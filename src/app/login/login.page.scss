@@ -1,0 +1,49 @@
+.content{
+  // background-image: url("../../assets/img/isabi-login.png");
+  background-image: url("../../assets/img/bg.png");
+  // background-color: green($color: #053f0d);
+  height: 100%;
+  width: 100%;
+  // position: fixed;
+   background-position: center; 
+   background-size: cover; 
+    background-repeat: no-repeat; 
+}
+
+ form{
+    opacity: 1;
+    padding-top: 30%; 
+ }
+
+ 
+//   loading
+.toast-container{
+position: fixed;
+display: flex;
+justify-content: center;
+top: auto;
+margin-bottom: 80px;
+left: 0;
+right: 0;
+bottom: 0;
+z-index: 999;
+}
+
+    // input
+    .text-input{
+      // opacity: 0.5;
+      border-radius:12px;
+      height: 4em;
+      border: 2px solid green;
+      scroll-margin-bottom: 10%;
+      color: black
+    }
+  
+
+    .input{
+      // color: #fff;
+    }
+
+
+ 
+    

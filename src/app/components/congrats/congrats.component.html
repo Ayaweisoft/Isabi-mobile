@@ -1,0 +1,47 @@
+
+<div class="ion-padding">
+  <ion-icon size="large" (click)="dismissModal()" slot="end" name="close"></ion-icon>
+ 
+ </div>
+ 
+ <ion-content>
+ 
+   <div class="content">
+ 
+   <ion-grid fixed class="mt-5">
+     <ion-row class="ion-justify-content-center">
+       <ion-col size="8">
+         
+         <div class="text-center">
+           <img src="/assets/img/congrants_image.jpg"  width="250" alt="">
+         </div>
+ 
+         <ion-list>
+           <ion-item class="ion-padding" color="light">
+             <ion-label>Elapsed </ion-label>
+             <div slot="end" >  <strong>{{minutes}} </strong> min, <strong>{{seconds}} </strong> seconds  </div>
+             <div></div>
+           </ion-item>
+ 
+           <ion-item class="ion-padding" color="light">
+             <ion-label>Correct Questions </ion-label>
+             <div slot="end"> <strong>{{correctQuestion}}/15 </strong> </div>
+           </ion-item>
+         </ion-list>
+ 
+         <ion-row class="ion-justify-content-center">
+           <ion-button (click)="dismissModal()" expand="block" fill="outline" color="dark">
+            close
+           </ion-button>
+           <ion-button (click)="playAgain()" expand="block" fill="outline" color="success">
+             play 
+           </ion-button>
+         </ion-row>
+         
+       </ion-col>
+     </ion-row>
+   </ion-grid>
+   </div>
+ 
+ </ion-content>
+ 

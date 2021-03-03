@@ -1,0 +1,7 @@
+{
+  "name": "new_isabi",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
