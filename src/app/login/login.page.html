@@ -27,7 +27,7 @@
                        type="text"
                        class="pl-4 pr-2"
                        placeholder="Username or Phone"
-                       #number
+                       #emailUser="ngModel"
                        name="number"
                        clearInput
                        [(ngModel)]="model.number"
@@ -39,28 +39,19 @@
             </ion-input>
           </div>
 
-          <!-- <div class="text-input mb-2">
-						<ion-item color="success" class="ion-margin-bottom" color="light">
-							<ion-label color="dark" position="floating">Password</ion-label>
-							<ion-input
-								type="password"
-								#password
-								name="password"
-								clearInput
-								[(ngModel)]="model.password"
-								minlength="11"
-								required="true"
-							></ion-input>
-							<ion-icon name="eye" slot="end"></ion-icon>
-						</ion-item>
-					</div> -->
+          <div *ngIf="emailUser.dirty && emailUser.errors"
+          class=" text-danger text-center">
+       <small class="text-danger ">phone number or email is required</small>
+     </div>
+
+       
 
           <div class="text-input">
             <ion-input type="password"
                        class="pl-4 pr-2"
                        input
                        placeholder="Password"
-                       #password
+                       #emailUser="ngModel"
                        name="password"
                        minlength="6"
                        [(ngModel)]="model.password"
@@ -70,12 +61,21 @@
                         name="lock-closed-outline"></ion-icon>
             </ion-input>
           </div>
+
+          <div *ngIf="emailUser.dirty && emailUser.errors"
+          class=" text-danger text-center">
+       <small class="text-danger ">password is required</small>
+     </div>
+
+
+
           <ion-text class="ion-float-right forgot-password"
                     [routerLink]="['/forgetpassword']">Forgot password?
           </ion-text>
 
           <ion-button class="login"
                       shape="round"
+                      [disabled]="!loginForm.valid"
                       (submit)="login(loginForm)"
                       expand="block"
                       type="submit">Login</ion-button>
