@@ -55,7 +55,9 @@
             <ion-input class="pl-4 pr-2"
                        placeholder="example@mail.com"
                        name="email"
+                       #email="ngModel"
                        position="floating"
+                       [(ngModel)]="model.email"
                        type="email"
                        required
                        ngControl="title">
@@ -63,6 +65,12 @@
                         name="mail-outline"></ion-icon>
             </ion-input>
           </div>
+          <div *ngIf="email.dirty && email.errors"
+          class=" text-danger text-center">
+       <small class="text-danger "
+              *ngIf="password?.errors.invalid">email is required</small>
+     
+     </div>
 
           <!-- password and validation -->
           <div class="text-input">
@@ -115,7 +123,7 @@
                        name="number"
                        [(ngModel)]="model.number"
                        placeholder="Phone"
-                       type="number"
+                       type="text"
                        required
                        minlength="11"
                        [pattern]="phoneRegex"

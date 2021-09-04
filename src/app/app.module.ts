@@ -39,6 +39,7 @@ import { GameServiceService } from './shared/game-service.service';
 import { AngularRaveModule } from 'angular-rave';
 import { GamePipe } from './game.pipe';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
+import { LogicService } from './services/logic.service';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
     DemoQuestionsService,
     // AppRate,
     UserService,
+    LogicService,
     Angular4PaystackModule,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
