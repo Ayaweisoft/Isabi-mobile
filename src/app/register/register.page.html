@@ -1,140 +1,235 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <img class="rounded-top"  src="../../assets/icon/Logoicon.png">
-  </ion-toolbar>
-</ion-header> -->
-
 <ion-content>
- 
-  <div class="content">
-
-
-  <ion-grid fixed >
- 
+  <ion-grid>
     <ion-row>
-      <ion-col size="1"></ion-col>
-      <ion-col size="10">
+      <ion-col size="12">
+        <section class="ion-padding logo">
+          <img src="assets/img/ISABI LOGO GREEN.png"
+               alt="isabi logo"
+               title="isabi logo" />
+        </section>
+      </ion-col>
+    </ion-row>
 
-        
-        <form class="form" #signUpForm="ngForm" name="signUpForm" (submit)="register()" >
-          <div class="text-center  p-3">
-            <ion-chip  color="dark" mode="ios" outline="true">
-              <h1 class=" font-weight-bold m-2 ">SIGN UP</h1>
-             </ion-chip>
-          </div>
-        
+    <ion-row>
+      <ion-col size-xs="12"
+               size-sm="10"
+               offset-md="1"
+               size-md="6"
+               offset-md="3"
+               size-lg="4"
+               offset-lg="4">
+        <form class="form"
+              #signUpForm="ngForm"
+              name="signUpForm"
+              (submit)="register()">
+
           <div *ngIf="loading">
             <ion-progress-bar type="indeterminate"></ion-progress-bar>
           </div>
 
-          <div *ngIf="number.dirty && number.errors" class=" text-danger text-center">
-            <small class="text-danger " *ngIf="number?.errors.required" >phone is required</small>
-          </div>
-          <div class="text-input mb-2">
-            <ion-label class="ml-3" position="floating">Phone</ion-label>
-            <ion-input #number="ngModel" name="number" position="floating" [(ngModel)]="model.number" type="number" required
-              minlength="11" [pattern]="phoneRegex" ngControl="title"></ion-input>
-          </div>
-         
-
-          <div *ngIf="username.dirty && username.errors"  class=" text-danger text-center">
-            <small class="text-danger " >username is required</small>
-          </div>
-          <div class="text-input mb-2">
-            <ion-label class="ml-3" position="floating">Username</ion-label>
-            <ion-input #username="ngModel" name="username" position="floating" [(ngModel)]="model.username" type="text" required
-              ngControl="title"></ion-input>
+          <!-- username and validation -->
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2"
+                       #username="ngModel"
+                       placeholder="Username"
+                       name="username"
+                       position="floating"
+                       [(ngModel)]="model.username"
+                       type="text"
+                       required
+                       ngControl="title">
+              <ion-icon class="mr-2"
+                        name="person-outline"></ion-icon>
+            </ion-input>
           </div>
 
-         
-          <div *ngIf="password.dirty && password.errors" class=" text-danger text-center">
-            <small class="text-danger " *ngIf="password?.errors.invalid">password is required</small>
-            <small class="text-danger " *ngIf="password?.errors.minlength">password must be at least 6 </small>
-          </div>
-          <div class="text-input mb-2">
-            <ion-label class="ml-3" position="floating">Password</ion-label>
-            <ion-input #password="ngModel" name="password" position="floating" [(ngModel)]="model.password" type="password"
-              required ngControl="title"  minlength="6" ></ion-input>
+          <div *ngIf="username.dirty && username.errors"
+               class=" text-danger text-center">
+            <small class="text-danger ">username is required</small>
           </div>
 
 
-          <div *ngIf="password.dirty && password.value !== conf_password.value" class=" text-center">
+          <!-- email and validation
+          TO DO - implement validation for email field -->
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2"
+                       placeholder="example@mail.com"
+                       name="email"
+                       position="floating"
+                       type="email"
+                       required
+                       ngControl="title">
+              <ion-icon class="mr-2"
+                        name="mail-outline"></ion-icon>
+            </ion-input>
+          </div>
+
+          <!-- password and validation -->
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2"
+                       #password="ngModel"
+                       name="password"
+                       placeholder="Password"
+                       position="floating"
+                       [(ngModel)]="model.password"
+                       type="password"
+                       required
+                       ngControl="title"
+                       minlength="6">
+              <ion-icon class="mr-2"
+                        name="lock-closed-outline"></ion-icon>
+            </ion-input>
+          </div>
+
+          <div *ngIf="password.dirty && password.errors"
+               class=" text-danger text-center">
+            <small class="text-danger "
+                   *ngIf="password?.errors.invalid">password is required</small>
+            <small class="text-danger "
+                   *ngIf="password?.errors.minlength">password must be at least 6 characters</small>
+          </div>
+
+          <!-- this confirm password field is commented out because it does not appear in the reviewed design, check button for sign up conditions. -->
+          <!-- <div *ngIf="password.dirty && password.value !== conf_password.value"
+               class=" text-center">
             <small class="text-danger ">password not matched</small>
           </div>
-          <div class="text-input mb-2">
-            <ion-label class="ml-3" position="floating">Confirm password</ion-label>
-            <ion-input #conf_password="ngModel" name="password" position="floating" [(ngModel)]="model.conf_password"
-              type="password" required ngControl="title"  minlength="6" ></ion-input>
-              
+
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2"
+                       #conf_password="ngModel"
+                       placeholder="Confirm password"
+                       name="password"
+                       position="floating"
+                       [(ngModel)]="model.conf_password"
+                       type="password"
+                       required
+                       ngControl="title"
+                       minlength="6"></ion-input>
+          </div> -->
+
+          <!-- phone number and validation -->
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2"
+                       #number="ngModel"
+                       name="number"
+                       [(ngModel)]="model.number"
+                       placeholder="Phone"
+                       type="number"
+                       required
+                       minlength="11"
+                       [pattern]="phoneRegex"
+                       ngControl="title">
+              <ion-icon class="mr-2"
+                        name="phone-portrait-outline"></ion-icon>
+            </ion-input>
           </div>
 
-          <ion-button [disabled]="!signUpForm.valid && password.value !==conf_password.value" class="mt-4" color="success"  expand="block" type="submit">Submit</ion-button>
+          <div *ngIf="number.dirty && number.errors"
+               class="text-center">
+            <small class="text-danger "
+                   *ngIf="number?.errors.required">phone is required</small>
+          </div>
+
+
+          <!-- TO DO - the conditions for this button have changed since the confirm password filed has been removed, please confirm code. -->
+
+          <div class="signup-block">
+            <ion-button class="login"
+                        shape="round"
+                        [disabled]="!signUpForm.valid && password.value == true"
+                        expand="block"
+                        type="submit">Sign up</ion-button>
+          </div>
         </form>
-       
-        <div class="justify-content-center row">
-          <p class="text-dark"> I already have account 
-            <ion-chip [routerLink]="['/login']" color="light" >
-            <ion-label class="font-weight-bold text-dark">login</ion-label>
-            </ion-chip>
+
+        <div class="ion-text-center mt-5"
+             size="12">
+          <p class="text-dark">Already have an account?
+            <ion-label [routerLink]="['/login']"
+                       class="font-weight-bold text-dark">Login</ion-label>
           </p>
         </div>
       </ion-col>
-      <ion-col size="1"></ion-col>
     </ion-row>
-  
+
+    <ion-row>
+      <ion-col class="ion-text-center mt-3">
+        <ion-label>Sign up with</ion-label>
+        <ion-row>
+          <ion-col class="social-icons"
+                   size-xs="6"
+                   offset-xs="3"
+                   size-sm="6"
+                   offset-sm="3"
+                   size-md="3"
+                   offset-md="4.5"
+                   size-lg="2"
+                   offset-lg="5">
+            <div>
+              <img src="/assets/img/Facebook_Logo.png"
+                   alt="facebook logo" />
+            </div>
+            <div>
+              <img src="assets/img/google-plus-logo.png"
+                   alt="google plus logo" />
+            </div>
+            <div>
+              <img src="assets/img/twitter--logo.png"
+                   alt="twitter logo" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
-  <ion-fab horizontal="start" vertical="bottom" slot="fixed">
-    <ion-fab-button color="success">
-      <ion-icon name="alert"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-button color="success">
-        <a class=" info text-white" [routerLink]="['/testimonials']">
-          <ion-icon name="trophy"></ion-icon> TESTIMONIALS
-        </a>
-      </ion-button>
-      <ion-button color="success">
-        <a class=" info text-white" [routerLink]="['/howtoplay']">
-          <ion-icon name="logo-game-controller-a"></ion-icon> HOW TO PLAY
-        </a>
-      </ion-button>
-      <ion-button color="success">
-        <a class=" info text-white" [routerLink]="['/contactus']">
-          <ion-icon name="chatbubbles"></ion-icon> CONTACT US
-        </a>
-      </ion-button>
-      <ion-button color="success">
-        <a class="info text-white  " href="https:/i-sabi.com/faq/">
-          <ion-icon name="help"></ion-icon> FAQ
-        </a>
-      </ion-button>
-      <ion-button color="success">
-        <a class="info text-white  " href="https:/i-sabi.com/privacy-policy-2/">
-          <ion-icon name="list"></ion-icon> POLICY
-        </a>
-      </ion-button>
-    </ion-fab-list>
-  </ion-fab>
-
-
-
-  
-        <!-- loader -->
-        <div *ngIf="loading" class=" ">
-          <div class="toast-container ">
-            <div class="lds-roller">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-          </div>
-        </div>
+  <!-- loader -->
+  <div *ngIf="loading"
+       class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller"> </div>
+    </div>
   </div>
 
+  <!-- fab button with options on click -->
+  <!-- <ion-fab horizontal="start"
+             vertical="bottom"
+             slot="fixed">
+      <ion-fab-button color="success">
+        <ion-icon name="alert"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-button color="success">
+          <a class=" info text-white"
+             [routerLink]="['/testimonials']">
+            <ion-icon name="trophy"></ion-icon> TESTIMONIALS
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class=" info text-white"
+             [routerLink]="['/howtoplay']">
+            <ion-icon name="logo-game-controller-a"></ion-icon> HOW TO PLAY
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class=" info text-white"
+             [routerLink]="['/contactus']">
+            <ion-icon name="chatbubbles"></ion-icon> CONTACT US
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class="info text-white  "
+             href="https:/i-sabi.com/faq/">
+            <ion-icon name="help"></ion-icon> FAQ
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class="info text-white  "
+             href="https:/i-sabi.com/privacy-policy-2/">
+            <ion-icon name="list"></ion-icon> POLICY
+          </a>
+        </ion-button>
+      </ion-fab-list>
+    </ion-fab> -->
 </ion-content>
