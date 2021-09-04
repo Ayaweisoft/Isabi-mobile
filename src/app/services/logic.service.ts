@@ -19,19 +19,14 @@ export class LogicService {
       header:  `${header}`,
       message: `${msg}`,
       position: 'bottom',
+      duration:3000,
       buttons: [
         {
           text:`${psitiveBtbText}`,
           side: 'start',
           icon: 'flash',
           handler: () => resolveFunction(true)
-        }, {
-          text: 'Login',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
+        },
       ]
     });
     toast.present();
