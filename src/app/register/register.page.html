@@ -53,11 +53,13 @@
 
           <!-- email and validation
           TO DO - implement validation for email field -->
+
           <div class="utility">
             <div class="text-input">
               <ion-input class="pl-4 pr-2"
                          placeholder="example@mail.com"
                          name="email"
+                          [(ngModel)]="model.email"
                          position="floating"
                          type="email"
                          required
@@ -66,7 +68,14 @@
                           name="mail-outline"></ion-icon>
               </ion-input>
             </div>
+
           </div>
+          <div *ngIf="email.dirty && email.errors"
+          class=" text-danger text-center">
+       <small class="text-danger "
+              *ngIf="password?.errors.invalid">email is required</small>
+     
+     </div>
 
           <!-- password and validation -->
           <div class="utility">
@@ -115,6 +124,7 @@
           </div> -->
 
           <!-- phone number and validation -->
+
           <div class="utility">
             <div class="text-input">
               <ion-input class="pl-4 pr-2"
@@ -122,7 +132,7 @@
                          name="number"
                          [(ngModel)]="model.number"
                          placeholder="Phone"
-                         type="number"
+                         type="text"
                          required
                          minlength="11"
                          [pattern]="phoneRegex"
@@ -131,6 +141,7 @@
                           name="phone-portrait-outline"></ion-icon>
               </ion-input>
             </div>
+
 
             <div *ngIf="number.dirty && number.errors"
                  class="text-center">

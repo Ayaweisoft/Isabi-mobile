@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../shared/user.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { LogicService } from '../services/logic.service';
 
 @Component({
   selector: 'app-register',
@@ -15,8 +16,7 @@ export class RegisterPage implements OnInit {
 
 
   constructor(public userService: UserService,
-              public alertController: AlertController,
-              public toastController: ToastController,
+             private logicService: LogicService,
               public gameService: GameServiceService,
               private router: Router) {
                 if(this.userService.networkDisconnet){
@@ -27,6 +27,7 @@ export class RegisterPage implements OnInit {
             model = {
               number: '',
               password: '',
+              email:'',
               username: '',
               conf_password:''
             };
@@ -34,66 +35,16 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
   }
 
- 
-  async registerToast(message) {
-    const toast = await this.toastController.create({
-      header: 'Info ',
-      message: `${message}`,
-      position: 'middle',
-      buttons: [
-        {
-          side: 'start',
-          icon: 'flash',
-          handler: () => {
-            console.log('Favorite clicked');
-          }
-        }, {
-          text: 'Close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
-
-
-  async presentSucess(message) {
-    const toast = await this.toastController.create({
-      header: 'Continue to login ',
-      message: `${message}`,
-      position: 'middle',
-      buttons: [
-        {
-          side: 'start',
-          icon: 'flash',
-          handler: () => {
-            this.router.navigate(['/login']);
-          }
-        }, {
-          text: 'Login',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-            this.router.navigate(['/login']);
-          }
-        }
-      ]
-    });
-    toast.present();
-  }
-
 
   
-  register(){
+ async register(){
     this.loading = true; 
+    console.log(this.model);
     this.userService.registerUser( this.model).subscribe( 
       response => {
         this.loading = false;
         let message = "Registraion successful!";
-        this.presentSucess(message);        
+        this.logicService.presentSucess('success','registration successful', 'continue');       
         
       },
       error => {
