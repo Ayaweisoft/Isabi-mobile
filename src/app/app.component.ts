@@ -4,8 +4,9 @@ import { AccountService } from './shared/account.service';
 import { UserService } from './shared/user.service';
 import { Component, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
-import {NavController, Platform, AlertController } from '@ionic/angular';
+import { NavController, Platform, AlertController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { SplashComponent } from './splash/splash.component';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { timer } from 'rxjs';
 
@@ -18,7 +19,7 @@ import { timer } from 'rxjs';
 })
 export class AppComponent {
   @ViewChild('bal', {static : false}) bal: ElementRef;
-  showSlash = true;
+  showSplash = true;
   @ViewChild('nav', {static: false}) nav: NavController;
   
   authenticate = false;
@@ -86,9 +87,11 @@ export class AppComponent {
     private statusBar: StatusBar,
     private alertCtrl: AlertController,
     private splashScreen: SplashScreen,
+    private ModalController: ModalController,
     public userService: UserService,
     public accountService: AccountService,
   ) {
+    this.presentSplash();
     this.initializeApp();
   }
 
@@ -126,10 +129,18 @@ export class AppComponent {
     
       
       this.statusBar.show();
-      this.splashScreen.hide();
-      timer(5000).subscribe(()=> this.showSlash = false);
+      // this.splashScreen.hide();
+      // timer(5000).subscribe(()=> this.showSplash = false);
     });
 
+  }
+
+  async presentSplash() {
+    const modal = await this.ModalController.create({
+      component: SplashComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
   }
 
 
