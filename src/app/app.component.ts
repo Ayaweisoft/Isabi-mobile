@@ -138,7 +138,7 @@ export class AppComponent {
   async presentSplash() {
     const modal = await this.ModalController.create({
       component: SplashComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'modal-fullscreen'
     });
     return await modal.present();
   }
