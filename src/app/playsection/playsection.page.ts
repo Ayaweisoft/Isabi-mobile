@@ -7,6 +7,7 @@ import { IonSlides, MenuController, AlertController, ModalController } from '@io
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AccountService } from '../shared/account.service';
+import { BehavourService } from '../services/behavour.service';
 // import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({
@@ -50,12 +51,14 @@ export class PlaysectionPage implements OnInit, OnDestroy {
 
     GameTimeMinute: any = 0;
   GameTimeSeconds: any = 0;
+  currentGameAmount: any;
     
 
 
   constructor(private userService: UserService, private gameService: GameServiceService,
               public accountService: AccountService, private alertController : AlertController,
               private modalController : ModalController,
+              private behaviorService: BehavourService,
               // private nativeAudio: NativeAudio,
               private router: Router) {
     // setTimeout(()=> {
@@ -70,7 +73,25 @@ export class PlaysectionPage implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.behaviorService.getGameAmount().subscribe(amount => {
+      console.log('see AMount', amount)
+      this.currentGameAmount =  amount;
+      if(amount === null){
+        this.getRemoteAmount();
+      }
+    })
 
+  }
+
+  getRemoteAmount(){
+    console.log('getting remote amoutn')
+    this.loadingGame =  true;
+    this.gameService.getGameAmount().subscribe(res => {
+      this.behaviorService.setGameAmount(res.data.amount);
+      this.loadingGame = false;
+    }, err => {
+      this.loadingGame = false;
+    });
   }
 
 
@@ -201,7 +222,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.loadBalanceSub =  this.accountService.loadBalanceForCalculation().subscribe(
       res => {
         const UserBalance = res['balance'];
-        if (UserBalance < 200){
+        if (UserBalance <  this.currentGameAmount){
           this.low_balance = true;
           setTimeout(() => {
             this.low_balance = false;

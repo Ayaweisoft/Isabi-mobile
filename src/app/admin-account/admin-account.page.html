@@ -9,41 +9,40 @@
   </ion-toolbar>
 </ion-header>
 
+
+<ion-segment scrollable="true" value="app_date" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="app_date">
+    <ion-icon name="calendar"></ion-icon>
+    <ion-label>App date</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="sms">
+    <ion-icon name="mail"></ion-icon>
+    <ion-label>Sms</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="video_link">
+    <ion-icon name="play"></ion-icon>
+        <ion-label>Video link</ion-label>
+  </ion-segment-button>
+  <ion-segment-button [routerLink]="['/tabs/admin-event']"  value="create_event">
+    <ion-icon name="information-circle"></ion-icon>
+        <ion-label>Event</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="game_amount">
+    <ion-icon name="game-controller"></ion-icon>
+        <ion-label>Amount</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
 <ion-content>
 
-  <!--  tabs -->
-<ion-toolbar>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button (click)="dateSection()" >
-        <ion-icon name="calendar"></ion-icon>
-        <ion-label>App date</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button (click)="smsSection()">
-        <ion-icon name="mail"></ion-icon>
-        <ion-label>SMS</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button (click)="videoSection()">
-        <ion-icon name="play"></ion-icon>
-        <ion-label>Video link</ion-label>
-      </ion-tab-button>
-  
-      <ion-tab-button [routerLink]="['/tabs/admin-event']" >
-        <ion-icon name="information-circle"></ion-icon>
-        <ion-label>Event</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
-</ion-toolbar>
-  <!-- end tabs -->
 
+
+  <!-- [routerLink]="['/tabs/admin-event']" -->
 
     <br>
     <ion-badge class="text-center">{{gameService.applicationDate}} </ion-badge>
     
-    <div *ngIf="date_section" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
+    <div *ngIf=" segment ==='app_date'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
       <form #dateform name="dateform" (submit)="submitDate(dateform)">
         <ion-item>
             <ion-label  class="ml-3"  
@@ -60,7 +59,7 @@
 
 
     <!-- video form -->
-    <div *ngIf="video_section">
+    <div *ngIf=" segment === 'video_link'">
     <form #youtubeform name="youtubeform" (submit)="submityoutubeLink(youtubeform)">
       <ion-item>
           <ion-label  class="ml-3"  
@@ -73,7 +72,7 @@
       <!-- end video form -->
 
       <!-- sms section -->
-      <div *ngIf="sms_section" style="padding-top: 40px;">
+      <div *ngIf=" segment === 'sms'" style="padding-top: 40px;">
         <form #smsform id="smsform" name="youtubeform" (submit)="submitSms(smsform)">
           <ion-item >
             <textarea rows="5" cols="40" placeholder="Enter sms here..." #sms name="sms" [(ngModel)]="model.sms" placeholder="Enter sms here" ></textarea>
@@ -82,8 +81,25 @@
           </form>
         </div>
         <!-- end sms section -->
+
+        <div *ngIf="segment === 'game_amount'">
+
+          <h3>Amount : {{currentAmount | currency:'₦'}} </h3>
+          <ion-card color="success"> 
+            <ion-item class="p-5">
+              <ion-label position="floating" >Game session amount</ion-label>
+              <ion-input  [(ngModel)]="amountModel.amount" type="number" ></ion-input>
+            </ion-item>
+
+            <div class="ion-text-center">
+              <ion-button [disabled]="!amountModel.amount" (click)="submitGameAmount()">
+                Submit
+              </ion-button>
+            </div>
+          </ion-card>
+        </div>
        
-      
+
     <div *ngIf="loading">
       <ion-spinner slot="middle"></ion-spinner>
       <ion-progress-bar type="indeterminate"></ion-progress-bar>

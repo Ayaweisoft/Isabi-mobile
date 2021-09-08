@@ -47,7 +47,7 @@ export class LeaderboardPage implements OnInit {
     this.loading = true;
     this.accountServive.getLeaderboard().subscribe(val => {
       this.leaderBoard = val["document"];
-      console.log('getting leaderboard')
+      console.log('getting leaderboard', val);
       this.loading = false;
     });
   }

@@ -132,6 +132,15 @@ export class GameServiceService  {
       return this.http.post(environment.apiBaseUrl + '/create-new-contestant', contestant);
     }
 
+    setGameAmount(data) : Observable<any>{
+      return this.http.post(environment.apiBaseUrl + '/save-game-amount', data);
+    }
+
+
+    getGameAmount() : Observable<any>{
+      return this.http.get(environment.apiBaseUrl + '/get-game-amount');
+    }
+
   
 
     async presentUpdate() {

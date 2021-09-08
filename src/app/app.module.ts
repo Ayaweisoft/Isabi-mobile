@@ -40,6 +40,7 @@ import { AngularRaveModule } from 'angular-rave';
 import { GamePipe } from './game.pipe';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
+import { BehavourService } from './services/behavour.service';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { LogicService } from './services/logic.service';
     // AppRate,
     UserService,
     LogicService,
+    BehavourService,
     Angular4PaystackModule,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
