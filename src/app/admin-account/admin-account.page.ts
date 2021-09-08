@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController } from '@ionic/angular';
 import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { BehavourService } from '../services/behavour.service';
 
 @Component({
   selector: 'app-admin-account',
@@ -11,17 +13,23 @@ import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.com
   styleUrls: ['./admin-account.page.scss'],
 })
 export class AdminAccountPage implements OnInit {
- video_section = false;
- date_section = true;
- sms_section = false;
+
+
+ segment = 'app_date';
 
 
   loading  = false;
+  currentAmount: any;
 
   constructor(public gameService: GameServiceService,
-    private router: Router,
+                private router: Router,
+                private behaviorService: BehavourService,
               private popoverController: PopoverController) { 
 
+  }
+  amountModel = {
+    amount: null,
+    admin : 'ADMIN'
   }
 
  model= { 
@@ -32,34 +40,16 @@ export class AdminAccountPage implements OnInit {
  };
 
   ngOnInit() {
-  }
-
-  dateSection(){
-    this.date_section = true;
-    this.video_section = false;
-    this.sms_section = false;
-
-  }
-
-  smsSection(){
-    this.date_section = false;
-    this.video_section = false;
-    this.sms_section = true;
-  }
-
-  videoSection(){
-    this.date_section = false;
-    this.video_section = true;
-    this.sms_section = false;
-  }
-
-  eventSection(){
-    this.date_section = false;
-    this.video_section = false;
-    this.sms_section = false;
+    this.behaviorService.getGameAmount().subscribe(amount => {
+      this.currentAmount = amount;
+    })
   }
 
 
+  segmentChanged($event){
+    console.log('event...', $event);
+    this.segment = $event.detail.value;
+  }
 
 
   
@@ -131,6 +121,21 @@ export class AdminAccountPage implements OnInit {
 
   createContestant(form: NgForm){
     console.log(form);
+  }
+
+  submitGameAmount(){
+    this.loading = true;
+    this.gameService.setGameAmount(this.amountModel).subscribe( res => {
+      console.log('res ', res);
+      this.loading = false;
+      this.behaviorService.setGameAmount(res.data.amount);
+
+      this.amountModel.amount = undefined;
+
+    }, err => {
+      console.log(err);
+      this.loading = false;
+    });
   }
 
 }
