@@ -20,6 +20,7 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
+import { SplashComponent } from './splash/splash.component';
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -47,7 +48,7 @@ import { BehavourService } from './services/behavour.service';
   declarations: [AppComponent, GamePipe, AccountComponent,HeaderComponent,
     AdminnavigationComponent, AdminEventComponent, ForgetpasswordComponent,InsideEventComponent,
     InsideEventAddUserComponent, VoteNowComponent, TabsComponent, GamesectionComponent, NotLiveComponent,
-     SafeResourceUrlPipe, CongratsComponent, FailGameComponent],
+     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent],
   imports: [
     BrowserModule,

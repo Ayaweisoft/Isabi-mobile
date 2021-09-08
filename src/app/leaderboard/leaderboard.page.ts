@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { AccountService } from "src/app/shared/account.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MenuController, ToastController, IonRefresher } from "@ionic/angular";
@@ -13,6 +14,10 @@ export class LeaderboardPage implements OnInit {
   @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
   leaderBoard: any = [];
   loading: boolean;
+  topThree: any;
+  thirdPerson: any;
+  secondPerson: any;
+  firstPerson: any;
 
   constructor(
     public menu: MenuController,
@@ -47,7 +52,10 @@ export class LeaderboardPage implements OnInit {
     this.loading = true;
     this.accountServive.getLeaderboard().subscribe(val => {
       this.leaderBoard = val["document"];
-      console.log('getting leaderboard', val);
+      this.firstPerson = this.leaderBoard[0];
+       this.secondPerson = this.leaderBoard[1];
+        this.thirdPerson = this.leaderBoard[2];
+      console.log('getting leaderboard')
       this.loading = false;
     });
   }

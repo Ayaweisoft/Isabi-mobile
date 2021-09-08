@@ -28,42 +28,47 @@
           </div>
 
           <!-- username and validation -->
-          <div class="text-input">
-            <ion-input class="pl-4 pr-2"
-                       #username="ngModel"
-                       placeholder="Username"
-                       name="username"
-                       position="floating"
-                       [(ngModel)]="model.username"
-                       type="text"
-                       required
-                       ngControl="title">
-              <ion-icon class="mr-2"
-                        name="person-outline"></ion-icon>
-            </ion-input>
-          </div>
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2"
+                         #username="ngModel"
+                         placeholder="Username"
+                         name="username"
+                         position="floating"
+                         [(ngModel)]="model.username"
+                         type="text"
+                         required
+                         ngControl="title">
+                <ion-icon class="mr-2"
+                          name="person-outline"></ion-icon>
+              </ion-input>
+            </div>
 
-          <div *ngIf="username.dirty && username.errors"
-               class=" text-danger text-center">
-            <small class="text-danger ">username is required</small>
+            <div *ngIf="username.dirty && username.errors"
+                 class=" text-danger text-center">
+              <small class="text-danger ">username is required</small>
+            </div>
           </div>
 
 
           <!-- email and validation
           TO DO - implement validation for email field -->
-          <div class="text-input">
-            <ion-input class="pl-4 pr-2"
-                       placeholder="example@mail.com"
-                       name="email"
-                       #email="ngModel"
-                       position="floating"
-                       [(ngModel)]="model.email"
-                       type="email"
-                       required
-                       ngControl="title">
-              <ion-icon class="mr-2"
-                        name="mail-outline"></ion-icon>
-            </ion-input>
+
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2"
+                         placeholder="example@mail.com"
+                         name="email"
+                          [(ngModel)]="model.email"
+                         position="floating"
+                         type="email"
+                         required
+                         ngControl="title">
+                <ion-icon class="mr-2"
+                          name="mail-outline"></ion-icon>
+              </ion-input>
+            </div>
+
           </div>
           <div *ngIf="email.dirty && email.errors"
           class=" text-danger text-center">
@@ -73,28 +78,30 @@
      </div>
 
           <!-- password and validation -->
-          <div class="text-input">
-            <ion-input class="pl-4 pr-2"
-                       #password="ngModel"
-                       name="password"
-                       placeholder="Password"
-                       position="floating"
-                       [(ngModel)]="model.password"
-                       type="password"
-                       required
-                       ngControl="title"
-                       minlength="6">
-              <ion-icon class="mr-2"
-                        name="lock-closed-outline"></ion-icon>
-            </ion-input>
-          </div>
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2"
+                         #password="ngModel"
+                         name="password"
+                         placeholder="Password"
+                         position="floating"
+                         [(ngModel)]="model.password"
+                         type="password"
+                         required
+                         ngControl="title"
+                         minlength="6">
+                <ion-icon class="mr-2"
+                          name="lock-closed-outline"></ion-icon>
+              </ion-input>
+            </div>
 
-          <div *ngIf="password.dirty && password.errors"
-               class=" text-danger text-center">
-            <small class="text-danger "
-                   *ngIf="password?.errors.invalid">password is required</small>
-            <small class="text-danger "
-                   *ngIf="password?.errors.minlength">password must be at least 6 characters</small>
+            <div *ngIf="password.dirty && password.errors"
+                 class=" text-danger text-center">
+              <small class="text-danger "
+                     *ngIf="password?.errors.invalid">password is required</small>
+              <small class="text-danger "
+                     *ngIf="password?.errors.minlength">password must be at least 6 characters</small>
+            </div>
           </div>
 
           <!-- this confirm password field is commented out because it does not appear in the reviewed design, check button for sign up conditions. -->
@@ -117,26 +124,30 @@
           </div> -->
 
           <!-- phone number and validation -->
-          <div class="text-input">
-            <ion-input class="pl-4 pr-2"
-                       #number="ngModel"
-                       name="number"
-                       [(ngModel)]="model.number"
-                       placeholder="Phone"
-                       type="text"
-                       required
-                       minlength="11"
-                       [pattern]="phoneRegex"
-                       ngControl="title">
-              <ion-icon class="mr-2"
-                        name="phone-portrait-outline"></ion-icon>
-            </ion-input>
-          </div>
 
-          <div *ngIf="number.dirty && number.errors"
-               class="text-center">
-            <small class="text-danger "
-                   *ngIf="number?.errors.required">phone is required</small>
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2"
+                         #number="ngModel"
+                         name="number"
+                         [(ngModel)]="model.number"
+                         placeholder="Phone"
+                         type="text"
+                         required
+                         minlength="11"
+                         [pattern]="phoneRegex"
+                         ngControl="title">
+                <ion-icon class="mr-2"
+                          name="phone-portrait-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+
+            <div *ngIf="number.dirty && number.errors"
+                 class="text-center">
+              <small class="text-danger "
+                     *ngIf="number?.errors.required">phone is required</small>
+            </div>
           </div>
 
 

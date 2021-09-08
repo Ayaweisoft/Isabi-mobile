@@ -22,51 +22,53 @@
               #loginForm="ngForm"
               name="form"
               (submit)="login(loginForm)">
-          <div class="text-input">
-            <ion-input autofocus
-                       type="text"
-                       class="pl-4 pr-2"
-                       placeholder="Username or Phone"
-                       #emailUser="ngModel"
-                       name="number"
-                       clearInput
-                       [(ngModel)]="model.number"
-                       autocomplete="off"
-                       minlength="11"
-                       required="true">
-              <ion-icon class="mr-2"
-                        name="person-outline"></ion-icon>
-            </ion-input>
+          <!-- username -->
+          <div class="utility">
+            <div class="text-input">
+              <ion-input autofocus
+                         type="text"
+                         class="pl-4 pr-2"
+                         placeholder="Username or Phone"
+                         #emailUser="ngModel"
+                         name="number"
+                         clearInput
+                         [(ngModel)]="model.number"
+                         autocomplete="off"
+                         minlength="11"
+                         required="true">
+                <ion-icon class="mr-2"
+                          name="person-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+            <div *ngIf="emailUser.dirty && emailUser.errors"
+                 class="text-center">
+              <small class="text-danger ">phone number or email is required</small>
+            </div>
           </div>
 
-          <div *ngIf="emailUser.dirty && emailUser.errors"
-          class=" text-danger text-center">
-       <small class="text-danger ">phone number or email is required</small>
-     </div>
+          <div class="utility">
+            <div class="text-input">
+              <ion-input type="password"
+                         class="pl-4 pr-2"
+                         input
+                         placeholder="Password"
+                         #emailUser="ngModel"
+                         name="password"
+                         minlength="6"
+                         [(ngModel)]="model.password"
+                         clearInput
+                         required="true">
+                <ion-icon class="mr-2"
+                          name="lock-closed-outline"></ion-icon>
+              </ion-input>
+            </div>
 
-       
-
-          <div class="text-input">
-            <ion-input type="password"
-                       class="pl-4 pr-2"
-                       input
-                       placeholder="Password"
-                       #emailUser="ngModel"
-                       name="password"
-                       minlength="6"
-                       [(ngModel)]="model.password"
-                       clearInput
-                       required="true">
-              <ion-icon class="mr-2"
-                        name="lock-closed-outline"></ion-icon>
-            </ion-input>
+            <div *ngIf="emailUser.dirty && emailUser.errors"
+                 class="text-center">
+              <small class="text-danger ">password is required</small>
+            </div>
           </div>
-
-          <div *ngIf="emailUser.dirty && emailUser.errors"
-          class=" text-danger text-center">
-       <small class="text-danger ">password is required</small>
-     </div>
-
 
 
           <ion-text class="ion-float-right forgot-password"

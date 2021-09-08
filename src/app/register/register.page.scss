@@ -13,10 +13,13 @@ ion-content {
 		min-height: 250px;
 	}
 
+	.utility {
+		margin-bottom: 1.2rem;
+	}
+
 	.text-input {
 		border: 1px solid var(--ion-color-primary);
 		border-radius: 35px;
-		margin-bottom: 1rem;
 	}
 
 	.forgot-password {

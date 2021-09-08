@@ -1,0 +1,66 @@
+<ion-content [fullscreen]="true">
+  <ion-slides #mySlider
+              pager="true"
+              [options]="slideOpts">
+    <ion-slide class="slide-one">
+      <img src="assets/img/Splash.png"
+           alt="">
+    </ion-slide>
+
+    <ion-slide class="slide-one">
+      <img src="assets/img/Splash.png"
+           alt="">
+    </ion-slide>
+
+    <ion-slide class="slide-two">
+      <img src="assets/img/isabi video.png"
+           alt="">
+      <div>
+        <ion-title class="ion-margin-bottom ion-margin-top"
+                   color="primary"
+                   mode="md">Digital TV</ion-title>
+        <ion-text class="pl-2 pr-2">You can stream live Events with our Digital TV <br>and also see clue tips for our trivia games.</ion-text>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-three">
+      <img src="assets/img/isabi social.png"
+           alt="">
+      <div>
+        <ion-title class="ion-margin-bottom ion-margin-top"
+                   color="primary"
+                   mode="md">Social</ion-title>
+        <ion-text class="pl-2 pr-2">Get connected with millions of i-sabi users all<br>over the world with our Social media feature.</ion-text>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-four">
+      <img src="assets/img/isabi game.png"
+           alt="">
+      <div>
+        <ion-title class="ion-margin-bottom ion-margin-top"
+                   color="primary"
+                   mode="md">Game</ion-title>
+        <ion-text class="pl-2 pr-2">Take on the i-sabi trivia quiz games and stand<br>to win awesome cash prizes.</ion-text>
+      </div>
+    </ion-slide>
+
+    <ion-slide class="slide-five">
+      <img src="assets/img/ISABI APP ONBOARDING4.png"
+           alt="">
+      <div>
+        <ion-title class="ion-margin-bottom ion-margin-top"
+                   color="primary"
+                   mode="md">Events</ion-title>
+        <ion-text class="pl-2 pr-2">Get to know about your favorite Events<br>and also purchase your tickets.</ion-text>
+        <div>
+          <ion-button class="mt-5">Get Started</ion-button>
+        </div>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-buttons>
+    <ion-button (click)="clickSlidePrevious()">Prev</ion-button>
+    <ion-button (click)="clickSlidetoNext()">Next</ion-button>
+  </ion-buttons>
+</ion-content>
