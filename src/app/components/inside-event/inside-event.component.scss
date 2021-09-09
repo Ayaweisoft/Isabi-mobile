@@ -1,24 +1,28 @@
-.image{
-      object-fit: cover;
-  width: 100px;
-  height: 100px;
-  // align-self: center;
-  margin-left: auto;
-  margin-right: auto;
+ion-header {
+	img {
+		width: 70px;
+		height: 30px;
+		padding: 5px 0;
+	}
 }
 
-.vote_card{
-    padding: 0 !important;
-    margin: 0 !important;
+ion-icon[name='trash'] {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background-color: rgba($color: #000000, $alpha: 0.7);
+	padding: 10px;
+	border-radius: 50%;
+	color: red;
 }
 
-.content{
-    // background-image: url("../../assets/img/app-bg.png");
-    background-image: url("../../../assets/img/bg.png");
-    height: 100%;
-    width: 100%;
-     background-position: center; 
-     position: fixed;
-     background-size: cover;
-      background-repeat: no-repeat; 
-  }
+ion-card {
+	--background: #d5f3d9;
+	// height: 300px;
+
+	img {
+		height: 230px;
+		width: 100%;
+		object-fit: fill;
+	}
+}

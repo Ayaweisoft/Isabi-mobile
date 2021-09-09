@@ -20,7 +20,7 @@ export class SplashComponent implements OnInit {
   ionViewDidEnter(){
    setTimeout(() => {
      this.modalController.dismiss()
-   }, 30000)
+   }, 30)
    this.autoSlide()
   }
 

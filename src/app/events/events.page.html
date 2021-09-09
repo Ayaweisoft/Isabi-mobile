@@ -6,55 +6,60 @@
     </ion-buttons>
     <div class="row d-flex justify-content-center">
       <img class="rounded-top"
-           src="../../../assets/icon/Logoicon.png">
+           src="assets/img/ISABI LOGO GREEN.png">
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="content">
-    <div *ngFor="let item of allEvent">
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="12"
+               size-sm="12"
+               size-md="8"
+               offset-md="2"
+               size-lg="6"
+               offset-lg="3">
+        <ion-card color="light"
+                  *ngFor="let item of allEvent">
+          <img [src]="item.image_url">
 
-      <ion-card color="success"
-                class="m-4">
-        <ion-item color="success">
-          <ion-chip color="light">{{item.type}} </ion-chip>
-          <ion-icon *ngIf="userService.getUserRole() == 'ADMIN'"
-                    (click)="handleDelete(item)"
-                    slot="end"
-                    name="trash"></ion-icon>
-        </ion-item>
-        <img [src]="item.image_url">
-        <h4 class="text-center text-uppercase font-weight-bold">{{item.eventName}} </h4>
-        <div class="text-center">{{item.aboutEvent}} </div>
-        <div class="d-flex col justify-content-center">
-          <ion-button (click)="insideEvent(item._id)"
-                      fill="outline"
-                      size="large"
-                      color="light">
-            ENTER
-          </ion-button>
-        </div>
-      </ion-card>
-    </div>
+          <div class="ion-text-center">
+            <ion-title mode="md"
+                       class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
+            <ion-text>{{item.aboutEvent}} </ion-text>
 
+            <small>{{item.type}} </small>
 
-    <!-- loader -->
-    <div *ngIf="loading"
-         class=" ">
-      <div class="toast-container ">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+            <ion-icon *ngIf="userService.getUserRole() == 'ADMIN'"
+                      (click)="handleDelete(item)"
+                      name="trash">
+            </ion-icon>
+          </div>
+
+          <div class="row d-flex justify-content-center">
+            <ion-button (click)="insideEvent(item._id)">ENTER
+            </ion-button>
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- loader -->
+  <div *ngIf="loading"
+       class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </div>
-
   </div>
 </ion-content>
