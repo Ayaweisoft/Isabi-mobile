@@ -28,7 +28,7 @@
               <ion-input autofocus
                          type="text"
                          class="pl-4 pr-2"
-                         placeholder="Username or Phone"
+                         placeholder="Email or Phone"
                          #emailUser="ngModel"
                          name="number"
                          clearInput
@@ -53,7 +53,7 @@
                          class="pl-4 pr-2"
                          input
                          placeholder="Password"
-                         #emailUser="ngModel"
+                         #password="ngModel"
                          name="password"
                          minlength="6"
                          [(ngModel)]="model.password"
@@ -64,7 +64,7 @@
               </ion-input>
             </div>
 
-            <div *ngIf="emailUser.dirty && emailUser.errors"
+            <div *ngIf="password.dirty && password.errors"
                  class="text-center">
               <small class="text-danger ">password is required</small>
             </div>
@@ -183,4 +183,21 @@
       </ion-button>
     </ion-fab-list>
   </ion-fab> -->
+
+  <!-- loader -->
+  <div *ngIf="loading"
+       class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
 </ion-content>

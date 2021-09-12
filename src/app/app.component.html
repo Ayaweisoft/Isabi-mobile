@@ -1,33 +1,29 @@
-<ion-app [class.dark-theme]="dark">
-
-
-
+<ion-app>
   <ion-menu contentId="main-content"
             type="overlay">
     <ion-header>
-      <ion-toolbar color="warning">
-        <small class="p-5 ">{{accountService.appUser}}</small> <br>
-        <small class="p-5 "> ({{accountService.user_id}}) </small> <br>
+      <ion-toolbar>
+        <div class="menu">
+          <ion-title mode="md">Menu</ion-title>
 
+          <ion-item lines="none"><span class="mt-3 mr-2"> Username: </span>
+            <ion-text class="font-weight-bold mt-3">{{accountService.appUser}}</ion-text>
+          </ion-item>
 
-        <div class="">
-          <h6 class="ml-5">
-            <ion-badge color="success"> ₦ {{accountService.accountBalance | number}} </ion-badge>
-            <div #bal
-                 class="animated"
-                 (click)="reloadBalance()">
-              <ion-icon name="wallet"
-                        size="large"></ion-icon>refresh
-            </div>
+          <!-- <ion-item lines="none">UserId: ({{accountService.user_id}}) </ion-item> -->
 
-            <br>
-            <p class=" text-dark"> </p>
-          </h6>
-
+          <ion-item lines="none"><span class="mr-2"> Balance: </span>
+            <ion-badge> ₦ {{accountService.accountBalance | number}} </ion-badge>
+            <ion-icon slot="end"
+                      #bal
+                      class="animated"
+                      (click)="reloadBalance()"
+                      name="refresh">refresh</ion-icon>
+          </ion-item>
         </div>
-
       </ion-toolbar>
     </ion-header>
+
     <ion-content>
       <ion-list color="light"
                 class="drawer-list">

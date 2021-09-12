@@ -1,3 +1,4 @@
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { DemoQuestionsService } from './shared/demo-questions.service';
 import { FailGameComponent } from './components/fail-game/fail-game.component';
 import { CongratsComponent } from './components/congrats/congrats.component';
@@ -21,6 +22,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 import { SplashComponent } from './splash/splash.component';
+
+
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -48,7 +51,7 @@ import { BehavourService } from './services/behavour.service';
   declarations: [AppComponent, GamePipe, AccountComponent,HeaderComponent,
     AdminnavigationComponent, AdminEventComponent, ForgetpasswordComponent,InsideEventComponent,
     InsideEventAddUserComponent, VoteNowComponent, TabsComponent, GamesectionComponent, NotLiveComponent,
-     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, SplashComponent],
+     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent],
   imports: [
     BrowserModule,

@@ -36,6 +36,10 @@ ion-content {
 		text-align: center;
 		font-size: 0.9rem;
 		margin-top: 2rem;
+
+		ion-label {
+			cursor: pointer;
+		}
 	}
 
 	.social-icons {

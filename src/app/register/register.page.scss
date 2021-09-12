@@ -32,8 +32,8 @@ ion-content {
 		margin-top: 3rem;
 	}
 
-	.login ion-button {
-		--background: var(--ion-color-primary);
+	.login ion-label {
+		cursor: pointer;
 	}
 
 	.social-icons {

@@ -60,11 +60,11 @@ export class AppComponent {
       url: '/tabs/transaction',
       icon: 'card'
     },
-    {
-      title: 'HOW TO PLAY',
-      url: '/howtoplay',
-      icon: 'information-circle'
-    },
+    // {
+    //   title: 'HOW TO PLAY',
+    //   url: '/howtoplay',
+    //   icon: 'information-circle'
+    // },
   ];
   dark = false;
 
