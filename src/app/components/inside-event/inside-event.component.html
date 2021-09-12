@@ -22,14 +22,22 @@
   </ion-fab>
 
   <ion-title mode="md"
-             class="text-center text-uppercase mt-2">CONTESTANT</ion-title>
-  <ion-item lines="none">
-    <ion-searchbar type="text"
-                   [(ngModel)]="searchModel.name"
-                   name="search"
-                   debounce="500"
-                   (ionChange)="getItems()"></ion-searchbar>
-  </ion-item>
+             class="text-center text-uppercase ion-margin-top">CONTESTANTS</ion-title>
+
+  <ion-row>
+    <ion-col size-xs="12"
+             size-sm="12"
+             size-md="6"
+             offset-md="3"
+             size-lg="12"
+             offset-lg="3">
+      <ion-searchbar type="text"
+                     [(ngModel)]="searchModel.name"
+                     name="search"
+                     debounce="500"
+                     (ionChange)="getItems()"></ion-searchbar>
+    </ion-col>
+  </ion-row>
 
   <ion-grid>
     <ion-row>

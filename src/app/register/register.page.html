@@ -59,7 +59,7 @@
               <ion-input class="pl-4 pr-2"
                          placeholder="example@mail.com"
                          name="email"
-                          [(ngModel)]="model.email"
+                         [(ngModel)]="model.email"
                          position="floating"
                          type="email"
                          required
@@ -68,59 +68,11 @@
                           name="mail-outline"></ion-icon>
               </ion-input>
             </div>
-
           </div>
-          <div *ngIf="email.dirty && email.errors"
-          class=" text-danger text-center">
-       <small class="text-danger "
-              *ngIf="password?.errors.invalid">email is required</small>
-     
-     </div>
-
-          <!-- password and validation -->
-          <div class="utility">
-            <div class="text-input">
-              <ion-input class="pl-4 pr-2"
-                         #password="ngModel"
-                         name="password"
-                         placeholder="Password"
-                         position="floating"
-                         [(ngModel)]="model.password"
-                         type="password"
-                         required
-                         ngControl="title"
-                         minlength="6">
-                <ion-icon class="mr-2"
-                          name="lock-closed-outline"></ion-icon>
-              </ion-input>
-            </div>
-
-            <div *ngIf="password.dirty && password.errors"
-                 class=" text-danger text-center">
-              <small class="text-danger "
-                     *ngIf="password?.errors.invalid">password is required</small>
-              <small class="text-danger "
-                     *ngIf="password?.errors.minlength">password must be at least 6 characters</small>
-            </div>
-          </div>
-
-          <!-- this confirm password field is commented out because it does not appear in the reviewed design, check button for sign up conditions. -->
-          <!-- <div *ngIf="password.dirty && password.value !== conf_password.value"
-               class=" text-center">
-            <small class="text-danger ">password not matched</small>
-          </div>
-
-          <div class="text-input">
-            <ion-input class="pl-4 pr-2"
-                       #conf_password="ngModel"
-                       placeholder="Confirm password"
-                       name="password"
-                       position="floating"
-                       [(ngModel)]="model.conf_password"
-                       type="password"
-                       required
-                       ngControl="title"
-                       minlength="6"></ion-input>
+          <!-- <div *ngIf="email.dirty && email.errors"
+               class=" text-danger text-center">
+            <small class="text-danger "
+                   *ngIf="password?.errors.invalid">email is required</small>
           </div> -->
 
           <!-- phone number and validation -->
@@ -150,8 +102,66 @@
             </div>
           </div>
 
+          <!-- password and validation -->
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2"
+                         #password="ngModel"
+                         name="password"
+                         placeholder="Password"
+                         position="floating"
+                         [(ngModel)]="model.password"
+                         type="password"
+                         required
+                         ngControl="title"
+                         minlength="6">
+                <ion-icon class="mr-2"
+                          name="lock-closed-outline"></ion-icon>
+              </ion-input>
+            </div>
 
-          <!-- TO DO - the conditions for this button have changed since the confirm password filed has been removed, please confirm code. -->
+            <div *ngIf="password.dirty && password.errors"
+                 class=" text-danger text-center">
+              <small class="text-danger "
+                     *ngIf="password?.errors.invalid">password is required</small>
+              <small class="text-danger "
+                     *ngIf="password?.errors.minlength">password must be at least 6 characters</small>
+            </div>
+          </div>
+
+          <div *ngIf="password.dirty && password.value !== conf_password.value"
+               class=" text-center">
+            <small class="text-danger ">password not matched</small>
+          </div>
+
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2"
+                       #conf_password="ngModel"
+                       placeholder="Confirm password"
+                       name="password"
+                       position="floating"
+                       [(ngModel)]="model.conf_password"
+                       type="password"
+                       required
+                       ngControl="title"
+                       minlength="6">
+              <ion-icon class="mr-2"
+                        name="lock-closed-outline"></ion-icon>
+            </ion-input>
+          </div>
+
+
+          <ion-row>
+            <ion-col class="d-flex align-items-center ion-margin-top">
+              <ion-checkbox class="mr-2"
+                            mode="ios"
+                            disabled="false"></ion-checkbox>
+              <a [routerLink]="
+              ">
+                <ion-label>Privacy Policy, Terms & Conditions</ion-label>
+              </a>
+            </ion-col>
+          </ion-row>
 
           <div class="signup-block">
             <ion-button class="login"
@@ -162,7 +172,7 @@
           </div>
         </form>
 
-        <div class="ion-text-center mt-5"
+        <div class="ion-text-center mt-5 login"
              size="12">
           <p class="text-dark">Already have an account?
             <ion-label [routerLink]="['/login']"
