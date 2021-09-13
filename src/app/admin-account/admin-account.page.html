@@ -31,6 +31,10 @@
     <ion-icon name="game-controller"></ion-icon>
         <ion-label>Amount</ion-label>
   </ion-segment-button>
+  <ion-segment-button value="promo_code">
+    <ion-icon name="cash"></ion-icon>
+        <ion-label>Promo</ion-label>
+  </ion-segment-button>
 </ion-segment>
 
 <ion-content>
@@ -97,6 +101,53 @@
               </ion-button>
             </div>
           </ion-card>
+        </div>
+
+        <!--  proo code -->
+        <div *ngIf="segment === 'promo_code'">
+
+          <ion-grid fixed>
+            <ion-row>
+              <ion-col size="10" offset="1">
+
+                <ion-card color="success"> 
+                  <ion-item class="p-1">
+                    <ion-label position="floating" > amount</ion-label>
+                    <ion-input  [(ngModel)]="promoCode.amount" type="number" ></ion-input>
+                  </ion-item>
+                  <ion-item class="p-1">
+                    <ion-label position="floating" > code</ion-label>
+                    <ion-input  [(ngModel)]="promoCode.promoCode" type="text" ></ion-input>
+                  </ion-item>
+                  <ion-item class="p-1">
+                    <ion-label position="floating" > slot</ion-label>
+                    <ion-input  [(ngModel)]="promoCode.promoSlot" type="number" ></ion-input>
+                  </ion-item>
+                  <!-- <ion-item class="p-1">
+                    <ion-label position="floating" > code </ion-label>
+                    <ion-input  [(ngModel)]="promoCode.promoCode" type="number" ></ion-input>
+                 
+                  </ion-item> -->
+                  <ion-item>
+                    <ion-label>start </ion-label>
+                    <ion-input  [(ngModel)]="promoCode.startDate" type="date" ></ion-input>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label>end </ion-label>
+                    <ion-input  [(ngModel)]="promoCode.endDate" type="date" ></ion-input>
+                  </ion-item>
+      
+                  <div class="ion-text-center">
+                    <ion-button [disabled]="!promoCode.promoCode" (click)="submitPromo()">
+                      Submit
+                    </ion-button>
+                  </div>
+                </ion-card>
+
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        
         </div>
        
 

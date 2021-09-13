@@ -157,6 +157,8 @@ constructor(private http: HttpClient,
       
     }
 
+    
+
     loadBalance(){
       this.accountService.getLeaderGameSection();
       return this.http.get(environment.apiBaseUrl + '/load-balance');

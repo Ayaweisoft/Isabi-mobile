@@ -56,4 +56,21 @@ export class LogicService {
     await alert.present();
     return promise;
   }
+
+  async presentAlert(header, message) {
+    const alert = await this.alertController.create({
+      header: `${header}`,
+      message: `${message}`,
+      buttons: [
+      {
+          text: 'Okay',
+          handler: () => {
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
 }

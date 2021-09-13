@@ -141,6 +141,14 @@ export class GameServiceService  {
       return this.http.get(environment.apiBaseUrl + '/get-game-amount');
     }
 
+
+    savePromo(data) : Observable<any>{
+      return this.http.post(environment.apiBaseUrl + '/save-promo', data);
+    }
+
+    getPromo() : Observable<any>{
+      return this.http.get(environment.apiBaseUrl + '/get-promo');
+    }
   
 
     async presentUpdate() {

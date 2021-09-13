@@ -2,7 +2,7 @@
   "appId": "ayaweisoft.swagasoft",
   "appName": "i-sabi",
   "bundledWebRuntime": false,
-  "linuxAndroidStudioPath":"/snap/bin/android-studio",
+  "linuxAndroidStudioPath": "/snap/bin/android-studio/android-studio",
   "npmClient": "npm",
   "webDir": "www",
   "plugins": {

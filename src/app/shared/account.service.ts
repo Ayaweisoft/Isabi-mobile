@@ -51,6 +51,10 @@ export class AccountService {
     return this.http.get(environment.apiBaseUrl + "/get-winners");
   }
 
+  activatePromo(promo){
+    return this.http.put(environment.apiBaseUrl + '/activate-promo', promo);
+  }
+
   merchantTransfer(username){
     return this.http.post(environment.apiBaseUrl + '/merchant-transfer', username);
   }

@@ -9,6 +9,7 @@ import { RaveOptions } from 'angular-rave';
 import { ModalController, AlertController, ToastController, Platform } from '@ionic/angular';
 
 import { NgModel } from '@angular/forms';
+import { LogicService } from 'src/app/services/logic.service';
 // import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 
 @Component({
@@ -30,12 +31,14 @@ export class AccountComponent implements OnInit, OnDestroy {
   @Input() firstName: string;
   @Input() lastName: string;
   @Input() middleInitial: string; 
+  loading: boolean;
 
 
   constructor(private router: Router, public userService: UserService,
               public accountService: AccountService,
               public gameSevice : GameServiceService,
               private platform: Platform,
+              private logicService: LogicService,
               // private localNotifications: LocalNotifications,
               public alertController: AlertController,
               public toastController: ToastController,
@@ -122,6 +125,23 @@ ngOnDestroy() {
 //   this.scheduled = data;
 // });
 // }
+
+submitProCode(promo){
+  this.loading = true;
+  console.log(promo)
+ let data = {promoCode : promo}
+  this.accountService.activatePromo(data).subscribe(data => {
+    console.log(data);
+    this.loading = false;
+    this.logicService.presentAlert('success', 'your account has been credited');
+    this.accountService.loadMyBalance();
+  }, err => {
+    this.loading = false;
+    this.logicService.presentAlert('not fount', err.error.message);
+    console.log(err);
+  })
+
+}
 
 showNotiAlert(header, sub, msg){
   this.alertController.create({

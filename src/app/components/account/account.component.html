@@ -50,6 +50,16 @@
                             <ion-button (click)="enterCashoutAmount()"  color="success">CASHOUT</ion-button>
                            
                            </div>
+
+                          <ion-item color="light" class="p-3">
+                            <ion-label  color="success" position="floating">promo code</ion-label>
+                            <ion-input #promo type="text"></ion-input>
+                          </ion-item>
+                          <div>
+                            <ion-button color="success" [disabled]="!promo.value" (click)="submitProCode(promo.value)">
+                              submit 
+                            </ion-button>
+                          </div>
                          
                               </ion-row>
       
@@ -315,5 +325,11 @@
         </ion-row>
       </ion-grid>
     
+
+      <div *ngIf="loading">
+        <ion-spinner slot="middle"></ion-spinner>
+        <ion-progress-bar type="indeterminate"></ion-progress-bar>
+        <p class="p-5 bg-dark text-white">loading </p>
+      </div>
     </ion-content>
     

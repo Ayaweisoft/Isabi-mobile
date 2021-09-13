@@ -6,6 +6,7 @@ import { PopoverController, ToastController } from '@ionic/angular';
 import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { BehavourService } from '../services/behavour.service';
+import { LogicService } from '../services/logic.service';
 
 @Component({
   selector: 'app-admin-account',
@@ -23,6 +24,7 @@ export class AdminAccountPage implements OnInit {
 
   constructor(public gameService: GameServiceService,
                 private router: Router,
+                private logicService: LogicService,
                 private behaviorService: BehavourService,
               private popoverController: PopoverController) { 
 
@@ -38,6 +40,15 @@ export class AdminAccountPage implements OnInit {
    sms:'',
    youtubeUrl:''
  };
+
+ promoCode = {
+   amount : null,
+   startDate : null,
+   endDate :  null,
+   promoCode :'',
+   promoSlot : null
+
+ }
 
   ngOnInit() {
     this.behaviorService.getGameAmount().subscribe(amount => {
@@ -136,6 +147,18 @@ export class AdminAccountPage implements OnInit {
       console.log(err);
       this.loading = false;
     });
+  }
+
+
+  submitPromo(){
+    this.loading = true;
+    this.gameService.savePromo(this.promoCode).subscribe( res => {
+      this.loading = false;
+      this.logicService.presentAlert('Success ','promo code has beend saved successfully.')
+    }, err => {
+      this.loading = false;
+      this.logicService.presentAlert('error ','error saving promo code')
+    })
   }
 
 }
