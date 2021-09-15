@@ -14,7 +14,7 @@ export class AdminGuard implements CanActivate {
     }
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-      this.userRole = this.userService.getUserRole();
+      this.userRole = this.userService.getRole();
       console.log('INSIDE ADMIN CANACTIVATE',this.userRole );
       const admin = 'ADMIN';
       if( this.userRole !== admin){
