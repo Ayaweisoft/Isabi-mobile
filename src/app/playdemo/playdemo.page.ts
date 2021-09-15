@@ -108,7 +108,8 @@ export class PlaydemoPage implements OnInit {
   }
 
   getQuestionForGame() { 
-  
+  this.lastQuestion = 0;
+  this.runningQuestion = 0;
     this.gameQuestions = this.demoQuestionsService.demoQuestions;
     this.lastQuestion =  this.gameQuestions.length - 1;
     this.loadingGame = false;
@@ -171,6 +172,10 @@ export class PlaydemoPage implements OnInit {
     //       clearInterval(this.timerTicker);
     //         }
     //   );
+    this.gameOver = false;
+    this.disableClick = false;
+    this. runningQuestion  = 0;
+    this.lastQuestion = 0;
     }
 
   checkAnswer(selection, correctAnswer) {
@@ -296,6 +301,7 @@ export class PlaydemoPage implements OnInit {
  
    await modal.present();
    const data = await modal.onDidDismiss();
+   this.ngOnDestroy();
  
  }
  
@@ -320,6 +326,7 @@ async presentResult(min, secs, correct) {
 
   setTimeout(()=> {
     this.router.navigate(['/tabs/gamesection']);
+    this.ngOnDestroy()
     alert.dismiss()
   },3000);
 }

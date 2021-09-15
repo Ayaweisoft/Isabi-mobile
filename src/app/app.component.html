@@ -41,7 +41,7 @@
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-menu-toggle *ngIf="userService.getUserRole() === 'MERCHANT'"
+        <ion-menu-toggle *ngIf="userService.getRole() === 'MERCHANT'"
                          [routerLink]="['/merchant']">
           <ion-item color="light">
             <ion-icon name="cash"></ion-icon>
@@ -83,7 +83,7 @@
 
       <ion-list color="light"
                 id="labels-list"
-                *ngIf="userService.getUserRole() == 'ADMIN'">
+                *ngIf="userService.getRole() == 'ADMIN'">
         <ion-list-header class="text-center">Admin</ion-list-header>
         <ion-menu-toggle>
           <ion-item color="success"

@@ -5,11 +5,12 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 import { AccountService } from 'src/app/shared/account.service';
 
-import { RaveOptions } from 'angular-rave';
+
 import { ModalController, AlertController, ToastController, Platform } from '@ionic/angular';
 
 import { NgModel } from '@angular/forms';
 import { LogicService } from 'src/app/services/logic.service';
+import { Flutterwave } from 'flutterwave-angular-v3';
 // import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
 
 @Component({
@@ -23,9 +24,9 @@ export class AccountComponent implements OnInit, OnDestroy {
   scheduled :  any;
   userEmail: any;
   appUsername: any;
-  amountInput: any;
+  // amountInput: any;
   paymentDoneSub : any;
-  exactAmount: any;
+  // exactAmount: any;
   paymentOptions: any;
   showPaymentButtons : boolean = false;
   @Input() firstName: string;
@@ -33,6 +34,9 @@ export class AccountComponent implements OnInit, OnDestroy {
   @Input() middleInitial: string; 
   loading: boolean;
 
+  customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: ''}
+  
+  customizations = { logo: 'https://flutterwave.com/images/logo-colored.svg'}
 
   constructor(private router: Router, public userService: UserService,
               public accountService: AccountService,
@@ -40,6 +44,7 @@ export class AccountComponent implements OnInit, OnDestroy {
               private platform: Platform,
               private logicService: LogicService,
               // private localNotifications: LocalNotifications,
+              private flutterwave: Flutterwave,
               public alertController: AlertController,
               public toastController: ToastController,
               public modalController: ModalController
@@ -50,7 +55,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 }
 
 model = {
-  amount: '', 
+  amount: null, 
   cashout: '',
   username: ''
 };
@@ -75,56 +80,64 @@ ngOnInit() {
 }
 ngOnDestroy() {
   // this.paymentDoneSub = '';
-  this.amountInput = '';
-  this.exactAmount = '';
   this.model = {
-      amount: '',
+      amount: null,
       cashout: '',
       username: ''
     };
 }
 
-// notiClick() {
-//   this.localNotifications.schedule({
-//     id: 1,
-//     title : 'i-sabi',
-//     icon : 'assets://icon/success_icon.png',
-//     attachments : ['/icon/success.png'],
-//     text : 'i-sabi  click Notifications',
-//     data : { pageData : AccountComponent},
-//     trigger : {in: 1, unit: ELocalNotificationTriggerUnit.SECOND},
-//     foreground : true
-//   });
+makePaymentCallback(response: any): void {
+  console.log("RESULT", response);
+  if(response.status == "successful"){
+    this.generateReference();
+    response.date = Date.now();
+    response.account_id  = this.userService.getAuthId();
+    response.ref  = response.flw_ref;
+    response.username  = this.userService.getUsername();
+    response.user_id  = this.userService.getAuthId();
+    response.transaction  = response.tx_ref;
+    this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
+      res => {
+        console.log('new balance',res);
+        this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
+       this.accountService.loadMyBalance();
+        
+       this.generateRef();
+      },
+      err => {
+       this.generateRef();
+       this.accountService.loadMyBalance();
+      }
+    );
+
+    this.flutterwave.closePaymentModal()
+    
+  }else{
+    console.log('data')
+    this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
+  }
+
+}
+
+
+closedPaymentModal(): void {
+  this.generateReference();
+  console.log('payment is closed');
+  this.model.amount = null;
+
+ 
+}
+
+
+
+generateReference() {
+  let date = new Date();
+  this.reference = date.getTime().toString();
   
-// }
+}
 
-// scheduleNotification(){ 
-//   this.localNotifications.schedule({
-//     id: 2,
-//     title : 'shedule Attention',
-//     text : 'i-sabi Notifications',
-//     data : { pageData : AccountComponent},
-//     trigger : {in: 5, unit: ELocalNotificationTriggerUnit.SECOND},
-//     foreground : true
-//   });
-// }
 
-// recurrentNotification(){
-//   this.localNotifications.schedule({
-//     id: 3,
-//     title : 'trigger Attention',
-//     text : 'i-sabi trigger Notifications',
-   
-//     trigger : {every : ELocalNotificationTriggerUnit.MINUTE},
-//     foreground : true
-//   });
-// }
-
-// getAllNotification(){
-// this.localNotifications.getAll().then((data) => {
-//   this.scheduled = data;
-// });
-// }
 
 submitProCode(promo){
   this.loading = true;
@@ -159,8 +172,6 @@ showNotiAlert(header, sub, msg){
 
 paymentCancel(){
   this.showPaymentButtons = false;
-  this.amountInput = '';
-  this.exactAmount = '';
   this.generateRef();
   // this.amountInput = null;
 }
@@ -176,17 +187,12 @@ paymentDone(process: any) {
 
   this.paymentDoneSub = this.userService.postTransaction(process).subscribe(
     res => {
-     this.amountInput = '';
-     this.exactAmount = '';
      this.accountService.loadMyBalance();
       
      this.generateRef();
     },
     err => {
-     this.amountInput = '';
-     this.exactAmount = '';
      this.generateRef();
-     this.amountInput = null;
      this.accountService.loadMyBalance();
     }
   );
@@ -199,13 +205,8 @@ paymentDone(process: any) {
 }
 
  payNow(){
-  console.log('pay now is clicked..');
-  this.exactAmount = this.amountInput;
-  this.amountInput = this.model.amount;
-  const paymentAmount = this.amountInput + '00';
-  this.amountInput = paymentAmount;
-  console.log(this.exactAmount);
-  console.log(this.amountInput);
+  console.log('pay now is clicked..', this.reference);
+  
 }
 
 mobileTransfer(){
@@ -294,13 +295,9 @@ async enterAmountInput() {
         text: 'Confirm',
         cssClass : 'success',
         handler: (val) => {
+          console.log(val.amount)
           this.showPaymentButtons = true;
-          this.exactAmount = val.amount;
-          this.amountInput = this.model.amount;
-          const paymentAmount = this.amountInput + '00';
-          this.amountInput = paymentAmount;
-          console.log(this.exactAmount);
-          console.log(this.amountInput);
+          this.model.amount = val.amount;
         }
       }
     ]

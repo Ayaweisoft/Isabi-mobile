@@ -26,16 +26,16 @@ export class SplashComponent implements OnInit {
 
     clickSlidetoNext() {
     console.log('slide to next')
-    this.mySlider.slideNext();
+    this.mySlider?.slideNext();
   }
 
   clickSlidePrevious() {
     console.log('slide to previous');
-    this.mySlider.slidePrev();
+    this.mySlider?.slidePrev();
   }
 
   async autoSlide() {
-     this.mySlider.slideNext(3500, true);
+     this.mySlider?.slideNext(3500, true);
 }
 
 }

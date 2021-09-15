@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { ToastController, AlertController } from '@ionic/angular';
+import jwtDecode, * as jwt_decode from "jwt-decode";
 
 
 @Injectable({ 
@@ -142,7 +143,6 @@ constructor(private http: HttpClient,
       return this.http.post(environment.apiBaseUrl + `/update-question`, question);
     }
     deleteQuestion(id){
-      console.log(id);
       return this.http.get(environment.apiBaseUrl + `/delete-question${id}`);
     }
     postTransaction(tranx){
@@ -181,9 +181,7 @@ constructor(private http: HttpClient,
       return this.http.get(environment.apiBaseUrl + '/get-all-live-questions');
     }
   
-    getUserRole(){
-      return localStorage.getItem('user-role');
-     }
+   
 
 
      resetPassword(credentials){
@@ -202,6 +200,45 @@ constructor(private http: HttpClient,
   
      deleteGameRecord(id){
        return this.http.get(environment.apiBaseUrl + `/delete-game-record${id}`);
+     }
+
+
+
+     getEmail(){
+      let payLoad = jwtDecode(this.getToken());
+      let email = payLoad['email'];
+      return email;
+     }
+   
+
+     getRole(){
+      let payLoad = jwtDecode(this.getToken());
+      let role = payLoad['role'];
+      return role;
+     }
+
+     checkForAdmin(){
+      let payLoad = jwtDecode(this.getToken());
+      let role = payLoad['role'];
+      if(role == 'ADMIN'){
+        return true
+      }else{
+        return false;
+      }
+      return role;
+     }
+   
+     getUsername(){
+      let payLoad = jwtDecode(this.getToken());
+      let role = payLoad['username'];
+      return role;
+     }
+   
+
+     getAuthId(){
+      let payLoad = jwtDecode(this.getToken());
+      let user_id = payLoad['_id'];
+      return user_id;
      }
   
    

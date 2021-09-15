@@ -29,7 +29,6 @@ import { SplashComponent } from './splash/splash.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Angular4PaystackModule } from 'angular4-paystack';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -40,11 +39,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth-interceptor';
 import { AccountService } from './shared/account.service';
 import { GameServiceService } from './shared/game-service.service';
-import { AngularRaveModule } from 'angular-rave';
 import { GamePipe } from './game.pipe';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
 import { BehavourService } from './services/behavour.service';
+import { FlutterwaveModule } from 'flutterwave-angular-v3';
 
 
 @NgModule({
@@ -57,12 +56,9 @@ import { BehavourService } from './services/behavour.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    Angular4PaystackModule,
     HttpClientModule,
-    AngularRaveModule.forRoot({
-      key: "FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X",
-      isTest: true,
-    }),
+    FlutterwaveModule,
+  
     IonicModule.forRoot(),
     AppRoutingModule,
     
@@ -80,7 +76,6 @@ import { BehavourService } from './services/behavour.service';
     UserService,
     LogicService,
     BehavourService,
-    Angular4PaystackModule,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
     UserService, AccountService, AdminGuard,

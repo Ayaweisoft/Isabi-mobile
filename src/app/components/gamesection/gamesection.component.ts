@@ -63,11 +63,10 @@ export class GamesectionComponent implements OnInit {
 
      }
 
-  ngOnInit() {
-    this.loadBalance(); 
+ async ngOnInit() {
     this.appUser = localStorage.getItem('appUser');
-    this.gameService.getAdminDate();
-                this.gameService.getGameTip(); 
+   await this.gameService.getAdminDate();
+   await this.loadBalance(); 
                 this.autoSlide();
  
   }

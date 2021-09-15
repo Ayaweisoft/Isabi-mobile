@@ -87,7 +87,10 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     console.log('getting remote amoutn')
     this.loadingGame =  true;
     this.gameService.getGameAmount().subscribe(res => {
-      this.behaviorService.setGameAmount(res.data.amount);
+      if(res.data?.amount){
+        this.behaviorService.setGameAmount(res.data?.amount);
+
+      }
       this.loadingGame = false;
     }, err => {
       this.loadingGame = false;

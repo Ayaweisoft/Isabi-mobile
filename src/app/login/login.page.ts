@@ -51,28 +51,16 @@ export class LoginPage implements OnInit {
     this.userService.login(this.model).subscribe(response => {
       this.userService.setToken(response['token']);
       this.userService.loadBalance();
-      console.log('RESPONSE FROM LOGIN');
-      localStorage.setItem('user_id',response['doc']['user_id']);
-      localStorage.setItem('appUser',response['doc']['username']);
-      localStorage.setItem('user-role',response['doc']['role']);
+
       this.loading = false;
       this.router.navigate(['/tabs/gamesection']);
    
         
-    }, error => {
+    }, err => {
       this.loading = false;
-      let errorMessage = '';
-      let message = error.error;
-      if(error.error ){
-        const message  = error.error;
-        this.gameService.presentToast(message);
-        console.log('LOGIN ERROR');
-        console.log(error.statusText);
-      }else{
-        const messageErr = error.statusText;
-        this.gameService.presentToast(messageErr);
-        console.log('server error');
-      }
+        this.gameService.presentToast(err.error.message);
+        console.log('LOGIN ERROR', err.error.message);
+   
      
       // this.loginToast(message);
     });
