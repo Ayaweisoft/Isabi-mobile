@@ -7,7 +7,7 @@ export const environment = {
 // apiBaseUrl:  'http://localhost:8000/api',
 versionCode :5.2,
 apiBaseUrl: ' https://i-sabi.herokuapp.com/api'
-simon
+// simon
 
 };
 
