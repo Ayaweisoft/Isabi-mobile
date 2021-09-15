@@ -1,3 +1,5 @@
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { RegisterPage } from './register/register.page';
 import { GameGuard } from './auth/game.guard';
 import { NotLiveComponent } from './components/not-live/not-live.component';
 import { GamesectionComponent } from './components/gamesection/gamesection.component';
@@ -78,7 +80,6 @@ const routes: Routes = [
         canActivate: [AuthguardGuard]
       },
 
-
       //  admin routes
       {
         path: 'admin-upload',
@@ -152,6 +153,10 @@ const routes: Routes = [
     path: 'testimonials',
     loadChildren: './testimonials/testimonials.module#TestimonialsPageModule'
   },
+    {
+        path: 'privacypolicy',
+        component: PrivacyPolicyComponent
+      },
   {
     path: 'contactus',
     loadChildren: './contactus/contactus.module#ContactusPageModule'
