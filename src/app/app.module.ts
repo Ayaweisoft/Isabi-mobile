@@ -44,14 +44,17 @@ import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
 import { BehavourService } from './services/behavour.service';
 import { FlutterwaveModule } from 'flutterwave-angular-v3';
+import { WebVotingComponent } from './components/web-voting/web-voting.component';
 
 
 @NgModule({
   declarations: [AppComponent, GamePipe, AccountComponent,HeaderComponent,
     AdminnavigationComponent, AdminEventComponent, ForgetpasswordComponent,InsideEventComponent,
     InsideEventAddUserComponent, VoteNowComponent, TabsComponent, GamesectionComponent, NotLiveComponent,
+    WebVotingComponent,
      SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
-  entryComponents: [InsideEventAddUserComponent, VoteNowComponent],
+  entryComponents: [InsideEventAddUserComponent, VoteNowComponent,
+  ],
   imports: [
     BrowserModule,
     FormsModule,

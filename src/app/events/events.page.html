@@ -31,7 +31,7 @@
 
             <small>{{item.type}} </small>
 
-            <ion-icon *ngIf="userService.getUserRole() == 'ADMIN'"
+            <ion-icon *ngIf="userService.getRole() == 'ADMIN'"
                       (click)="handleDelete(item)"
                       name="trash">
             </ion-icon>

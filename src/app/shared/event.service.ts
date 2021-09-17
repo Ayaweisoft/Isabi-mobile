@@ -38,6 +38,10 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
     return this.http.put(environment.apiBaseUrl + '/submit-vote', votes);
   }
 
+  submitVoteForWeb(votes){
+    return this.http.put(environment.apiBaseUrl + '/submit-vote-web', votes);
+  }
+
   deleteContestant(id){
 return this.http.delete(environment.apiBaseUrl +`/delete-contestant${id}`);
   }

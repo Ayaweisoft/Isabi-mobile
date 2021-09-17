@@ -14,6 +14,7 @@ import { AccountComponent } from './components/account/account.component';
 import { AuthguardGuard } from './auth/authguard.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
+import { WebVotingComponent } from './components/web-voting/web-voting.component';
 
 const routes: Routes = [
   {
@@ -171,6 +172,10 @@ const routes: Routes = [
   },
   {
     path: 'forgetpassword', component: ForgetpasswordComponent
+  },
+  {
+    
+    path: 'web-voting/:id', component: WebVotingComponent
   },
 
 

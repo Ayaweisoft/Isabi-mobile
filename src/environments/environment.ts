@@ -4,9 +4,10 @@
 
 export const environment = {
   production: false,
-// apiBaseUrl:  'http://localhost:8000/api',
+apiBaseUrl:  'http://localhost:8000/api',
+webVotingUrl:  'http://localhost:8100/',
 versionCode :5.2,
-apiBaseUrl: ' https://i-sabi.herokuapp.com/api'
+// apiBaseUrl: ' https://i-sabi.herokuapp.com/api'
 // simon
 
 };
