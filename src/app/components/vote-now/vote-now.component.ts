@@ -54,8 +54,7 @@ loading = false;
     let balance = this.accountService.accountBalance;
     let costPerVate = this.properties.purchase * this.properties.cost;
     let totalCost = balance - costPerVate ;
-    console.log('BLANCE', balance);
-    console.log('BLANCE', totalCost);
+   
     if( totalCost > 1){
       console.log('we can bid for this');
       this.loading = true;

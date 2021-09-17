@@ -145,6 +145,11 @@ constructor(private http: HttpClient,
     deleteQuestion(id){
       return this.http.get(environment.apiBaseUrl + `/delete-question${id}`);
     }
+
+    getContestantById(dataId){
+      return this.http.post(environment.apiBaseUrl + `/get-contestant-by-id`,dataId, this.noAuthHeader);
+    }
+
     postTransaction(tranx){
       return this.http.post(environment.apiBaseUrl + `/submit-transaction`, tranx);
     }
@@ -205,19 +210,29 @@ constructor(private http: HttpClient,
 
 
      getEmail(){
-      let payLoad = jwtDecode(this.getToken());
-      let email = payLoad['email'];
-      return email;
+      try {
+        let payLoad = jwtDecode(this.getToken());
+        let email = payLoad['email'];
+        return email;
+      } catch (error) {
+        
+      }
+     
      }
    
 
      getRole(){
+     try {
       let payLoad = jwtDecode(this.getToken());
       let role = payLoad['role'];
       return role;
+     } catch (error) {
+       
+     }
      }
 
      checkForAdmin(){
+     try {
       let payLoad = jwtDecode(this.getToken());
       let role = payLoad['role'];
       if(role == 'ADMIN'){
@@ -225,20 +240,31 @@ constructor(private http: HttpClient,
       }else{
         return false;
       }
-      return role;
+     } catch (error) {
+       
+     }
+     
      }
    
      getUsername(){
-      let payLoad = jwtDecode(this.getToken());
+      try {
+        let payLoad = jwtDecode(this.getToken());
       let role = payLoad['username'];
       return role;
+      } catch (error) {
+        
+      }
      }
    
 
      getAuthId(){
-      let payLoad = jwtDecode(this.getToken());
+      try {
+        let payLoad = jwtDecode(this.getToken());
       let user_id = payLoad['_id'];
       return user_id;
+      } catch (error) {
+        
+      }
      }
   
    

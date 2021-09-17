@@ -11,7 +11,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab *ngIf="userService.getUserRole() == 'ADMIN'"
+  <ion-fab *ngIf="userService.getRole() == 'ADMIN'"
            (click)="addUser()"
            vertical="top"
            horizontal="end"
@@ -53,7 +53,7 @@
                i>
         <ion-card class="text-center font-weight-bold pb-2 ion-no-margin">
           <!-- <ion-icon name="swap"></ion-icon> {{item.vote_count | number}}  -->
-          <ion-icon *ngIf="userService.getUserRole() == 'ADMIN'"
+          <ion-icon *ngIf="userService.getRole() == 'ADMIN'"
                     (click)="deleteContestant(item)"
                     name="trash"></ion-icon>
           <img [src]="item.image_url">
@@ -68,6 +68,12 @@
             item.nickname,item.my_code, item.fullname)"
                         size="small"
                         color="primary">vote now</ion-button>
+          </div>
+
+          <div class="ion-text-center">
+            <input readonly type="text"  [value]="personalLink +'/'+'web-voting/'+ item._id " #userinput size="35">
+            <ion-button color="dark"  size="small" (click)="copyInputMessage(userinput)" value="click to copy" >Copy link</ion-button>
+          
           </div>
         </ion-card>
       </ion-col>

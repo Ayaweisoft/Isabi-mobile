@@ -6,6 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController, AlertController } from '@ionic/angular';
 import { EventService } from 'src/app/shared/event.service';
 import { startWith, map, filter } from "rxjs/operators";
+import { environment } from 'src/environments/environment';
+import { LogicService } from 'src/app/services/logic.service';
 
 @Component({
   selector: 'app-inside-event',
@@ -18,8 +20,10 @@ loading = true;
 contestant = [];
 contestantData = [];
 costPerVote = null;
+personalLink = environment.webVotingUrl;
 
   constructor(private route: ActivatedRoute, public modalController: ModalController,
+    private logicService: LogicService,
               private eventService: EventService, public userService: UserService, public alertController: AlertController) { }
 
     searchModel = { name:''}
@@ -39,6 +43,13 @@ costPerVote = null;
      }
  
 
+
+     copyInputMessage(inputElement){
+      inputElement.select();
+      document.execCommand('copy');
+      inputElement.setSelectionRange(0, 0);
+      this.logicService.presentToast('text  coppied' );
+    }
 
   
   getItems() {

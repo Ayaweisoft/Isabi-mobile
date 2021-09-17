@@ -32,6 +32,14 @@ export class LogicService {
     toast.present();
   }
 
+  async presentToast(msg) {
+    const toast = await this.toastController.create({
+      message: msg,
+      duration: 2000
+    });
+    toast.present();
+  }
+
 
 
   async alertDialog(head: string, msg: string): Promise<void | boolean> {
