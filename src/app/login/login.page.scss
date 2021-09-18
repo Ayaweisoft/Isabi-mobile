@@ -1,5 +1,7 @@
 ion-content {
-	--background: var(--ion-color-primary-contrast);
+	--background: url('/assets/img/bg.png1');
+	--background-repeat: no-repeat;
+	--background-size: contain;
 
 	.logo {
 		display: flex;
