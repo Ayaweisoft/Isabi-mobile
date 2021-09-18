@@ -91,7 +91,7 @@ export class AppComponent {
     public userService: UserService,
     public accountService: AccountService,
   ) {
-    this.presentSplash();
+    // this.presentSplash();
     this.initializeApp();
   }
 
@@ -135,13 +135,13 @@ export class AppComponent {
 
   }
 
-  async presentSplash() {
-    const modal = await this.ModalController.create({
-      component: SplashComponent,
-      cssClass: 'modal-fullscreen'
-    });
-    return await modal.present();
-  }
+  // async presentSplash() {
+  //   const modal = await this.ModalController.create({
+  //     component: SplashComponent,
+  //     cssClass: 'modal-fullscreen'
+  //   });
+  //   return await modal.present();
+  // }
 
 
   async showAlert(title, msg){
