@@ -77,7 +77,7 @@ export class AppComponent {
     {title:'ADMIN ACCOUNT', url:'/tabs/admin-account', icon:'wallet'},
     {title:'ADMIN SEARCH', url:'/tabs/adminquery', icon:'search'},
     {title:'ADMIN LEADERBOARD', url:'/tabs/admin-leaderbord', icon:'trophy'},
-    {title:'ADMIN PLAY', url:'/tabs/play', icon:'play'},
+    {title:'ADMIN PLAY', url:'/tabs/admin-play', icon:'play'},
     // {title:'Admin dashboard', url:'/admin-dash'},
 
   ];
