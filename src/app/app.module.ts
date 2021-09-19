@@ -40,11 +40,13 @@ import { AuthInterceptor } from './auth/auth-interceptor';
 import { AccountService } from './shared/account.service';
 import { GameServiceService } from './shared/game-service.service';
 import { GamePipe } from './game.pipe';
+import { AngularFireModule } from '@angular/fire';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
 import { BehavourService } from './services/behavour.service';
 import { FlutterwaveModule } from 'flutterwave-angular-v3';
 import { WebVotingComponent } from './components/web-voting/web-voting.component';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -63,6 +65,7 @@ import { WebVotingComponent } from './components/web-voting/web-voting.component
     FlutterwaveModule,
   
     IonicModule.forRoot(),
+     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     
   ],
