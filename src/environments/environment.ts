@@ -7,8 +7,16 @@ export const environment = {
 // apiBaseUrl:  'http://localhost:8000/api',
 webVotingUrl:  'http://localhost:8100/',
 versionCode :5.2,
-apiBaseUrl: ' https://i-sabi.herokuapp.com/api'
-// simon
+apiBaseUrl: ' https://i-sabi.herokuapp.com/api',
+firebaseConfig : {
+  apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
+  authDomain: "i-sabi-bd851.firebaseapp.com",
+  projectId: "i-sabi-bd851",
+  storageBucket: "i-sabi-bd851.appspot.com",
+  messagingSenderId: "689315780305",
+  appId: "1:689315780305:web:0b8e34d8b46966fc0817f0",
+  measurementId: "G-4FT60JQ93C"
+}
 
 };
 
