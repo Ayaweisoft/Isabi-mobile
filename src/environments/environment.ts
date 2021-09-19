@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
 // apiBaseUrl:  'http://localhost:8000/api',
-webVotingUrl:  'http://localhost:8100/',
+// webVotingUrl:  'http://localhost:8100/',
+webVotingUrl:  'https://i-sabi.app/',
 versionCode :5.2,
 apiBaseUrl: ' https://i-sabi.herokuapp.com/api',
 firebaseConfig : {
