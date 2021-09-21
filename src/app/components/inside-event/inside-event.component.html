@@ -11,6 +11,15 @@
 </ion-header>
 
 <ion-content>
+    <!-- content area -->
+    <ion-refresher #refresherRef
+    (ionRefresh)="doRefresh($event)"
+    slot="fixed">
+<ion-refresher-content>
+</ion-refresher-content>
+</ion-refresher>
+
+
   <ion-fab *ngIf="userService.getRole() == 'ADMIN'"
            (click)="addUser()"
            vertical="top"
