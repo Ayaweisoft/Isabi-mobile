@@ -1,9 +1,9 @@
 import { VoteNowComponent } from './../vote-now/vote-now.component';
 import { UserService } from 'src/app/shared/user.service';
 import { InsideEventAddUserComponent } from './../inside-event-add-user/inside-event-add-user.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, IonRefresher } from '@ionic/angular';
 import { EventService } from 'src/app/shared/event.service';
 import { startWith, map, filter } from "rxjs/operators";
 import { environment } from 'src/environments/environment';
@@ -15,6 +15,7 @@ import { LogicService } from 'src/app/services/logic.service';
   styleUrls: ['./inside-event.component.scss'],
 })
 export class InsideEventComponent implements OnInit {
+  @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
 eventId;
 loading = true;
 contestant = [];
@@ -34,7 +35,6 @@ personalLink = environment.webVotingUrl;
      
     });
 
-    console.log('inside event')
     this.getAllContentant();
   }
 
@@ -57,38 +57,48 @@ personalLink = environment.webVotingUrl;
     this.initializeItems();
     // set val to the value of the searchbar
     const val = this.searchModel.name;
-    console.log(val);
    
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
         // this.isItemAvailable = true;
         this.contestant = this.contestant.filter((item) => {
-          console.log(item);
           return (item.nickname.indexOf(val) > -1);
     });
     }
     }
 
   getAllContentant(){
-    console.log('getting contestant');
     this.eventService.getAllContestant(this.eventId).subscribe(
       res => {
-        console.log(res);
+        try {
+          this.refresherRef.complete();
+        } catch (error) {
+          
+        }
         this.loading = false;
         this.contestant = res['contestant'];
         this.contestantData = this.contestant;
         this.costPerVote = res['cost_per_vote'];
       },
       err => {
+        try {
+          this.refresherRef.complete();
+        } catch (error) {
+          
+        }
         this.loading = false;
-        console.log(err);
         this.userService.longToast(err.error.msg);
       }
     );
   }
 
+  async doRefresh(refresher) {
+    await this.getAllContentant();
+   
+   
+  }
+
   async addUser() {
-    console.log(this.eventId);
     const modal = await this.modalController.create({ component: InsideEventAddUserComponent,
       componentProps: {
         event_id: this.eventId, 
@@ -128,12 +138,11 @@ async deleteContestant(contestant) {
         role: 'cancel',
         cssClass: 'secondary',
         handler: () => {
-          console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
         }
       }, {
         text: 'Okay',
         handler: () => {
-          console.log('Confirm Okay', contestant);
           this.loading = true;
           this.eventService.deleteContestant(contestant._id).subscribe(
             res => {

@@ -163,7 +163,7 @@
             </ion-col>
         
             <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
                   <ion-label position="floating" color="primary">bank name</ion-label>
                   <ion-input  type="text" #bankname="ngModel" name="bankname" 
@@ -172,9 +172,21 @@
             </ion-item>
             </ion-col>
            </ion-row>
+           <ion-list>
+             <ion-item color="light">
+              <ion-input  type="text" #bankname="ngModel" name="bankname" 
+              [(ngModel)]="eventModel.eventOwner" placeholder="(optional username)  event owner"></ion-input>
+               
+             </ion-item>
+             <ion-item color="light">
+              <div class="p-3">
+              <ion-button (click)="submitEvent()" *ngIf="eventModel.type  && eventForm.valid">submit</ion-button>
+
+              </div>
+             </ion-item>
+           </ion-list>
         
-            <ion-button (click)="submitEvent()" *ngIf="eventModel.type  && eventForm.valid">submit</ion-button>
-        
+            
           </form>
         </ion-card>
 

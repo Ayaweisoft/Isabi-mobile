@@ -20,7 +20,8 @@ loading = false;
 
   eventModel = {
     eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '',bankname:'',
-    costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: ''
+    costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: '',
+    eventOwner:''
   }
   ngOnInit() {
 
@@ -53,8 +54,10 @@ loading = false;
 
   resetForm(){
     this.eventModel = {
-      eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '',bankname:'',
-      costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: ''
+      eventName: '', type: '', image_url: '', companyName: '', address: '', 
+      contactNumber: '', aboutEvent: '',bankname:'',
+      costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '', 
+       sharingRatio_company: '', accountNumber: '', accountName: '',eventOwner:''
     }
   }
 
