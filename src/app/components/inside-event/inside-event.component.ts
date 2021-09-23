@@ -22,6 +22,7 @@ contestant = [];
 contestantData = [];
 costPerVote = null;
 personalLink = environment.webVotingUrl;
+  eventRefresher: any;
 
   constructor(private route: ActivatedRoute, public modalController: ModalController,
     private logicService: LogicService,
@@ -35,7 +36,19 @@ personalLink = environment.webVotingUrl;
      
     });
 
-    this.getAllContentant();
+   
+  }
+
+
+  ionViewDidEnter() {
+    
+    this.eventRefresher = setInterval(() => {
+      this.getAllContentant();
+    },9000)
+  }
+
+  ionViewDidLeave() {
+    clearInterval(this.eventRefresher);
   }
 
   initializeItems(){
@@ -77,6 +90,7 @@ personalLink = environment.webVotingUrl;
         }
         this.loading = false;
         this.contestant = res['contestant'];
+        console.log(this.contestant.length);
         this.contestantData = this.contestant;
         this.costPerVote = res['cost_per_vote'];
       },
