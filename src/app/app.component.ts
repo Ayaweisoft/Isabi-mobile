@@ -21,7 +21,7 @@ export class AppComponent {
   @ViewChild('bal', {static : false}) bal: ElementRef;
   showSplash = true;
   @ViewChild('nav', {static: false}) nav: NavController;
-  
+  balance : any;
   authenticate = false;
   public appPages = [
    
@@ -70,6 +70,7 @@ export class AppComponent {
 
   public labels = [
     {title:'UPLOAD QUESTIONS', url:'/tabs/admin-upload', icon:'add'},
+    {title:'MANAGE EVENTS', url:'/tabs/manage-event', icon:'star-outline'},
     {title:'CASHOUT REQUESTS', url:'/tabs/cashout-request', icon:'cash'},
     {title:'MANAGE USERS', url:'/tabs/manage-users', icon:'person'},
     {title:'MANAGE QUESTIONS', url:'/tabs/manage-questions', icon: 'help'},
@@ -108,9 +109,9 @@ export class AppComponent {
 
   reloadBalance(){
     this.accountService.loadMyBalance();
-    this.bal.nativeElement.classList.add('rubberBand');
+    // this.bal.nativeElement.classList.add('rubberBand');
     setTimeout(()=>{
-      this.bal.nativeElement.classList.remove('rubberBand');
+      // this.bal.nativeElement.classList.remove('rubberBand');
     },2000);
 
   }
@@ -119,8 +120,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
- 
-        
+      this.accountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
+        this.reloadBalance();
         // this.localNotifications.on('trigger').subscribe( res => {
         //   console.log('alert Trigger 2', res );
         //   let msg = res.data ? res.data.mydata : '';

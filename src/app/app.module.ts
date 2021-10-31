@@ -47,6 +47,12 @@ import { BehavourService } from './services/behavour.service';
 import { FlutterwaveModule } from 'flutterwave-angular-v3';
 import { WebVotingComponent } from './components/web-voting/web-voting.component';
 import { environment } from 'src/environments/environment';
+import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/image-custom-spinner.component';
+import { FirebaseService } from './services/firebase.service';
+import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
+import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-ticket/inside-ticket-add-ticket.component';
+import { ManageEventComponent } from './components/manage-event/manage-event.component';
+import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 
 
 @NgModule({
@@ -54,6 +60,11 @@ import { environment } from 'src/environments/environment';
     AdminnavigationComponent, AdminEventComponent, ForgetpasswordComponent,InsideEventComponent,
     InsideEventAddUserComponent, VoteNowComponent, TabsComponent, GamesectionComponent, NotLiveComponent,
     WebVotingComponent,
+    ImageCustomSpinnerComponent,
+    InsideTicketingComponent,
+    InsideTicketAddTicketComponent,
+    ManageEventComponent,
+    BuyTicketComponent,
      SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent,
   ],
@@ -63,7 +74,7 @@ import { environment } from 'src/environments/environment';
     ReactiveFormsModule,
     HttpClientModule,
     FlutterwaveModule,
-  
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     IonicModule.forRoot(),
      AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
@@ -83,6 +94,7 @@ import { environment } from 'src/environments/environment';
     LogicService,
     BehavourService,
     SplashScreen,
+    FirebaseService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy, },
     UserService, AccountService, AdminGuard,
      AuthguardGuard, GameServiceService, MerchantGuard, GameGuard

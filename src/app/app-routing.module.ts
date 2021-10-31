@@ -15,6 +15,8 @@ import { AuthguardGuard } from './auth/authguard.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
 import { WebVotingComponent } from './components/web-voting/web-voting.component';
+import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
+import { ManageEventComponent } from './components/manage-event/manage-event.component';
 
 const routes: Routes = [
   {
@@ -42,6 +44,10 @@ const routes: Routes = [
       {
         path: 'events', loadChildren: './events/events.module#EventsPageModule',
         canActivate: [AuthguardGuard]
+      },
+      {
+        path: 'manage-event', component: ManageEventComponent,
+        canActivate: [AuthguardGuard, AdminGuard]
       },
 
       {
@@ -131,6 +137,9 @@ const routes: Routes = [
       },
       {
         path: 'inside-event/:id', component: InsideEventComponent, canActivate: [AuthguardGuard]
+      },
+      {
+        path: 'inside-ticketing/:id', component: InsideTicketingComponent, canActivate: [AuthguardGuard]
       },
       {
         path: 'admin-leaderbord', loadChildren: './admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',

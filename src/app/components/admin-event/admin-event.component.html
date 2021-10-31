@@ -16,15 +16,49 @@
     <ion-row>
       <ion-col sizeSm="12" sizeXs="12" sizeLg="8" offsetLg="2" sizeMd="10"  offsetMd="1">
 
-        <ion-card  color="light">
+        <ion-card >
+       
           <form #eventForm="ngForm" name="eventform" (submit)="eventForm.valid && submitEvent()">
             <h5 class="ion-text-center">CREATE EVENT</h5>
-        
+
+                
+              <!-- image -->
+              <div class="mt-3 mb-2">
+                <ion-progress-bar
+                  *ngIf="loading"
+                  type="indeterminate"
+                ></ion-progress-bar>
+                <div class="ion-text-center">
+                  <div class="cover-photo">
+                    <button  *ngIf="!image"
+                      onclick="document.getElementById('single-image').click();"
+                    >
+                      <i class="fas fa-image fa-5x lat"></i>
+                    </button>
+                    <input
+                      id="single-image"
+                      accept="image/*"
+                      #singleImage
+                      (change)="addImagesFirebase($event)"
+                      type="file"
+                      name="name"
+                      style="display: none"
+                    />
+  
+                    <app-image-custom-spinner
+                      onclick="document.getElementById('single-image').click();"
+                      *ngIf="image"
+                      [imageUrl]="image"
+                    ></app-image-custom-spinner>
+                  </div>
+                </div>
+              </div>
+              <!-- end image -->
             
             <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">event name</ion-label>
+                  <ion-label position="floating" > <small class="text-danger ">*</small> event name</ion-label>
                   <ion-input  type="text" #eventName="ngModel" name="eventName" 
                   [(ngModel)]="eventModel.eventName" required="true"></ion-input>
               </div>
@@ -34,33 +68,24 @@
             <ion-col>
               <!-- select options -->
               <ion-card>
+                <ion-label class="text-center" ><small class="text-danger">*</small>  select event type</ion-label>
+
                 <ion-item color="light">
-                <ion-label class="text-center" color="primary">select event type</ion-label>
                 <ion-select select="success" interface="popover" name="type"
                  (ngModelChange)="eventType($event)"  [(ngModel)]="eventModel.type" >
                <ion-select-option  value="VOTING">VOTING</ion-select-option>
-               <ion-select-option  value="TICKETTING">TICKETTING</ion-select-option>
+               <ion-select-option  value="TICKETING">TICKETING</ion-select-option>
                <ion-select-option  value="FORM-SALES">FORM-SALES</ion-select-option>
                 </ion-select>
               </ion-item>
-              <small *ngIf="eventName.value && !eventModel.type" class="text-center text-danger">select event type</small>
+              <small *ngIf="eventName.value && !eventModel.type" class="text-center text-danger"><small class="text-danger ">*</small>  select event type</small>
             </ion-card>
              </ion-col>
         
              <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">event image url</ion-label>
-                  <ion-input  type="text" #image_url="ngModel" name="image_url" 
-                  [(ngModel)]="eventModel.image_url" required="true"></ion-input>
-              </div>
-            </ion-item>
-            </ion-col>
-        
-             <ion-col>
-              <ion-item>
-                <div  class="text-input ">
-                  <ion-label position="floating" color="primary">company name</ion-label>
+                  <ion-label position="floating" ><small class="text-danger ">*</small> company name</ion-label>
                   <ion-input  type="text" #companyName="ngModel" name="companyName" 
                   [(ngModel)]="eventModel.companyName" required="true"></ion-input>
               </div>
@@ -68,9 +93,9 @@
             </ion-col>
         
              <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">address</ion-label>
+                  <ion-label position="floating" ><small class="text-danger ">*</small> address</ion-label>
                   <ion-input  type="text" #address="ngModel" name="address" 
                   [(ngModel)]="eventModel.address" required="true"></ion-input>
               </div>
@@ -78,9 +103,9 @@
             </ion-col>
         
              <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">contacty number</ion-label>
+                  <ion-label position="floating" ><small class="text-danger ">*</small> contact number</ion-label>
                   <ion-input  type="text" #contactNumber="ngModel" name="contactNumber" 
                   [(ngModel)]="eventModel.contactNumber" required="true"></ion-input>
               </div>
@@ -88,63 +113,106 @@
             </ion-col>
         
              <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">about event</ion-label>
+                  <ion-label position="floating" ><small class="text-danger ">*</small> about event</ion-label>
                   <ion-input  type="text" #aboutEvent="ngModel" name="aboutEvent" 
                   [(ngModel)]="eventModel.aboutEvent" required="true"></ion-input>
               </div>
             </ion-item>
             </ion-col>
+
+             <ion-col *ngIf="eventModel.type === 'TICKETING'">
+              <ion-item color="light">
+                <div  class="text-input ">
+                  <ion-label position="floating" ><small class="text-danger ">*</small> venue</ion-label>
+                  <ion-input  type="text" #venue="ngModel" name="venue" 
+                  [(ngModel)]="eventModel.venue"required="true"></ion-input>
+              </div>
+            </ion-item>
+            </ion-col>
+
         
             <ion-row>
               
-             <ion-col>
-              <ion-item>
+             <ion-col *ngIf="eventModel.type === 'VOTING'">
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">cost per vote</ion-label>
+                  <ion-label position="floating" >cost per vote</ion-label>
                   <ion-input  type="text" #costPerVote="ngModel" name="costPerVote" 
                   [(ngModel)]="eventModel.costPerVote"></ion-input>
               </div>
             </ion-item>
             </ion-col>
+
+           
+
+             <ion-col *ngIf="eventModel.type === 'TICKETING'">
+              <ion-item color="light">
+                <div  class="text-input ">
+                  <ion-label position="floating" >date</ion-label>
+                  <ion-input  type="date" #date="ngModel" name="date" 
+                  [(ngModel)]="eventModel.startDate"></ion-input>
+              </div>
+            </ion-item>
+            </ion-col>
+
+             <ion-col *ngIf="eventModel.type === 'TICKETING'">
+              <ion-item color="light">
+                <div  class="text-input ">
+                  <ion-label position="floating" >time</ion-label>
+                  <ion-input  type="time" #time="ngModel" name="time" 
+                  [(ngModel)]="eventModel.time"></ion-input>
+              </div>
+            </ion-item>
+            </ion-col>
         
                
-            <ion-col>
-              <ion-item>
+            <ion-col *ngIf="eventModel.type === 'VOTING'">
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">number of slot</ion-label>
+                  <ion-label position="floating" >number of slot</ion-label>
                   <ion-input  type="text" #numberOfSlot="ngModel" name="numberOfSlot" 
                   [(ngModel)]="eventModel.numberOfSlot"></ion-input>
               </div>
             </ion-item>
             </ion-col> 
         
-            <ion-col>
-              <ion-item>
+            <ion-col >
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">i-sabi sharing ratio</ion-label>
+                  <ion-label position="floating">i-sabi sharing ratio</ion-label>
                   <ion-input  type="text" #sharingRatio_isabi="ngModel" name="sharingRatio_isabi" 
                   [(ngModel)]="eventModel.sharingRatio_isabi"></ion-input>
               </div>
             </ion-item>
             </ion-col>
         
-            <ion-col>
-              <ion-item>
+            <ion-col >
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">company's sharing ratio</ion-label>
+                  <ion-label position="floating" >company's sharing ratio</ion-label>
                   <ion-input  type="text" #sharingRatio_company="ngModel" name="sharingRatio_company" 
                   [(ngModel)]="eventModel.sharingRatio_company"></ion-input>
               </div>
             </ion-item>
             </ion-col>
+        
+            <ion-col >
+              <ion-item color="light">
+                <div  class="text-input ">
+                  <ion-label position="floating" >busin's partner sharing ratio</ion-label>
+                  <ion-input  type="text" #businessSharingRatio="ngModel" name="businessSharingRatio" 
+                  [(ngModel)]="eventModel.businessSharingRatio"></ion-input>
+              </div>
+            </ion-item>
+            </ion-col>
             </ion-row>
         
-            <ion-col>
-              <ion-item>
+            <ion-col >
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">account number</ion-label>
+                  <ion-label position="floating" >account number</ion-label>
                   <ion-input  type="text" #accountNumber="ngModel" name="accountNumber" 
                   [(ngModel)]="eventModel.accountNumber"></ion-input>
               </div>
@@ -153,9 +221,9 @@
         
            <ion-row>
             <ion-col>
-              <ion-item>
+              <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">account name</ion-label>
+                  <ion-label position="floating" >account name</ion-label>
                   <ion-input  type="text" #accountName="ngModel" name="accountName" 
                   [(ngModel)]="eventModel.accountName"></ion-input>
               </div>
@@ -165,7 +233,7 @@
             <ion-col>
               <ion-item color="light">
                 <div  class="text-input ">
-                  <ion-label position="floating" color="primary">bank name</ion-label>
+                  <ion-label position="floating" >bank name</ion-label>
                   <ion-input  type="text" #bankname="ngModel" name="bankname" 
                   [(ngModel)]="eventModel.bankname"></ion-input>
               </div>

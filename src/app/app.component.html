@@ -1,6 +1,5 @@
 <ion-app>
-  <ion-menu contentId="main-content"
-            type="overlay">
+  <ion-menu contentId="main-content" type="overlay">
     <ion-header>
       <ion-toolbar>
         <div class="menu">
@@ -13,36 +12,25 @@
           <!-- <ion-item lines="none">UserId: ({{accountService.user_id}}) </ion-item> -->
 
           <ion-item lines="none"><span class="mr-2"> Balance: </span>
-            <ion-badge> ₦ {{accountService.accountBalance | number}} </ion-badge>
-            <ion-icon slot="end"
-                      #bal
-                      class="animated"
-                      (click)="reloadBalance()"
-                      name="refresh">refresh</ion-icon>
+            <ion-badge> ₦ {{balance | currency:'₦'}} </ion-badge>
+            <ion-icon slot="end" #bal class="animated" (click)="reloadBalance()" name="refresh">refresh</ion-icon>
           </ion-item>
         </div>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <ion-list color="light"
-                class="drawer-list">
-        <ion-menu-toggle auto-hide="false"
-                         *ngFor="let p of appPages">
-          <ion-item tappable
-                    color="light"
-                    [routerDirection]="'root'"
-                    [routerLink]="[p.url]"
-                    routerLinkActive="router-link-active">
-            <ion-icon slot="start"
-                      [name]="p.icon"></ion-icon>
+      <ion-list color="light" class="drawer-list">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-item tappable color="light" [routerDirection]="'root'" [routerLink]="[p.url]"
+            routerLinkActive="router-link-active">
+            <ion-icon slot="start" [name]="p.icon"></ion-icon>
             <ion-label>
               {{p.title}}
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <ion-menu-toggle *ngIf="userService.getRole() === 'MERCHANT'"
-                         [routerLink]="['/merchant']">
+        <ion-menu-toggle *ngIf="userService.getRole() === 'MERCHANT'" [routerLink]="['/merchant']">
           <ion-item color="light">
             <ion-icon name="cash"></ion-icon>
             <ion-label class="ml-4">MERCHANT</ion-label>
@@ -62,8 +50,7 @@
             </ion-menu-toggle> -->
 
         <ion-item>
-          <ion-icon slot="start"
-                    name="moon-outline"></ion-icon>
+          <ion-icon slot="start" name="moon-outline"></ion-icon>
           <ion-label>
             Dark Mode
           </ion-label>
@@ -71,29 +58,19 @@
         </ion-item>
 
         <ion-menu-toggle>
-          <ion-item color="light"
-                    tappable
-                    (click)="userService.logout()">
-            <ion-icon slot="start"
-                      name="power"></ion-icon>
+          <ion-item color="light" tappable (click)="userService.logout()">
+            <ion-icon slot="start" name="power"></ion-icon>
             <ion-label> LOGOUT</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>
 
-      <ion-list color="light"
-                id="labels-list"
-                *ngIf="userService.getRole() == 'ADMIN'">
+      <ion-list color="light" id="labels-list" *ngIf="userService.getRole() == 'ADMIN'">
         <ion-list-header class="text-center">Admin</ion-list-header>
         <ion-menu-toggle>
-          <ion-item color="success"
-                    color="light"
-                    *ngFor="let label of labels"
-                    lines="full">
-            <ion-icon slot="start"
-                      [name]="label.icon"></ion-icon>
-            <ion-label tappable
-                       [routerLink]="label.url">{{ label.title }}</ion-label>
+          <ion-item color="success" color="light" *ngFor="let label of labels" lines="full">
+            <ion-icon slot="start" [name]="label.icon"></ion-icon>
+            <ion-label tappable [routerLink]="label.url">{{ label.title }}</ion-label>
           </ion-item>
         </ion-menu-toggle>
       </ion-list>

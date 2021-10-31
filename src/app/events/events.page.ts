@@ -4,6 +4,7 @@ import { GameServiceService } from './../shared/game-service.service';
 import { UserService } from './../shared/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from '../shared/account.service';
 
 @Component({
   selector: 'app-events',
@@ -15,7 +16,9 @@ allEvent = [];
 loading = true;
   constructor(private router: Router, private gameService: GameServiceService, 
               private eventService: EventService, public  userService: UserService,
-              public alertController: AlertController) { }
+              private accountService: AccountService,
+              public alertController: AlertController) {
+               }
 
   ngOnInit() { 
     this.getAllevent();
@@ -39,9 +42,24 @@ loading = true;
       );
   }
 
-  insideEvent(id){
-    this.router.navigate([`/tabs/inside-event`, id]);
-    // this.router.navigateByUrl('/inside-event',id);
+  insideEvent(event){
+
+    switch (event.type) {
+      case 'VOTING':
+        this.router.navigate([`/tabs/inside-event`, event._id]);
+        break;
+      case 'TICKETING':
+        this.router.navigate([`/tabs/inside-ticketing`, event._id]);
+        break;
+      case 'FORM-SALES':
+        this.router.navigate([`/tabs/form-sales`, event._id]);
+        break;
+    
+      default:
+        break;
+    }
+    
+  
   }
 
 

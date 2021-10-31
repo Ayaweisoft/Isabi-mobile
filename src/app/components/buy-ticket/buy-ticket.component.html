@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-button color="light" (click)="closeModal()">
+    <button >
+      <ion-icon color="danger" name="close"></ion-icon>
+    </button>
+  </ion-button>
+</ion-header>
+<ion-content>
+
+  <ion-card>
+  <ion-card-title>{{ticket.ticketType}} </ion-card-title>
+
+
+<ion-card-content>
+<div class="ion-text-center">
+  <img class="image" width="350" height="250"  [src]="ticket.imageUrl">
+</div>
+<ion-chip class="ion-text-bold" color="light">{{ticket.amount |currency}} </ion-chip>
+
+<div class="ion-text-center">enter value</div>
+<ion-row>
+  <ion-col >
+   <ion-button color="success" size="small" (click)="remove()"> <ion-icon name="remove"></ion-icon></ion-button>
+  </ion-col>
+  <ion-col>
+   <ion-item color="light">
+    <ion-input #purchase type="number" name="purchase" [(ngModel)]="data.quantity"></ion-input>
+   </ion-item>
+  </ion-col>
+  <ion-col>
+    <ion-button color="success" size="small" (click)="add()"><ion-icon name="add"></ion-icon></ion-button>
+
+  </ion-col>
+</ion-row>
+<div class="ion-text-center">
+  <div>{{ticket.amount * data.quantity | currency:'₦'}} </div>
+</div>
+
+<form [formGroup]="ticketForm" (ngSubmit)="finalize()"
+(keyup.enter)="ticketForm.valid && finalize()">
+
+<ion-list>
+  <ion-item>
+    <ion-label position="floating"> <small class="text-danger">*</small>email </ion-label>
+    <ion-input type="email" formControlName="email"
+     placeholder="example@mail.com"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating"> <small class="text-danger">*</small>name </ion-label>
+    <ion-input type="text" formControlName="name"
+    placeholder="joe don"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating"> <small class="text-danger">*</small>phone </ion-label>
+    <ion-input type="tel" formControlName="phone"></ion-input>
+  </ion-item>
+</ion-list>
+
+
+
+</form>
+<!-- <p class="font-weight-bold text-center">
+   {{properties.purchase * properties.cost | currency:'₦'}} </p> -->
+   <!-- [disabled]="data.positive < 1" -->
+   <div class="ion-text-center">
+<ion-button [disabled]="!ticketForm.valid " (click)="finalize()" color="success" >finalize</ion-button>
+   </div>
+</ion-card-content>
+</ion-card>
+  </ion-content>

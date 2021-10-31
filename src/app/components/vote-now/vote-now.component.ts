@@ -11,6 +11,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class VoteNowComponent implements OnInit {
 loading = false;
+  balance: any;
 
   constructor(public modalController: ModalController, public navParams: NavParams,
               public accountService: AccountService, private eventService: EventService,
@@ -25,16 +26,16 @@ loading = false;
                 this.properties.cost = navParams.get('cost_per_vote');
                 this.properties.fullname = navParams.get('fullname');
 
-                setTimeout(() => {
-                  console.log(this.properties);
-                }, 3000);
+          
 
    }
 
    properties = {event_id:  '', contestant_id: '', image_url: '', 
                  nickname: '',my_code: '', cost:null, purchase: 0, fullname:''};
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.accountService.getAccountBalance().subscribe(bal =>  this.balance = bal)
+  }
 
 
   closeModal(){
@@ -51,9 +52,8 @@ loading = false;
   }
 
   finalize(){
-    let balance = this.accountService.accountBalance;
     let costPerVate = this.properties.purchase * this.properties.cost;
-    let totalCost = balance - costPerVate ;
+    let totalCost = this.balance - costPerVate ;
    
     if( totalCost > 1){
       console.log('we can bid for this');

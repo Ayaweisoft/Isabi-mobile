@@ -1,0 +1,35 @@
+` <div>
+    <p style="  text-align: left;"> Hello ${newPurchase?.name} </p> </br>
+    <p style="  text-align: center; font-size: medium; "> Congratulations ${newPurchase?.name}, you have successfully
+        purchased ${newPurchase?.numberOfTicket}
+        ticket(s) for the </p>
+    <h1 style="  text-align: center; font-size: medium; ">${event?.eventName}</h1>
+    <p style=" text-align: center; font-size: medium; "> organized by ${event?.companyName}</p>
+
+    <div style=" display: flex; align-items: center;">
+        <img style="  display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;" width="500" height="300" src="${event?.image_url}"> \n
+
+    </div>
+    <hr>
+
+
+    <span style=" text-align: center; font-size: medium; ">
+        <div>Here is your ticket ID :</div>
+        <h3> ${newPurchase?.ticketId}</h3>
+    </span>
+    <img style="  display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;" width="350" height="350" src="${newPurchase?.imageUrl}"> \n
+    \n
+    <span style=" text-align: center; font-size: medium; ">
+        <div>Ticket type : </div>
+        <h3>${newPurchase?.ticketType} </h3>
+    </span>
+    \n \n
+
+    <h6 style="  text-align: center; font-size: medium; ">Thank you for your patronage.</h6>`
+</div>,

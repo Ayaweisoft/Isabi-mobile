@@ -3,14 +3,15 @@ import { environment } from "./../../environments/environment";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
 })
 export class AccountService {
   public appUser: any;
-  public accountBalance = null;
+  // public accountBalance = null;
+  accountSubject =  new BehaviorSubject<number>(0);
   leaderboard$: Observable<any>;
   leaderboardGameSection$: Observable<any>;
   appUsername: any;
@@ -24,7 +25,8 @@ export class AccountService {
     )
   };
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   loadMyBalance() {
     console.log("GETTING BALANCE");
@@ -34,16 +36,25 @@ export class AccountService {
       .get(environment.apiBaseUrl + "/get-account-balance")
       .subscribe(value => {
 
-        this.accountBalance = value["balance"];
+        this.setAccountBalance(value["balance"])
+        console.log('NEW Balance ',this.accountSubject.getValue() )
         this.getLeaderboard();
         this.user_id = localStorage.getItem("user_id");
         this.appUsername = localStorage.getItem("appUser");
       });
   }
 
+
+  setAccountBalance(balance: number) {
+    this.accountSubject.next(balance);
+}
+
+
+getAccountBalance(): BehaviorSubject<any> {
+    return this.accountSubject;
+}
+
   getLeaderboard() {
-    // this.getLeaderGameSection();
-    // tslint:disable-next-line: align
     return this.http.get(environment.apiBaseUrl + "/get-leaderboard");
   }
 
