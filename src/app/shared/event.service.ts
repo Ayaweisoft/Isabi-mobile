@@ -34,8 +34,8 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
     return this.http.post(environment.apiBaseUrl +'/v2/save-purched-ticket', ticket);
   }
 
-  findMyTicket(eventId){
-    return this.http.get(environment.apiBaseUrl +'/v2/find-my-ticket/'+ eventId);
+  findMyTicket(eventId, email){
+    return this.http.get(environment.apiBaseUrl +'/v2/find-my-ticket/'+ eventId +"/"+email);
   }
   submitEvent(event){
     return this.http.post(environment.apiBaseUrl + '/submit-event', event);
@@ -79,6 +79,18 @@ return this.http.delete(environment.apiBaseUrl +`/delete-event${id}`);
   }
   getTicketByEventId(id){
     return this.http.get(environment.apiBaseUrl +'/v2/get-ticket-by-event-id/'+id);
+  }
+
+  shareTicket(newTicketData){
+    return this.http.put(environment.apiBaseUrl + '/v2/share-my-ticket', newTicketData);
+  }
+
+  getTicketById(id){
+    return this.http.get(environment.apiBaseUrl +'/v2/get-ticket-by-id/'+id)
+  }
+
+  confirmTicketId(id){
+    return this.http.get(environment.apiBaseUrl +'/v2/confirm-ticket/'+id);
   }
 
   

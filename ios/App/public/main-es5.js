@@ -194,7 +194,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-app>\n  <ion-menu contentId=\"main-content\"\n            type=\"overlay\">\n    <ion-header>\n      <ion-toolbar>\n        <div class=\"menu\">\n          <ion-title mode=\"md\">Menu</ion-title>\n\n          <ion-item lines=\"none\"><span class=\"mt-3 mr-2\"> Username: </span>\n            <ion-text class=\"font-weight-bold mt-3\">{{accountService.appUser}}</ion-text>\n          </ion-item>\n\n          <!-- <ion-item lines=\"none\">UserId: ({{accountService.user_id}}) </ion-item> -->\n\n          <ion-item lines=\"none\"><span class=\"mr-2\"> Balance: </span>\n            <ion-badge> ₦ {{accountService.accountBalance | number}} </ion-badge>\n            <ion-icon slot=\"end\"\n                      #bal\n                      class=\"animated\"\n                      (click)=\"reloadBalance()\"\n                      name=\"refresh\">refresh</ion-icon>\n          </ion-item>\n        </div>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list color=\"light\"\n                class=\"drawer-list\">\n        <ion-menu-toggle auto-hide=\"false\"\n                         *ngFor=\"let p of appPages\">\n          <ion-item tappable\n                    color=\"light\"\n                    [routerDirection]=\"'root'\"\n                    [routerLink]=\"[p.url]\"\n                    routerLinkActive=\"router-link-active\">\n            <ion-icon slot=\"start\"\n                      [name]=\"p.icon\"></ion-icon>\n            <ion-label>\n              {{p.title}}\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle *ngIf=\"userService.getRole() === 'MERCHANT'\"\n                         [routerLink]=\"['/merchant']\">\n          <ion-item color=\"light\">\n            <ion-icon name=\"cash\"></ion-icon>\n            <ion-label class=\"ml-4\">MERCHANT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <!-- <ion-menu-toggle (click)=\"rateYourApp()\">\n                <ion-item color=\"secondary\" >\n                <ion-icon name=\"thumbs-up\"></ion-icon>\n                <ion-label  class=\"ml-4\">RATE MY APP</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n        <!-- <ion-menu-toggle>\n                <ion-item color=\"secondary\" (click)=\"userService.logout()\" >\n                <ion-icon name=\"power\"></ion-icon>\n                <ion-label  class=\"ml-4\">LOGOUT</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n\n        <ion-item>\n          <ion-icon slot=\"start\"\n                    name=\"moon-outline\"></ion-icon>\n          <ion-label>\n            Dark Mode\n          </ion-label>\n          <ion-toggle [(ngModel)]=\"dark\"></ion-toggle>\n        </ion-item>\n\n        <ion-menu-toggle>\n          <ion-item color=\"light\"\n                    tappable\n                    (click)=\"userService.logout()\">\n            <ion-icon slot=\"start\"\n                      name=\"power\"></ion-icon>\n            <ion-label> LOGOUT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n      <ion-list color=\"light\"\n                id=\"labels-list\"\n                *ngIf=\"userService.getRole() == 'ADMIN'\">\n        <ion-list-header class=\"text-center\">Admin</ion-list-header>\n        <ion-menu-toggle>\n          <ion-item color=\"success\"\n                    color=\"light\"\n                    *ngFor=\"let label of labels\"\n                    lines=\"full\">\n            <ion-icon slot=\"start\"\n                      [name]=\"label.icon\"></ion-icon>\n            <ion-label tappable\n                       [routerLink]=\"label.url\">{{ label.title }}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n\n</ion-app>\n";
+      __webpack_exports__["default"] = "<ion-app>\n  <ion-menu contentId=\"main-content\" type=\"overlay\">\n    <ion-header>\n      <ion-toolbar>\n        <div class=\"menu\">\n          <ion-title mode=\"md\">Menu</ion-title>\n\n          <ion-item lines=\"none\"><span class=\"mt-3 mr-2\"> Username: </span>\n            <ion-text class=\"font-weight-bold mt-3\">{{accountService.appUser}}</ion-text>\n          </ion-item>\n\n          <!-- <ion-item lines=\"none\">UserId: ({{accountService.user_id}}) </ion-item> -->\n\n          <ion-item lines=\"none\"><span class=\"mr-2\"> Balance: </span>\n            <ion-badge> ₦ {{balance | currency:'₦'}} </ion-badge>\n            <ion-icon slot=\"end\" #bal class=\"animated\" (click)=\"reloadBalance()\" name=\"refresh\">refresh</ion-icon>\n          </ion-item>\n        </div>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list color=\"light\" class=\"drawer-list\">\n        <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n          <ion-item tappable color=\"light\" [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\"\n            routerLinkActive=\"router-link-active\">\n            <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n            <ion-label>\n              {{p.title}}\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle *ngIf=\"userService.getRole() === 'MERCHANT'\" [routerLink]=\"['/merchant']\">\n          <ion-item color=\"light\">\n            <ion-icon name=\"cash\"></ion-icon>\n            <ion-label class=\"ml-4\">MERCHANT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <!-- <ion-menu-toggle (click)=\"rateYourApp()\">\n                <ion-item color=\"secondary\" >\n                <ion-icon name=\"thumbs-up\"></ion-icon>\n                <ion-label  class=\"ml-4\">RATE MY APP</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n        <!-- <ion-menu-toggle>\n                <ion-item color=\"secondary\" (click)=\"userService.logout()\" >\n                <ion-icon name=\"power\"></ion-icon>\n                <ion-label  class=\"ml-4\">LOGOUT</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n\n        <ion-item>\n          <ion-icon slot=\"start\" name=\"moon-outline\"></ion-icon>\n          <ion-label>\n            Dark Mode\n          </ion-label>\n          <ion-toggle [(ngModel)]=\"dark\"></ion-toggle>\n        </ion-item>\n\n        <ion-menu-toggle>\n          <ion-item color=\"light\" tappable (click)=\"userService.logout()\">\n            <ion-icon slot=\"start\" name=\"power\"></ion-icon>\n            <ion-label> LOGOUT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n      <ion-list color=\"light\" id=\"labels-list\" *ngIf=\"userService.getRole() == 'ADMIN'\">\n        <ion-list-header class=\"text-center\">Admin</ion-list-header>\n        <ion-menu-toggle>\n          <ion-item color=\"success\" color=\"light\" *ngFor=\"let label of labels\" lines=\"full\">\n            <ion-icon slot=\"start\" [name]=\"label.icon\"></ion-icon>\n            <ion-label tappable [routerLink]=\"label.url\">{{ label.title }}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n\n</ion-app>";
       /***/
     },
 
@@ -214,7 +214,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"../../../assets/icon/Logoicon.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content color=\"light\">\n\n  <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"1\"></ion-col>\n      <ion-col size=\"10\">\n        <!-- grid content -->\n\n\n\n        <script src=\"https://code.jquery.com/jquery-1.12.4.min.js\"></script>\n        <script src=\"https://js.paystack.co/v1/paystack.js\"></script>\n\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white\"> PAYMENT</ion-card-header>\n            <ion-card-content>\n              <h2 class=\"text-center m-2\">{{appUsername}}</h2>\n              <!-- <img class=\"banks\" src=\"../../../assets/img/banks.png\" alt=\"\"> -->\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/wallet_icon.png\">\n              </div>\n\n              <h3 class=\"text-center mb-5 font-weight-bold\">\n                BALANCE <ion-chip color=\"dark\" outline>\n                  <h3 class=\"m-2\"> {{accountService.accountBalance | currency:' ₦ '}}</h3>\n                </ion-chip>\n              </h3>\n\n\n              <ion-row class=\"d-flex justify-content-center\">\n                <!-- pay now -->\n                <div *ngIf=\"!showPaymentButtons\" class=\"pr-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterAmountInput()\" color=\"success\">DEPOSIT</ion-button>\n                </div>\n                <div *ngIf=\"!showPaymentButtons\" class=\" pl-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterCashoutAmount()\" color=\"success\">CASHOUT</ion-button>\n\n                </div>\n              </ion-row>\n\n              <!-- <ion-list>\n                                <ion-item *ngFor=\"let item of scheduled\">\n                                  <ion-label text-wrap>\n                                    {{item.id}} {{item.title}}\n                                    <p>Trigger : {{item.trigger | json}}</p>\n                                  </ion-label>\n                                  \n                                </ion-item>\n                              </ion-list> -->\n\n\n\n\n              <div *ngIf=\"showPaymentButtons\">\n\n\n                <ion-chip *ngIf=\"showPaymentButtons\">\n                  <h5 class=\"text-center font-weight-bold\">I want to pay ₦ {{model.amount}} </h5>\n                </ion-chip> <br>\n\n\n                <!-- *ngIf=\"model?.amount > 99\" -->\n           \n\n                <!-- break line -->\n                <hr>\n                <ion-card class=\"green darken-3\">\n                  <small class=\"text-center text-white\"> Banks transafer/ Cards / ussd</small>\n                  <ion-row>\n                    <ion-col class=\"d-flex justify-content-center\">\n               \n                      <!-- public_key=\"FLWPUBK_TEST-32c34a10b25063883487eb99f916159a-X\" [amount]='model.amount' currency='NGN' -->\n\n                          <flutterwave-make-payment  \n                          public_key=\"FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X\" [amount]='model.amount' currency='NGN'\n                          payment_options=\"card\" text=\"PAY NOW\" [customer]=\"customerDetails\" [customizations]=\"customizations\"\n                          [tx_ref]=\"reference\" (callback)=\"makePaymentCallback($event)\" (close)=\"closedPaymentModal()\">\n                          <img src=\"../../../assets/banks/visa.gif\">\n                        </flutterwave-make-payment>\n        \n                    </ion-col>\n\n           \n                  </ion-row>\n                </ion-card>\n              </div>\n            </ion-card-content>\n\n          </ion-card>\n        </div>\n\n    <ion-card color=\"light\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-item color=\"light\" class=\"d-flex justify-content-center p-3\">\n            <ion-label color=\"success\" position=\"floating\">promo code</ion-label>\n            <ion-input #promo type=\"text\"></ion-input>\n          </ion-item>\n          <div class=\"ion-text-center\">\n            <ion-button [disabled]=\"loading\" color=\"success\" [disabled]=\"!promo.value\"\n              (click)=\"submitProCode(promo.value)\">\n              <div *ngIf=\"!loading\">submit </div>\n              <ion-spinner *ngIf=\"loading\" name=\"crescent\"></ion-spinner>\n            </ion-button>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white \"> ACCOUNT</ion-card-header>\n            <ion-card-content>\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/profile_icon.png\">\n              </div>\n              <h4 color=\"success\" class=\"text-center fint-weight-bold\"> UPDATE YOUR INFORMATION</h4>\n              <ion-button color=\"success\" (click)=\"profileSection()\">UPDATE</ion-button>\n            </ion-card-content>\n          </ion-card>\n        </div>\n\n      </ion-col>\n      <ion-col size=\"1\"></ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"../../../assets/icon/Logoicon.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content color=\"light\">\n\n  <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"1\"></ion-col>\n      <ion-col size=\"10\">\n        <!-- grid content -->\n\n\n\n        <script src=\"https://code.jquery.com/jquery-1.12.4.min.js\"></script>\n        <script src=\"https://js.paystack.co/v1/paystack.js\"></script>\n\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white\"> PAYMENT</ion-card-header>\n            <ion-card-content>\n              <h2 class=\"text-center m-2\">{{appUsername}}</h2>\n              <!-- <img class=\"banks\" src=\"../../../assets/img/banks.png\" alt=\"\"> -->\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/wallet_icon.png\">\n              </div>\n\n              <h3 class=\"text-center mb-5 font-weight-bold\">\n                BALANCE <ion-chip color=\"dark\" outline>\n                  <h3 class=\"m-2\"> {{balance | currency:' ₦ '}}</h3>\n                </ion-chip>\n              </h3>\n\n\n              <ion-row class=\"d-flex justify-content-center\">\n                <!-- pay now -->\n                <div *ngIf=\"!showPaymentButtons\" class=\"pr-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterAmountInput()\" color=\"success\">DEPOSIT</ion-button>\n                </div>\n                <div *ngIf=\"!showPaymentButtons\" class=\" pl-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterCashoutAmount()\" color=\"success\">CASHOUT</ion-button>\n\n                </div>\n              </ion-row>\n\n              <!-- <ion-list>\n                                <ion-item *ngFor=\"let item of scheduled\">\n                                  <ion-label text-wrap>\n                                    {{item.id}} {{item.title}}\n                                    <p>Trigger : {{item.trigger | json}}</p>\n                                  </ion-label>\n                                  \n                                </ion-item>\n                              </ion-list> -->\n\n\n\n\n              <div *ngIf=\"showPaymentButtons\">\n\n\n                <ion-chip *ngIf=\"showPaymentButtons\">\n                  <h5 class=\"text-center font-weight-bold\">I want to pay ₦ {{model.amount}} </h5>\n                </ion-chip> <br>\n\n\n                <!-- *ngIf=\"model?.amount > 99\" -->\n\n\n                <!-- break line -->\n                <hr>\n                <ion-card class=\"green darken-3\">\n                  <small class=\"text-center text-white\"> Banks transafer/ Cards / ussd</small>\n                  <ion-row>\n                    <ion-col class=\"d-flex justify-content-center\">\n\n                      <!-- public_key=\"FLWPUBK_TEST-32c34a10b25063883487eb99f916159a-X\" [amount]='model.amount' currency='NGN' -->\n\n                      <flutterwave-make-payment public_key=\"FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X\"\n                        [amount]='model.amount' currency='NGN' payment_options=\"card\" text=\"PAY NOW\"\n                        [customer]=\"customerDetails\" [customizations]=\"customizations\" [tx_ref]=\"reference\"\n                        (callback)=\"makePaymentCallback($event)\" (close)=\"closedPaymentModal()\">\n                        <img src=\"../../../assets/banks/visa.gif\">\n                      </flutterwave-make-payment>\n\n                    </ion-col>\n\n\n                  </ion-row>\n                </ion-card>\n              </div>\n            </ion-card-content>\n\n          </ion-card>\n        </div>\n\n        <ion-card color=\"light\">\n          <ion-row>\n            <ion-col size=\"12\">\n              <ion-item color=\"light\" class=\"d-flex justify-content-center p-3\">\n                <ion-label color=\"success\" position=\"floating\">promo code</ion-label>\n                <ion-input #promo type=\"text\"></ion-input>\n              </ion-item>\n              <div class=\"ion-text-center\">\n                <ion-button [disabled]=\"loading\" color=\"success\" [disabled]=\"!promo.value\"\n                  (click)=\"submitProCode(promo.value)\">\n                  <div *ngIf=\"!loading\">submit </div>\n                  <ion-spinner *ngIf=\"loading\" name=\"crescent\"></ion-spinner>\n                </ion-button>\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-card>\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white \"> ACCOUNT</ion-card-header>\n            <ion-card-content>\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/profile_icon.png\">\n              </div>\n              <h4 color=\"success\" class=\"text-center fint-weight-bold\"> UPDATE YOUR INFORMATION</h4>\n              <ion-button color=\"success\" (click)=\"profileSection()\">UPDATE</ion-button>\n            </ion-card-content>\n          </ion-card>\n        </div>\n\n      </ion-col>\n      <ion-col size=\"1\"></ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n</ion-content>";
       /***/
     },
 
@@ -254,7 +254,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button >\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card>\n  <ion-card-title>{{ticket.ticketType}} </ion-card-title>\n\n\n<ion-card-content>\n<div class=\"ion-text-center\">\n  <img class=\"image\" width=\"350\" height=\"250\"  [src]=\"ticket.imageUrl\">\n</div>\n<ion-chip class=\"ion-text-bold\" color=\"light\">{{ticket.amount |currency}} </ion-chip>\n\n<div class=\"ion-text-center\">enter value</div>\n<ion-row>\n  <ion-col >\n   <ion-button color=\"light\" size=\"small\" (click)=\"remove()\"> <ion-icon name=\"remove\"></ion-icon></ion-button>\n  </ion-col>\n  <ion-col>\n   <ion-item color=\"light\">\n    <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"data.quantity\"></ion-input>\n   </ion-item>\n  </ion-col>\n  <ion-col>\n    <ion-button color=\"light\" size=\"small\" (click)=\"add()\"><ion-icon name=\"add\"></ion-icon></ion-button>\n\n  </ion-col>\n</ion-row>\n<div class=\"ion-text-center\">\n  <div>{{ticket.amount * data.quantity | currency:'₦'}} </div>\n</div>\n\n<form [formGroup]=\"ticketForm\" (ngSubmit)=\"finalize()\"\n(keyup.enter)=\"ticketForm.valid && finalize()\">\n\n<ion-list>\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>email </ion-label>\n    <ion-input type=\"email\" formControlName=\"email\"\n     placeholder=\"example@mail.com\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>name </ion-label>\n    <ion-input type=\"text\" formControlName=\"name\"\n    placeholder=\"joe don\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>phone </ion-label>\n    <ion-input type=\"tel\" formControlName=\"phone\"></ion-input>\n  </ion-item>\n</ion-list>\n\n</form>\n<!-- <p class=\"font-weight-bold text-center\">\n   {{properties.purchase * properties.cost | currency:'₦'}} </p> -->\n   <!-- [disabled]=\"data.positive < 1\" -->\n   <div class=\"ion-text-center\">\n<ion-button  (click)=\"finalize()\" color=\"light\" >finalize</ion-button>\n   </div>\n</ion-card-content>\n</ion-card>\n  </ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button >\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card>\n  <ion-card-title>{{ticket.ticketType}} </ion-card-title>\n\n\n<ion-card-content>\n<div class=\"ion-text-center\">\n  <img class=\"image\" width=\"350\" height=\"250\"  [src]=\"ticket.imageUrl\">\n</div>\n<ion-chip class=\"ion-text-bold\" color=\"light\">{{ticket.amount |currency}} </ion-chip>\n\n<div class=\"ion-text-center\">enter value</div>\n<ion-row>\n  <ion-col >\n   <ion-button color=\"success\" size=\"small\" (click)=\"remove()\"> <ion-icon name=\"remove\"></ion-icon></ion-button>\n  </ion-col>\n  <ion-col>\n   <ion-item color=\"light\">\n    <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"data.quantity\"></ion-input>\n   </ion-item>\n  </ion-col>\n  <ion-col>\n    <ion-button color=\"success\" size=\"small\" (click)=\"add()\"><ion-icon name=\"add\"></ion-icon></ion-button>\n\n  </ion-col>\n</ion-row>\n<div class=\"ion-text-center\">\n  <div>{{ticket.amount * data.quantity | currency:'₦'}} </div>\n</div>\n\n<form [formGroup]=\"ticketForm\" (ngSubmit)=\"finalize()\"\n(keyup.enter)=\"ticketForm.valid && finalize()\">\n\n<ion-list>\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>email </ion-label>\n    <ion-input type=\"email\" formControlName=\"email\"\n     placeholder=\"example@mail.com\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>name </ion-label>\n    <ion-input type=\"text\" formControlName=\"name\"\n    placeholder=\"joe don\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>phone </ion-label>\n    <ion-input type=\"tel\" formControlName=\"phone\"></ion-input>\n  </ion-item>\n</ion-list>\n\n\n\n</form>\n<!-- <p class=\"font-weight-bold text-center\">\n   {{properties.purchase * properties.cost | currency:'₦'}} </p> -->\n   <!-- [disabled]=\"data.positive < 1\" -->\n   <div class=\"ion-text-center\">\n<ion-button [disabled]=\"!ticketForm.valid \" (click)=\"finalize()\" color=\"success\" >finalize</ion-button>\n   </div>\n</ion-card-content>\n</ion-card>\n  </ion-content>";
       /***/
     },
 
@@ -374,7 +374,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"ion-text-center\">\n\n</div>\n\n<div class=\"img-box ion-text-center\">\n  <ion-spinner *ngIf=\"imageLoading\" name=\"circular\"></ion-spinner>\n\t<img\n\t\twidth=\"151px\"\n\t\theight=\"140px\"\n\t\tclass=\"rounded-circle\"\n\t\t[src]=\"imageUrl\"\n\t\t(load)=\"onLoad()\"\n\t/>\n\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"ion-text-center\">\n\n</div>\n\n<div class=\"img-box ion-text-center\">\n\t<ion-spinner *ngIf=\"imageLoading\" name=\"circular\"></ion-spinner>\n\t<img width=\"151px\" height=\"140px\" class=\"rounded\" [src]=\"imageUrl\" (load)=\"onLoad()\" />\n\n</div>";
       /***/
     },
 
@@ -454,7 +454,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n\n<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"\n           src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n<!-- Segment with anchors -->\n<ion-segment (ionChange)=\"segmentChanged($event)\" [value]=\"segment\">\n  <ion-segment-button value=\"ticket\">\n    <ion-icon slot=\"start\" name=\"list\"></ion-icon>\n    <ion-label>Ticket</ion-label>\n  </ion-segment-button>\n  <ion-segment-button value=\"paid\">\n    <ion-label>Paid</ion-label>\n  </ion-segment-button>\n</ion-segment>\n\n<ion-content *ngIf=\"segment === 'ticket'\">\n\n  <ion-grid *ngFor=\"let item of ticketList\" >\n    <ion-row>\n      <ion-col sizeLg=\"8\" sizeMd=\"8\" sizeSm=\"12\" >\n\n        <ion-card color=\"light\">\n          <ion-item>\n            <ion-icon  *ngIf=\"userService.getRole() == 'ADMIN'\" slot=\"start\" name=\"trash\" (click)=\"deleteTicket(item?._id)\"></ion-icon>\n            <div>{{item?.purchased}} Purchased </div>\n          </ion-item>\n          <ion-card-header>\n          <app-image-custom-spinner [imageUrl]=\"item.imageUrl\"></app-image-custom-spinner>\n            <ion-card-subtitle class=\"text-center\">{{item.ticketType}} </ion-card-subtitle>\n            <ion-card-title class=\"text-center\">{{item.amount |currency:' ₦'}} </ion-card-title>\n          </ion-card-header>\n         <div class=\"ion-text-center\">\n          <ion-button color=\"secondary\" (click)=\"buyNow(item)\" fill=\"clear\">\n            Buy Now\n          </ion-button>\n         </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n  <ion-fab *ngIf=\"userService.getRole() == 'ADMIN'\"\n           (click)=\"addTicket()\"\n           vertical=\"top\"\n           horizontal=\"end\"\n           slot=\"fixed\">\n    <ion-fab-button color=\"success\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n\n<ion-content *ngIf=\"segment === 'paid'\">\n\n  paid\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n<!-- Segment with anchors -->\n<ion-segment (ionChange)=\"segmentChanged($event)\" [value]=\"segment\">\n  <ion-segment-button value=\"ticket\">\n    <ion-icon slot=\"start\" name=\"list\"></ion-icon>\n    <ion-label>Ticket</ion-label>\n  </ion-segment-button>\n  <ion-segment-button value=\"paid\">\n    <ion-label>Paid</ion-label>\n  </ion-segment-button>\n</ion-segment>\n\n<ion-content *ngIf=\"segment === 'ticket'\">\n  <ion-refresher #refresherRef (ionRefresh)=\"doRefresh($event)\" slot=\"fixed\">\n    <ion-refresher-content>\n    </ion-refresher-content>\n  </ion-refresher>\n\n\n  <ion-grid *ngFor=\"let item of ticketList\">\n    <ion-row>\n      <ion-col sizeLg=\"8\" sizeMd=\"8\" sizeSm=\"12\">\n\n        <ion-card color=\"light\">\n          <ion-item>\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\" slot=\"start\" name=\"trash\"\n              (click)=\"deleteTicket(item?._id)\"></ion-icon>\n            <div>{{item?.purchased}} Purchased </div>\n          </ion-item>\n          <ion-card-header>\n            <app-image-custom-spinner [imageUrl]=\"item.imageUrl\"></app-image-custom-spinner>\n            <ion-card-subtitle class=\"text-center\">{{item.ticketType}} </ion-card-subtitle>\n            <ion-card-title class=\"text-center\">{{item.amount |currency:' ₦'}} </ion-card-title>\n          </ion-card-header>\n          <div class=\"ion-text-center\">\n            <ion-button color=\"success\" (click)=\"buyNow(item)\">\n              Buy Now\n            </ion-button>\n          </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n  <ion-fab *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"addTicket()\" vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n\n<ion-content *ngIf=\"segment === 'paid'\">\n  <ion-refresher #refresherRef (ionRefresh)=\"doRefresh($event)\" slot=\"fixed\">\n    <ion-refresher-content>\n    </ion-refresher-content>\n  </ion-refresher>\n\n\n  <ion-list>\n    <ion-grid fixed>\n      <ion-row>\n        <ion-col sizeLg=\"8\" sizeSm=\"12\" sizeMd=\"8\" offsetLg=\"2\" offsetMd=\"2\">\n          <ion-card style=\"border-style: double; color: rgb(5, 122, 5);\" color=\"light\"\n            *ngFor=\"let ticket of myTicketList\">\n            <ion-card-header>\n              <ion-card-subtitle>{{ticket.ticketType}} </ion-card-subtitle>\n              <app-image-custom-spinner [imageUrl]=\"ticket?.imageUrl\"></app-image-custom-spinner>\n            </ion-card-header>\n            <ion-card-content>\n              <ion-row>\n                <ion-col size=\"6\"> Status</ion-col>\n                <ion-col size=\"6\">\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='VALID'\" color=\"primary\">{{ticket.status}}</ion-badge>\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='UNALLOTED'\" color=\"light\">{{ticket.status}}\n                  </ion-badge>\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='EXPIRED'\" color=\"danger\">{{ticket.status}}</ion-badge>\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='INVALID'\" color=\"dark\" color=\"danger\">\n                    {{ticket.status}}</ion-badge>\n                </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Ticket ID</ion-col>\n                <ion-col size=\"6\">{{ticket.ticketId}} </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Slot</ion-col>\n                <ion-col size=\"6\">{{ticket.numberOfTicket}} * {{ticket.amount|currency:'₦'}} </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Paid</ion-col>\n                <ion-col size=\"6\">{{ticket.amountPaid | currency:'₦'}} </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Purchased</ion-col>\n                <ion-col size=\"6\">{{ticket.date_purchased | date:'medium'}} </ion-col>\n              </ion-row>\n              <div class=\"ion-text-center\">\n                <ion-button *ngIf=\"ticket?.numberOfTicket > 1 && ticket.shared === false\"\n                  (click)=\"presentShareTicket(ticket)\">\n                  Share <i class=\"p-3 fas fa-share-alt \"></i>\n                </ion-button>\n                <ion-button color=\"warning\" *ngIf=\"ticket?.status === 'UNALLOTED' && ticket.shared === true\"\n                  (click)=\"confirmMessage(ticket)\">\n                  confirm <i class=\"p-3 fa fa-check \"></i>\n                </ion-button>\n              </div>\n              <div *ngFor=\"let id of ticket?.sharedTicket\">\n                <app-ticket-item [id]=\"id\"></app-ticket-item>\n              </div>\n            </ion-card-content>\n          </ion-card>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-list>\n</ion-content>";
       /***/
     },
 
@@ -519,6 +519,26 @@
     },
 
     /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ticket-item/ticket-item.component.html":
+    /*!*********************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/ticket-item/ticket-item.component.html ***!
+      \*********************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppComponentsTicketItemTicketItemComponentHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-row>\n  <ion-col size=\"6\">\n    <small class=\"flow\">{{ticket?.email}} </small>\n  </ion-col>\n  <ion-col size=\"1\">\n    <small>\n      <ion-badge color=\"primary\">{{ticket?.numberOfTicket}}</ion-badge>\n    </small>\n  </ion-col>\n  <ion-col size=\"4\">\n    <small *ngIf=\"ticket?.status ==='UNALLOTED'\" class=\"bg-dark p-2 text-light\">{{ticket?.status}} </small>\n    <small *ngIf=\"ticket?.status ==='VALID'\" class=\"bg-dark p-2 text-success\">{{ticket?.status}} </small>\n    <small *ngIf=\"ticket?.status ==='USED'\" class=\"bg-dark p-2 text-warning\">{{ticket?.status}} </small>\n    <small *ngIf=\"ticket?.status ==='EXPIRED'\" class=\"bg-dark p-2 text-danger\">{{ticket?.status}} </small>\n  </ion-col>\n\n</ion-row>";
+      /***/
+    },
+
+    /***/
     "./node_modules/raw-loader/dist/cjs.js!./src/app/components/vote-now/vote-now.component.html":
     /*!***************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/vote-now/vote-now.component.html ***!
@@ -534,7 +554,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button >\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card color=\"success\" class=\"ion-padding ion-margin-top ion-text-center\">\n    <ion-card-subtitle> cost per vote is {{properties.cost | currency:'₦'}} </ion-card-subtitle>\n    <ion-card-subtitle> Balance {{accountService.accountBalance | currency:'₦'}} </ion-card-subtitle>\n\n    <ion-row>\n      <ion-col>\n    <ion-card-title>00{{properties.my_code}} </ion-card-title>\n      </ion-col>\n      <ion-col>\n    <ion-card-title>{{properties.nickname}} </ion-card-title>\n      </ion-col>\n    </ion-row>\n    <ion-card-content>\n      <div>\n        <img class=\"image\" width=\"250\" height=\"250\"  [src]=\"properties.image_url\">\n      </div>\n    <ion-chip class=\"ion-text-bold\" color=\"light\">{{properties.fullname}} </ion-chip>\n\n      <div>enter value</div>\n      <ion-row>\n        <ion-col>\n         <ion-button color=\"light\" size=\"small\" (click)=\"remove()\"> <ion-icon name=\"remove\"></ion-icon></ion-button>\n        </ion-col>\n        <ion-col>\n         <ion-item color=\"light\">\n          <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"properties.purchase\"></ion-input>\n         </ion-item>\n        </ion-col>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"add()\"><ion-icon name=\"add\"></ion-icon></ion-button>\n\n        </ion-col>\n      </ion-row>\n      <p class=\"font-weight-bold text-center\">\n         {{properties.purchase * properties.cost | currency:'₦'}} </p>\n      <ion-button [disabled]=\"properties.purchase < 1\" (click)=\"finalize()\" color=\"light\"[disabled]=\"\" >finalize</ion-button>\n    </ion-card-content>\n  </ion-card>\n\n\n    <!-- loader -->\n    <div *ngIf=\"loading\" class=\" \">\n      <div class=\"toast-container \">\n        <div class=\"lds-roller\">\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </div>\n\n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button>\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card color=\"success\" class=\"ion-padding ion-margin-top ion-text-center\">\n    <ion-card-subtitle> cost per vote is {{properties.cost | currency:'₦'}} </ion-card-subtitle>\n    <ion-card-subtitle> Balance {{balance | currency:'₦'}} </ion-card-subtitle>\n\n    <ion-row>\n      <ion-col>\n        <ion-card-title>00{{properties.my_code}} </ion-card-title>\n      </ion-col>\n      <ion-col>\n        <ion-card-title>{{properties.nickname}} </ion-card-title>\n      </ion-col>\n    </ion-row>\n    <ion-card-content>\n      <div>\n        <img class=\"image\" width=\"250\" height=\"250\" [src]=\"properties.image_url\">\n      </div>\n      <ion-chip class=\"ion-text-bold\" color=\"light\">{{properties.fullname}} </ion-chip>\n\n      <div>enter value</div>\n      <ion-row>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"remove()\">\n            <ion-icon name=\"remove\"></ion-icon>\n          </ion-button>\n        </ion-col>\n        <ion-col>\n          <ion-item color=\"light\">\n            <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"properties.purchase\"></ion-input>\n          </ion-item>\n        </ion-col>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"add()\">\n            <ion-icon name=\"add\"></ion-icon>\n          </ion-button>\n\n        </ion-col>\n      </ion-row>\n      <p class=\"font-weight-bold text-center\">\n        {{properties.purchase * properties.cost | currency:'₦'}} </p>\n      <ion-button [disabled]=\"properties.purchase < 1\" (click)=\"finalize()\" color=\"light\" [disabled]=\"\">finalize\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n\n</ion-content>";
       /***/
     },
 
@@ -1177,11 +1197,17 @@
             this.platform.ready().then(function () {
               // Okay, so the platform is ready and our plugins are available.
               // Here you can do any higher level native things you might need.
-              // this.localNotifications.on('trigger').subscribe( res => {
+              _this.accountService.getAccountBalance().subscribe(function (bal) {
+                return _this.balance = bal;
+              });
+
+              _this.reloadBalance(); // this.localNotifications.on('trigger').subscribe( res => {
               //   console.log('alert Trigger 2', res );
               //   let msg = res.data ? res.data.mydata : '';
               //   this.showAlert(res.title, res.text);
               // });
+
+
               _this.statusBar.show(); // this.splashScreen.hide();
               // timer(5000).subscribe(()=> this.showSplash = false);
 
@@ -1589,7 +1615,13 @@
 
       var _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(
       /*! ./components/buy-ticket/buy-ticket.component */
-      "./src/app/components/buy-ticket/buy-ticket.component.ts"); // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
+      "./src/app/components/buy-ticket/buy-ticket.component.ts");
+      /* harmony import */
+
+
+      var _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
+      /*! ./components/ticket-item/ticket-item.component */
+      "./src/app/components/ticket-item/ticket-item.component.ts"); // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 
 
       var AppModule = function AppModule() {
@@ -1597,7 +1629,7 @@
       };
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_20__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_27__["AppComponent"], _game_pipe__WEBPACK_IMPORTED_MODULE_36__["GamePipe"], _components_account_account_component__WEBPACK_IMPORTED_MODULE_19__["AccountComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_12__["HeaderComponent"], _adminnavigation_adminnavigation_component__WEBPACK_IMPORTED_MODULE_16__["AdminnavigationComponent"], _components_admin_event_admin_event_component__WEBPACK_IMPORTED_MODULE_13__["AdminEventComponent"], _components_forgetpassword_forgetpassword_component__WEBPACK_IMPORTED_MODULE_17__["ForgetpasswordComponent"], _components_inside_event_inside_event_component__WEBPACK_IMPORTED_MODULE_11__["InsideEventComponent"], _components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"], _components_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_8__["TabsComponent"], _components_gamesection_gamesection_component__WEBPACK_IMPORTED_MODULE_7__["GamesectionComponent"], _components_not_live_not_live_component__WEBPACK_IMPORTED_MODULE_6__["NotLiveComponent"], _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_42__["WebVotingComponent"], _components_image_custom_spinner_image_custom_spinner_component__WEBPACK_IMPORTED_MODULE_44__["ImageCustomSpinnerComponent"], _components_inside_ticketing_inside_ticketing_component__WEBPACK_IMPORTED_MODULE_46__["InsideTicketingComponent"], _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"], _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"], _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"], _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_27__["AppComponent"], _game_pipe__WEBPACK_IMPORTED_MODULE_36__["GamePipe"], _components_account_account_component__WEBPACK_IMPORTED_MODULE_19__["AccountComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_12__["HeaderComponent"], _adminnavigation_adminnavigation_component__WEBPACK_IMPORTED_MODULE_16__["AdminnavigationComponent"], _components_admin_event_admin_event_component__WEBPACK_IMPORTED_MODULE_13__["AdminEventComponent"], _components_forgetpassword_forgetpassword_component__WEBPACK_IMPORTED_MODULE_17__["ForgetpasswordComponent"], _components_inside_event_inside_event_component__WEBPACK_IMPORTED_MODULE_11__["InsideEventComponent"], _components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"], _components_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_8__["TabsComponent"], _components_gamesection_gamesection_component__WEBPACK_IMPORTED_MODULE_7__["GamesectionComponent"], _components_not_live_not_live_component__WEBPACK_IMPORTED_MODULE_6__["NotLiveComponent"], _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_42__["WebVotingComponent"], _components_image_custom_spinner_image_custom_spinner_component__WEBPACK_IMPORTED_MODULE_44__["ImageCustomSpinnerComponent"], _components_inside_ticketing_inside_ticketing_component__WEBPACK_IMPORTED_MODULE_46__["InsideTicketingComponent"], _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"], _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"], _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"], _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"], _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
         entryComponents: [_components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"]],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_21__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_31__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_31__["ReactiveFormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_32__["HttpClientModule"], flutterwave_angular_v3__WEBPACK_IMPORTED_MODULE_41__["FlutterwaveModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_37__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_43__["environment"].firebaseConfig), _ionic_angular__WEBPACK_IMPORTED_MODULE_24__["IonicModule"].forRoot(), _angular_fire__WEBPACK_IMPORTED_MODULE_37__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_43__["environment"].firebaseConfig), _app_routing_module__WEBPACK_IMPORTED_MODULE_28__["AppRoutingModule"]],
         schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_20__["NO_ERRORS_SCHEMA"], _angular_core__WEBPACK_IMPORTED_MODULE_20__["CUSTOM_ELEMENTS_SCHEMA"]],
@@ -2094,11 +2126,16 @@
         _createClass(AccountComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            var _this3 = this;
+
             this.generateRef();
             console.log('REF', this.reference);
             console.log('trans ref');
             this.appUsername = localStorage.getItem('appUser');
             this.model.username = this.appUsername;
+            this.accountService.getAccountBalance().subscribe(function (bal) {
+              _this3.balance = bal;
+            });
           }
         }, {
           key: "ngOnDestroy",
@@ -2113,7 +2150,7 @@
         }, {
           key: "makePaymentCallback",
           value: function makePaymentCallback(response) {
-            var _this3 = this;
+            var _this4 = this;
 
             console.log("RESULT", response);
 
@@ -2128,15 +2165,15 @@
               this.paymentDoneSub = this.userService.postTransaction(response).subscribe(function (res) {
                 console.log('new balance', res);
 
-                _this3.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.');
+                _this4.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.');
 
-                _this3.accountService.loadMyBalance();
+                _this4.accountService.loadMyBalance();
 
-                _this3.generateRef();
+                _this4.generateRef();
               }, function (err) {
-                _this3.generateRef();
+                _this4.generateRef();
 
-                _this3.accountService.loadMyBalance();
+                _this4.accountService.loadMyBalance();
               });
               this.flutterwave.closePaymentModal();
             } else {
@@ -2160,7 +2197,7 @@
         }, {
           key: "submitProCode",
           value: function submitProCode(promo) {
-            var _this4 = this;
+            var _this5 = this;
 
             this.loading = true;
             console.log(promo);
@@ -2169,15 +2206,15 @@
             };
             this.accountService.activatePromo(data).subscribe(function (data) {
               console.log(data);
-              _this4.loading = false;
+              _this5.loading = false;
 
-              _this4.logicService.presentAlert('success', 'your account has been credited');
+              _this5.logicService.presentAlert('success', 'your account has been credited');
 
-              _this4.accountService.loadMyBalance();
+              _this5.accountService.loadMyBalance();
             }, function (err) {
-              _this4.loading = false;
+              _this5.loading = false;
 
-              _this4.logicService.presentAlert('not fount', err.error.message);
+              _this5.logicService.presentAlert('not fount', err.error.message);
 
               console.log(err);
             });
@@ -2208,19 +2245,19 @@
         }, {
           key: "paymentDone",
           value: function paymentDone(process) {
-            var _this5 = this;
+            var _this6 = this;
 
             this.showPaymentButtons = false;
             process.username = this.appUsername;
             process.amount = this.model.amount;
             this.paymentDoneSub = this.userService.postTransaction(process).subscribe(function (res) {
-              _this5.accountService.loadMyBalance();
+              _this6.accountService.loadMyBalance();
 
-              _this5.generateRef();
+              _this6.generateRef();
             }, function (err) {
-              _this5.generateRef();
+              _this6.generateRef();
 
-              _this5.accountService.loadMyBalance();
+              _this6.accountService.loadMyBalance();
             });
             console.log(process);
           }
@@ -2244,7 +2281,7 @@
           key: "showAlert",
           value: function showAlert() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this6 = this;
+              var _this7 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -2260,29 +2297,29 @@
                           role: 'cancel',
                           cssClass: 'secondary',
                           handler: function handler() {
-                            _this6.showPaymentButtons = false;
+                            _this7.showPaymentButtons = false;
 
-                            _this6.generateRef();
+                            _this7.generateRef();
                           }
                         }, {
                           text: 'Okay',
                           handler: function handler() {
-                            _this6.showPaymentButtons = false;
+                            _this7.showPaymentButtons = false;
                             var process = {
-                              username: _this6.appUsername,
-                              amount: _this6.model.amount,
+                              username: _this7.appUsername,
+                              amount: _this7.model.amount,
                               status: 'processing',
-                              trxref: _this6.reference,
-                              account_id: _this6.accountService.user_id,
+                              trxref: _this7.reference,
+                              account_id: _this7.accountService.user_id,
                               transaction: ' manual transfer'
                             };
-                            process.username = _this6.appUsername;
+                            process.username = _this7.appUsername;
                             console.log('Confirm Okay', process);
 
-                            _this6.userService.postManualTrans(process).subscribe(function (res) {
+                            _this7.userService.postManualTrans(process).subscribe(function (res) {
                               console.log(res);
 
-                              _this6.presentSucess();
+                              _this7.presentSucess();
                             }, function (err) {
                               console.log(err);
                             });
@@ -2336,7 +2373,7 @@
           key: "enterAmountInput",
           value: function enterAmountInput() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var _this7 = this;
+              var _this8 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -2358,15 +2395,15 @@
                           handler: function handler(blah) {
                             console.log('cancel amount input');
 
-                            _this7.generateRef();
+                            _this8.generateRef();
                           }
                         }, {
                           text: 'Confirm',
                           cssClass: 'success',
                           handler: function handler(val) {
                             console.log(val.amount);
-                            _this7.showPaymentButtons = true;
-                            _this7.model.amount = val.amount;
+                            _this8.showPaymentButtons = true;
+                            _this8.model.amount = val.amount;
                           }
                         }]
                       });
@@ -2388,7 +2425,7 @@
           key: "presentAmountInput",
           value: function presentAmountInput() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-              var _this8 = this;
+              var _this9 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee5$(_context5) {
@@ -2414,9 +2451,9 @@
                           text: 'Okay',
                           handler: function handler(value) {
                             console.log('Confirm Okay', value);
-                            _this8.model.amount = value.amount;
+                            _this9.model.amount = value.amount;
 
-                            _this8.payNow();
+                            _this9.payNow();
                           }
                         }]
                       });
@@ -2439,7 +2476,7 @@
           key: "enterCashoutAmount",
           value: function enterCashoutAmount() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-              var _this9 = this;
+              var _this10 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee6$(_context6) {
@@ -2465,24 +2502,24 @@
                           text: 'Confirm',
                           cssClass: 'success',
                           handler: function handler(val) {
-                            _this9.model.cashout = val.amount;
-                            var userCashout = parseInt(_this9.model.cashout);
+                            _this10.model.cashout = val.amount;
+                            var userCashout = parseInt(_this10.model.cashout);
 
                             if (userCashout < 500) {
                               var msg = "cashout must be greater that 500!";
 
-                              _this9.gameSevice.presentToast(msg);
+                              _this10.gameSevice.presentToast(msg);
                             } else {
-                              _this9.accountService.cashout(_this9.model).subscribe(function (res) {
+                              _this10.accountService.cashout(_this10.model).subscribe(function (res) {
                                 console.log(res);
 
-                                _this9.accountService.loadMyBalance();
+                                _this10.accountService.loadMyBalance();
 
-                                _this9.cashoutSuccess();
+                                _this10.cashoutSuccess();
                               }, function (err) {
                                 console.log(err);
 
-                                _this9.gameSevice.presentToast(err.error.message);
+                                _this10.gameSevice.presentToast(err.error.message);
                               });
                             }
                           }
@@ -2711,23 +2748,23 @@
         }, {
           key: "submitEvent",
           value: function submitEvent() {
-            var _this10 = this;
+            var _this11 = this;
 
             console.log(this.eventModel);
             this.eventService.submitEvent(this.eventModel).subscribe(function (res) {
               console.log('event submitted successful!');
 
-              _this10.userService.shortToast(res['msg']);
+              _this11.userService.shortToast(res['msg']);
 
-              _this10.resetForm();
+              _this11.resetForm();
 
               setTimeout(function () {
-                _this10.router.navigateByUrl('/tabs/events');
+                _this11.router.navigateByUrl('/tabs/events');
               }, 2000);
             }, function (err) {
               console.log('error submitting event.');
 
-              _this10.userService.shortToast(err.error.msg);
+              _this11.userService.shortToast(err.error.msg);
             });
           }
         }, {
@@ -2777,7 +2814,7 @@
         }, {
           key: "uploadImageToFireBase",
           value: function uploadImageToFireBase(image) {
-            var _this11 = this;
+            var _this12 = this;
 
             this.loading = true;
 
@@ -2785,10 +2822,10 @@
               this.fireService.uploadFile(image).then(function (success) {
                 var imageRef = success.ref.fullPath;
 
-                _this11.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
-                  _this11.image = imageUrl;
-                  _this11.eventModel.image_url = imageUrl;
-                  _this11.loading = false;
+                _this12.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
+                  _this12.image = imageUrl;
+                  _this12.eventModel.image_url = imageUrl;
+                  _this12.loading = false;
                 });
               });
             } catch (error) {
@@ -2894,31 +2931,39 @@
       /* harmony import */
 
 
-      var src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      var src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/services/logic.service */
+      "./src/app/services/logic.service.ts");
+      /* harmony import */
+
+
+      var src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! src/app/shared/account.service */
       "./src/app/shared/account.service.ts");
       /* harmony import */
 
 
-      var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/app/shared/event.service */
       "./src/app/shared/event.service.ts");
       /* harmony import */
 
 
-      var src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! src/app/shared/user.service */
       "./src/app/shared/user.service.ts");
 
       var BuyTicketComponent = /*#__PURE__*/function () {
-        function BuyTicketComponent(modalController, navParams, accountService, eventService, formBuilder, userService) {
+        function BuyTicketComponent(modalController, navParams, accountService, eventService, logicService, formBuilder, userservice, userService) {
           _classCallCheck(this, BuyTicketComponent);
 
           this.modalController = modalController;
           this.navParams = navParams;
           this.accountService = accountService;
           this.eventService = eventService;
+          this.logicService = logicService;
           this.formBuilder = formBuilder;
+          this.userservice = userservice;
           this.userService = userService;
           this.data = {
             quantity: 1
@@ -2926,13 +2971,16 @@
           this.ticketForm = this.formBuilder.group({
             eventId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             ticketId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            ticketDatabaseId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             parentTicket: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0),
             ticketType: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            ticketImage: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            mobile: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](true),
+            imageUrl: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             phone: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+            user_id: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             numberOfTicket: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             amountPaid: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required])
           });
@@ -2941,17 +2989,23 @@
         _createClass(BuyTicketComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
+            var _this13 = this;
+
             this.randomString(6);
-            console.log(this.ticket);
+            this.ticketForm.get('user_id').setValue(this.userService.getAuthId());
             this.ticketForm.get('eventId').setValue(this.ticket.eventId);
             this.ticketForm.get('amount').setValue(this.ticket.amount);
             this.ticketForm.get('ticketType').setValue(this.ticket.ticketType);
-            this.ticketForm.get('ticketImage').setValue(this.ticket.imageUri);
+            this.ticketForm.get('imageUrl').setValue(this.ticket.imageUrl);
+            this.ticketForm.get('ticketDatabaseId').setValue(this.ticket._id);
+            this.accountService.getAccountBalance().subscribe(function (bal) {
+              return _this13.balance = bal;
+            });
           }
         }, {
           key: "randomString",
           value: function randomString(len) {
-            var _this12 = this;
+            var _this14 = this;
 
             var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -2965,7 +3019,7 @@
             this.eventService.checkTicketIdIfExist(shortpass, this.ticket.eventId).subscribe(function (res) {
               console.log(res);
 
-              _this12.randomString(6);
+              _this14.randomString(6);
             }, function (err) {
               console.log(err);
             });
@@ -2991,12 +3045,15 @@
         }, {
           key: "finalize",
           value: function finalize() {
-            var _this13 = this;
+            var _this15 = this;
+
+            if (this.data.quantity < 1) {
+              return this.logicService.presentToast('One or more field is required');
+            }
 
             console.log(this.ticketForm.value);
-            var balance = this.accountService.accountBalance;
             var costPerTicket = this.ticketForm.get('amount').value * this.data.quantity;
-            var remainBalance = balance - costPerTicket;
+            var remainBalance = this.balance - costPerTicket;
             this.ticketForm.get('numberOfTicket').setValue(this.data.quantity);
             this.ticketForm.get('amountPaid').setValue(costPerTicket);
 
@@ -3004,9 +3061,15 @@
               this.eventService.savePurchaseTicket(this.ticketForm.value).subscribe(function (newTicket) {
                 console.log(newTicket);
 
-                _this13.modalController.dismiss({
-                  newTicket: newTicket
+                _this15.modalController.dismiss({
+                  data: newTicket
                 });
+
+                _this15.randomString(6);
+
+                _this15.logicService.presentSucess('success', 'ticket purchase successful ', '');
+
+                _this15.accountService.loadMyBalance();
               }, function (err) {
                 console.log(err);
               });
@@ -3026,13 +3089,17 @@
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavParams"]
         }, {
-          type: src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_4__["AccountService"]
+          type: src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_5__["AccountService"]
         }, {
-          type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"]
+          type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_6__["EventService"]
+        }, {
+          type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"]
         }, {
           type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"]
         }, {
-          type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"]
+          type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"]
+        }, {
+          type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"]
         }];
       };
 
@@ -3428,24 +3495,24 @@
         }, {
           key: "submitNumber",
           value: function submitNumber(form) {
-            var _this14 = this;
+            var _this16 = this;
 
             this.loading = true;
             this.userService.confirmNumber(this.model.number).subscribe(function (res) {
-              _this14.loading = false;
+              _this16.loading = false;
 
-              _this14.showPasswordInput();
+              _this16.showPasswordInput();
 
-              _this14.otpFromServer = res['otp'];
-              _this14.phoneFromServer = res['phone'];
-              console.log(_this14.otpFromServer);
-              console.log(_this14.phoneFromServer);
-              _this14.showNumberForm = false;
-              _this14.showOTPInput = true;
+              _this16.otpFromServer = res['otp'];
+              _this16.phoneFromServer = res['phone'];
+              console.log(_this16.otpFromServer);
+              console.log(_this16.phoneFromServer);
+              _this16.showNumberForm = false;
+              _this16.showOTPInput = true;
             }, function (err) {
-              _this14.loading = false;
+              _this16.loading = false;
 
-              _this14.noUserFound();
+              _this16.noUserFound();
 
               console.log(err.error);
             });
@@ -3455,7 +3522,7 @@
           key: "showPasswordInput",
           value: function showPasswordInput() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var _this15 = this;
+              var _this17 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
@@ -3480,7 +3547,7 @@
                         }, {
                           text: 'Confirm',
                           handler: function handler(data) {
-                            _this15.allowResetpasswordIfTrue(data.otp);
+                            _this17.allowResetpasswordIfTrue(data.otp);
 
                             console.log(' clecked ok.....', data.otp);
                           }
@@ -3544,7 +3611,7 @@
         }, {
           key: "submitNewPassword",
           value: function submitNewPassword(password) {
-            var _this16 = this;
+            var _this18 = this;
 
             console.log(this.model.newPassword);
             console.log(this.model.confirmPassword);
@@ -3554,11 +3621,11 @@
               this.userService.resetPassword(this.model).subscribe(function (response) {
                 console.log(response);
 
-                _this16.router.navigate(['/login']);
+                _this18.router.navigate(['/login']);
 
                 var msg = 'Successful!!! you can login with your new password';
 
-                _this16.presentToast(msg);
+                _this18.presentToast(msg);
               }, function (error) {
                 console.log(error);
               });
@@ -3783,17 +3850,17 @@
           key: "autoSlide",
           value: function autoSlide() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-              var _this17 = this;
+              var _this19 = this;
 
               return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
                   switch (_context12.prev = _context12.next) {
                     case 0:
                       setInterval(function () {
-                        _this17.gameService.slideCounter = _this17.gameService.gameTipArray.length;
-                        _this17.gameService.slideCounter--;
+                        _this19.gameService.slideCounter = _this19.gameService.gameTipArray.length;
+                        _this19.gameService.slideCounter--;
 
-                        _this17.mySlider.slideNext(3000, true);
+                        _this19.mySlider.slideNext(3000, true);
                       }, 9000);
 
                     case 1:
@@ -4170,15 +4237,15 @@
         }, {
           key: "submitUser",
           value: function submitUser() {
-            var _this18 = this;
+            var _this20 = this;
 
             console.log(this.contesttModel);
             this.eventService.createContestTant(this.contesttModel).subscribe(function (res) {
-              _this18.closeModal();
+              _this20.closeModal();
 
-              _this18.userService.shortToast(res['msg']);
+              _this20.userService.shortToast(res['msg']);
             }, function (err) {
-              _this18.userService.longToast(err.error.msg);
+              _this20.userService.longToast(err.error.msg);
             });
           }
         }]);
@@ -4333,19 +4400,19 @@
         _createClass(InsideEventComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this19 = this;
+            var _this21 = this;
 
             this.route.params.subscribe(function (params) {
-              _this19.eventId = params['id'];
+              _this21.eventId = params['id'];
             });
           }
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this20 = this;
+            var _this22 = this;
 
             this.eventRefresher = setInterval(function () {
-              _this20.getAllContentant();
+              _this22.getAllContentant();
             }, 9000);
           }
         }, {
@@ -4384,26 +4451,26 @@
         }, {
           key: "getAllContentant",
           value: function getAllContentant() {
-            var _this21 = this;
+            var _this23 = this;
 
             this.eventService.getAllContestant(this.eventId).subscribe(function (res) {
               try {
-                _this21.refresherRef.complete();
+                _this23.refresherRef.complete();
               } catch (error) {}
 
-              _this21.loading = false;
-              _this21.contestant = res['contestant'];
-              console.log(_this21.contestant.length);
-              _this21.contestantData = _this21.contestant;
-              _this21.costPerVote = res['cost_per_vote'];
+              _this23.loading = false;
+              _this23.contestant = res['contestant'];
+              console.log(_this23.contestant.length);
+              _this23.contestantData = _this23.contestant;
+              _this23.costPerVote = res['cost_per_vote'];
             }, function (err) {
               try {
-                _this21.refresherRef.complete();
+                _this23.refresherRef.complete();
               } catch (error) {}
 
-              _this21.loading = false;
+              _this23.loading = false;
 
-              _this21.userService.longToast(err.error.msg);
+              _this23.userService.longToast(err.error.msg);
             });
           }
         }, {
@@ -4429,7 +4496,7 @@
           key: "addUser",
           value: function addUser() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-              var _this22 = this;
+              var _this24 = this;
 
               var modal;
               return regeneratorRuntime.wrap(function _callee14$(_context14) {
@@ -4448,7 +4515,7 @@
                       modal = _context14.sent;
                       modal.onDidDismiss().then(function () {
                         // load all event
-                        _this22.getAllContentant();
+                        _this24.getAllContentant();
                       });
                       _context14.next = 6;
                       return modal.present();
@@ -4468,7 +4535,7 @@
           key: "voteNow",
           value: function voteNow(event_id, contestant_id, image_url, nickname, my_code, fullname) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
-              var _this23 = this;
+              var _this25 = this;
 
               var modal;
               return regeneratorRuntime.wrap(function _callee15$(_context15) {
@@ -4493,7 +4560,7 @@
                       modal = _context15.sent;
                       modal.onDidDismiss().then(function () {
                         // load all event
-                        _this23.getAllContentant();
+                        _this25.getAllContentant();
                       });
                       _context15.next = 6;
                       return modal.present();
@@ -4513,7 +4580,7 @@
           key: "deleteContestant",
           value: function deleteContestant(contestant) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
-              var _this24 = this;
+              var _this26 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee16$(_context16) {
@@ -4533,18 +4600,18 @@
                         }, {
                           text: 'Okay',
                           handler: function handler() {
-                            _this24.loading = true;
+                            _this26.loading = true;
 
-                            _this24.eventService.deleteContestant(contestant._id).subscribe(function (res) {
-                              _this24.loading = false;
+                            _this26.eventService.deleteContestant(contestant._id).subscribe(function (res) {
+                              _this26.loading = false;
 
-                              _this24.userService.generalToast(res['msg'], 2000);
+                              _this26.userService.generalToast(res['msg'], 2000);
 
-                              _this24.getAllContentant();
+                              _this26.getAllContentant();
                             }, function (err) {
-                              _this24.loading = false;
+                              _this26.loading = false;
 
-                              _this24.userService.generalAlert(err.error.msg);
+                              _this26.userService.generalAlert(err.error.msg);
                             });
                           }
                         }]
@@ -4741,7 +4808,7 @@
         }, {
           key: "uploadImageToFireBase",
           value: function uploadImageToFireBase(image) {
-            var _this25 = this;
+            var _this27 = this;
 
             this.loading = true;
 
@@ -4749,12 +4816,12 @@
               this.fireService.uploadFile(image).then(function (success) {
                 var imageRef = success.ref.fullPath;
 
-                _this25.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
-                  _this25.image = imageUrl;
+                _this27.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
+                  _this27.image = imageUrl;
 
-                  _this25.ticketForm.get('imageUrl').setValue(imageUrl);
+                  _this27.ticketForm.get('imageUrl').setValue(imageUrl);
 
-                  _this25.loading = false;
+                  _this27.loading = false;
                 });
               });
             } catch (error) {
@@ -4766,25 +4833,25 @@
         }, {
           key: "submitForm",
           value: function submitForm() {
-            var _this26 = this;
+            var _this28 = this;
 
             this.loading = true;
             console.log(this.ticketForm.value);
             this.eventService.submitTicket(this.ticketForm.value).subscribe(function (response) {
-              _this26.ticketForm.reset();
+              _this28.ticketForm.reset();
 
               console.log(response);
-              _this26.loading = false;
+              _this28.loading = false;
 
-              _this26.modalController.dismiss({
+              _this28.modalController.dismiss({
                 data: response['docs']
               });
             }, function (err) {
               var _a;
 
-              _this26.loading = false;
+              _this28.loading = false;
 
-              _this26.logicService.presentToast((_a = err.error) === null || _a === void 0 ? void 0 : _a.message);
+              _this28.logicService.presentToast((_a = err.error) === null || _a === void 0 ? void 0 : _a.message);
             });
           }
         }]);
@@ -4918,12 +4985,13 @@
       "./src/app/components/inside-ticket-add-ticket/inside-ticket-add-ticket.component.ts");
 
       var InsideTicketingComponent = /*#__PURE__*/function () {
-        function InsideTicketingComponent(route, eventService, userService, logicService, modalController) {
+        function InsideTicketingComponent(route, eventService, userService, alertController, logicService, modalController) {
           _classCallCheck(this, InsideTicketingComponent);
 
           this.route = route;
           this.eventService = eventService;
           this.userService = userService;
+          this.alertController = alertController;
           this.logicService = logicService;
           this.modalController = modalController;
           this.ticketList = [];
@@ -4933,17 +5001,42 @@
 
         _createClass(InsideTicketingComponent, [{
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            this.randomString(6);
+          }
+        }, {
+          key: "randomString",
+          value: function randomString(len) {
+            var _this29 = this;
+
+            var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+            var shortpass = _toConsumableArray(Array(len)).reduce(function (a) {
+              return a + p[~~(Math.random() * p.length)];
+            }, '');
+
+            console.log('POP ', shortpass);
+            this.generatedTicketId = shortpass;
+            this.eventService.checkTicketIdIfExist(shortpass, this.eventId).subscribe(function (res) {
+              console.log(res);
+
+              _this29.randomString(6);
+            }, function (err) {
+              console.log(err);
+            });
+            return;
+          }
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this27 = this;
+            var _this30 = this;
 
             this.route.params.subscribe(function (params) {
-              _this27.eventId = params['id'];
-              console.log('seee id ', _this27.eventId);
+              _this30.eventId = params['id'];
+              console.log('seee id ', _this30.eventId);
             });
             this.getAllTicket();
+            this.findMyTicket();
           }
         }, {
           key: "segmentChanged",
@@ -4980,10 +5073,11 @@
 
                     case 8:
                       data = _context17.sent;
-                      console.log(data['newTicket']);
+                      console.log(data.data.data);
 
-                      if (data['newTicket']) {
-                        this.myTicketList.push(data['newTicket']);
+                      if (data.data.data) {
+                        this.myTicketList.push(data.data.data);
+                        this.findMyTicket();
                       }
 
                     case 11:
@@ -5027,40 +5121,158 @@
             }));
           }
         }, {
+          key: "doRefresh",
+          value: function doRefresh(ev) {
+            this.getAllTicket();
+          }
+        }, {
           key: "getAllTicket",
           value: function getAllTicket() {
-            var _this28 = this;
+            var _this31 = this;
 
             this.eventService.getTicketByEventId(this.eventId).subscribe(function (res) {
               try {
-                _this28.refresherRef.complete();
+                _this31.refresherRef.complete();
               } catch (error) {}
 
-              _this28.loading = false;
+              _this31.loading = false;
               console.log(res);
-              _this28.ticketList = res['ticketList'];
+              _this31.ticketList = res['ticketList'];
             }, function (err) {
               try {
-                _this28.refresherRef.complete();
+                _this31.refresherRef.complete();
               } catch (error) {}
 
-              _this28.loading = false;
+              _this31.loading = false;
 
-              _this28.logicService.presentToast(err.error.msg);
+              _this31.logicService.presentToast(err.error.msg);
             });
+          }
+        }, {
+          key: "findMyTicket",
+          value: function findMyTicket() {
+            var _this32 = this;
+
+            this.eventService.findMyTicket(this.eventId, this.userService.getEmail()).subscribe(function (myList) {
+              console.log('OBSSS ', myList);
+              _this32.myTicketList = myList['ticketList'];
+            });
+          }
+        }, {
+          key: "presentShareTicket",
+          value: function presentShareTicket(ticket) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
+              var _this33 = this;
+
+              var alert;
+              return regeneratorRuntime.wrap(function _callee19$(_context19) {
+                while (1) {
+                  switch (_context19.prev = _context19.next) {
+                    case 0:
+                      _context19.next = 2;
+                      return this.alertController.create({
+                        cssClass: 'my-custom-class',
+                        header: 'Share ticket!',
+                        inputs: [{
+                          name: 'email',
+                          type: 'email',
+                          placeholder: 'Beneficiary Email'
+                        }, {
+                          name: 'name',
+                          type: 'text',
+                          placeholder: 'Beneficiary Name'
+                        }, {
+                          name: 'phone',
+                          type: 'tel',
+                          placeholder: 'Beneficiary phone'
+                        }, {
+                          name: 'slot',
+                          type: 'number',
+                          value: 1,
+                          placeholder: 'slot'
+                        }],
+                        buttons: [{
+                          text: 'Cancel',
+                          role: 'cancel',
+                          cssClass: 'secondary',
+                          handler: function handler() {
+                            console.log('Confirm Cancel');
+                          }
+                        }, {
+                          text: 'Confirm',
+                          handler: function handler(data) {
+                            console.log('Confirm Ok', data);
+
+                            if (!(data === null || data === void 0 ? void 0 : data.email) || !data.phone || !(data === null || data === void 0 ? void 0 : data.name) || !(data === null || data === void 0 ? void 0 : data.slot)) {
+                              return _this33.logicService.presentToast('one or more field is required!');
+                            }
+
+                            if (data.slot === 0) {
+                              return _this33.logicService.presentToast('slot must be greater tha zero');
+                            }
+
+                            var remainingTicket = (ticket === null || ticket === void 0 ? void 0 : ticket.numberOfTicket) - parseInt(data.slot);
+                            console.log('remain ', remainingTicket);
+
+                            if (remainingTicket < 1) {
+                              return _this33.logicService.presentToast('You have requested more than your slot');
+                            }
+
+                            _this33.loading = true;
+                            var newTicket = {
+                              name: data.name,
+                              amount: ticket.amount,
+                              ticketDBId: ticket._id,
+                              ticketId: _this33.generatedTicketId,
+                              email: data.email,
+                              numberOfTicket: data.slot,
+                              phone: data.phone,
+                              imageUrl: ticket.imageUrl
+                            };
+
+                            _this33.eventService.shareTicket(newTicket).subscribe(function (response) {
+                              console.log(response);
+
+                              _this33.findMyTicket();
+
+                              _this33.randomString(6);
+
+                              _this33.logicService.presentSucess('Shared successful', "you have successfully shared ".concat(newTicket === null || newTicket === void 0 ? void 0 : newTicket.numberOfTicket, " ") + "ticket(s)  to ".concat(newTicket === null || newTicket === void 0 ? void 0 : newTicket.email), 'close');
+
+                              _this33.loading = false;
+                            }, function (err) {
+                              _this33.loading = false;
+                              console.log(err);
+                            });
+                          }
+                        }]
+                      });
+
+                    case 2:
+                      alert = _context19.sent;
+                      _context19.next = 5;
+                      return alert.present();
+
+                    case 5:
+                    case "end":
+                      return _context19.stop();
+                  }
+                }
+              }, _callee19, this);
+            }));
           }
         }, {
           key: "addTicket",
           value: function addTicket() {
             var _a, _b;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee20() {
               var modal, data;
-              return regeneratorRuntime.wrap(function _callee19$(_context19) {
+              return regeneratorRuntime.wrap(function _callee20$(_context20) {
                 while (1) {
-                  switch (_context19.prev = _context19.next) {
+                  switch (_context20.prev = _context20.next) {
                     case 0:
-                      _context19.next = 2;
+                      _context20.next = 2;
                       return this.modalController.create({
                         component: _inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_8__["InsideTicketAddTicketComponent"],
                         componentProps: {
@@ -5069,16 +5281,16 @@
                       });
 
                     case 2:
-                      modal = _context19.sent;
-                      _context19.next = 5;
+                      modal = _context20.sent;
+                      _context20.next = 5;
                       return modal.present();
 
                     case 5:
-                      _context19.next = 7;
+                      _context20.next = 7;
                       return modal.onDidDismiss();
 
                     case 7:
-                      data = _context19.sent;
+                      data = _context20.sent;
                       console.log(data);
 
                       if ((_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.data) {
@@ -5087,11 +5299,24 @@
 
                     case 10:
                     case "end":
-                      return _context19.stop();
+                      return _context20.stop();
                   }
                 }
-              }, _callee19, this);
+              }, _callee20, this);
             }));
+          }
+        }, {
+          key: "confirmMessage",
+          value: function confirmMessage(ticket) {
+            var _this34 = this;
+
+            console.log('confirm  ticket ', ticket);
+            ticket.status = 'VALID';
+            this.eventService.confirmTicketId(ticket._id).subscribe(function (data) {}, function (err) {
+              ticket.status = 'UNALLOTED';
+
+              _this34.logicService.presentToast('error updating ticket status');
+            });
           }
         }]);
 
@@ -5105,6 +5330,8 @@
           type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"]
         }, {
           type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"]
         }, {
           type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"]
         }, {
@@ -5235,16 +5462,16 @@
         }, {
           key: "getAllevent",
           value: function getAllevent() {
-            var _this29 = this;
+            var _this35 = this;
 
             this.eventService.getAllEventAdmin().subscribe(function (res) {
               console.log(res);
-              _this29.allEvent = res['event'];
-              _this29.loading = false;
+              _this35.allEvent = res['event'];
+              _this35.loading = false;
             }, function (err) {
-              _this29.loading = false;
+              _this35.loading = false;
 
-              _this29.userService.longToast(err.error.msg);
+              _this35.userService.longToast(err.error.msg);
 
               console.log('error getting event', err);
             });
@@ -5267,15 +5494,15 @@
         }, {
           key: "handleDelete",
           value: function handleDelete(event) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee20() {
-              var _this30 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
+              var _this36 = this;
 
               var alert;
-              return regeneratorRuntime.wrap(function _callee20$(_context20) {
+              return regeneratorRuntime.wrap(function _callee21$(_context21) {
                 while (1) {
-                  switch (_context20.prev = _context20.next) {
+                  switch (_context21.prev = _context21.next) {
                     case 0:
-                      _context20.next = 2;
+                      _context21.next = 2;
                       return this.alertController.create({
                         header: 'Confirm!',
                         message: "Delete <strong>".concat(event.aboutEvent, " </strong>!!!"),
@@ -5289,34 +5516,34 @@
                         }, {
                           text: 'Okay',
                           handler: function handler() {
-                            _this30.loading = true;
+                            _this36.loading = true;
 
-                            _this30.eventService.deleteEvent(event._id).subscribe(function (res) {
-                              _this30.loading = false;
+                            _this36.eventService.deleteEvent(event._id).subscribe(function (res) {
+                              _this36.loading = false;
 
-                              _this30.userService.generalToast(res['msg'], 2000);
+                              _this36.userService.generalToast(res['msg'], 2000);
 
-                              _this30.getAllevent();
+                              _this36.getAllevent();
                             }, function (err) {
-                              _this30.loading = false;
+                              _this36.loading = false;
 
-                              _this30.userService.generalAlert(err.error.msg);
+                              _this36.userService.generalAlert(err.error.msg);
                             });
                           }
                         }]
                       });
 
                     case 2:
-                      alert = _context20.sent;
-                      _context20.next = 5;
+                      alert = _context21.sent;
+                      _context21.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context20.stop();
+                      return _context21.stop();
                   }
                 }
-              }, _callee20, this);
+              }, _callee21, this);
             }));
           }
         }, {
@@ -5525,40 +5752,40 @@
         }, {
           key: "autoSlide",
           value: function autoSlide() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
-              var _this31 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee22() {
+              var _this37 = this;
 
-              return regeneratorRuntime.wrap(function _callee21$(_context21) {
+              return regeneratorRuntime.wrap(function _callee22$(_context22) {
                 while (1) {
-                  switch (_context21.prev = _context21.next) {
+                  switch (_context22.prev = _context22.next) {
                     case 0:
                       setInterval(function () {
-                        _this31.gameService.slideCounter = _this31.gameService.gameTipArray.length;
-                        _this31.gameService.slideCounter--;
+                        _this37.gameService.slideCounter = _this37.gameService.gameTipArray.length;
+                        _this37.gameService.slideCounter--;
 
-                        _this31.mySlider.slideNext(3000, true);
+                        _this37.mySlider.slideNext(3000, true);
 
-                        console.log('slide to prev', _this31.gameService.slideCounter);
+                        console.log('slide to prev', _this37.gameService.slideCounter);
                       }, 9000);
 
                     case 1:
                     case "end":
-                      return _context21.stop();
+                      return _context22.stop();
                   }
                 }
-              }, _callee21);
+              }, _callee22);
             }));
           }
         }, {
           key: "presentNotice",
           value: function presentNotice() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee22() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee23() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee22$(_context22) {
+              return regeneratorRuntime.wrap(function _callee23$(_context23) {
                 while (1) {
-                  switch (_context22.prev = _context22.next) {
+                  switch (_context23.prev = _context23.next) {
                     case 0:
-                      _context22.next = 2;
+                      _context23.next = 2;
                       return this.alertController.create({
                         header: 'Notice!',
                         cssClass: 'success',
@@ -5573,16 +5800,16 @@
                       });
 
                     case 2:
-                      alert = _context22.sent;
-                      _context22.next = 5;
+                      alert = _context23.sent;
+                      _context23.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context22.stop();
+                      return _context23.stop();
                   }
                 }
-              }, _callee22, this);
+              }, _callee23, this);
             }));
           }
         }, {
@@ -5623,27 +5850,27 @@
         }, {
           key: "getYoutubeLink",
           value: function getYoutubeLink() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee23() {
-              var _this32 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee24() {
+              var _this38 = this;
 
-              return regeneratorRuntime.wrap(function _callee23$(_context23) {
+              return regeneratorRuntime.wrap(function _callee24$(_context24) {
                 while (1) {
-                  switch (_context23.prev = _context23.next) {
+                  switch (_context24.prev = _context24.next) {
                     case 0:
                       this.gameService.getYoutubeLink().subscribe(function (res) {
                         var youtubeVideo = res['doc']['link'];
                         console.log('link', youtubeVideo);
-                        _this32.safeVideo = _this32.sanitizer.bypassSecurityTrustResourceUrl(youtubeVideo);
+                        _this38.safeVideo = _this38.sanitizer.bypassSecurityTrustResourceUrl(youtubeVideo);
                       }, function (err) {
-                        _this32.userService.generalToast('youtube url not found!', 2000);
+                        _this38.userService.generalToast('youtube url not found!', 2000);
                       });
 
                     case 1:
                     case "end":
-                      return _context23.stop();
+                      return _context24.stop();
                   }
                 }
-              }, _callee23, this);
+              }, _callee24, this);
             }));
           }
         }, {
@@ -5802,6 +6029,112 @@
     },
 
     /***/
+    "./src/app/components/ticket-item/ticket-item.component.scss":
+    /*!*******************************************************************!*\
+      !*** ./src/app/components/ticket-item/ticket-item.component.scss ***!
+      \*******************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppComponentsTicketItemTicketItemComponentScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = ".flow {\n  white-space: nowrap;\n  overflow: hidden;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90aWNrZXQtaXRlbS90aWNrZXQtaXRlbS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFBO0VBQ0EsZ0JBQUE7QUFDRiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGlja2V0LWl0ZW0vdGlja2V0LWl0ZW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZmxvdyB7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG4iXX0= */";
+      /***/
+    },
+
+    /***/
+    "./src/app/components/ticket-item/ticket-item.component.ts":
+    /*!*****************************************************************!*\
+      !*** ./src/app/components/ticket-item/ticket-item.component.ts ***!
+      \*****************************************************************/
+
+    /*! exports provided: TicketItemComponent */
+
+    /***/
+    function srcAppComponentsTicketItemTicketItemComponentTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "TicketItemComponent", function () {
+        return TicketItemComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/fesm2015/core.js");
+      /* harmony import */
+
+
+      var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! src/app/shared/event.service */
+      "./src/app/shared/event.service.ts");
+
+      var TicketItemComponent = /*#__PURE__*/function () {
+        function TicketItemComponent(eventService) {
+          _classCallCheck(this, TicketItemComponent);
+
+          this.eventService = eventService;
+        }
+
+        _createClass(TicketItemComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _this39 = this;
+
+            console.log('shared tick id ', this.id);
+            this.eventService.getTicketById(this.id).subscribe(function (data) {
+              console.log('data ', data);
+              _this39.ticket = data['ticket'];
+            }, function (err) {
+              console.log(err);
+            });
+          }
+        }]);
+
+        return TicketItemComponent;
+      }();
+
+      TicketItemComponent.ctorParameters = function () {
+        return [{
+          type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_2__["EventService"]
+        }];
+      };
+
+      TicketItemComponent.propDecorators = {
+        id: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }]
+      };
+      TicketItemComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-ticket-item',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./ticket-item.component.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ticket-item/ticket-item.component.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./ticket-item.component.scss */
+        "./src/app/components/ticket-item/ticket-item.component.scss"))["default"]]
+      })], TicketItemComponent);
+      /***/
+    },
+
+    /***/
     "./src/app/components/vote-now/vote-now.component.scss":
     /*!*************************************************************!*\
       !*** ./src/app/components/vote-now/vote-now.component.scss ***!
@@ -5910,7 +6243,13 @@
 
         _createClass(VoteNowComponent, [{
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {
+            var _this40 = this;
+
+            this.accountService.getAccountBalance().subscribe(function (bal) {
+              return _this40.balance = bal;
+            });
+          }
         }, {
           key: "closeModal",
           value: function closeModal() {
@@ -5929,25 +6268,24 @@
         }, {
           key: "finalize",
           value: function finalize() {
-            var _this33 = this;
+            var _this41 = this;
 
-            var balance = this.accountService.accountBalance;
             var costPerVate = this.properties.purchase * this.properties.cost;
-            var totalCost = balance - costPerVate;
+            var totalCost = this.balance - costPerVate;
 
             if (totalCost > 1) {
               console.log('we can bid for this');
               this.loading = true;
               this.eventService.submitVote(this.properties).subscribe(function (res) {
-                _this33.loading = false;
+                _this41.loading = false;
 
-                _this33.userService.shortToast(res['msg']);
+                _this41.userService.shortToast(res['msg']);
 
-                _this33.closeModal();
+                _this41.closeModal();
               }, function (err) {
-                _this33.loading = false;
+                _this41.loading = false;
 
-                _this33.userService.longToast(err.error.msg);
+                _this41.userService.longToast(err.error.msg);
               });
             } else {
               this.userService.longToast('balance is to low!');
@@ -6078,31 +6416,31 @@
         _createClass(WebVotingComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this34 = this;
+            var _this42 = this;
 
             this.loading = true;
             this.activateRoute.queryParams.subscribe(function (params) {
-              _this34.contestanId = _this34.activateRoute.snapshot.params['id'];
+              _this42.contestanId = _this42.activateRoute.snapshot.params['id'];
 
-              if (_this34.contestanId) {
+              if (_this42.contestanId) {
                 var data = {
-                  id: _this34.contestanId
+                  id: _this42.contestanId
                 };
 
-                _this34.userService.getContestantById(data).subscribe(function (contestant) {
+                _this42.userService.getContestantById(data).subscribe(function (contestant) {
                   console.log(contestant);
-                  _this34.loading = false;
-                  _this34.properties.contestant_id = contestant['contestant']._id;
-                  _this34.properties.event_id = contestant['contestant'].event_id;
-                  _this34.properties.fullname = contestant['contestant'].fullname;
-                  _this34.properties.image_url = contestant['contestant'].image_url;
-                  _this34.properties.my_code = contestant['contestant'].my_code;
-                  _this34.properties.nickname = contestant['contestant'].nickname;
-                  _this34.properties.cost = contestant['cost_per_vote'];
+                  _this42.loading = false;
+                  _this42.properties.contestant_id = contestant['contestant']._id;
+                  _this42.properties.event_id = contestant['contestant'].event_id;
+                  _this42.properties.fullname = contestant['contestant'].fullname;
+                  _this42.properties.image_url = contestant['contestant'].image_url;
+                  _this42.properties.my_code = contestant['contestant'].my_code;
+                  _this42.properties.nickname = contestant['contestant'].nickname;
+                  _this42.properties.cost = contestant['cost_per_vote'];
                 }, function (err) {
-                  _this34.loading = false;
+                  _this42.loading = false;
 
-                  _this34.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again');
+                  _this42.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again');
 
                   console.log(err);
                 });
@@ -6637,63 +6975,28 @@
         _createClass(LogicService, [{
           key: "presentSucess",
           value: function presentSucess(header, msg, psitiveBtbText) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee24() {
-              var resolveFunction, promise, toast;
-              return regeneratorRuntime.wrap(function _callee24$(_context24) {
-                while (1) {
-                  switch (_context24.prev = _context24.next) {
-                    case 0:
-                      promise = new Promise(function (resolve) {
-                        resolveFunction = resolve;
-                      });
-                      _context24.next = 3;
-                      return this.toastController.create({
-                        header: "".concat(header),
-                        message: "".concat(msg),
-                        position: 'bottom',
-                        duration: 3000,
-                        buttons: [{
-                          text: "".concat(psitiveBtbText),
-                          side: 'start',
-                          icon: 'flash',
-                          handler: function handler() {
-                            return resolveFunction(true);
-                          }
-                        }]
-                      });
-
-                    case 3:
-                      toast = _context24.sent;
-                      toast.present();
-
-                    case 5:
-                    case "end":
-                      return _context24.stop();
-                  }
-                }
-              }, _callee24, this);
-            }));
-          }
-        }, {
-          key: "presentToast",
-          value: function presentToast(msg) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee25() {
-              var toast;
+              var resolveFunction, promise, toast;
               return regeneratorRuntime.wrap(function _callee25$(_context25) {
                 while (1) {
                   switch (_context25.prev = _context25.next) {
                     case 0:
-                      _context25.next = 2;
+                      promise = new Promise(function (resolve) {
+                        resolveFunction = resolve;
+                      });
+                      _context25.next = 3;
                       return this.toastController.create({
-                        message: msg,
-                        duration: 2000
+                        header: "".concat(header),
+                        message: "".concat(msg),
+                        position: 'bottom',
+                        duration: 3000
                       });
 
-                    case 2:
+                    case 3:
                       toast = _context25.sent;
                       toast.present();
 
-                    case 4:
+                    case 5:
                     case "end":
                       return _context25.stop();
                   }
@@ -6702,18 +7005,45 @@
             }));
           }
         }, {
-          key: "alertDialog",
-          value: function alertDialog(head, msg) {
+          key: "presentToast",
+          value: function presentToast(msg) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee26() {
-              var resolveFunction, promise, alert;
+              var toast;
               return regeneratorRuntime.wrap(function _callee26$(_context26) {
                 while (1) {
                   switch (_context26.prev = _context26.next) {
                     case 0:
+                      _context26.next = 2;
+                      return this.toastController.create({
+                        message: msg,
+                        duration: 2000
+                      });
+
+                    case 2:
+                      toast = _context26.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context26.stop();
+                  }
+                }
+              }, _callee26, this);
+            }));
+          }
+        }, {
+          key: "alertDialog",
+          value: function alertDialog(head, msg) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee27() {
+              var resolveFunction, promise, alert;
+              return regeneratorRuntime.wrap(function _callee27$(_context27) {
+                while (1) {
+                  switch (_context27.prev = _context27.next) {
+                    case 0:
                       promise = new Promise(function (resolve) {
                         resolveFunction = resolve;
                       });
-                      _context26.next = 3;
+                      _context27.next = 3;
                       return this.alertController.create({
                         header: head,
                         message: msg,
@@ -6729,31 +7059,31 @@
                       });
 
                     case 3:
-                      alert = _context26.sent;
-                      _context26.next = 6;
+                      alert = _context27.sent;
+                      _context27.next = 6;
                       return alert.present();
 
                     case 6:
-                      return _context26.abrupt("return", promise);
+                      return _context27.abrupt("return", promise);
 
                     case 7:
                     case "end":
-                      return _context26.stop();
+                      return _context27.stop();
                   }
                 }
-              }, _callee26, this);
+              }, _callee27, this);
             }));
           }
         }, {
           key: "presentAlert",
           value: function presentAlert(header, message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee27() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee28() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee27$(_context27) {
+              return regeneratorRuntime.wrap(function _callee28$(_context28) {
                 while (1) {
-                  switch (_context27.prev = _context27.next) {
+                  switch (_context28.prev = _context28.next) {
                     case 0:
-                      _context27.next = 2;
+                      _context28.next = 2;
                       return this.alertController.create({
                         header: "".concat(header),
                         message: "".concat(message),
@@ -6766,16 +7096,16 @@
                       });
 
                     case 2:
-                      alert = _context27.sent;
-                      _context27.next = 5;
+                      alert = _context28.sent;
+                      _context28.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context27.stop();
+                      return _context28.stop();
                   }
                 }
-              }, _callee27, this);
+              }, _callee28, this);
             }));
           }
         }]);
@@ -6846,14 +7176,21 @@
       var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! @angular/router */
       "./node_modules/@angular/router/fesm2015/router.js");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! rxjs */
+      "./node_modules/rxjs/_esm2015/index.js");
 
       var AccountService = /*#__PURE__*/function () {
         function AccountService(http, router) {
           _classCallCheck(this, AccountService);
 
           this.http = http;
-          this.router = router;
-          this.accountBalance = null;
+          this.router = router; // public accountBalance = null;
+
+          this.accountSubject = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](0);
           this.noAuthHeader = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({
               NoAuth: "True"
@@ -6867,25 +7204,35 @@
         _createClass(AccountService, [{
           key: "loadMyBalance",
           value: function loadMyBalance() {
-            var _this35 = this;
+            var _this43 = this;
 
             console.log("GETTING BALANCE");
             this.getLeaderGameSection();
             this.appUser = localStorage.getItem("appUser");
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-account-balance").subscribe(function (value) {
-              _this35.accountBalance = value["balance"];
+              _this43.setAccountBalance(value["balance"]);
 
-              _this35.getLeaderboard();
+              console.log('NEW Balance ', _this43.accountSubject.getValue());
 
-              _this35.user_id = localStorage.getItem("user_id");
-              _this35.appUsername = localStorage.getItem("appUser");
+              _this43.getLeaderboard();
+
+              _this43.user_id = localStorage.getItem("user_id");
+              _this43.appUsername = localStorage.getItem("appUser");
             });
+          }
+        }, {
+          key: "setAccountBalance",
+          value: function setAccountBalance(balance) {
+            this.accountSubject.next(balance);
+          }
+        }, {
+          key: "getAccountBalance",
+          value: function getAccountBalance() {
+            return this.accountSubject;
           }
         }, {
           key: "getLeaderboard",
           value: function getLeaderboard() {
-            // this.getLeaderGameSection();
-            // tslint:disable-next-line: align
             return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-leaderboard");
           }
         }, {
@@ -6906,10 +7253,10 @@
         }, {
           key: "getLeaderGameSection",
           value: function getLeaderGameSection() {
-            var _this36 = this;
+            var _this44 = this;
 
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-leaderboard-game-section").subscribe(function (value) {
-              _this36.leaderboardGameSection$ = value["document"];
+              _this44.leaderboardGameSection$ = value["document"];
             });
           }
         }, {
@@ -7230,6 +7577,11 @@
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/save-purched-ticket', ticket);
           }
         }, {
+          key: "findMyTicket",
+          value: function findMyTicket(eventId, email) {
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/find-my-ticket/' + eventId + "/" + email);
+          }
+        }, {
           key: "submitEvent",
           value: function submitEvent(event) {
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/submit-event', event);
@@ -7283,6 +7635,21 @@
           key: "getTicketByEventId",
           value: function getTicketByEventId(id) {
             return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/get-ticket-by-event-id/' + id);
+          }
+        }, {
+          key: "shareTicket",
+          value: function shareTicket(newTicketData) {
+            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/share-my-ticket', newTicketData);
+          }
+        }, {
+          key: "getTicketById",
+          value: function getTicketById(id) {
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/get-ticket-by-id/' + id);
+          }
+        }, {
+          key: "confirmTicketId",
+          value: function confirmTicketId(id) {
+            return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/confirm-ticket/' + id);
           }
         }]);
 
@@ -7391,21 +7758,21 @@
         _createClass(GameServiceService, [{
           key: "getAdminDate",
           value: function getAdminDate() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee28() {
-              var _this37 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee29() {
+              var _this45 = this;
 
-              return regeneratorRuntime.wrap(function _callee28$(_context28) {
+              return regeneratorRuntime.wrap(function _callee29$(_context29) {
                 while (1) {
-                  switch (_context28.prev = _context28.next) {
+                  switch (_context29.prev = _context29.next) {
                     case 0:
                       clearInterval(this.gameTime);
                       this.loading = true;
                       this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/get-admin-date').subscribe(function (res) {
-                        _this37.loading = false;
-                        _this37.applicationDate = res['doc']['appdate'];
-                        _this37.serverVersion = res['version']; //  console.log(this.serverVersion);
+                        _this45.loading = false;
+                        _this45.applicationDate = res['doc']['appdate'];
+                        _this45.serverVersion = res['version']; //  console.log(this.serverVersion);
 
-                        _this37.gameTimer(); //  setTimeout(()=> {
+                        _this45.gameTimer(); //  setTimeout(()=> {
                         //    if(this.serverVersion > environment.versionCode){
                         //       this.presentUpdate();
                         //    }
@@ -7415,22 +7782,22 @@
 
                     case 3:
                     case "end":
-                      return _context28.stop();
+                      return _context29.stop();
                   }
                 }
-              }, _callee28, this);
+              }, _callee29, this);
             }));
           }
         }, {
           key: "gameTimer",
           value: function gameTimer() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee29() {
-              var _this38 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee30() {
+              var _this46 = this;
 
               var fake_date, appDATE, deadline;
-              return regeneratorRuntime.wrap(function _callee29$(_context29) {
+              return regeneratorRuntime.wrap(function _callee30$(_context30) {
                 while (1) {
-                  switch (_context29.prev = _context29.next) {
+                  switch (_context30.prev = _context30.next) {
                     case 0:
                       fake_date = 'aug 29,2020 12:10:00';
                       appDATE = this.applicationDate;
@@ -7438,19 +7805,19 @@
                       this.gameTime = setInterval(function () {
                         var now = new Date().getTime();
                         var t = deadline - now;
-                        _this38.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
-                        _this38.timeHours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)).toString();
-                        _this38.timeMinute = Math.floor(t % (1000 * 60 * 60) / (1000 * 60)).toString();
-                        _this38.timeSeconds = Math.floor(t % (1000 * 60) / 1000).toString();
+                        _this46.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
+                        _this46.timeHours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)).toString();
+                        _this46.timeMinute = Math.floor(t % (1000 * 60 * 60) / (1000 * 60)).toString();
+                        _this46.timeSeconds = Math.floor(t % (1000 * 60) / 1000).toString();
 
                         if (t < 0) {
                           console.log('GAME IS LIVE....');
                           localStorage.setItem('GAMELIVE', 'true');
-                          clearInterval(_this38.gameTime);
-                          _this38.timeDays = '0';
-                          _this38.timeHours = '0';
-                          _this38.timeMinute = '0';
-                          _this38.timeSeconds = '0';
+                          clearInterval(_this46.gameTime);
+                          _this46.timeDays = '0';
+                          _this46.timeHours = '0';
+                          _this46.timeMinute = '0';
+                          _this46.timeSeconds = '0';
                         } else {
                           console.log('GAME NOT LIVE....');
                           localStorage.setItem('GAMELIVE', 'false');
@@ -7461,19 +7828,19 @@
 
                     case 4:
                     case "end":
-                      return _context29.stop();
+                      return _context30.stop();
                   }
                 }
-              }, _callee29, this);
+              }, _callee30, this);
             }));
           }
         }, {
           key: "getGameTip",
           value: function getGameTip() {
-            var _this39 = this;
+            var _this47 = this;
 
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/game-fun-fact-tips').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["retry"])(3)).subscribe(function (tips) {
-              _this39.gameTipArray = tips['gamestips'];
+              _this47.gameTipArray = tips['gamestips'];
             });
           }
         }, {
@@ -7484,13 +7851,13 @@
         }, {
           key: "presentToast",
           value: function presentToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee30() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee31() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee30$(_context30) {
+              return regeneratorRuntime.wrap(function _callee31$(_context31) {
                 while (1) {
-                  switch (_context30.prev = _context30.next) {
+                  switch (_context31.prev = _context31.next) {
                     case 0:
-                      _context30.next = 2;
+                      _context31.next = 2;
                       return this.toastController.create({
                         header: 'Info ',
                         message: "".concat(message),
@@ -7499,15 +7866,15 @@
                       });
 
                     case 2:
-                      toast = _context30.sent;
+                      toast = _context31.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context30.stop();
+                      return _context31.stop();
                   }
                 }
-              }, _callee30, this);
+              }, _callee31, this);
             }));
           }
         }, {
@@ -7553,13 +7920,13 @@
         }, {
           key: "presentUpdate",
           value: function presentUpdate() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee31() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee32() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee31$(_context31) {
+              return regeneratorRuntime.wrap(function _callee32$(_context32) {
                 while (1) {
-                  switch (_context31.prev = _context31.next) {
+                  switch (_context32.prev = _context32.next) {
                     case 0:
-                      _context31.next = 2;
+                      _context32.next = 2;
                       return this.alertController.create({
                         header: ' Update!',
                         cssClass: 'success',
@@ -7574,16 +7941,16 @@
                       });
 
                     case 2:
-                      alert = _context31.sent;
-                      _context31.next = 5;
+                      alert = _context32.sent;
+                      _context32.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context31.stop();
+                      return _context32.stop();
                   }
                 }
-              }, _callee31, this);
+              }, _callee32, this);
             }));
           }
         }]);
@@ -7709,34 +8076,6 @@
         _createClass(UserService, [{
           key: "shortToast",
           value: function shortToast(messages) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee32() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee32$(_context32) {
-                while (1) {
-                  switch (_context32.prev = _context32.next) {
-                    case 0:
-                      _context32.next = 2;
-                      return this.toastController.create({
-                        message: messages,
-                        position: 'middle',
-                        duration: 1000
-                      });
-
-                    case 2:
-                      toast = _context32.sent;
-                      toast.present();
-
-                    case 4:
-                    case "end":
-                      return _context32.stop();
-                  }
-                }
-              }, _callee32, this);
-            }));
-          }
-        }, {
-          key: "longToast",
-          value: function longToast(messages) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee33() {
               var toast;
               return regeneratorRuntime.wrap(function _callee33$(_context33) {
@@ -7747,7 +8086,7 @@
                       return this.toastController.create({
                         message: messages,
                         position: 'middle',
-                        duration: 3000
+                        duration: 1000
                       });
 
                     case 2:
@@ -7763,8 +8102,8 @@
             }));
           }
         }, {
-          key: "generalToast",
-          value: function generalToast(message, duration) {
+          key: "longToast",
+          value: function longToast(messages) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee34() {
               var toast;
               return regeneratorRuntime.wrap(function _callee34$(_context34) {
@@ -7773,8 +8112,9 @@
                     case 0:
                       _context34.next = 2;
                       return this.toastController.create({
-                        message: "".concat(message),
-                        duration: duration
+                        message: messages,
+                        position: 'middle',
+                        duration: 3000
                       });
 
                     case 2:
@@ -7790,15 +8130,42 @@
             }));
           }
         }, {
-          key: "generalAlert",
-          value: function generalAlert(message) {
+          key: "generalToast",
+          value: function generalToast(message, duration) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee35() {
-              var alert;
+              var toast;
               return regeneratorRuntime.wrap(function _callee35$(_context35) {
                 while (1) {
                   switch (_context35.prev = _context35.next) {
                     case 0:
                       _context35.next = 2;
+                      return this.toastController.create({
+                        message: "".concat(message),
+                        duration: duration
+                      });
+
+                    case 2:
+                      toast = _context35.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context35.stop();
+                  }
+                }
+              }, _callee35, this);
+            }));
+          }
+        }, {
+          key: "generalAlert",
+          value: function generalAlert(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee36() {
+              var alert;
+              return regeneratorRuntime.wrap(function _callee36$(_context36) {
+                while (1) {
+                  switch (_context36.prev = _context36.next) {
+                    case 0:
+                      _context36.next = 2;
                       return this.alertController.create({
                         header: 'Alert',
                         message: "".concat(message),
@@ -7806,16 +8173,16 @@
                       });
 
                     case 2:
-                      alert = _context35.sent;
-                      _context35.next = 5;
+                      alert = _context36.sent;
+                      _context36.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context35.stop();
+                      return _context36.stop();
                   }
                 }
-              }, _callee35, this);
+              }, _callee36, this);
             }));
           }
         }, {
@@ -8163,10 +8530,10 @@
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this40 = this;
+            var _this48 = this;
 
             setTimeout(function () {
-              _this40.modalController.dismiss();
+              _this48.modalController.dismiss();
             }, 30);
             this.autoSlide();
           }
@@ -8191,19 +8558,19 @@
           value: function autoSlide() {
             var _a;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee36() {
-              return regeneratorRuntime.wrap(function _callee36$(_context36) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee37() {
+              return regeneratorRuntime.wrap(function _callee37$(_context37) {
                 while (1) {
-                  switch (_context36.prev = _context36.next) {
+                  switch (_context37.prev = _context37.next) {
                     case 0:
                       (_a = this.mySlider) === null || _a === void 0 ? void 0 : _a.slideNext(3500, true);
 
                     case 1:
                     case "end":
-                      return _context36.stop();
+                      return _context37.stop();
                   }
                 }
-              }, _callee36, this);
+              }, _callee37, this);
             }));
           }
         }]);

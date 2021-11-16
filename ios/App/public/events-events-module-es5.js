@@ -185,15 +185,22 @@
       var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! @angular/core */
       "./node_modules/@angular/core/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _shared_account_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../shared/account.service */
+      "./src/app/shared/account.service.ts");
 
       var EventsPage = /*#__PURE__*/function () {
-        function EventsPage(router, gameService, eventService, userService, alertController) {
+        function EventsPage(router, gameService, eventService, userService, accountService, alertController) {
           _classCallCheck(this, EventsPage);
 
           this.router = router;
           this.gameService = gameService;
           this.eventService = eventService;
           this.userService = userService;
+          this.accountService = accountService;
           this.alertController = alertController;
           this.allEvent = [];
           this.loading = true;
@@ -310,6 +317,8 @@
           type: _shared_event_service__WEBPACK_IMPORTED_MODULE_2__["EventService"]
         }, {
           type: _shared_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]
+        }, {
+          type: _shared_account_service__WEBPACK_IMPORTED_MODULE_7__["AccountService"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"]
         }];

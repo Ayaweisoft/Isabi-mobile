@@ -91,6 +91,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_user_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../shared/user.service */ "./src/app/shared/user.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _shared_account_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/account.service */ "./src/app/shared/account.service.ts");
+
 
 
 
@@ -99,11 +101,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let EventsPage = class EventsPage {
-    constructor(router, gameService, eventService, userService, alertController) {
+    constructor(router, gameService, eventService, userService, accountService, alertController) {
         this.router = router;
         this.gameService = gameService;
         this.eventService = eventService;
         this.userService = userService;
+        this.accountService = accountService;
         this.alertController = alertController;
         this.allEvent = [];
         this.loading = true;
@@ -175,6 +178,7 @@ EventsPage.ctorParameters = () => [
     { type: _shared_game_service_service__WEBPACK_IMPORTED_MODULE_3__["GameServiceService"] },
     { type: _shared_event_service__WEBPACK_IMPORTED_MODULE_2__["EventService"] },
     { type: _shared_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"] },
+    { type: _shared_account_service__WEBPACK_IMPORTED_MODULE_7__["AccountService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"] }
 ];
 EventsPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

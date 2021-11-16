@@ -53,6 +53,7 @@ import { InsideTicketingComponent } from './components/inside-ticketing/inside-t
 import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-ticket/inside-ticket-add-ticket.component';
 import { ManageEventComponent } from './components/manage-event/manage-event.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
+import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component
     InsideTicketAddTicketComponent,
     ManageEventComponent,
     BuyTicketComponent,
+    TicketItemComponent,
      SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent,
   ],

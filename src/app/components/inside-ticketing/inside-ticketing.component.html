@@ -1,13 +1,10 @@
-
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <div class="row d-flex justify-content-center">
-      <img class="rounded-top"
-           src="assets/img/ISABI LOGO GREEN.png">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
     </div>
   </ion-toolbar>
 </ion-header>
@@ -23,26 +20,32 @@
 </ion-segment>
 
 <ion-content *ngIf="segment === 'ticket'">
+  <ion-refresher #refresherRef (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
 
-  <ion-grid *ngFor="let item of ticketList" >
+
+  <ion-grid *ngFor="let item of ticketList">
     <ion-row>
-      <ion-col sizeLg="8" sizeMd="8" sizeSm="12" >
+      <ion-col sizeLg="8" sizeMd="8" sizeSm="12">
 
         <ion-card color="light">
           <ion-item>
-            <ion-icon  *ngIf="userService.getRole() == 'ADMIN'" slot="start" name="trash" (click)="deleteTicket(item?._id)"></ion-icon>
+            <ion-icon *ngIf="userService.getRole() == 'ADMIN'" slot="start" name="trash"
+              (click)="deleteTicket(item?._id)"></ion-icon>
             <div>{{item?.purchased}} Purchased </div>
           </ion-item>
           <ion-card-header>
-          <app-image-custom-spinner [imageUrl]="item.imageUrl"></app-image-custom-spinner>
+            <app-image-custom-spinner [imageUrl]="item.imageUrl"></app-image-custom-spinner>
             <ion-card-subtitle class="text-center">{{item.ticketType}} </ion-card-subtitle>
             <ion-card-title class="text-center">{{item.amount |currency:' ₦'}} </ion-card-title>
           </ion-card-header>
-         <div class="ion-text-center">
-          <ion-button color="success" (click)="buyNow(item)" >
-            Buy Now
-          </ion-button>
-         </div>
+          <div class="ion-text-center">
+            <ion-button color="success" (click)="buyNow(item)">
+              Buy Now
+            </ion-button>
+          </div>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -50,11 +53,7 @@
 
 
 
-  <ion-fab *ngIf="userService.getRole() == 'ADMIN'"
-           (click)="addTicket()"
-           vertical="top"
-           horizontal="end"
-           slot="fixed">
+  <ion-fab *ngIf="userService.getRole() == 'ADMIN'" (click)="addTicket()" vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
@@ -62,41 +61,67 @@
 </ion-content>
 
 <ion-content *ngIf="segment === 'paid'">
+  <ion-refresher #refresherRef (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+
 
   <ion-list>
-   <ion-grid fixed>
-     <ion-row>
-       <ion-col sizeLg="8" sizeSm="12" sizeMd="8"  offsetLg="2" offsetMd="2">
-        <ion-card style="border-style: double; color: rgb(5, 122, 5);" color="light" *ngFor="let ticket of myTicketList">
-          <ion-card-header>
-            <ion-card-subtitle>{{ticket.ticketType}} </ion-card-subtitle>
-            <app-image-custom-spinner [imageUrl]="ticket?.imageUrl"></app-image-custom-spinner>
-          </ion-card-header>
-          <ion-card-content>
-         <ion-row>
-           <ion-col size="6"> Status</ion-col>
-           <ion-col size="6">{{ticket.status}} </ion-col>
-         </ion-row>
-         <ion-row>
-           <ion-col size="6"> Ticket ID</ion-col>
-           <ion-col size="6">{{ticket.ticketId}} </ion-col>
-         </ion-row>
-         <ion-row>
-           <ion-col size="6"> Slot</ion-col>
-           <ion-col size="6">{{ticket.numberOfTicket}} * {{ticket.amount|currency:'₦'}} </ion-col>
-         </ion-row>
-         <ion-row>
-           <ion-col size="6"> Paid</ion-col>
-           <ion-col size="6">{{ticket.amountPaid | currency:'₦'}} </ion-col>
-         </ion-row>
-         <ion-row>
-           <ion-col size="6"> Purchased</ion-col>
-           <ion-col size="6">{{ticket.date_purchased | date:'medium'}} </ion-col>
-         </ion-row>
-          </ion-card-content>
-        </ion-card>
-       </ion-col>
-     </ion-row>
-   </ion-grid>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col sizeLg="8" sizeSm="12" sizeMd="8" offsetLg="2" offsetMd="2">
+          <ion-card style="border-style: double; color: rgb(5, 122, 5);" color="light"
+            *ngFor="let ticket of myTicketList">
+            <ion-card-header>
+              <ion-card-subtitle>{{ticket.ticketType}} </ion-card-subtitle>
+              <app-image-custom-spinner [imageUrl]="ticket?.imageUrl"></app-image-custom-spinner>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-row>
+                <ion-col size="6"> Status</ion-col>
+                <ion-col size="6">
+                  <ion-badge class="p-1" *ngIf="ticket.status ==='VALID'" color="primary">{{ticket.status}}</ion-badge>
+                  <ion-badge class="p-1" *ngIf="ticket.status ==='UNALLOTED'" color="light">{{ticket.status}}
+                  </ion-badge>
+                  <ion-badge class="p-1" *ngIf="ticket.status ==='EXPIRED'" color="danger">{{ticket.status}}</ion-badge>
+                  <ion-badge class="p-1" *ngIf="ticket.status ==='INVALID'" color="dark" color="danger">
+                    {{ticket.status}}</ion-badge>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6"> Ticket ID</ion-col>
+                <ion-col size="6">{{ticket.ticketId}} </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6"> Slot</ion-col>
+                <ion-col size="6">{{ticket.numberOfTicket}} * {{ticket.amount|currency:'₦'}} </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6"> Paid</ion-col>
+                <ion-col size="6">{{ticket.amountPaid | currency:'₦'}} </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6"> Purchased</ion-col>
+                <ion-col size="6">{{ticket.date_purchased | date:'medium'}} </ion-col>
+              </ion-row>
+              <div class="ion-text-center">
+                <ion-button *ngIf="ticket?.numberOfTicket > 1 && ticket.shared === false"
+                  (click)="presentShareTicket(ticket)">
+                  Share <i class="p-3 fas fa-share-alt "></i>
+                </ion-button>
+                <ion-button color="warning" *ngIf="ticket?.status === 'UNALLOTED' && ticket.shared === true"
+                  (click)="confirmMessage(ticket)">
+                  confirm <i class="p-3 fa fa-check "></i>
+                </ion-button>
+              </div>
+              <div *ngFor="let id of ticket?.sharedTicket">
+                <app-ticket-item [id]="id"></app-ticket-item>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
 </ion-content>

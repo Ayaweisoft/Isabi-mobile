@@ -22,6 +22,7 @@ ticketForm: FormGroup;
     public accountService: AccountService, private eventService: EventService,
     private logicService: LogicService,
     private formBuilder: FormBuilder,
+    private userservice : UserService,
     private userService: UserService) {
       this.ticketForm = this.formBuilder.group({
         eventId: new FormControl(''),
@@ -35,6 +36,7 @@ ticketForm: FormGroup;
         name: new FormControl('', [Validators.required]),
         phone: new FormControl('', [Validators.required]),
         email: new FormControl('', [Validators.required]),
+        user_id: new FormControl(''),
      
         numberOfTicket: new FormControl(0, [Validators.required]),
         amountPaid: new FormControl(0, [Validators.required]),
@@ -44,12 +46,12 @@ ticketForm: FormGroup;
   ngOnInit() {
 this.randomString(6);
 
+    this.ticketForm.get('user_id').setValue(this.userService.getAuthId());
     this.ticketForm.get('eventId').setValue(this.ticket.eventId);
     this.ticketForm.get('amount').setValue(this.ticket.amount);
     this.ticketForm.get('ticketType').setValue(this.ticket.ticketType);
     this.ticketForm.get('imageUrl').setValue(this.ticket.imageUrl);
     this.ticketForm.get('ticketDatabaseId').setValue(this.ticket._id);
-
     this.accountService.getAccountBalance().subscribe(bal =>  this.balance = bal);
   }
 
@@ -102,6 +104,7 @@ console.log('POP ', shortpass)
     console.log(newTicket);
     this.modalController.dismiss({data: newTicket});
     this.randomString(6);
+    this.logicService.presentSucess('success','ticket purchase successful ','')
     this.accountService.loadMyBalance();
   }, err => {
     console.log(err);

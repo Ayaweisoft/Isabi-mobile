@@ -3,13 +3,7 @@
 </div>
 
 <div class="img-box ion-text-center">
-  <ion-spinner *ngIf="imageLoading" name="circular"></ion-spinner>
-	<img
-		width="151px"
-		height="140px"
-		class="rounded-circle"
-		[src]="imageUrl"
-		(load)="onLoad()"
-	/>
+	<ion-spinner *ngIf="imageLoading" name="circular"></ion-spinner>
+	<img width="151px" height="140px" class="rounded" [src]="imageUrl" (load)="onLoad()" />
 
 </div>

@@ -37,6 +37,7 @@ export class AccountComponent implements OnInit, OnDestroy {
   customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: ''}
   
   customizations = { logo: 'https://flutterwave.com/images/logo-colored.svg'}
+  balance: any;
 
   constructor(private router: Router, public userService: UserService,
               public accountService: AccountService,
@@ -77,7 +78,13 @@ ngOnInit() {
   console.log('trans ref', )
   this.appUsername = localStorage.getItem('appUser');
   this.model.username = this.appUsername;
+
+  this.accountService.getAccountBalance().subscribe(bal => {
+    this.balance = bal;
+  })
 }
+
+
 ngOnDestroy() {
   // this.paymentDoneSub = '';
   this.model = {

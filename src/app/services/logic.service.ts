@@ -20,14 +20,7 @@ export class LogicService {
       message: `${msg}`,
       position: 'bottom',
       duration:3000,
-      buttons: [
-        {
-          text:`${psitiveBtbText}`,
-          side: 'start',
-          icon: 'flash',
-          handler: () => resolveFunction(true)
-        },
-      ]
+  
     });
     toast.present();
   }

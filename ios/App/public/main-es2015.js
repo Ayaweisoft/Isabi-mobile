@@ -375,7 +375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu contentId=\"main-content\"\n            type=\"overlay\">\n    <ion-header>\n      <ion-toolbar>\n        <div class=\"menu\">\n          <ion-title mode=\"md\">Menu</ion-title>\n\n          <ion-item lines=\"none\"><span class=\"mt-3 mr-2\"> Username: </span>\n            <ion-text class=\"font-weight-bold mt-3\">{{accountService.appUser}}</ion-text>\n          </ion-item>\n\n          <!-- <ion-item lines=\"none\">UserId: ({{accountService.user_id}}) </ion-item> -->\n\n          <ion-item lines=\"none\"><span class=\"mr-2\"> Balance: </span>\n            <ion-badge> ₦ {{accountService.accountBalance | number}} </ion-badge>\n            <ion-icon slot=\"end\"\n                      #bal\n                      class=\"animated\"\n                      (click)=\"reloadBalance()\"\n                      name=\"refresh\">refresh</ion-icon>\n          </ion-item>\n        </div>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list color=\"light\"\n                class=\"drawer-list\">\n        <ion-menu-toggle auto-hide=\"false\"\n                         *ngFor=\"let p of appPages\">\n          <ion-item tappable\n                    color=\"light\"\n                    [routerDirection]=\"'root'\"\n                    [routerLink]=\"[p.url]\"\n                    routerLinkActive=\"router-link-active\">\n            <ion-icon slot=\"start\"\n                      [name]=\"p.icon\"></ion-icon>\n            <ion-label>\n              {{p.title}}\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle *ngIf=\"userService.getRole() === 'MERCHANT'\"\n                         [routerLink]=\"['/merchant']\">\n          <ion-item color=\"light\">\n            <ion-icon name=\"cash\"></ion-icon>\n            <ion-label class=\"ml-4\">MERCHANT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <!-- <ion-menu-toggle (click)=\"rateYourApp()\">\n                <ion-item color=\"secondary\" >\n                <ion-icon name=\"thumbs-up\"></ion-icon>\n                <ion-label  class=\"ml-4\">RATE MY APP</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n        <!-- <ion-menu-toggle>\n                <ion-item color=\"secondary\" (click)=\"userService.logout()\" >\n                <ion-icon name=\"power\"></ion-icon>\n                <ion-label  class=\"ml-4\">LOGOUT</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n\n        <ion-item>\n          <ion-icon slot=\"start\"\n                    name=\"moon-outline\"></ion-icon>\n          <ion-label>\n            Dark Mode\n          </ion-label>\n          <ion-toggle [(ngModel)]=\"dark\"></ion-toggle>\n        </ion-item>\n\n        <ion-menu-toggle>\n          <ion-item color=\"light\"\n                    tappable\n                    (click)=\"userService.logout()\">\n            <ion-icon slot=\"start\"\n                      name=\"power\"></ion-icon>\n            <ion-label> LOGOUT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n      <ion-list color=\"light\"\n                id=\"labels-list\"\n                *ngIf=\"userService.getRole() == 'ADMIN'\">\n        <ion-list-header class=\"text-center\">Admin</ion-list-header>\n        <ion-menu-toggle>\n          <ion-item color=\"success\"\n                    color=\"light\"\n                    *ngFor=\"let label of labels\"\n                    lines=\"full\">\n            <ion-icon slot=\"start\"\n                      [name]=\"label.icon\"></ion-icon>\n            <ion-label tappable\n                       [routerLink]=\"label.url\">{{ label.title }}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n\n</ion-app>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\n  <ion-menu contentId=\"main-content\" type=\"overlay\">\n    <ion-header>\n      <ion-toolbar>\n        <div class=\"menu\">\n          <ion-title mode=\"md\">Menu</ion-title>\n\n          <ion-item lines=\"none\"><span class=\"mt-3 mr-2\"> Username: </span>\n            <ion-text class=\"font-weight-bold mt-3\">{{accountService.appUser}}</ion-text>\n          </ion-item>\n\n          <!-- <ion-item lines=\"none\">UserId: ({{accountService.user_id}}) </ion-item> -->\n\n          <ion-item lines=\"none\"><span class=\"mr-2\"> Balance: </span>\n            <ion-badge> ₦ {{balance | currency:'₦'}} </ion-badge>\n            <ion-icon slot=\"end\" #bal class=\"animated\" (click)=\"reloadBalance()\" name=\"refresh\">refresh</ion-icon>\n          </ion-item>\n        </div>\n      </ion-toolbar>\n    </ion-header>\n\n    <ion-content>\n      <ion-list color=\"light\" class=\"drawer-list\">\n        <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n          <ion-item tappable color=\"light\" [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\"\n            routerLinkActive=\"router-link-active\">\n            <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n            <ion-label>\n              {{p.title}}\n            </ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <ion-menu-toggle *ngIf=\"userService.getRole() === 'MERCHANT'\" [routerLink]=\"['/merchant']\">\n          <ion-item color=\"light\">\n            <ion-icon name=\"cash\"></ion-icon>\n            <ion-label class=\"ml-4\">MERCHANT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n        <!-- <ion-menu-toggle (click)=\"rateYourApp()\">\n                <ion-item color=\"secondary\" >\n                <ion-icon name=\"thumbs-up\"></ion-icon>\n                <ion-label  class=\"ml-4\">RATE MY APP</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n        <!-- <ion-menu-toggle>\n                <ion-item color=\"secondary\" (click)=\"userService.logout()\" >\n                <ion-icon name=\"power\"></ion-icon>\n                <ion-label  class=\"ml-4\">LOGOUT</ion-label>\n              </ion-item>\n            </ion-menu-toggle> -->\n\n        <ion-item>\n          <ion-icon slot=\"start\" name=\"moon-outline\"></ion-icon>\n          <ion-label>\n            Dark Mode\n          </ion-label>\n          <ion-toggle [(ngModel)]=\"dark\"></ion-toggle>\n        </ion-item>\n\n        <ion-menu-toggle>\n          <ion-item color=\"light\" tappable (click)=\"userService.logout()\">\n            <ion-icon slot=\"start\" name=\"power\"></ion-icon>\n            <ion-label> LOGOUT</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n      <ion-list color=\"light\" id=\"labels-list\" *ngIf=\"userService.getRole() == 'ADMIN'\">\n        <ion-list-header class=\"text-center\">Admin</ion-list-header>\n        <ion-menu-toggle>\n          <ion-item color=\"success\" color=\"light\" *ngFor=\"let label of labels\" lines=\"full\">\n            <ion-icon slot=\"start\" [name]=\"label.icon\"></ion-icon>\n            <ion-label tappable [routerLink]=\"label.url\">{{ label.title }}</ion-label>\n          </ion-item>\n        </ion-menu-toggle>\n      </ion-list>\n\n    </ion-content>\n  </ion-menu>\n  <ion-router-outlet id=\"main-content\"></ion-router-outlet>\n\n</ion-app>");
 
 /***/ }),
 
@@ -388,7 +388,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"../../../assets/icon/Logoicon.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content color=\"light\">\n\n  <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"1\"></ion-col>\n      <ion-col size=\"10\">\n        <!-- grid content -->\n\n\n\n        <script src=\"https://code.jquery.com/jquery-1.12.4.min.js\"></script>\n        <script src=\"https://js.paystack.co/v1/paystack.js\"></script>\n\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white\"> PAYMENT</ion-card-header>\n            <ion-card-content>\n              <h2 class=\"text-center m-2\">{{appUsername}}</h2>\n              <!-- <img class=\"banks\" src=\"../../../assets/img/banks.png\" alt=\"\"> -->\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/wallet_icon.png\">\n              </div>\n\n              <h3 class=\"text-center mb-5 font-weight-bold\">\n                BALANCE <ion-chip color=\"dark\" outline>\n                  <h3 class=\"m-2\"> {{accountService.accountBalance | currency:' ₦ '}}</h3>\n                </ion-chip>\n              </h3>\n\n\n              <ion-row class=\"d-flex justify-content-center\">\n                <!-- pay now -->\n                <div *ngIf=\"!showPaymentButtons\" class=\"pr-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterAmountInput()\" color=\"success\">DEPOSIT</ion-button>\n                </div>\n                <div *ngIf=\"!showPaymentButtons\" class=\" pl-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterCashoutAmount()\" color=\"success\">CASHOUT</ion-button>\n\n                </div>\n              </ion-row>\n\n              <!-- <ion-list>\n                                <ion-item *ngFor=\"let item of scheduled\">\n                                  <ion-label text-wrap>\n                                    {{item.id}} {{item.title}}\n                                    <p>Trigger : {{item.trigger | json}}</p>\n                                  </ion-label>\n                                  \n                                </ion-item>\n                              </ion-list> -->\n\n\n\n\n              <div *ngIf=\"showPaymentButtons\">\n\n\n                <ion-chip *ngIf=\"showPaymentButtons\">\n                  <h5 class=\"text-center font-weight-bold\">I want to pay ₦ {{model.amount}} </h5>\n                </ion-chip> <br>\n\n\n                <!-- *ngIf=\"model?.amount > 99\" -->\n           \n\n                <!-- break line -->\n                <hr>\n                <ion-card class=\"green darken-3\">\n                  <small class=\"text-center text-white\"> Banks transafer/ Cards / ussd</small>\n                  <ion-row>\n                    <ion-col class=\"d-flex justify-content-center\">\n               \n                      <!-- public_key=\"FLWPUBK_TEST-32c34a10b25063883487eb99f916159a-X\" [amount]='model.amount' currency='NGN' -->\n\n                          <flutterwave-make-payment  \n                          public_key=\"FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X\" [amount]='model.amount' currency='NGN'\n                          payment_options=\"card\" text=\"PAY NOW\" [customer]=\"customerDetails\" [customizations]=\"customizations\"\n                          [tx_ref]=\"reference\" (callback)=\"makePaymentCallback($event)\" (close)=\"closedPaymentModal()\">\n                          <img src=\"../../../assets/banks/visa.gif\">\n                        </flutterwave-make-payment>\n        \n                    </ion-col>\n\n           \n                  </ion-row>\n                </ion-card>\n              </div>\n            </ion-card-content>\n\n          </ion-card>\n        </div>\n\n    <ion-card color=\"light\">\n      <ion-row>\n        <ion-col size=\"12\">\n          <ion-item color=\"light\" class=\"d-flex justify-content-center p-3\">\n            <ion-label color=\"success\" position=\"floating\">promo code</ion-label>\n            <ion-input #promo type=\"text\"></ion-input>\n          </ion-item>\n          <div class=\"ion-text-center\">\n            <ion-button [disabled]=\"loading\" color=\"success\" [disabled]=\"!promo.value\"\n              (click)=\"submitProCode(promo.value)\">\n              <div *ngIf=\"!loading\">submit </div>\n              <ion-spinner *ngIf=\"loading\" name=\"crescent\"></ion-spinner>\n            </ion-button>\n          </div>\n        </ion-col>\n      </ion-row>\n    </ion-card>\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white \"> ACCOUNT</ion-card-header>\n            <ion-card-content>\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/profile_icon.png\">\n              </div>\n              <h4 color=\"success\" class=\"text-center fint-weight-bold\"> UPDATE YOUR INFORMATION</h4>\n              <ion-button color=\"success\" (click)=\"profileSection()\">UPDATE</ion-button>\n            </ion-card-content>\n          </ion-card>\n        </div>\n\n      </ion-col>\n      <ion-col size=\"1\"></ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"../../../assets/icon/Logoicon.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content color=\"light\">\n\n  <ion-grid fixed>\n    <ion-row>\n      <ion-col size=\"1\"></ion-col>\n      <ion-col size=\"10\">\n        <!-- grid content -->\n\n\n\n        <script src=\"https://code.jquery.com/jquery-1.12.4.min.js\"></script>\n        <script src=\"https://js.paystack.co/v1/paystack.js\"></script>\n\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white\"> PAYMENT</ion-card-header>\n            <ion-card-content>\n              <h2 class=\"text-center m-2\">{{appUsername}}</h2>\n              <!-- <img class=\"banks\" src=\"../../../assets/img/banks.png\" alt=\"\"> -->\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/wallet_icon.png\">\n              </div>\n\n              <h3 class=\"text-center mb-5 font-weight-bold\">\n                BALANCE <ion-chip color=\"dark\" outline>\n                  <h3 class=\"m-2\"> {{balance | currency:' ₦ '}}</h3>\n                </ion-chip>\n              </h3>\n\n\n              <ion-row class=\"d-flex justify-content-center\">\n                <!-- pay now -->\n                <div *ngIf=\"!showPaymentButtons\" class=\"pr-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterAmountInput()\" color=\"success\">DEPOSIT</ion-button>\n                </div>\n                <div *ngIf=\"!showPaymentButtons\" class=\" pl-4 row d-flex justify-content-center\">\n                  <ion-button (click)=\"enterCashoutAmount()\" color=\"success\">CASHOUT</ion-button>\n\n                </div>\n              </ion-row>\n\n              <!-- <ion-list>\n                                <ion-item *ngFor=\"let item of scheduled\">\n                                  <ion-label text-wrap>\n                                    {{item.id}} {{item.title}}\n                                    <p>Trigger : {{item.trigger | json}}</p>\n                                  </ion-label>\n                                  \n                                </ion-item>\n                              </ion-list> -->\n\n\n\n\n              <div *ngIf=\"showPaymentButtons\">\n\n\n                <ion-chip *ngIf=\"showPaymentButtons\">\n                  <h5 class=\"text-center font-weight-bold\">I want to pay ₦ {{model.amount}} </h5>\n                </ion-chip> <br>\n\n\n                <!-- *ngIf=\"model?.amount > 99\" -->\n\n\n                <!-- break line -->\n                <hr>\n                <ion-card class=\"green darken-3\">\n                  <small class=\"text-center text-white\"> Banks transafer/ Cards / ussd</small>\n                  <ion-row>\n                    <ion-col class=\"d-flex justify-content-center\">\n\n                      <!-- public_key=\"FLWPUBK_TEST-32c34a10b25063883487eb99f916159a-X\" [amount]='model.amount' currency='NGN' -->\n\n                      <flutterwave-make-payment public_key=\"FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X\"\n                        [amount]='model.amount' currency='NGN' payment_options=\"card\" text=\"PAY NOW\"\n                        [customer]=\"customerDetails\" [customizations]=\"customizations\" [tx_ref]=\"reference\"\n                        (callback)=\"makePaymentCallback($event)\" (close)=\"closedPaymentModal()\">\n                        <img src=\"../../../assets/banks/visa.gif\">\n                      </flutterwave-make-payment>\n\n                    </ion-col>\n\n\n                  </ion-row>\n                </ion-card>\n              </div>\n            </ion-card-content>\n\n          </ion-card>\n        </div>\n\n        <ion-card color=\"light\">\n          <ion-row>\n            <ion-col size=\"12\">\n              <ion-item color=\"light\" class=\"d-flex justify-content-center p-3\">\n                <ion-label color=\"success\" position=\"floating\">promo code</ion-label>\n                <ion-input #promo type=\"text\"></ion-input>\n              </ion-item>\n              <div class=\"ion-text-center\">\n                <ion-button [disabled]=\"loading\" color=\"success\" [disabled]=\"!promo.value\"\n                  (click)=\"submitProCode(promo.value)\">\n                  <div *ngIf=\"!loading\">submit </div>\n                  <ion-spinner *ngIf=\"loading\" name=\"crescent\"></ion-spinner>\n                </ion-button>\n              </div>\n            </ion-col>\n          </ion-row>\n        </ion-card>\n\n        <div>\n          <ion-card class=\"text-center\">\n            <ion-card-header color=\"success\" class=\"font-weight-bold text-white \"> ACCOUNT</ion-card-header>\n            <ion-card-content>\n              <div class=\"col p-5 d-flex justify-content-center\">\n                <img class=\"wallet\" src=\"assets/icon/profile_icon.png\">\n              </div>\n              <h4 color=\"success\" class=\"text-center fint-weight-bold\"> UPDATE YOUR INFORMATION</h4>\n              <ion-button color=\"success\" (click)=\"profileSection()\">UPDATE</ion-button>\n            </ion-card-content>\n          </ion-card>\n        </div>\n\n      </ion-col>\n      <ion-col size=\"1\"></ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n</ion-content>");
 
 /***/ }),
 
@@ -414,7 +414,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button >\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card>\n  <ion-card-title>{{ticket.ticketType}} </ion-card-title>\n\n\n<ion-card-content>\n<div class=\"ion-text-center\">\n  <img class=\"image\" width=\"350\" height=\"250\"  [src]=\"ticket.imageUrl\">\n</div>\n<ion-chip class=\"ion-text-bold\" color=\"light\">{{ticket.amount |currency}} </ion-chip>\n\n<div class=\"ion-text-center\">enter value</div>\n<ion-row>\n  <ion-col >\n   <ion-button color=\"light\" size=\"small\" (click)=\"remove()\"> <ion-icon name=\"remove\"></ion-icon></ion-button>\n  </ion-col>\n  <ion-col>\n   <ion-item color=\"light\">\n    <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"data.quantity\"></ion-input>\n   </ion-item>\n  </ion-col>\n  <ion-col>\n    <ion-button color=\"light\" size=\"small\" (click)=\"add()\"><ion-icon name=\"add\"></ion-icon></ion-button>\n\n  </ion-col>\n</ion-row>\n<div class=\"ion-text-center\">\n  <div>{{ticket.amount * data.quantity | currency:'₦'}} </div>\n</div>\n\n<form [formGroup]=\"ticketForm\" (ngSubmit)=\"finalize()\"\n(keyup.enter)=\"ticketForm.valid && finalize()\">\n\n<ion-list>\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>email </ion-label>\n    <ion-input type=\"email\" formControlName=\"email\"\n     placeholder=\"example@mail.com\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>name </ion-label>\n    <ion-input type=\"text\" formControlName=\"name\"\n    placeholder=\"joe don\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>phone </ion-label>\n    <ion-input type=\"tel\" formControlName=\"phone\"></ion-input>\n  </ion-item>\n</ion-list>\n\n</form>\n<!-- <p class=\"font-weight-bold text-center\">\n   {{properties.purchase * properties.cost | currency:'₦'}} </p> -->\n   <!-- [disabled]=\"data.positive < 1\" -->\n   <div class=\"ion-text-center\">\n<ion-button  (click)=\"finalize()\" color=\"light\" >finalize</ion-button>\n   </div>\n</ion-card-content>\n</ion-card>\n  </ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button >\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card>\n  <ion-card-title>{{ticket.ticketType}} </ion-card-title>\n\n\n<ion-card-content>\n<div class=\"ion-text-center\">\n  <img class=\"image\" width=\"350\" height=\"250\"  [src]=\"ticket.imageUrl\">\n</div>\n<ion-chip class=\"ion-text-bold\" color=\"light\">{{ticket.amount |currency}} </ion-chip>\n\n<div class=\"ion-text-center\">enter value</div>\n<ion-row>\n  <ion-col >\n   <ion-button color=\"success\" size=\"small\" (click)=\"remove()\"> <ion-icon name=\"remove\"></ion-icon></ion-button>\n  </ion-col>\n  <ion-col>\n   <ion-item color=\"light\">\n    <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"data.quantity\"></ion-input>\n   </ion-item>\n  </ion-col>\n  <ion-col>\n    <ion-button color=\"success\" size=\"small\" (click)=\"add()\"><ion-icon name=\"add\"></ion-icon></ion-button>\n\n  </ion-col>\n</ion-row>\n<div class=\"ion-text-center\">\n  <div>{{ticket.amount * data.quantity | currency:'₦'}} </div>\n</div>\n\n<form [formGroup]=\"ticketForm\" (ngSubmit)=\"finalize()\"\n(keyup.enter)=\"ticketForm.valid && finalize()\">\n\n<ion-list>\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>email </ion-label>\n    <ion-input type=\"email\" formControlName=\"email\"\n     placeholder=\"example@mail.com\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>name </ion-label>\n    <ion-input type=\"text\" formControlName=\"name\"\n    placeholder=\"joe don\"></ion-input>\n  </ion-item>\n\n  <ion-item>\n    <ion-label position=\"floating\"> <small class=\"text-danger\">*</small>phone </ion-label>\n    <ion-input type=\"tel\" formControlName=\"phone\"></ion-input>\n  </ion-item>\n</ion-list>\n\n\n\n</form>\n<!-- <p class=\"font-weight-bold text-center\">\n   {{properties.purchase * properties.cost | currency:'₦'}} </p> -->\n   <!-- [disabled]=\"data.positive < 1\" -->\n   <div class=\"ion-text-center\">\n<ion-button [disabled]=\"!ticketForm.valid \" (click)=\"finalize()\" color=\"success\" >finalize</ion-button>\n   </div>\n</ion-card-content>\n</ion-card>\n  </ion-content>");
 
 /***/ }),
 
@@ -492,7 +492,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"ion-text-center\">\n\n</div>\n\n<div class=\"img-box ion-text-center\">\n  <ion-spinner *ngIf=\"imageLoading\" name=\"circular\"></ion-spinner>\n\t<img\n\t\twidth=\"151px\"\n\t\theight=\"140px\"\n\t\tclass=\"rounded-circle\"\n\t\t[src]=\"imageUrl\"\n\t\t(load)=\"onLoad()\"\n\t/>\n\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"ion-text-center\">\n\n</div>\n\n<div class=\"img-box ion-text-center\">\n\t<ion-spinner *ngIf=\"imageLoading\" name=\"circular\"></ion-spinner>\n\t<img width=\"151px\" height=\"140px\" class=\"rounded\" [src]=\"imageUrl\" (load)=\"onLoad()\" />\n\n</div>");
 
 /***/ }),
 
@@ -544,7 +544,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n\n<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"\n           src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n<!-- Segment with anchors -->\n<ion-segment (ionChange)=\"segmentChanged($event)\" [value]=\"segment\">\n  <ion-segment-button value=\"ticket\">\n    <ion-icon slot=\"start\" name=\"list\"></ion-icon>\n    <ion-label>Ticket</ion-label>\n  </ion-segment-button>\n  <ion-segment-button value=\"paid\">\n    <ion-label>Paid</ion-label>\n  </ion-segment-button>\n</ion-segment>\n\n<ion-content *ngIf=\"segment === 'ticket'\">\n\n  <ion-grid *ngFor=\"let item of ticketList\" >\n    <ion-row>\n      <ion-col sizeLg=\"8\" sizeMd=\"8\" sizeSm=\"12\" >\n\n        <ion-card color=\"light\">\n          <ion-item>\n            <ion-icon  *ngIf=\"userService.getRole() == 'ADMIN'\" slot=\"start\" name=\"trash\" (click)=\"deleteTicket(item?._id)\"></ion-icon>\n            <div>{{item?.purchased}} Purchased </div>\n          </ion-item>\n          <ion-card-header>\n          <app-image-custom-spinner [imageUrl]=\"item.imageUrl\"></app-image-custom-spinner>\n            <ion-card-subtitle class=\"text-center\">{{item.ticketType}} </ion-card-subtitle>\n            <ion-card-title class=\"text-center\">{{item.amount |currency:' ₦'}} </ion-card-title>\n          </ion-card-header>\n         <div class=\"ion-text-center\">\n          <ion-button color=\"secondary\" (click)=\"buyNow(item)\" fill=\"clear\">\n            Buy Now\n          </ion-button>\n         </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n  <ion-fab *ngIf=\"userService.getRole() == 'ADMIN'\"\n           (click)=\"addTicket()\"\n           vertical=\"top\"\n           horizontal=\"end\"\n           slot=\"fixed\">\n    <ion-fab-button color=\"success\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n\n<ion-content *ngIf=\"segment === 'paid'\">\n\n  paid\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n<!-- Segment with anchors -->\n<ion-segment (ionChange)=\"segmentChanged($event)\" [value]=\"segment\">\n  <ion-segment-button value=\"ticket\">\n    <ion-icon slot=\"start\" name=\"list\"></ion-icon>\n    <ion-label>Ticket</ion-label>\n  </ion-segment-button>\n  <ion-segment-button value=\"paid\">\n    <ion-label>Paid</ion-label>\n  </ion-segment-button>\n</ion-segment>\n\n<ion-content *ngIf=\"segment === 'ticket'\">\n  <ion-refresher #refresherRef (ionRefresh)=\"doRefresh($event)\" slot=\"fixed\">\n    <ion-refresher-content>\n    </ion-refresher-content>\n  </ion-refresher>\n\n\n  <ion-grid *ngFor=\"let item of ticketList\">\n    <ion-row>\n      <ion-col sizeLg=\"8\" sizeMd=\"8\" sizeSm=\"12\">\n\n        <ion-card color=\"light\">\n          <ion-item>\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\" slot=\"start\" name=\"trash\"\n              (click)=\"deleteTicket(item?._id)\"></ion-icon>\n            <div>{{item?.purchased}} Purchased </div>\n          </ion-item>\n          <ion-card-header>\n            <app-image-custom-spinner [imageUrl]=\"item.imageUrl\"></app-image-custom-spinner>\n            <ion-card-subtitle class=\"text-center\">{{item.ticketType}} </ion-card-subtitle>\n            <ion-card-title class=\"text-center\">{{item.amount |currency:' ₦'}} </ion-card-title>\n          </ion-card-header>\n          <div class=\"ion-text-center\">\n            <ion-button color=\"success\" (click)=\"buyNow(item)\">\n              Buy Now\n            </ion-button>\n          </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n\n\n  <ion-fab *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"addTicket()\" vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n</ion-content>\n\n<ion-content *ngIf=\"segment === 'paid'\">\n  <ion-refresher #refresherRef (ionRefresh)=\"doRefresh($event)\" slot=\"fixed\">\n    <ion-refresher-content>\n    </ion-refresher-content>\n  </ion-refresher>\n\n\n  <ion-list>\n    <ion-grid fixed>\n      <ion-row>\n        <ion-col sizeLg=\"8\" sizeSm=\"12\" sizeMd=\"8\" offsetLg=\"2\" offsetMd=\"2\">\n          <ion-card style=\"border-style: double; color: rgb(5, 122, 5);\" color=\"light\"\n            *ngFor=\"let ticket of myTicketList\">\n            <ion-card-header>\n              <ion-card-subtitle>{{ticket.ticketType}} </ion-card-subtitle>\n              <app-image-custom-spinner [imageUrl]=\"ticket?.imageUrl\"></app-image-custom-spinner>\n            </ion-card-header>\n            <ion-card-content>\n              <ion-row>\n                <ion-col size=\"6\"> Status</ion-col>\n                <ion-col size=\"6\">\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='VALID'\" color=\"primary\">{{ticket.status}}</ion-badge>\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='UNALLOTED'\" color=\"light\">{{ticket.status}}\n                  </ion-badge>\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='EXPIRED'\" color=\"danger\">{{ticket.status}}</ion-badge>\n                  <ion-badge class=\"p-1\" *ngIf=\"ticket.status ==='INVALID'\" color=\"dark\" color=\"danger\">\n                    {{ticket.status}}</ion-badge>\n                </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Ticket ID</ion-col>\n                <ion-col size=\"6\">{{ticket.ticketId}} </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Slot</ion-col>\n                <ion-col size=\"6\">{{ticket.numberOfTicket}} * {{ticket.amount|currency:'₦'}} </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Paid</ion-col>\n                <ion-col size=\"6\">{{ticket.amountPaid | currency:'₦'}} </ion-col>\n              </ion-row>\n              <ion-row>\n                <ion-col size=\"6\"> Purchased</ion-col>\n                <ion-col size=\"6\">{{ticket.date_purchased | date:'medium'}} </ion-col>\n              </ion-row>\n              <div class=\"ion-text-center\">\n                <ion-button *ngIf=\"ticket?.numberOfTicket > 1 && ticket.shared === false\"\n                  (click)=\"presentShareTicket(ticket)\">\n                  Share <i class=\"p-3 fas fa-share-alt \"></i>\n                </ion-button>\n                <ion-button color=\"warning\" *ngIf=\"ticket?.status === 'UNALLOTED' && ticket.shared === true\"\n                  (click)=\"confirmMessage(ticket)\">\n                  confirm <i class=\"p-3 fa fa-check \"></i>\n                </ion-button>\n              </div>\n              <div *ngFor=\"let id of ticket?.sharedTicket\">\n                <app-ticket-item [id]=\"id\"></app-ticket-item>\n              </div>\n            </ion-card-content>\n          </ion-card>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n  </ion-list>\n</ion-content>");
 
 /***/ }),
 
@@ -587,6 +587,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ticket-item/ticket-item.component.html":
+/*!*********************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/ticket-item/ticket-item.component.html ***!
+  \*********************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-row>\n  <ion-col size=\"6\">\n    <small class=\"flow\">{{ticket?.email}} </small>\n  </ion-col>\n  <ion-col size=\"1\">\n    <small>\n      <ion-badge color=\"primary\">{{ticket?.numberOfTicket}}</ion-badge>\n    </small>\n  </ion-col>\n  <ion-col size=\"4\">\n    <small *ngIf=\"ticket?.status ==='UNALLOTED'\" class=\"bg-dark p-2 text-light\">{{ticket?.status}} </small>\n    <small *ngIf=\"ticket?.status ==='VALID'\" class=\"bg-dark p-2 text-success\">{{ticket?.status}} </small>\n    <small *ngIf=\"ticket?.status ==='USED'\" class=\"bg-dark p-2 text-warning\">{{ticket?.status}} </small>\n    <small *ngIf=\"ticket?.status ==='EXPIRED'\" class=\"bg-dark p-2 text-danger\">{{ticket?.status}} </small>\n  </ion-col>\n\n</ion-row>");
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/vote-now/vote-now.component.html":
 /*!***************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/vote-now/vote-now.component.html ***!
@@ -596,7 +609,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button >\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card color=\"success\" class=\"ion-padding ion-margin-top ion-text-center\">\n    <ion-card-subtitle> cost per vote is {{properties.cost | currency:'₦'}} </ion-card-subtitle>\n    <ion-card-subtitle> Balance {{accountService.accountBalance | currency:'₦'}} </ion-card-subtitle>\n\n    <ion-row>\n      <ion-col>\n    <ion-card-title>00{{properties.my_code}} </ion-card-title>\n      </ion-col>\n      <ion-col>\n    <ion-card-title>{{properties.nickname}} </ion-card-title>\n      </ion-col>\n    </ion-row>\n    <ion-card-content>\n      <div>\n        <img class=\"image\" width=\"250\" height=\"250\"  [src]=\"properties.image_url\">\n      </div>\n    <ion-chip class=\"ion-text-bold\" color=\"light\">{{properties.fullname}} </ion-chip>\n\n      <div>enter value</div>\n      <ion-row>\n        <ion-col>\n         <ion-button color=\"light\" size=\"small\" (click)=\"remove()\"> <ion-icon name=\"remove\"></ion-icon></ion-button>\n        </ion-col>\n        <ion-col>\n         <ion-item color=\"light\">\n          <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"properties.purchase\"></ion-input>\n         </ion-item>\n        </ion-col>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"add()\"><ion-icon name=\"add\"></ion-icon></ion-button>\n\n        </ion-col>\n      </ion-row>\n      <p class=\"font-weight-bold text-center\">\n         {{properties.purchase * properties.cost | currency:'₦'}} </p>\n      <ion-button [disabled]=\"properties.purchase < 1\" (click)=\"finalize()\" color=\"light\"[disabled]=\"\" >finalize</ion-button>\n    </ion-card-content>\n  </ion-card>\n\n\n    <!-- loader -->\n    <div *ngIf=\"loading\" class=\" \">\n      <div class=\"toast-container \">\n        <div class=\"lds-roller\">\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n          <div></div>\n        </div>\n      </div>\n    </div>\n\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button>\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card color=\"success\" class=\"ion-padding ion-margin-top ion-text-center\">\n    <ion-card-subtitle> cost per vote is {{properties.cost | currency:'₦'}} </ion-card-subtitle>\n    <ion-card-subtitle> Balance {{balance | currency:'₦'}} </ion-card-subtitle>\n\n    <ion-row>\n      <ion-col>\n        <ion-card-title>00{{properties.my_code}} </ion-card-title>\n      </ion-col>\n      <ion-col>\n        <ion-card-title>{{properties.nickname}} </ion-card-title>\n      </ion-col>\n    </ion-row>\n    <ion-card-content>\n      <div>\n        <img class=\"image\" width=\"250\" height=\"250\" [src]=\"properties.image_url\">\n      </div>\n      <ion-chip class=\"ion-text-bold\" color=\"light\">{{properties.fullname}} </ion-chip>\n\n      <div>enter value</div>\n      <ion-row>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"remove()\">\n            <ion-icon name=\"remove\"></ion-icon>\n          </ion-button>\n        </ion-col>\n        <ion-col>\n          <ion-item color=\"light\">\n            <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"properties.purchase\"></ion-input>\n          </ion-item>\n        </ion-col>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"add()\">\n            <ion-icon name=\"add\"></ion-icon>\n          </ion-button>\n\n        </ion-col>\n      </ion-row>\n      <p class=\"font-weight-bold text-center\">\n        {{properties.purchase * properties.cost | currency:'₦'}} </p>\n      <ion-button [disabled]=\"properties.purchase < 1\" (click)=\"finalize()\" color=\"light\" [disabled]=\"\">finalize\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n\n</ion-content>");
 
 /***/ }),
 
@@ -1015,6 +1028,8 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => {
             // Okay, so the platform is ready and our plugins are available.
             // Here you can do any higher level native things you might need.
+            this.accountService.getAccountBalance().subscribe(bal => this.balance = bal);
+            this.reloadBalance();
             // this.localNotifications.on('trigger').subscribe( res => {
             //   console.log('alert Trigger 2', res );
             //   let msg = res.data ? res.data.mydata : '';
@@ -1127,6 +1142,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./components/inside-ticket-add-ticket/inside-ticket-add-ticket.component */ "./src/app/components/inside-ticket-add-ticket/inside-ticket-add-ticket.component.ts");
 /* harmony import */ var _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./components/manage-event/manage-event.component */ "./src/app/components/manage-event/manage-event.component.ts");
 /* harmony import */ var _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/buy-ticket/buy-ticket.component */ "./src/app/components/buy-ticket/buy-ticket.component.ts");
+/* harmony import */ var _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/ticket-item/ticket-item.component */ "./src/app/components/ticket-item/ticket-item.component.ts");
 
 
 
@@ -1178,6 +1194,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AppModule = class AppModule {
 };
 AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -1191,6 +1208,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"],
             _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"],
             _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"],
+            _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"],
             _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
         entryComponents: [_components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"],
         ],
@@ -1507,6 +1525,9 @@ let AccountComponent = class AccountComponent {
         console.log('trans ref');
         this.appUsername = localStorage.getItem('appUser');
         this.model.username = this.appUsername;
+        this.accountService.getAccountBalance().subscribe(bal => {
+            this.balance = bal;
+        });
     }
     ngOnDestroy() {
         // this.paymentDoneSub = '';
@@ -1970,9 +1991,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
-/* harmony import */ var src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/shared/account.service */ "./src/app/shared/account.service.ts");
-/* harmony import */ var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/event.service */ "./src/app/shared/event.service.ts");
-/* harmony import */ var src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/user.service */ "./src/app/shared/user.service.ts");
+/* harmony import */ var src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/logic.service */ "./src/app/services/logic.service.ts");
+/* harmony import */ var src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/account.service */ "./src/app/shared/account.service.ts");
+/* harmony import */ var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/event.service */ "./src/app/shared/event.service.ts");
+/* harmony import */ var src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/shared/user.service */ "./src/app/shared/user.service.ts");
+
 
 
 
@@ -1981,35 +2004,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let BuyTicketComponent = class BuyTicketComponent {
-    constructor(modalController, navParams, accountService, eventService, formBuilder, userService) {
+    constructor(modalController, navParams, accountService, eventService, logicService, formBuilder, userservice, userService) {
         this.modalController = modalController;
         this.navParams = navParams;
         this.accountService = accountService;
         this.eventService = eventService;
+        this.logicService = logicService;
         this.formBuilder = formBuilder;
+        this.userservice = userservice;
         this.userService = userService;
         this.data = { quantity: 1 };
         this.ticketForm = this.formBuilder.group({
             eventId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             ticketId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            ticketDatabaseId: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             parentTicket: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             amount: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0),
             ticketType: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
-            ticketImage: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
+            mobile: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](true),
+            imageUrl: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             phone: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"]('', [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
+            user_id: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](''),
             numberOfTicket: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
             amountPaid: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](0, [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required]),
         });
     }
     ngOnInit() {
         this.randomString(6);
-        console.log(this.ticket);
+        this.ticketForm.get('user_id').setValue(this.userService.getAuthId());
         this.ticketForm.get('eventId').setValue(this.ticket.eventId);
         this.ticketForm.get('amount').setValue(this.ticket.amount);
         this.ticketForm.get('ticketType').setValue(this.ticket.ticketType);
-        this.ticketForm.get('ticketImage').setValue(this.ticket.imageUri);
+        this.ticketForm.get('imageUrl').setValue(this.ticket.imageUrl);
+        this.ticketForm.get('ticketDatabaseId').setValue(this.ticket._id);
+        this.accountService.getAccountBalance().subscribe(bal => this.balance = bal);
     }
     randomString(len) {
         var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -2037,16 +2067,21 @@ let BuyTicketComponent = class BuyTicketComponent {
         }
     }
     finalize() {
+        if (this.data.quantity < 1) {
+            return this.logicService.presentToast('One or more field is required');
+        }
         console.log(this.ticketForm.value);
-        let balance = this.accountService.accountBalance;
         let costPerTicket = this.ticketForm.get('amount').value * this.data.quantity;
-        let remainBalance = balance - costPerTicket;
+        let remainBalance = this.balance - costPerTicket;
         this.ticketForm.get('numberOfTicket').setValue(this.data.quantity);
         this.ticketForm.get('amountPaid').setValue(costPerTicket);
         if (remainBalance > 1) {
             this.eventService.savePurchaseTicket(this.ticketForm.value).subscribe(newTicket => {
                 console.log(newTicket);
-                this.modalController.dismiss({ newTicket });
+                this.modalController.dismiss({ data: newTicket });
+                this.randomString(6);
+                this.logicService.presentSucess('success', 'ticket purchase successful ', '');
+                this.accountService.loadMyBalance();
             }, err => {
                 console.log(err);
             });
@@ -2060,10 +2095,12 @@ let BuyTicketComponent = class BuyTicketComponent {
 BuyTicketComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavParams"] },
-    { type: src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_4__["AccountService"] },
-    { type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"] },
+    { type: src_app_shared_account_service__WEBPACK_IMPORTED_MODULE_5__["AccountService"] },
+    { type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_6__["EventService"] },
+    { type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormBuilder"] },
-    { type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"] }
+    { type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"] },
+    { type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_7__["UserService"] }
 ];
 BuyTicketComponent.propDecorators = {
     ticket: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"] }]
@@ -3091,10 +3128,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let InsideTicketingComponent = class InsideTicketingComponent {
-    constructor(route, eventService, userService, logicService, modalController) {
+    constructor(route, eventService, userService, alertController, logicService, modalController) {
         this.route = route;
         this.eventService = eventService;
         this.userService = userService;
+        this.alertController = alertController;
         this.logicService = logicService;
         this.modalController = modalController;
         this.ticketList = [];
@@ -3102,6 +3140,20 @@ let InsideTicketingComponent = class InsideTicketingComponent {
         this.segment = 'ticket';
     }
     ngOnInit() {
+        this.randomString(6);
+    }
+    randomString(len) {
+        var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var shortpass = [...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], '');
+        console.log('POP ', shortpass);
+        this.generatedTicketId = shortpass;
+        this.eventService.checkTicketIdIfExist(shortpass, this.eventId).subscribe(res => {
+            console.log(res);
+            this.randomString(6);
+        }, err => {
+            console.log(err);
+        });
+        return;
     }
     ionViewDidEnter() {
         this.route.params.subscribe(params => {
@@ -3109,6 +3161,7 @@ let InsideTicketingComponent = class InsideTicketingComponent {
             console.log('seee id ', this.eventId);
         });
         this.getAllTicket();
+        this.findMyTicket();
     }
     segmentChanged(ev) {
         console.log(ev);
@@ -3123,9 +3176,10 @@ let InsideTicketingComponent = class InsideTicketingComponent {
             });
             yield modal.present();
             const data = yield modal.onDidDismiss();
-            console.log(data['newTicket']);
-            if (data['newTicket']) {
-                this.myTicketList.push(data['newTicket']);
+            console.log(data.data.data);
+            if (data.data.data) {
+                this.myTicketList.push(data.data.data);
+                this.findMyTicket();
             }
         });
     }
@@ -3139,6 +3193,9 @@ let InsideTicketingComponent = class InsideTicketingComponent {
                 });
             }
         });
+    }
+    doRefresh(ev) {
+        this.getAllTicket();
     }
     getAllTicket() {
         this.eventService.getTicketByEventId(this.eventId).subscribe(res => {
@@ -3160,6 +3217,86 @@ let InsideTicketingComponent = class InsideTicketingComponent {
             this.logicService.presentToast(err.error.msg);
         });
     }
+    findMyTicket() {
+        this.eventService.findMyTicket(this.eventId, this.userService.getEmail()).subscribe(myList => {
+            console.log('OBSSS ', myList);
+            this.myTicketList = myList['ticketList'];
+        });
+    }
+    presentShareTicket(ticket) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Share ticket!',
+                inputs: [
+                    {
+                        name: 'email',
+                        type: 'email',
+                        placeholder: 'Beneficiary Email'
+                    },
+                    {
+                        name: 'name',
+                        type: 'text',
+                        placeholder: 'Beneficiary Name'
+                    },
+                    {
+                        name: 'phone',
+                        type: 'tel',
+                        placeholder: 'Beneficiary phone'
+                    },
+                    {
+                        name: 'slot',
+                        type: 'number',
+                        value: 1,
+                        placeholder: 'slot'
+                    },
+                ],
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                        }
+                    },
+                    {
+                        text: 'Confirm',
+                        handler: (data) => {
+                            console.log('Confirm Ok', data);
+                            if (!(data === null || data === void 0 ? void 0 : data.email) || !data.phone || !(data === null || data === void 0 ? void 0 : data.name) || !(data === null || data === void 0 ? void 0 : data.slot)) {
+                                return this.logicService.presentToast('one or more field is required!');
+                            }
+                            if (data.slot === 0) {
+                                return this.logicService.presentToast('slot must be greater tha zero');
+                            }
+                            var remainingTicket = (ticket === null || ticket === void 0 ? void 0 : ticket.numberOfTicket) - parseInt(data.slot);
+                            console.log('remain ', remainingTicket);
+                            if (remainingTicket < 1) {
+                                return this.logicService.presentToast('You have requested more than your slot');
+                            }
+                            this.loading = true;
+                            var newTicket = { name: data.name, amount: ticket.amount, ticketDBId: ticket._id,
+                                ticketId: this.generatedTicketId, email: data.email, numberOfTicket: data.slot,
+                                phone: data.phone, imageUrl: ticket.imageUrl };
+                            this.eventService.shareTicket(newTicket).subscribe(response => {
+                                console.log(response);
+                                this.findMyTicket();
+                                this.randomString(6);
+                                this.logicService.presentSucess('Shared successful', `you have successfully shared ${newTicket === null || newTicket === void 0 ? void 0 : newTicket.numberOfTicket} ` +
+                                    `ticket(s)  to ${newTicket === null || newTicket === void 0 ? void 0 : newTicket.email}`, 'close');
+                                this.loading = false;
+                            }, err => {
+                                this.loading = false;
+                                console.log(err);
+                            });
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
     addTicket() {
         var _a, _b;
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -3175,11 +3312,21 @@ let InsideTicketingComponent = class InsideTicketingComponent {
             }
         });
     }
+    confirmMessage(ticket) {
+        console.log('confirm  ticket ', ticket);
+        ticket.status = 'VALID';
+        this.eventService.confirmTicketId(ticket._id).subscribe(data => {
+        }, err => {
+            ticket.status = 'UNALLOTED';
+            this.logicService.presentToast('error updating ticket status');
+        });
+    }
 };
 InsideTicketingComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
     { type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"] },
     { type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
     { type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] }
 ];
@@ -3556,6 +3703,67 @@ TabsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "./src/app/components/ticket-item/ticket-item.component.scss":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/ticket-item/ticket-item.component.scss ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".flow {\n  white-space: nowrap;\n  overflow: hidden;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90aWNrZXQtaXRlbS90aWNrZXQtaXRlbS5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNFLG1CQUFBO0VBQ0EsZ0JBQUE7QUFDRiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGlja2V0LWl0ZW0vdGlja2V0LWl0ZW0uY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuZmxvdyB7XG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIG92ZXJmbG93OiBoaWRkZW47XG59XG4iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/components/ticket-item/ticket-item.component.ts":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/ticket-item/ticket-item.component.ts ***!
+  \*****************************************************************/
+/*! exports provided: TicketItemComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TicketItemComponent", function() { return TicketItemComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/shared/event.service */ "./src/app/shared/event.service.ts");
+
+
+
+let TicketItemComponent = class TicketItemComponent {
+    constructor(eventService) {
+        this.eventService = eventService;
+    }
+    ngOnInit() {
+        console.log('shared tick id ', this.id);
+        this.eventService.getTicketById(this.id).subscribe(data => {
+            console.log('data ', data);
+            this.ticket = data['ticket'];
+        }, err => {
+            console.log(err);
+        });
+    }
+};
+TicketItemComponent.ctorParameters = () => [
+    { type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_2__["EventService"] }
+];
+TicketItemComponent.propDecorators = {
+    id: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"] }]
+};
+TicketItemComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-ticket-item',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./ticket-item.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/ticket-item/ticket-item.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./ticket-item.component.scss */ "./src/app/components/ticket-item/ticket-item.component.scss")).default]
+    })
+], TicketItemComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/components/vote-now/vote-now.component.scss":
 /*!*************************************************************!*\
   !*** ./src/app/components/vote-now/vote-now.component.scss ***!
@@ -3611,7 +3819,9 @@ let VoteNowComponent = class VoteNowComponent {
         this.properties.cost = navParams.get('cost_per_vote');
         this.properties.fullname = navParams.get('fullname');
     }
-    ngOnInit() { }
+    ngOnInit() {
+        this.accountService.getAccountBalance().subscribe(bal => this.balance = bal);
+    }
     closeModal() {
         this.modalController.dismiss();
     }
@@ -3622,9 +3832,8 @@ let VoteNowComponent = class VoteNowComponent {
         this.properties.purchase--;
     }
     finalize() {
-        let balance = this.accountService.accountBalance;
         let costPerVate = this.properties.purchase * this.properties.cost;
-        let totalCost = balance - costPerVate;
+        let totalCost = this.balance - costPerVate;
         if (totalCost > 1) {
             console.log('we can bid for this');
             this.loading = true;
@@ -4028,14 +4237,6 @@ let LogicService = class LogicService {
                 message: `${msg}`,
                 position: 'bottom',
                 duration: 3000,
-                buttons: [
-                    {
-                        text: `${psitiveBtbText}`,
-                        side: 'start',
-                        icon: 'flash',
-                        handler: () => resolveFunction(true)
-                    },
-                ]
             });
             toast.present();
         });
@@ -4120,6 +4321,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+
 
 
 
@@ -4129,7 +4332,8 @@ let AccountService = class AccountService {
     constructor(http, router) {
         this.http = http;
         this.router = router;
-        this.accountBalance = null;
+        // public accountBalance = null;
+        this.accountSubject = new rxjs__WEBPACK_IMPORTED_MODULE_5__["BehaviorSubject"](0);
         this.noAuthHeader = { headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]({ NoAuth: "True" }) };
         this.AuthHeader = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpHeaders"]().set("Authorization", `Bearer ${localStorage.getItem("token")}`)
@@ -4142,15 +4346,20 @@ let AccountService = class AccountService {
         this.http
             .get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-account-balance")
             .subscribe(value => {
-            this.accountBalance = value["balance"];
+            this.setAccountBalance(value["balance"]);
+            console.log('NEW Balance ', this.accountSubject.getValue());
             this.getLeaderboard();
             this.user_id = localStorage.getItem("user_id");
             this.appUsername = localStorage.getItem("appUser");
         });
     }
+    setAccountBalance(balance) {
+        this.accountSubject.next(balance);
+    }
+    getAccountBalance() {
+        return this.accountSubject;
+    }
     getLeaderboard() {
-        // this.getLeaderGameSection();
-        // tslint:disable-next-line: align
         return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-leaderboard");
     }
     getWinners() {
@@ -4410,6 +4619,9 @@ let EventService = class EventService {
     savePurchaseTicket(ticket) {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/save-purched-ticket', ticket);
     }
+    findMyTicket(eventId, email) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/find-my-ticket/' + eventId + "/" + email);
+    }
     submitEvent(event) {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/submit-event', event);
     }
@@ -4442,6 +4654,15 @@ let EventService = class EventService {
     }
     getTicketByEventId(id) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/get-ticket-by-event-id/' + id);
+    }
+    shareTicket(newTicketData) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/share-my-ticket', newTicketData);
+    }
+    getTicketById(id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/get-ticket-by-id/' + id);
+    }
+    confirmTicketId(id) {
+        return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/confirm-ticket/' + id);
     }
 };
 EventService.ctorParameters = () => [
