@@ -4,67 +4,41 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <div class="row d-flex justify-content-center">
-      <img class="rounded-top"
-           src="assets/img/ISABI LOGO GREEN.png">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <!-- content area -->
-    <ion-refresher #refresherRef
-    (ionRefresh)="doRefresh($event)"
-    slot="fixed">
-<ion-refresher-content>
-</ion-refresher-content>
-</ion-refresher>
+  <!-- content area -->
+  <ion-refresher #refresherRef (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
 
 
-  <ion-fab *ngIf="userService.getRole() == 'ADMIN'"
-           (click)="addUser()"
-           vertical="top"
-           horizontal="end"
-           slot="fixed">
+  <ion-fab *ngIf="userService.getRole() == 'ADMIN'" (click)="addUser()" vertical="top" horizontal="end" slot="fixed">
     <ion-fab-button color="success">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-title mode="md"
-             class="text-center text-uppercase ion-margin-top">CONTESTANTS</ion-title>
+  <ion-title mode="md" class="text-center text-uppercase ion-margin-top">CONTESTANTS</ion-title>
 
   <ion-row>
-    <ion-col size-xs="12"
-             size-sm="12"
-             size-md="6"
-             offset-md="3"
-             size-lg="12"
-             offset-lg="3">
-      <ion-searchbar type="text"
-                     [(ngModel)]="searchModel.name"
-                     name="search"
-                     debounce="500"
-                     (ionChange)="getItems()"></ion-searchbar>
+    <ion-col size-xs="12" size-sm="12" size-md="6" offset-md="3" size-lg="12" offset-lg="3">
+      <ion-searchbar type="text" [(ngModel)]="searchModel.name" name="search" debounce="500" (ionChange)="getItems()">
+      </ion-searchbar>
     </ion-col>
   </ion-row>
 
   <ion-grid>
     <ion-row>
-      <ion-col size="6"
-               size-lg="3"
-               size-md="4"
-               size-xs="6"
-               size-sm="6"
-               size-xl="3"
-               *ngFor="let item of contestant"
-               index
-               as
-               i>
+      <ion-col size="6" size-lg="3" size-md="4" size-xs="6" size-sm="6" size-xl="3" *ngFor="let item of contestant"
+        index as i>
         <ion-card class="text-center font-weight-bold pb-2 ion-no-margin">
           <!-- <ion-icon name="swap"></ion-icon> {{item.vote_count | number}}  -->
-          <ion-icon *ngIf="userService.getRole() == 'ADMIN'"
-                    (click)="deleteContestant(item)"
-                    name="trash"></ion-icon>
+          <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="deleteContestant(item)" name="trash"></ion-icon>
           <img [src]="item.image_url">
 
           <small> 00{{item.my_code}} </small>
@@ -74,15 +48,14 @@
           <div>
             <ion-label> <strong>{{item.vote_count | number}} vote(s) </strong></ion-label>
             <ion-button (click)="voteNow(item.event_id,item._id,item.image_url,
-            item.nickname,item.my_code, item.fullname)"
-                        size="small"
-                        color="primary">vote now</ion-button>
+            item.nickname,item.my_code, item.fullname)" size="small" color="primary">vote now</ion-button>
           </div>
 
           <div *ngIf="userService.getRole() == 'ADMIN'" class="ion-text-center">
-            <input readonly type="text"  [value]="personalLink +'/'+'web-voting/'+ item._id " #userinput size="35">
-            <ion-button color="dark"  size="small" (click)="copyInputMessage(userinput)" value="click to copy" >Copy link</ion-button>
-          
+            <input readonly type="text" [value]="personalLink +'/'+'web-voting/'+ item._id " #userinput size="35">
+            <ion-button color="dark" size="small" (click)="copyInputMessage(userinput)" value="click to copy">Copy
+            </ion-button>
+
           </div>
         </ion-card>
       </ion-col>
@@ -90,8 +63,7 @@
   </ion-grid>
 
   <!-- loader -->
-  <div *ngIf="loading"
-       class=" ">
+  <div *ngIf="loading" class=" ">
     <div class="toast-container ">
       <div class="lds-roller">
         <div></div>

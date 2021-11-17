@@ -22,7 +22,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"\n           src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size-xs=\"12\"\n               size-sm=\"12\"\n               size-md=\"8\"\n               offset-md=\"2\"\n               size-lg=\"6\"\n               offset-lg=\"3\">\n        <ion-card color=\"light\"\n                  *ngFor=\"let item of allEvent\">\n          <img [src]=\"item.image_url\">\n\n          <div class=\"ion-text-center\">\n            <ion-title mode=\"md\"\n                       class=\"text-uppercase font-weight-bold\">{{item.eventName}}</ion-title>\n            <ion-text>{{item.aboutEvent}} </ion-text>\n\n            <small>{{item.type}} </small>\n\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\"\n                      (click)=\"handleDelete(item)\"\n                      name=\"trash\">\n            </ion-icon>\n          </div>\n\n          <div class=\"row d-flex justify-content-center\">\n            <ion-button (click)=\"insideEvent(item)\">ENTER\n            </ion-button>\n          </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\"\n       class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size-xs=\"12\" size-sm=\"12\" size-md=\"8\" offset-md=\"2\" size-lg=\"6\" offset-lg=\"3\">\n        <ion-card color=\"light\" *ngFor=\"let item of allEvent\">\n          <img [src]=\"item.image_url\">\n\n          <div class=\"ion-text-center\">\n            <ion-title mode=\"md\" class=\"text-uppercase font-weight-bold\">{{item.eventName}}</ion-title>\n            <ion-text>{{item.aboutEvent}} </ion-text>\n\n            <small>{{item.type}} </small>\n\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"handleDelete(item)\" name=\"trash\">\n            </ion-icon>\n          </div>\n\n          <div class=\"row d-flex justify-content-center\">\n            <ion-button (click)=\"insideEvent(item)\">ENTER\n            </ion-button>\n          </div>\n          <div *ngIf=\"userService.getRole() == 'ADMIN'\" class=\"ion-text-center\">\n            <input readonly type=\"text\" [value]=\"webLink +'/'+'web-event-ticket/'+ item._id \" #userinput size=\"35\">\n            <ion-button color=\"dark\" size=\"small\" (click)=\"copyInputMessage(userinput)\" value=\"click to copy\">Copy\n            </ion-button>\n\n          </div>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>";
       /***/
     },
 
@@ -191,9 +191,21 @@
       var _shared_account_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ../shared/account.service */
       "./src/app/shared/account.service.ts");
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/environments/environment */
+      "./src/environments/environment.ts");
+      /* harmony import */
+
+
+      var _services_logic_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ../services/logic.service */
+      "./src/app/services/logic.service.ts");
 
       var EventsPage = /*#__PURE__*/function () {
-        function EventsPage(router, gameService, eventService, userService, accountService, alertController) {
+        function EventsPage(router, gameService, eventService, userService, accountService, logicService, alertController) {
           _classCallCheck(this, EventsPage);
 
           this.router = router;
@@ -201,9 +213,11 @@
           this.eventService = eventService;
           this.userService = userService;
           this.accountService = accountService;
+          this.logicService = logicService;
           this.alertController = alertController;
           this.allEvent = [];
           this.loading = true;
+          this.webLink = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].webVotingUrl;
         }
 
         _createClass(EventsPage, [{
@@ -227,6 +241,14 @@
 
               console.log('error getting event', err);
             });
+          }
+        }, {
+          key: "copyInputMessage",
+          value: function copyInputMessage(inputElement) {
+            inputElement.select();
+            document.execCommand('copy');
+            inputElement.setSelectionRange(0, 0);
+            this.logicService.presentToast('text  coppied');
           }
         }, {
           key: "insideEvent",
@@ -319,6 +341,8 @@
           type: _shared_user_service__WEBPACK_IMPORTED_MODULE_4__["UserService"]
         }, {
           type: _shared_account_service__WEBPACK_IMPORTED_MODULE_7__["AccountService"]
+        }, {
+          type: _services_logic_service__WEBPACK_IMPORTED_MODULE_9__["LogicService"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_1__["AlertController"]
         }];

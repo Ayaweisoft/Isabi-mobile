@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid *ngIf="event">
+    <ion-row>
+      <ion-col size="12">
+        <div class="ion-text-center">
+          <img [src]="event?.image_url" width="520" height="380">
+          <ion-title mode="md" class="text-uppercase p-2 m-2 font-weight-bold">{{event?.eventName}}</ion-title>
+          <ion-text class="p-2">{{event?.aboutEvent}} </ion-text> <br>
+          <ion-text class="p-2">{{event?.company}} </ion-text> <br>
+          <ion-text class="p-2">{{event?.contactNumber}} </ion-text> <br>
+          <ion-text class="p-2">{{event?.address}} </ion-text>
+
+          <p class="font-weight-bold text-center">Type : {{event?.type}} </p>
+
+
+        </div>
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+  <ion-row *ngFor="let ticket of ticketList">
+
+    <ion-col sizeLg="8" offsetLg="2" sizeMd="8" offsetMd="2" sizeSm="12">
+
+      <ion-card color="light">
+        <ion-item color="dark">
+
+          <div>{{ticket?.purchased}} Purchased </div>
+        </ion-item>
+        <ion-card-header>
+          <app-image-custom-spinner [imageUrl]="ticket.imageUrl"></app-image-custom-spinner>
+          <ion-card-subtitle class="text-center">{{ticket.ticketType}} </ion-card-subtitle>
+          <ion-card-title class="text-center">{{ticket.amount |currency:' ₦'}} </ion-card-title>
+        </ion-card-header>
+        <div class="ion-text-center">
+          <ion-button color="success" (click)="buyNow(ticket)">
+            Buy Now
+          </ion-button>
+        </div>
+      </ion-card>
+    </ion-col>
+
+
+  </ion-row>
+
+
+
+  <!-- loader -->
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

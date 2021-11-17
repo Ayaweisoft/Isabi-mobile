@@ -374,7 +374,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"ion-text-center\">\n\n</div>\n\n<div class=\"img-box ion-text-center\">\n\t<ion-spinner *ngIf=\"imageLoading\" name=\"circular\"></ion-spinner>\n\t<img width=\"151px\" height=\"140px\" class=\"rounded\" [src]=\"imageUrl\" (load)=\"onLoad()\" />\n\n</div>";
+      __webpack_exports__["default"] = "<div class=\"ion-text-center\">\n\n</div>\n\n<div class=\"img-box ion-text-center\">\n\t<ion-spinner *ngIf=\"imageLoading\" name=\"circular\"></ion-spinner>\n\t<img width=\"350px\" height=\"250px\" class=\"rounded\" [src]=\"imageUrl\" (load)=\"onLoad()\" />\n\n</div>";
       /***/
     },
 
@@ -414,7 +414,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"\n           src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n    <!-- content area -->\n    <ion-refresher #refresherRef\n    (ionRefresh)=\"doRefresh($event)\"\n    slot=\"fixed\">\n<ion-refresher-content>\n</ion-refresher-content>\n</ion-refresher>\n\n\n  <ion-fab *ngIf=\"userService.getRole() == 'ADMIN'\"\n           (click)=\"addUser()\"\n           vertical=\"top\"\n           horizontal=\"end\"\n           slot=\"fixed\">\n    <ion-fab-button color=\"success\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <ion-title mode=\"md\"\n             class=\"text-center text-uppercase ion-margin-top\">CONTESTANTS</ion-title>\n\n  <ion-row>\n    <ion-col size-xs=\"12\"\n             size-sm=\"12\"\n             size-md=\"6\"\n             offset-md=\"3\"\n             size-lg=\"12\"\n             offset-lg=\"3\">\n      <ion-searchbar type=\"text\"\n                     [(ngModel)]=\"searchModel.name\"\n                     name=\"search\"\n                     debounce=\"500\"\n                     (ionChange)=\"getItems()\"></ion-searchbar>\n    </ion-col>\n  </ion-row>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col size=\"6\"\n               size-lg=\"3\"\n               size-md=\"4\"\n               size-xs=\"6\"\n               size-sm=\"6\"\n               size-xl=\"3\"\n               *ngFor=\"let item of contestant\"\n               index\n               as\n               i>\n        <ion-card class=\"text-center font-weight-bold pb-2 ion-no-margin\">\n          <!-- <ion-icon name=\"swap\"></ion-icon> {{item.vote_count | number}}  -->\n          <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\"\n                    (click)=\"deleteContestant(item)\"\n                    name=\"trash\"></ion-icon>\n          <img [src]=\"item.image_url\">\n\n          <small> 00{{item.my_code}} </small>\n          <small> {{item.fullname}} </small>\n          <div> {{item.nickname}} </div>\n\n          <div>\n            <ion-label> <strong>{{item.vote_count | number}} vote(s) </strong></ion-label>\n            <ion-button (click)=\"voteNow(item.event_id,item._id,item.image_url,\n            item.nickname,item.my_code, item.fullname)\"\n                        size=\"small\"\n                        color=\"primary\">vote now</ion-button>\n          </div>\n\n          <div *ngIf=\"userService.getRole() == 'ADMIN'\" class=\"ion-text-center\">\n            <input readonly type=\"text\"  [value]=\"personalLink +'/'+'web-voting/'+ item._id \" #userinput size=\"35\">\n            <ion-button color=\"dark\"  size=\"small\" (click)=\"copyInputMessage(userinput)\" value=\"click to copy\" >Copy link</ion-button>\n          \n          </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\"\n       class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <!-- content area -->\n  <ion-refresher #refresherRef (ionRefresh)=\"doRefresh($event)\" slot=\"fixed\">\n    <ion-refresher-content>\n    </ion-refresher-content>\n  </ion-refresher>\n\n\n  <ion-fab *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"addUser()\" vertical=\"top\" horizontal=\"end\" slot=\"fixed\">\n    <ion-fab-button color=\"success\">\n      <ion-icon name=\"add\"></ion-icon>\n    </ion-fab-button>\n  </ion-fab>\n\n  <ion-title mode=\"md\" class=\"text-center text-uppercase ion-margin-top\">CONTESTANTS</ion-title>\n\n  <ion-row>\n    <ion-col size-xs=\"12\" size-sm=\"12\" size-md=\"6\" offset-md=\"3\" size-lg=\"12\" offset-lg=\"3\">\n      <ion-searchbar type=\"text\" [(ngModel)]=\"searchModel.name\" name=\"search\" debounce=\"500\" (ionChange)=\"getItems()\">\n      </ion-searchbar>\n    </ion-col>\n  </ion-row>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col size=\"6\" size-lg=\"3\" size-md=\"4\" size-xs=\"6\" size-sm=\"6\" size-xl=\"3\" *ngFor=\"let item of contestant\"\n        index as i>\n        <ion-card class=\"text-center font-weight-bold pb-2 ion-no-margin\">\n          <!-- <ion-icon name=\"swap\"></ion-icon> {{item.vote_count | number}}  -->\n          <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"deleteContestant(item)\" name=\"trash\"></ion-icon>\n          <img [src]=\"item.image_url\">\n\n          <small> 00{{item.my_code}} </small>\n          <small> {{item.fullname}} </small>\n          <div> {{item.nickname}} </div>\n\n          <div>\n            <ion-label> <strong>{{item.vote_count | number}} vote(s) </strong></ion-label>\n            <ion-button (click)=\"voteNow(item.event_id,item._id,item.image_url,\n            item.nickname,item.my_code, item.fullname)\" size=\"small\" color=\"primary\">vote now</ion-button>\n          </div>\n\n          <div *ngIf=\"userService.getRole() == 'ADMIN'\" class=\"ion-text-center\">\n            <input readonly type=\"text\" [value]=\"personalLink +'/'+'web-voting/'+ item._id \" #userinput size=\"35\">\n            <ion-button color=\"dark\" size=\"small\" (click)=\"copyInputMessage(userinput)\" value=\"click to copy\">Copy\n            </ion-button>\n\n          </div>\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>";
       /***/
     },
 
@@ -555,6 +555,26 @@
 
 
       __webpack_exports__["default"] = "<ion-header>\n  <ion-button color=\"light\" (click)=\"closeModal()\">\n    <button>\n      <ion-icon color=\"danger\" name=\"close\"></ion-icon>\n    </button>\n  </ion-button>\n</ion-header>\n<ion-content>\n\n  <ion-card color=\"success\" class=\"ion-padding ion-margin-top ion-text-center\">\n    <ion-card-subtitle> cost per vote is {{properties.cost | currency:'₦'}} </ion-card-subtitle>\n    <ion-card-subtitle> Balance {{balance | currency:'₦'}} </ion-card-subtitle>\n\n    <ion-row>\n      <ion-col>\n        <ion-card-title>00{{properties.my_code}} </ion-card-title>\n      </ion-col>\n      <ion-col>\n        <ion-card-title>{{properties.nickname}} </ion-card-title>\n      </ion-col>\n    </ion-row>\n    <ion-card-content>\n      <div>\n        <img class=\"image\" width=\"250\" height=\"250\" [src]=\"properties.image_url\">\n      </div>\n      <ion-chip class=\"ion-text-bold\" color=\"light\">{{properties.fullname}} </ion-chip>\n\n      <div>enter value</div>\n      <ion-row>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"remove()\">\n            <ion-icon name=\"remove\"></ion-icon>\n          </ion-button>\n        </ion-col>\n        <ion-col>\n          <ion-item color=\"light\">\n            <ion-input #purchase type=\"number\" name=\"purchase\" [(ngModel)]=\"properties.purchase\"></ion-input>\n          </ion-item>\n        </ion-col>\n        <ion-col>\n          <ion-button color=\"light\" size=\"small\" (click)=\"add()\">\n            <ion-icon name=\"add\"></ion-icon>\n          </ion-button>\n\n        </ion-col>\n      </ion-row>\n      <p class=\"font-weight-bold text-center\">\n        {{properties.purchase * properties.cost | currency:'₦'}} </p>\n      <ion-button [disabled]=\"properties.purchase < 1\" (click)=\"finalize()\" color=\"light\" [disabled]=\"\">finalize\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n\n</ion-content>";
+      /***/
+    },
+
+    /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/components/web-ticket/web-ticket.component.html":
+    /*!*******************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/web-ticket/web-ticket.component.html ***!
+      \*******************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppComponentsWebTicketWebTicketComponentHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-grid *ngIf=\"event\">\n    <ion-row>\n      <ion-col size=\"12\">\n        <div class=\"ion-text-center\">\n          <img [src]=\"event?.image_url\" width=\"520\" height=\"380\">\n          <ion-title mode=\"md\" class=\"text-uppercase p-2 m-2 font-weight-bold\">{{event?.eventName}}</ion-title>\n          <ion-text class=\"p-2\">{{event?.aboutEvent}} </ion-text> <br>\n          <ion-text class=\"p-2\">{{event?.company}} </ion-text> <br>\n          <ion-text class=\"p-2\">{{event?.contactNumber}} </ion-text> <br>\n          <ion-text class=\"p-2\">{{event?.address}} </ion-text>\n\n          <p class=\"font-weight-bold text-center\">Type : {{event?.type}} </p>\n\n\n        </div>\n      </ion-col>\n\n    </ion-row>\n  </ion-grid>\n  <ion-row *ngFor=\"let ticket of ticketList\">\n\n    <ion-col sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"8\" offsetMd=\"2\" sizeSm=\"12\">\n\n      <ion-card color=\"light\">\n        <ion-item color=\"dark\">\n\n          <div>{{ticket?.purchased}} Purchased </div>\n        </ion-item>\n        <ion-card-header>\n          <app-image-custom-spinner [imageUrl]=\"ticket.imageUrl\"></app-image-custom-spinner>\n          <ion-card-subtitle class=\"text-center\">{{ticket.ticketType}} </ion-card-subtitle>\n          <ion-card-title class=\"text-center\">{{ticket.amount |currency:' ₦'}} </ion-card-title>\n        </ion-card-header>\n        <div class=\"ion-text-center\">\n          <ion-button color=\"success\" (click)=\"buyNow(ticket)\">\n            Buy Now\n          </ion-button>\n        </div>\n      </ion-card>\n    </ion-col>\n\n\n  </ion-row>\n\n\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>";
       /***/
     },
 
@@ -832,6 +852,12 @@
       var _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! ./components/manage-event/manage-event.component */
       "./src/app/components/manage-event/manage-event.component.ts");
+      /* harmony import */
+
+
+      var _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      /*! ./components/web-ticket/web-ticket.component */
+      "./src/app/components/web-ticket/web-ticket.component.ts");
 
       var routes = [{
         path: '',
@@ -989,6 +1015,9 @@
       }, {
         path: 'web-voting/:id',
         component: _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_16__["WebVotingComponent"]
+      }, {
+        path: 'web-event-ticket/:id',
+        component: _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_19__["WebTicketComponent"]
       }];
 
       var AppRoutingModule = function AppRoutingModule() {
@@ -1621,7 +1650,13 @@
 
       var _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(
       /*! ./components/ticket-item/ticket-item.component */
-      "./src/app/components/ticket-item/ticket-item.component.ts"); // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
+      "./src/app/components/ticket-item/ticket-item.component.ts");
+      /* harmony import */
+
+
+      var _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
+      /*! ./components/web-ticket/web-ticket.component */
+      "./src/app/components/web-ticket/web-ticket.component.ts"); // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 
 
       var AppModule = function AppModule() {
@@ -1629,7 +1664,7 @@
       };
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_20__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_27__["AppComponent"], _game_pipe__WEBPACK_IMPORTED_MODULE_36__["GamePipe"], _components_account_account_component__WEBPACK_IMPORTED_MODULE_19__["AccountComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_12__["HeaderComponent"], _adminnavigation_adminnavigation_component__WEBPACK_IMPORTED_MODULE_16__["AdminnavigationComponent"], _components_admin_event_admin_event_component__WEBPACK_IMPORTED_MODULE_13__["AdminEventComponent"], _components_forgetpassword_forgetpassword_component__WEBPACK_IMPORTED_MODULE_17__["ForgetpasswordComponent"], _components_inside_event_inside_event_component__WEBPACK_IMPORTED_MODULE_11__["InsideEventComponent"], _components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"], _components_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_8__["TabsComponent"], _components_gamesection_gamesection_component__WEBPACK_IMPORTED_MODULE_7__["GamesectionComponent"], _components_not_live_not_live_component__WEBPACK_IMPORTED_MODULE_6__["NotLiveComponent"], _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_42__["WebVotingComponent"], _components_image_custom_spinner_image_custom_spinner_component__WEBPACK_IMPORTED_MODULE_44__["ImageCustomSpinnerComponent"], _components_inside_ticketing_inside_ticketing_component__WEBPACK_IMPORTED_MODULE_46__["InsideTicketingComponent"], _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"], _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"], _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"], _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"], _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_27__["AppComponent"], _game_pipe__WEBPACK_IMPORTED_MODULE_36__["GamePipe"], _components_account_account_component__WEBPACK_IMPORTED_MODULE_19__["AccountComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_12__["HeaderComponent"], _adminnavigation_adminnavigation_component__WEBPACK_IMPORTED_MODULE_16__["AdminnavigationComponent"], _components_admin_event_admin_event_component__WEBPACK_IMPORTED_MODULE_13__["AdminEventComponent"], _components_forgetpassword_forgetpassword_component__WEBPACK_IMPORTED_MODULE_17__["ForgetpasswordComponent"], _components_inside_event_inside_event_component__WEBPACK_IMPORTED_MODULE_11__["InsideEventComponent"], _components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"], _components_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_8__["TabsComponent"], _components_gamesection_gamesection_component__WEBPACK_IMPORTED_MODULE_7__["GamesectionComponent"], _components_not_live_not_live_component__WEBPACK_IMPORTED_MODULE_6__["NotLiveComponent"], _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_42__["WebVotingComponent"], _components_image_custom_spinner_image_custom_spinner_component__WEBPACK_IMPORTED_MODULE_44__["ImageCustomSpinnerComponent"], _components_inside_ticketing_inside_ticketing_component__WEBPACK_IMPORTED_MODULE_46__["InsideTicketingComponent"], _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"], _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"], _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"], _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"], _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__["WebTicketComponent"], _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
         entryComponents: [_components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"]],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_21__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_31__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_31__["ReactiveFormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_32__["HttpClientModule"], flutterwave_angular_v3__WEBPACK_IMPORTED_MODULE_41__["FlutterwaveModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_37__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_43__["environment"].firebaseConfig), _ionic_angular__WEBPACK_IMPORTED_MODULE_24__["IonicModule"].forRoot(), _angular_fire__WEBPACK_IMPORTED_MODULE_37__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_43__["environment"].firebaseConfig), _app_routing_module__WEBPACK_IMPORTED_MODULE_28__["AppRoutingModule"]],
         schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_20__["NO_ERRORS_SCHEMA"], _angular_core__WEBPACK_IMPORTED_MODULE_20__["CUSTOM_ELEMENTS_SCHEMA"]],
@@ -6324,6 +6359,198 @@
     },
 
     /***/
+    "./src/app/components/web-ticket/web-ticket.component.scss":
+    /*!*****************************************************************!*\
+      !*** ./src/app/components/web-ticket/web-ticket.component.scss ***!
+      \*****************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppComponentsWebTicketWebTicketComponentScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvd2ViLXRpY2tldC93ZWItdGlja2V0LmNvbXBvbmVudC5zY3NzIn0= */";
+      /***/
+    },
+
+    /***/
+    "./src/app/components/web-ticket/web-ticket.component.ts":
+    /*!***************************************************************!*\
+      !*** ./src/app/components/web-ticket/web-ticket.component.ts ***!
+      \***************************************************************/
+
+    /*! exports provided: WebTicketComponent */
+
+    /***/
+    function srcAppComponentsWebTicketWebTicketComponentTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "WebTicketComponent", function () {
+        return WebTicketComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "./node_modules/@angular/router/fesm2015/router.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+      /* harmony import */
+
+
+      var src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/services/logic.service */
+      "./src/app/services/logic.service.ts");
+      /* harmony import */
+
+
+      var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/shared/event.service */
+      "./src/app/shared/event.service.ts");
+      /* harmony import */
+
+
+      var _buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../buy-ticket/buy-ticket.component */
+      "./src/app/components/buy-ticket/buy-ticket.component.ts");
+
+      var WebTicketComponent = /*#__PURE__*/function () {
+        function WebTicketComponent(activateRoute, logicService, eventService, modalController) {
+          _classCallCheck(this, WebTicketComponent);
+
+          this.activateRoute = activateRoute;
+          this.logicService = logicService;
+          this.eventService = eventService;
+          this.modalController = modalController;
+          this.ticketList = [];
+        }
+
+        _createClass(WebTicketComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _this42 = this;
+
+            this.loading = true;
+            this.activateRoute.queryParams.subscribe(function (params) {
+              _this42.eventId = _this42.activateRoute.snapshot.params['id'];
+
+              if (_this42.eventId) {
+                _this42.eventService.getTicketByEventId(_this42.eventId).subscribe(function (response) {
+                  console.log(response);
+                  _this42.loading = false;
+                  _this42.event = response['event'];
+                  _this42.ticketList = response['ticketList'];
+                }, function (err) {
+                  _this42.loading = false;
+
+                  _this42.logicService.presentAlert('Error getting event', ' it could be cause by connection error, check your connection and try again');
+
+                  console.log(err);
+                });
+              }
+            });
+          }
+        }, {
+          key: "buyNow",
+          value: function buyNow(ticket) {
+            var _a;
+
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee25() {
+              var modal, data;
+              return regeneratorRuntime.wrap(function _callee25$(_context25) {
+                while (1) {
+                  switch (_context25.prev = _context25.next) {
+                    case 0:
+                      ticket.eventId = this.eventId;
+                      _context25.next = 3;
+                      return this.modalController.create({
+                        component: _buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_6__["BuyTicketComponent"],
+                        componentProps: {
+                          ticket: ticket
+                        }
+                      });
+
+                    case 3:
+                      modal = _context25.sent;
+                      _context25.next = 6;
+                      return modal.present();
+
+                    case 6:
+                      _context25.next = 8;
+                      return modal.onDidDismiss();
+
+                    case 8:
+                      data = _context25.sent;
+                      console.log(data.data.data);
+
+                      if ((_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.data) {
+                        this.ticketList.push(data.data.data); // this.findMyTicket();
+                      }
+
+                    case 11:
+                    case "end":
+                      return _context25.stop();
+                  }
+                }
+              }, _callee25, this);
+            }));
+          }
+        }]);
+
+        return WebTicketComponent;
+      }();
+
+      WebTicketComponent.ctorParameters = function () {
+        return [{
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"]
+        }, {
+          type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"]
+        }, {
+          type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
+        }];
+      };
+
+      WebTicketComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-web-ticket',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./web-ticket.component.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/components/web-ticket/web-ticket.component.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./web-ticket.component.scss */
+        "./src/app/components/web-ticket/web-ticket.component.scss"))["default"]]
+      })], WebTicketComponent);
+      /***/
+    },
+
+    /***/
     "./src/app/components/web-voting/web-voting.component.scss":
     /*!*****************************************************************!*\
       !*** ./src/app/components/web-voting/web-voting.component.scss ***!
@@ -6416,31 +6643,31 @@
         _createClass(WebVotingComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this42 = this;
+            var _this43 = this;
 
             this.loading = true;
             this.activateRoute.queryParams.subscribe(function (params) {
-              _this42.contestanId = _this42.activateRoute.snapshot.params['id'];
+              _this43.contestanId = _this43.activateRoute.snapshot.params['id'];
 
-              if (_this42.contestanId) {
+              if (_this43.contestanId) {
                 var data = {
-                  id: _this42.contestanId
+                  id: _this43.contestanId
                 };
 
-                _this42.userService.getContestantById(data).subscribe(function (contestant) {
+                _this43.userService.getContestantById(data).subscribe(function (contestant) {
                   console.log(contestant);
-                  _this42.loading = false;
-                  _this42.properties.contestant_id = contestant['contestant']._id;
-                  _this42.properties.event_id = contestant['contestant'].event_id;
-                  _this42.properties.fullname = contestant['contestant'].fullname;
-                  _this42.properties.image_url = contestant['contestant'].image_url;
-                  _this42.properties.my_code = contestant['contestant'].my_code;
-                  _this42.properties.nickname = contestant['contestant'].nickname;
-                  _this42.properties.cost = contestant['cost_per_vote'];
+                  _this43.loading = false;
+                  _this43.properties.contestant_id = contestant['contestant']._id;
+                  _this43.properties.event_id = contestant['contestant'].event_id;
+                  _this43.properties.fullname = contestant['contestant'].fullname;
+                  _this43.properties.image_url = contestant['contestant'].image_url;
+                  _this43.properties.my_code = contestant['contestant'].my_code;
+                  _this43.properties.nickname = contestant['contestant'].nickname;
+                  _this43.properties.cost = contestant['cost_per_vote'];
                 }, function (err) {
-                  _this42.loading = false;
+                  _this43.loading = false;
 
-                  _this42.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again');
+                  _this43.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again');
 
                   console.log(err);
                 });
@@ -6975,16 +7202,16 @@
         _createClass(LogicService, [{
           key: "presentSucess",
           value: function presentSucess(header, msg, psitiveBtbText) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee25() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee26() {
               var resolveFunction, promise, toast;
-              return regeneratorRuntime.wrap(function _callee25$(_context25) {
+              return regeneratorRuntime.wrap(function _callee26$(_context26) {
                 while (1) {
-                  switch (_context25.prev = _context25.next) {
+                  switch (_context26.prev = _context26.next) {
                     case 0:
                       promise = new Promise(function (resolve) {
                         resolveFunction = resolve;
                       });
-                      _context25.next = 3;
+                      _context26.next = 3;
                       return this.toastController.create({
                         header: "".concat(header),
                         message: "".concat(msg),
@@ -6993,37 +7220,10 @@
                       });
 
                     case 3:
-                      toast = _context25.sent;
-                      toast.present();
-
-                    case 5:
-                    case "end":
-                      return _context25.stop();
-                  }
-                }
-              }, _callee25, this);
-            }));
-          }
-        }, {
-          key: "presentToast",
-          value: function presentToast(msg) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee26() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee26$(_context26) {
-                while (1) {
-                  switch (_context26.prev = _context26.next) {
-                    case 0:
-                      _context26.next = 2;
-                      return this.toastController.create({
-                        message: msg,
-                        duration: 2000
-                      });
-
-                    case 2:
                       toast = _context26.sent;
                       toast.present();
 
-                    case 4:
+                    case 5:
                     case "end":
                       return _context26.stop();
                   }
@@ -7032,18 +7232,45 @@
             }));
           }
         }, {
-          key: "alertDialog",
-          value: function alertDialog(head, msg) {
+          key: "presentToast",
+          value: function presentToast(msg) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee27() {
-              var resolveFunction, promise, alert;
+              var toast;
               return regeneratorRuntime.wrap(function _callee27$(_context27) {
                 while (1) {
                   switch (_context27.prev = _context27.next) {
                     case 0:
+                      _context27.next = 2;
+                      return this.toastController.create({
+                        message: msg,
+                        duration: 2000
+                      });
+
+                    case 2:
+                      toast = _context27.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context27.stop();
+                  }
+                }
+              }, _callee27, this);
+            }));
+          }
+        }, {
+          key: "alertDialog",
+          value: function alertDialog(head, msg) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee28() {
+              var resolveFunction, promise, alert;
+              return regeneratorRuntime.wrap(function _callee28$(_context28) {
+                while (1) {
+                  switch (_context28.prev = _context28.next) {
+                    case 0:
                       promise = new Promise(function (resolve) {
                         resolveFunction = resolve;
                       });
-                      _context27.next = 3;
+                      _context28.next = 3;
                       return this.alertController.create({
                         header: head,
                         message: msg,
@@ -7059,31 +7286,31 @@
                       });
 
                     case 3:
-                      alert = _context27.sent;
-                      _context27.next = 6;
+                      alert = _context28.sent;
+                      _context28.next = 6;
                       return alert.present();
 
                     case 6:
-                      return _context27.abrupt("return", promise);
+                      return _context28.abrupt("return", promise);
 
                     case 7:
                     case "end":
-                      return _context27.stop();
+                      return _context28.stop();
                   }
                 }
-              }, _callee27, this);
+              }, _callee28, this);
             }));
           }
         }, {
           key: "presentAlert",
           value: function presentAlert(header, message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee28() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee29() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee28$(_context28) {
+              return regeneratorRuntime.wrap(function _callee29$(_context29) {
                 while (1) {
-                  switch (_context28.prev = _context28.next) {
+                  switch (_context29.prev = _context29.next) {
                     case 0:
-                      _context28.next = 2;
+                      _context29.next = 2;
                       return this.alertController.create({
                         header: "".concat(header),
                         message: "".concat(message),
@@ -7096,16 +7323,16 @@
                       });
 
                     case 2:
-                      alert = _context28.sent;
-                      _context28.next = 5;
+                      alert = _context29.sent;
+                      _context29.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context28.stop();
+                      return _context29.stop();
                   }
                 }
-              }, _callee28, this);
+              }, _callee29, this);
             }));
           }
         }]);
@@ -7204,20 +7431,20 @@
         _createClass(AccountService, [{
           key: "loadMyBalance",
           value: function loadMyBalance() {
-            var _this43 = this;
+            var _this44 = this;
 
             console.log("GETTING BALANCE");
             this.getLeaderGameSection();
             this.appUser = localStorage.getItem("appUser");
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-account-balance").subscribe(function (value) {
-              _this43.setAccountBalance(value["balance"]);
+              _this44.setAccountBalance(value["balance"]);
 
-              console.log('NEW Balance ', _this43.accountSubject.getValue());
+              console.log('NEW Balance ', _this44.accountSubject.getValue());
 
-              _this43.getLeaderboard();
+              _this44.getLeaderboard();
 
-              _this43.user_id = localStorage.getItem("user_id");
-              _this43.appUsername = localStorage.getItem("appUser");
+              _this44.user_id = localStorage.getItem("user_id");
+              _this44.appUsername = localStorage.getItem("appUser");
             });
           }
         }, {
@@ -7253,10 +7480,10 @@
         }, {
           key: "getLeaderGameSection",
           value: function getLeaderGameSection() {
-            var _this44 = this;
+            var _this45 = this;
 
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-leaderboard-game-section").subscribe(function (value) {
-              _this44.leaderboardGameSection$ = value["document"];
+              _this45.leaderboardGameSection$ = value["document"];
             });
           }
         }, {
@@ -7758,21 +7985,21 @@
         _createClass(GameServiceService, [{
           key: "getAdminDate",
           value: function getAdminDate() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee29() {
-              var _this45 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee30() {
+              var _this46 = this;
 
-              return regeneratorRuntime.wrap(function _callee29$(_context29) {
+              return regeneratorRuntime.wrap(function _callee30$(_context30) {
                 while (1) {
-                  switch (_context29.prev = _context29.next) {
+                  switch (_context30.prev = _context30.next) {
                     case 0:
                       clearInterval(this.gameTime);
                       this.loading = true;
                       this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/get-admin-date').subscribe(function (res) {
-                        _this45.loading = false;
-                        _this45.applicationDate = res['doc']['appdate'];
-                        _this45.serverVersion = res['version']; //  console.log(this.serverVersion);
+                        _this46.loading = false;
+                        _this46.applicationDate = res['doc']['appdate'];
+                        _this46.serverVersion = res['version']; //  console.log(this.serverVersion);
 
-                        _this45.gameTimer(); //  setTimeout(()=> {
+                        _this46.gameTimer(); //  setTimeout(()=> {
                         //    if(this.serverVersion > environment.versionCode){
                         //       this.presentUpdate();
                         //    }
@@ -7782,22 +8009,22 @@
 
                     case 3:
                     case "end":
-                      return _context29.stop();
+                      return _context30.stop();
                   }
                 }
-              }, _callee29, this);
+              }, _callee30, this);
             }));
           }
         }, {
           key: "gameTimer",
           value: function gameTimer() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee30() {
-              var _this46 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee31() {
+              var _this47 = this;
 
               var fake_date, appDATE, deadline;
-              return regeneratorRuntime.wrap(function _callee30$(_context30) {
+              return regeneratorRuntime.wrap(function _callee31$(_context31) {
                 while (1) {
-                  switch (_context30.prev = _context30.next) {
+                  switch (_context31.prev = _context31.next) {
                     case 0:
                       fake_date = 'aug 29,2020 12:10:00';
                       appDATE = this.applicationDate;
@@ -7805,19 +8032,19 @@
                       this.gameTime = setInterval(function () {
                         var now = new Date().getTime();
                         var t = deadline - now;
-                        _this46.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
-                        _this46.timeHours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)).toString();
-                        _this46.timeMinute = Math.floor(t % (1000 * 60 * 60) / (1000 * 60)).toString();
-                        _this46.timeSeconds = Math.floor(t % (1000 * 60) / 1000).toString();
+                        _this47.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
+                        _this47.timeHours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)).toString();
+                        _this47.timeMinute = Math.floor(t % (1000 * 60 * 60) / (1000 * 60)).toString();
+                        _this47.timeSeconds = Math.floor(t % (1000 * 60) / 1000).toString();
 
                         if (t < 0) {
                           console.log('GAME IS LIVE....');
                           localStorage.setItem('GAMELIVE', 'true');
-                          clearInterval(_this46.gameTime);
-                          _this46.timeDays = '0';
-                          _this46.timeHours = '0';
-                          _this46.timeMinute = '0';
-                          _this46.timeSeconds = '0';
+                          clearInterval(_this47.gameTime);
+                          _this47.timeDays = '0';
+                          _this47.timeHours = '0';
+                          _this47.timeMinute = '0';
+                          _this47.timeSeconds = '0';
                         } else {
                           console.log('GAME NOT LIVE....');
                           localStorage.setItem('GAMELIVE', 'false');
@@ -7828,19 +8055,19 @@
 
                     case 4:
                     case "end":
-                      return _context30.stop();
+                      return _context31.stop();
                   }
                 }
-              }, _callee30, this);
+              }, _callee31, this);
             }));
           }
         }, {
           key: "getGameTip",
           value: function getGameTip() {
-            var _this47 = this;
+            var _this48 = this;
 
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/game-fun-fact-tips').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["retry"])(3)).subscribe(function (tips) {
-              _this47.gameTipArray = tips['gamestips'];
+              _this48.gameTipArray = tips['gamestips'];
             });
           }
         }, {
@@ -7851,13 +8078,13 @@
         }, {
           key: "presentToast",
           value: function presentToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee31() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee32() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee31$(_context31) {
+              return regeneratorRuntime.wrap(function _callee32$(_context32) {
                 while (1) {
-                  switch (_context31.prev = _context31.next) {
+                  switch (_context32.prev = _context32.next) {
                     case 0:
-                      _context31.next = 2;
+                      _context32.next = 2;
                       return this.toastController.create({
                         header: 'Info ',
                         message: "".concat(message),
@@ -7866,15 +8093,15 @@
                       });
 
                     case 2:
-                      toast = _context31.sent;
+                      toast = _context32.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context31.stop();
+                      return _context32.stop();
                   }
                 }
-              }, _callee31, this);
+              }, _callee32, this);
             }));
           }
         }, {
@@ -7920,13 +8147,13 @@
         }, {
           key: "presentUpdate",
           value: function presentUpdate() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee32() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee33() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee32$(_context32) {
+              return regeneratorRuntime.wrap(function _callee33$(_context33) {
                 while (1) {
-                  switch (_context32.prev = _context32.next) {
+                  switch (_context33.prev = _context33.next) {
                     case 0:
-                      _context32.next = 2;
+                      _context33.next = 2;
                       return this.alertController.create({
                         header: ' Update!',
                         cssClass: 'success',
@@ -7941,16 +8168,16 @@
                       });
 
                     case 2:
-                      alert = _context32.sent;
-                      _context32.next = 5;
+                      alert = _context33.sent;
+                      _context33.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context32.stop();
+                      return _context33.stop();
                   }
                 }
-              }, _callee32, this);
+              }, _callee33, this);
             }));
           }
         }]);
@@ -8076,34 +8303,6 @@
         _createClass(UserService, [{
           key: "shortToast",
           value: function shortToast(messages) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee33() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee33$(_context33) {
-                while (1) {
-                  switch (_context33.prev = _context33.next) {
-                    case 0:
-                      _context33.next = 2;
-                      return this.toastController.create({
-                        message: messages,
-                        position: 'middle',
-                        duration: 1000
-                      });
-
-                    case 2:
-                      toast = _context33.sent;
-                      toast.present();
-
-                    case 4:
-                    case "end":
-                      return _context33.stop();
-                  }
-                }
-              }, _callee33, this);
-            }));
-          }
-        }, {
-          key: "longToast",
-          value: function longToast(messages) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee34() {
               var toast;
               return regeneratorRuntime.wrap(function _callee34$(_context34) {
@@ -8114,7 +8313,7 @@
                       return this.toastController.create({
                         message: messages,
                         position: 'middle',
-                        duration: 3000
+                        duration: 1000
                       });
 
                     case 2:
@@ -8130,8 +8329,8 @@
             }));
           }
         }, {
-          key: "generalToast",
-          value: function generalToast(message, duration) {
+          key: "longToast",
+          value: function longToast(messages) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee35() {
               var toast;
               return regeneratorRuntime.wrap(function _callee35$(_context35) {
@@ -8140,8 +8339,9 @@
                     case 0:
                       _context35.next = 2;
                       return this.toastController.create({
-                        message: "".concat(message),
-                        duration: duration
+                        message: messages,
+                        position: 'middle',
+                        duration: 3000
                       });
 
                     case 2:
@@ -8157,15 +8357,42 @@
             }));
           }
         }, {
-          key: "generalAlert",
-          value: function generalAlert(message) {
+          key: "generalToast",
+          value: function generalToast(message, duration) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee36() {
-              var alert;
+              var toast;
               return regeneratorRuntime.wrap(function _callee36$(_context36) {
                 while (1) {
                   switch (_context36.prev = _context36.next) {
                     case 0:
                       _context36.next = 2;
+                      return this.toastController.create({
+                        message: "".concat(message),
+                        duration: duration
+                      });
+
+                    case 2:
+                      toast = _context36.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context36.stop();
+                  }
+                }
+              }, _callee36, this);
+            }));
+          }
+        }, {
+          key: "generalAlert",
+          value: function generalAlert(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee37() {
+              var alert;
+              return regeneratorRuntime.wrap(function _callee37$(_context37) {
+                while (1) {
+                  switch (_context37.prev = _context37.next) {
+                    case 0:
+                      _context37.next = 2;
                       return this.alertController.create({
                         header: 'Alert',
                         message: "".concat(message),
@@ -8173,16 +8400,16 @@
                       });
 
                     case 2:
-                      alert = _context36.sent;
-                      _context36.next = 5;
+                      alert = _context37.sent;
+                      _context37.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context36.stop();
+                      return _context37.stop();
                   }
                 }
-              }, _callee36, this);
+              }, _callee37, this);
             }));
           }
         }, {
@@ -8530,10 +8757,10 @@
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this48 = this;
+            var _this49 = this;
 
             setTimeout(function () {
-              _this48.modalController.dismiss();
+              _this49.modalController.dismiss();
             }, 30);
             this.autoSlide();
           }
@@ -8558,19 +8785,19 @@
           value: function autoSlide() {
             var _a;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee37() {
-              return regeneratorRuntime.wrap(function _callee37$(_context37) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee38() {
+              return regeneratorRuntime.wrap(function _callee38$(_context38) {
                 while (1) {
-                  switch (_context37.prev = _context37.next) {
+                  switch (_context38.prev = _context38.next) {
                     case 0:
                       (_a = this.mySlider) === null || _a === void 0 ? void 0 : _a.slideNext(3500, true);
 
                     case 1:
                     case "end":
-                      return _context37.stop();
+                      return _context38.stop();
                   }
                 }
-              }, _callee37, this);
+              }, _callee38, this);
             }));
           }
         }]);

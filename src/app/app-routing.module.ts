@@ -17,6 +17,7 @@ import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/r
 import { WebVotingComponent } from './components/web-voting/web-voting.component';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { ManageEventComponent } from './components/manage-event/manage-event.component';
+import { WebTicketComponent } from './components/web-ticket/web-ticket.component';
 
 const routes: Routes = [
   {
@@ -185,6 +186,10 @@ const routes: Routes = [
   {
     
     path: 'web-voting/:id', component: WebVotingComponent
+  },
+  {
+    
+    path: 'web-event-ticket/:id', component: WebTicketComponent
   },
 
 

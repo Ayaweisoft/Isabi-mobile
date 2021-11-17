@@ -5,6 +5,8 @@ import { UserService } from './../shared/user.service';
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AccountService } from '../shared/account.service';
+import { environment } from 'src/environments/environment';
+import { LogicService } from '../services/logic.service';
 
 @Component({
   selector: 'app-events',
@@ -14,9 +16,11 @@ import { AccountService } from '../shared/account.service';
 export class EventsPage implements OnInit {
 allEvent = [];
 loading = true;
+webLink = environment.webVotingUrl;
   constructor(private router: Router, private gameService: GameServiceService, 
               private eventService: EventService, public  userService: UserService,
               private accountService: AccountService,
+              private logicService: LogicService,
               public alertController: AlertController) {
                }
 
@@ -42,8 +46,15 @@ loading = true;
       );
   }
 
-  insideEvent(event){
+  copyInputMessage(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    this.logicService.presentToast('text  coppied' );
+  }
 
+
+  insideEvent(event){
     switch (event.type) {
       case 'VOTING':
         this.router.navigate([`/tabs/inside-event`, event._id]);
