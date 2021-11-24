@@ -61,16 +61,7 @@ model = {
   username: ''
 };
 
- RaveOptions = {
-  PBFPubKey: 'FLWPUBK_TEST-0e44fc52fddf09104dc7aa889c085b11-X',
-  customer_email:'swagasoft@gmail.com',
-  custom_description: 'i-sabi credit',
-  amount: 500000,
-  currency:'NGN',
-  customer_phone: '09026464646',
-  txref:'238485458496',
-  // txref: this.reference,
-}
+
 
 ngOnInit() {
   this.generateRef();

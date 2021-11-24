@@ -31,7 +31,7 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
   }
 
   savePurchaseTicket(ticket){
-    return this.http.post(environment.apiBaseUrl +'/v2/save-purched-ticket', ticket);
+    return this.http.post(environment.apiBaseUrl +'/v2/save-purchased-ticket', ticket);
   }
 
   findMyTicket(eventId, email){
