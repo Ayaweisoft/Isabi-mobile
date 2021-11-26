@@ -5,8 +5,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <div class="row d-flex justify-content-center">
-      <img class="rounded-top"
-           src="assets/img/ISABI LOGO GREEN.png">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
     </div>
   </ion-toolbar>
 </ion-header>
@@ -14,32 +13,29 @@
 <ion-content>
   <ion-grid>
     <ion-row>
-      <ion-col size-xs="12"
-               size-sm="12"
-               size-md="8"
-               offset-md="2"
-               size-lg="6"
-               offset-lg="3">
-        <ion-card color="light"
-                  *ngFor="let item of allEvent">
+      <ion-col size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <ion-card color="darl" class="p-1" *ngFor="let item of allEvent">
           <img [src]="item.image_url">
 
           <div class="ion-text-center">
-            <ion-title mode="md"
-                       class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
+            <ion-title mode="md" class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
             <ion-text>{{item.aboutEvent}} </ion-text>
 
             <small>{{item.type}} </small>
 
-            <ion-icon *ngIf="userService.getRole() == 'ADMIN'"
-                      (click)="handleDelete(item)"
-                      name="trash">
+            <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="handleDelete(item)" name="trash">
             </ion-icon>
           </div>
-          
+
           <ion-item color="dark">
             <ion-label>Live</ion-label>
-            <ion-toggle [checked]="item.active" color="success" (ionChange)="changeStatus($event,item._id)" ></ion-toggle> 
+
+            <ion-toggle class="p-1" [checked]="item.active" color="success" (ionChange)="changeStatus($event,item._id)">
+            </ion-toggle>
+            <ion-button (click)="editEvent(item)" color="light">
+              edit
+            </ion-button>
+
           </ion-item>
 
         </ion-card>
@@ -48,8 +44,7 @@
   </ion-grid>
 
   <!-- loader -->
-  <div *ngIf="loading"
-       class=" ">
+  <div *ngIf="loading" class=" ">
     <div class="toast-container ">
       <div class="lds-roller">
         <div></div>

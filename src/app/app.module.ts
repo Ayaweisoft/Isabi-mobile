@@ -55,6 +55,7 @@ import { ManageEventComponent } from './components/manage-event/manage-event.com
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
 import { WebTicketComponent } from './components/web-ticket/web-ticket.component';
+import { EditEventComponent } from './components/edit-event/edit-event.component';
 
 
 @NgModule({
@@ -68,6 +69,7 @@ import { WebTicketComponent } from './components/web-ticket/web-ticket.component
     ManageEventComponent,
     BuyTicketComponent,
     TicketItemComponent,
+    EditEventComponent,
     WebTicketComponent,
      SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent,

@@ -1,14 +1,13 @@
 <ion-header>
   <ion-toolbar>
-
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <div class="row d-flex justify-content-center">
-      <img class="rounded-top" src="../../../assets/icon/Logoicon.png">
-    </div>
+    <ion-item>
+      <ion-button (click)="dismiss()">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-item>
   </ion-toolbar>
 </ion-header>
+
 
 
 <ion-content ion-padding>
@@ -19,8 +18,8 @@
 
         <ion-card>
 
-          <form #eventForm="ngForm" name="eventform" (submit)="eventForm.valid && submitEvent()">
-            <h5 class="ion-text-center">CREATE EVENT</h5>
+          <form #eventForm="ngForm" name="eventform">
+            <h5 class="ion-text-center">UPDATE EVENT</h5>
 
 
             <!-- image -->
@@ -51,23 +50,26 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
-              <!-- select options -->
-              <ion-card>
-                <ion-label class="text-center"><small class="text-danger">*</small> select event type</ion-label>
-
+            <ion-row>
+              <ion-col size="6">
                 <ion-item color="light">
-                  <ion-select select="success" interface="popover" name="type" (ngModelChange)="eventType($event)"
-                    [(ngModel)]="eventModel.type">
-                    <ion-select-option value="VOTING">VOTING</ion-select-option>
-                    <ion-select-option value="TICKETING">TICKETING</ion-select-option>
-                    <ion-select-option value="FORM-SALES">FORM-SALES</ion-select-option>
-                  </ion-select>
+                  <ion-label position="floating">Start date</ion-label>
+                  <div class="text-input ">
+
+                    <ion-input type="date" #startDate="ngModel" name="date" [(ngModel)]="eventModel.startDate">
+                    </ion-input>
+                  </div>
                 </ion-item>
-                <small *ngIf="eventName.value && !eventModel.type" class="text-center text-danger"><small
-                    class="text-danger ">*</small> select event type</small>
-              </ion-card>
-            </ion-col>
+              </ion-col>
+              <ion-col size="6">
+                <ion-item color="light">
+                  <ion-label position="floating">End date</ion-label>
+                  <div class="text-input ">
+                    <ion-input type="date" #endDate="ngModel" name="date" [(ngModel)]="eventModel.endDate"></ion-input>
+                  </div>
+                </ion-item>
+              </ion-col>
+            </ion-row>
 
             <ion-col>
               <ion-item color="light">
@@ -119,24 +121,6 @@
               </ion-item>
             </ion-col>
 
-            <ion-row>
-              <ion-col size="6">
-                <ion-item color="light">
-                  <div class="text-input ">
-                    <ion-input type="date" #startDate="ngModel" name="date" [(ngModel)]="eventModel.startDate">
-                    </ion-input>
-                  </div>
-                </ion-item>
-              </ion-col>
-              <ion-col size="6">
-                <ion-item color="light">
-                  <div class="text-input ">
-                    <ion-input type="date" #endDate="ngModel" name="date" [(ngModel)]="eventModel.endDate"></ion-input>
-                  </div>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-
 
             <ion-row>
 
@@ -155,20 +139,13 @@
               <ion-col>
                 <ion-item color="light">
                   <div class="text-input ">
-                    <ion-label position="floating">Time</ion-label>
-                    <ion-input type="time" #time="ngModel" name="time" [(ngModel)]="eventModel.startTime"></ion-input>
+                    <ion-label position="floating">Start time</ion-label>
+                    <ion-input type="time" #date="ngModel" name="date" [(ngModel)]="eventModel.startTime"></ion-input>
                   </div>
                 </ion-item>
               </ion-col>
 
-              <ion-col *ngIf="eventModel.type === 'TICKETING'">
-                <ion-item color="light">
-                  <div class="text-input ">
-                    <ion-label position="floating">time</ion-label>
-                    <ion-input type="time" #time="ngModel" name="time" [(ngModel)]="eventModel.time"></ion-input>
-                  </div>
-                </ion-item>
-              </ion-col>
+
 
 
               <ion-col *ngIf="eventModel.type === 'VOTING'">
@@ -237,7 +214,7 @@
                 <ion-item color="light">
                   <div class="text-input ">
                     <ion-label position="floating">bank name</ion-label>
-                    <ion-input type="text" #bankname="ngModel" name="bankname" [(ngModel)]="eventModel.bankname">
+                    <ion-input type="text" #bankName="ngModel" name="bankname" [(ngModel)]="eventModel.bankName">
                     </ion-input>
                   </div>
                 </ion-item>
@@ -251,7 +228,7 @@
               </ion-item>
               <ion-item color="light">
                 <div class="p-3">
-                  <ion-button (click)="submitEvent()" *ngIf="eventModel.type  && eventForm.valid">submit</ion-button>
+                  <ion-button (click)="updateEvent()" *ngIf=" eventForm.valid">update</ion-button>
 
                 </div>
               </ion-item>

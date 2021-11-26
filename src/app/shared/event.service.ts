@@ -41,6 +41,10 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
     return this.http.post(environment.apiBaseUrl + '/submit-event', event);
   }
 
+  updateEvent(event){
+    return this.http.put(environment.apiBaseUrl + '/update-event', event);
+  }
+
   createContestTant(contestant){
     return this.http.post(environment.apiBaseUrl + '/create-contestant', contestant);
   }

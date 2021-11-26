@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { EventService } from 'src/app/shared/event.service';
 import { GameServiceService } from 'src/app/shared/game-service.service';
 import { UserService } from 'src/app/shared/user.service';
+import { EditEventComponent } from '../edit-event/edit-event.component';
 
 @Component({
   selector: 'app-manage-event',
@@ -15,11 +16,30 @@ export class ManageEventComponent implements OnInit {
   loading = true;
     constructor(private router: Router, private gameService: GameServiceService, 
                 private eventService: EventService, public  userService: UserService,
+                private modalController: ModalController,
                 public alertController: AlertController) { }
   
     ngOnInit() { 
       this.getAllevent();
     }
+
+
+async editEvent(event) {
+  const modal = await this.modalController.create({
+  component: EditEventComponent,
+  componentProps: { event }
+  });
+
+  await modal.present();
+
+  const data = await modal.onDidDismiss();
+  console.log(data)
+  if(data.role === 'exist'){
+    console.log(data?.data)
+    event = data.data;
+  }
+
+}
   
   
     getAllevent(){
