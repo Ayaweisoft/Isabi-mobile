@@ -401,7 +401,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    \n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons> <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"  src=\"../../../assets/icon/Logoicon.png\">\n    </div> \n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content ion-padding>\n\n  <ion-grid >\n    <ion-row>\n      <ion-col sizeSm=\"12\" sizeXs=\"12\" sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"10\"  offsetMd=\"1\">\n\n        <ion-card >\n       \n          <form #eventForm=\"ngForm\" name=\"eventform\" (submit)=\"eventForm.valid && submitEvent()\">\n            <h5 class=\"ion-text-center\">CREATE EVENT</h5>\n\n                \n              <!-- image -->\n              <div class=\"mt-3 mb-2\">\n                <ion-progress-bar\n                  *ngIf=\"loading\"\n                  type=\"indeterminate\"\n                ></ion-progress-bar>\n                <div class=\"ion-text-center\">\n                  <div class=\"cover-photo\">\n                    <button  *ngIf=\"!image\"\n                      onclick=\"document.getElementById('single-image').click();\"\n                    >\n                      <i class=\"fas fa-image fa-5x lat\"></i>\n                    </button>\n                    <input\n                      id=\"single-image\"\n                      accept=\"image/*\"\n                      #singleImage\n                      (change)=\"addImagesFirebase($event)\"\n                      type=\"file\"\n                      name=\"name\"\n                      style=\"display: none\"\n                    />\n  \n                    <app-image-custom-spinner\n                      onclick=\"document.getElementById('single-image').click();\"\n                      *ngIf=\"image\"\n                      [imageUrl]=\"image\"\n                    ></app-image-custom-spinner>\n                  </div>\n                </div>\n              </div>\n              <!-- end image -->\n            \n            <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" > <small class=\"text-danger \">*</small> event name</ion-label>\n                  <ion-input  type=\"text\" #eventName=\"ngModel\" name=\"eventName\" \n                  [(ngModel)]=\"eventModel.eventName\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col>\n              <!-- select options -->\n              <ion-card>\n                <ion-label class=\"text-center\" ><small class=\"text-danger\">*</small>  select event type</ion-label>\n\n                <ion-item color=\"light\">\n                <ion-select select=\"success\" interface=\"popover\" name=\"type\"\n                 (ngModelChange)=\"eventType($event)\"  [(ngModel)]=\"eventModel.type\" >\n               <ion-select-option  value=\"VOTING\">VOTING</ion-select-option>\n               <ion-select-option  value=\"TICKETING\">TICKETING</ion-select-option>\n               <ion-select-option  value=\"FORM-SALES\">FORM-SALES</ion-select-option>\n                </ion-select>\n              </ion-item>\n              <small *ngIf=\"eventName.value && !eventModel.type\" class=\"text-center text-danger\"><small class=\"text-danger \">*</small>  select event type</small>\n            </ion-card>\n             </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> company name</ion-label>\n                  <ion-input  type=\"text\" #companyName=\"ngModel\" name=\"companyName\" \n                  [(ngModel)]=\"eventModel.companyName\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> address</ion-label>\n                  <ion-input  type=\"text\" #address=\"ngModel\" name=\"address\" \n                  [(ngModel)]=\"eventModel.address\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> contact number</ion-label>\n                  <ion-input  type=\"text\" #contactNumber=\"ngModel\" name=\"contactNumber\" \n                  [(ngModel)]=\"eventModel.contactNumber\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> about event</ion-label>\n                  <ion-input  type=\"text\" #aboutEvent=\"ngModel\" name=\"aboutEvent\" \n                  [(ngModel)]=\"eventModel.aboutEvent\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n             <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> venue</ion-label>\n                  <ion-input  type=\"text\" #venue=\"ngModel\" name=\"venue\" \n                  [(ngModel)]=\"eventModel.venue\"required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n        \n            <ion-row>\n              \n             <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >cost per vote</ion-label>\n                  <ion-input  type=\"text\" #costPerVote=\"ngModel\" name=\"costPerVote\" \n                  [(ngModel)]=\"eventModel.costPerVote\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n           \n\n             <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >date</ion-label>\n                  <ion-input  type=\"date\" #date=\"ngModel\" name=\"date\" \n                  [(ngModel)]=\"eventModel.startDate\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n             <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >time</ion-label>\n                  <ion-input  type=\"time\" #time=\"ngModel\" name=\"time\" \n                  [(ngModel)]=\"eventModel.time\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n               \n            <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >number of slot</ion-label>\n                  <ion-input  type=\"text\" #numberOfSlot=\"ngModel\" name=\"numberOfSlot\" \n                  [(ngModel)]=\"eventModel.numberOfSlot\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col> \n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\">i-sabi sharing ratio</ion-label>\n                  <ion-input  type=\"text\" #sharingRatio_isabi=\"ngModel\" name=\"sharingRatio_isabi\" \n                  [(ngModel)]=\"eventModel.sharingRatio_isabi\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >company's sharing ratio</ion-label>\n                  <ion-input  type=\"text\" #sharingRatio_company=\"ngModel\" name=\"sharingRatio_company\" \n                  [(ngModel)]=\"eventModel.sharingRatio_company\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >busin's partner sharing ratio</ion-label>\n                  <ion-input  type=\"text\" #businessSharingRatio=\"ngModel\" name=\"businessSharingRatio\" \n                  [(ngModel)]=\"eventModel.businessSharingRatio\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n            </ion-row>\n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >account number</ion-label>\n                  <ion-input  type=\"text\" #accountNumber=\"ngModel\" name=\"accountNumber\" \n                  [(ngModel)]=\"eventModel.accountNumber\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n           <ion-row>\n            <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >account name</ion-label>\n                  <ion-input  type=\"text\" #accountName=\"ngModel\" name=\"accountName\" \n                  [(ngModel)]=\"eventModel.accountName\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >bank name</ion-label>\n                  <ion-input  type=\"text\" #bankname=\"ngModel\" name=\"bankname\" \n                  [(ngModel)]=\"eventModel.bankname\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n           </ion-row>\n           <ion-list>\n             <ion-item color=\"light\">\n              <ion-input  type=\"text\" #bankname=\"ngModel\" name=\"bankname\" \n              [(ngModel)]=\"eventModel.eventOwner\" placeholder=\"(optional username)  event owner\"></ion-input>\n               \n             </ion-item>\n             <ion-item color=\"light\">\n              <div class=\"p-3\">\n              <ion-button (click)=\"submitEvent()\" *ngIf=\"eventModel.type  && eventForm.valid\">submit</ion-button>\n\n              </div>\n             </ion-item>\n           </ion-list>\n        \n            \n          </form>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"../../../assets/icon/Logoicon.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content ion-padding>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col sizeSm=\"12\" sizeXs=\"12\" sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"10\" offsetMd=\"1\">\n\n        <ion-card>\n\n          <form #eventForm=\"ngForm\" name=\"eventform\" (submit)=\"eventForm.valid && submitEvent()\">\n            <h5 class=\"ion-text-center\">CREATE EVENT</h5>\n\n\n            <!-- image -->\n            <div class=\"mt-3 mb-2\">\n              <ion-progress-bar *ngIf=\"loading\" type=\"indeterminate\"></ion-progress-bar>\n              <div class=\"ion-text-center\">\n                <div class=\"cover-photo\">\n                  <button *ngIf=\"!image\" onclick=\"document.getElementById('single-image').click();\">\n                    <i class=\"fas fa-image fa-5x lat\"></i>\n                  </button>\n                  <input id=\"single-image\" accept=\"image/*\" #singleImage (change)=\"addImagesFirebase($event)\"\n                    type=\"file\" name=\"name\" style=\"display: none\" />\n\n                  <app-image-custom-spinner onclick=\"document.getElementById('single-image').click();\" *ngIf=\"image\"\n                    [imageUrl]=\"image\"></app-image-custom-spinner>\n                </div>\n              </div>\n            </div>\n            <!-- end image -->\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"> <small class=\"text-danger \">*</small> event name</ion-label>\n                  <ion-input type=\"text\" #eventName=\"ngModel\" name=\"eventName\" [(ngModel)]=\"eventModel.eventName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <!-- select options -->\n              <ion-card>\n                <ion-label class=\"text-center\"><small class=\"text-danger\">*</small> select event type</ion-label>\n\n                <ion-item color=\"light\">\n                  <ion-select select=\"success\" interface=\"popover\" name=\"type\" (ngModelChange)=\"eventType($event)\"\n                    [(ngModel)]=\"eventModel.type\">\n                    <ion-select-option value=\"VOTING\">VOTING</ion-select-option>\n                    <ion-select-option value=\"TICKETING\">TICKETING</ion-select-option>\n                    <ion-select-option value=\"FORM-SALES\">FORM-SALES</ion-select-option>\n                  </ion-select>\n                </ion-item>\n                <small *ngIf=\"eventName.value && !eventModel.type\" class=\"text-center text-danger\"><small\n                    class=\"text-danger \">*</small> select event type</small>\n              </ion-card>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> company name</ion-label>\n                  <ion-input type=\"text\" #companyName=\"ngModel\" name=\"companyName\" [(ngModel)]=\"eventModel.companyName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> address</ion-label>\n                  <ion-input type=\"text\" #address=\"ngModel\" name=\"address\" [(ngModel)]=\"eventModel.address\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> contact number</ion-label>\n                  <ion-input type=\"text\" #contactNumber=\"ngModel\" name=\"contactNumber\"\n                    [(ngModel)]=\"eventModel.contactNumber\" required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> about event</ion-label>\n                  <ion-input type=\"text\" #aboutEvent=\"ngModel\" name=\"aboutEvent\" [(ngModel)]=\"eventModel.aboutEvent\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> venue</ion-label>\n                  <ion-input type=\"text\" #venue=\"ngModel\" name=\"venue\" [(ngModel)]=\"eventModel.venue\" required=\"true\">\n                  </ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-input type=\"date\" #startDate=\"ngModel\" name=\"date\" [(ngModel)]=\"eventModel.startDate\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-input type=\"date\" #endDate=\"ngModel\" name=\"date\" [(ngModel)]=\"eventModel.endDate\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n\n            <ion-row>\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">cost per vote</ion-label>\n                    <ion-input type=\"text\" #costPerVote=\"ngModel\" name=\"costPerVote\"\n                      [(ngModel)]=\"eventModel.costPerVote\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">Time</ion-label>\n                    <ion-input type=\"time\" #time=\"ngModel\" name=\"time\" [(ngModel)]=\"eventModel.startTime\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">time</ion-label>\n                    <ion-input type=\"time\" #time=\"ngModel\" name=\"time\" [(ngModel)]=\"eventModel.time\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">number of slot</ion-label>\n                    <ion-input type=\"text\" #numberOfSlot=\"ngModel\" name=\"numberOfSlot\"\n                      [(ngModel)]=\"eventModel.numberOfSlot\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">i-sabi sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_isabi=\"ngModel\" name=\"sharingRatio_isabi\"\n                      [(ngModel)]=\"eventModel.sharingRatio_isabi\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">company's sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_company=\"ngModel\" name=\"sharingRatio_company\"\n                      [(ngModel)]=\"eventModel.sharingRatio_company\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">busin's partner sharing ratio</ion-label>\n                    <ion-input type=\"text\" #businessSharingRatio=\"ngModel\" name=\"businessSharingRatio\"\n                      [(ngModel)]=\"eventModel.businessSharingRatio\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\">account number</ion-label>\n                  <ion-input type=\"text\" #accountNumber=\"ngModel\" name=\"accountNumber\"\n                    [(ngModel)]=\"eventModel.accountNumber\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">account name</ion-label>\n                    <ion-input type=\"text\" #accountName=\"ngModel\" name=\"accountName\"\n                      [(ngModel)]=\"eventModel.accountName\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">bank name</ion-label>\n                    <ion-input type=\"text\" #bankname=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.bankname\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n            <ion-list>\n              <ion-item color=\"light\">\n                <ion-input type=\"text\" #bankname=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.eventOwner\"\n                  placeholder=\"(optional username)  event owner\"></ion-input>\n\n              </ion-item>\n              <ion-item color=\"light\">\n                <div class=\"p-3\">\n                  <ion-button (click)=\"submitEvent()\" *ngIf=\"eventModel.type  && eventForm.valid\">submit</ion-button>\n\n                </div>\n              </ion-item>\n            </ion-list>\n\n\n          </form>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>");
 
 /***/ }),
 
@@ -428,6 +428,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\n<div class=\"ion-padding\">\n  <ion-icon size=\"large\" (click)=\"dismissModal()\" slot=\"end\" name=\"close\"></ion-icon>\n \n </div>\n \n <ion-content>\n \n   <div class=\"content\">\n \n   <ion-grid fixed class=\"mt-5\">\n     <ion-row class=\"ion-justify-content-center\">\n       <ion-col size=\"8\">\n         \n         <div class=\"text-center\">\n           <img src=\"/assets/img/congrants_image.jpg\"  width=\"250\" alt=\"\">\n         </div>\n \n         <ion-list>\n           <ion-item class=\"ion-padding\" color=\"light\">\n             <ion-label>Elapsed </ion-label>\n             <div slot=\"end\" >  <strong>{{minutes}} </strong> min, <strong>{{seconds}} </strong> seconds  </div>\n             <div></div>\n           </ion-item>\n \n           <ion-item class=\"ion-padding\" color=\"light\">\n             <ion-label>Correct Questions </ion-label>\n             <div slot=\"end\"> <strong>{{correctQuestion}}/15 </strong> </div>\n           </ion-item>\n         </ion-list>\n \n         <ion-row class=\"ion-justify-content-center\">\n           <ion-button (click)=\"dismissModal()\" expand=\"block\" fill=\"outline\" color=\"dark\">\n            close\n           </ion-button>\n           <ion-button (click)=\"playAgain()\" expand=\"block\" fill=\"outline\" color=\"success\">\n             play \n           </ion-button>\n         </ion-row>\n         \n       </ion-col>\n     </ion-row>\n   </ion-grid>\n   </div>\n \n </ion-content>\n ");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/edit-event/edit-event.component.html":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/edit-event/edit-event.component.html ***!
+  \*******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-item>\n      <ion-button (click)=\"dismiss()\">\n        <ion-icon slot=\"start\" name=\"close\"></ion-icon>\n      </ion-button>\n    </ion-item>\n  </ion-toolbar>\n</ion-header>\n\n\n\n<ion-content ion-padding>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col sizeSm=\"12\" sizeXs=\"12\" sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"10\" offsetMd=\"1\">\n\n        <ion-card>\n\n          <form #eventForm=\"ngForm\" name=\"eventform\">\n            <h5 class=\"ion-text-center\">UPDATE EVENT</h5>\n\n\n            <!-- image -->\n            <div class=\"mt-3 mb-2\">\n              <ion-progress-bar *ngIf=\"loading\" type=\"indeterminate\"></ion-progress-bar>\n              <div class=\"ion-text-center\">\n                <div class=\"cover-photo\">\n                  <button *ngIf=\"!image\" onclick=\"document.getElementById('single-image').click();\">\n                    <i class=\"fas fa-image fa-5x lat\"></i>\n                  </button>\n                  <input id=\"single-image\" accept=\"image/*\" #singleImage (change)=\"addImagesFirebase($event)\"\n                    type=\"file\" name=\"name\" style=\"display: none\" />\n\n                  <app-image-custom-spinner onclick=\"document.getElementById('single-image').click();\" *ngIf=\"image\"\n                    [imageUrl]=\"image\"></app-image-custom-spinner>\n                </div>\n              </div>\n            </div>\n            <!-- end image -->\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"> <small class=\"text-danger \">*</small> event name</ion-label>\n                  <ion-input type=\"text\" #eventName=\"ngModel\" name=\"eventName\" [(ngModel)]=\"eventModel.eventName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <ion-label position=\"floating\">Start date</ion-label>\n                  <div class=\"text-input \">\n\n                    <ion-input type=\"date\" name=\"date\" [value]=\"eventModel?.startDate\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <ion-label position=\"floating\">End date</ion-label>\n                  <div class=\"text-input \">\n                    <ion-input type=\"date\" name=\"date\" [value]=\"eventModel?.endDate\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> company name</ion-label>\n                  <ion-input type=\"text\" #companyName=\"ngModel\" name=\"companyName\" [(ngModel)]=\"eventModel.companyName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> address</ion-label>\n                  <ion-input type=\"text\" #address=\"ngModel\" name=\"address\" [(ngModel)]=\"eventModel.address\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> contact number</ion-label>\n                  <ion-input type=\"text\" #contactNumber=\"ngModel\" name=\"contactNumber\"\n                    [(ngModel)]=\"eventModel.contactNumber\" required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> about event</ion-label>\n                  <ion-input type=\"text\" #aboutEvent=\"ngModel\" name=\"aboutEvent\" [(ngModel)]=\"eventModel.aboutEvent\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> venue</ion-label>\n                  <ion-input type=\"text\" #venue=\"ngModel\" name=\"venue\" [(ngModel)]=\"eventModel.venue\" required=\"true\">\n                  </ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n\n            <ion-row>\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">cost per vote</ion-label>\n                    <ion-input type=\"text\" #costPerVote=\"ngModel\" name=\"costPerVote\"\n                      [(ngModel)]=\"eventModel.costPerVote\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">Start time</ion-label>\n                    <ion-input type=\"time\" #date=\"ngModel\" name=\"date\" [value]=\"eventModel?.startTime\"\n                      [(ngModel)]=\"eventModel.startTime\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">number of slot</ion-label>\n                    <ion-input type=\"text\" #numberOfSlot=\"ngModel\" name=\"numberOfSlot\"\n                      [(ngModel)]=\"eventModel.numberOfSlot\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">i-sabi sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_isabi=\"ngModel\" name=\"sharingRatio_isabi\"\n                      [(ngModel)]=\"eventModel.sharingRatio_isabi\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">company's sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_company=\"ngModel\" name=\"sharingRatio_company\"\n                      [(ngModel)]=\"eventModel.sharingRatio_company\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">busin's partner sharing ratio</ion-label>\n                    <ion-input type=\"text\" #businessSharingRatio=\"ngModel\" name=\"businessSharingRatio\"\n                      [(ngModel)]=\"eventModel.businessSharingRatio\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\">account number</ion-label>\n                  <ion-input type=\"text\" #accountNumber=\"ngModel\" name=\"accountNumber\"\n                    [(ngModel)]=\"eventModel.accountNumber\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">account name</ion-label>\n                    <ion-input type=\"text\" #accountName=\"ngModel\" name=\"accountName\"\n                      [(ngModel)]=\"eventModel.accountName\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">bank name</ion-label>\n                    <ion-input type=\"text\" #bankName=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.bankName\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n            <ion-list>\n              <ion-item color=\"light\">\n                <ion-input type=\"text\" #bankname=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.eventOwner\"\n                  placeholder=\"(optional username)  event owner\"></ion-input>\n\n              </ion-item>\n              <ion-item color=\"light\">\n                <div class=\"p-3\">\n                  <ion-button (click)=\"updateEvent()\" *ngIf=\" eventForm.valid\">update</ion-button>\n\n                </div>\n              </ion-item>\n            </ion-list>\n\n\n          </form>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>");
 
 /***/ }),
 
@@ -557,7 +570,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"\n           src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size-xs=\"12\"\n               size-sm=\"12\"\n               size-md=\"8\"\n               offset-md=\"2\"\n               size-lg=\"6\"\n               offset-lg=\"3\">\n        <ion-card color=\"light\"\n                  *ngFor=\"let item of allEvent\">\n          <img [src]=\"item.image_url\">\n\n          <div class=\"ion-text-center\">\n            <ion-title mode=\"md\"\n                       class=\"text-uppercase font-weight-bold\">{{item.eventName}}</ion-title>\n            <ion-text>{{item.aboutEvent}} </ion-text>\n\n            <small>{{item.type}} </small>\n\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\"\n                      (click)=\"handleDelete(item)\"\n                      name=\"trash\">\n            </ion-icon>\n          </div>\n          \n          <ion-item color=\"dark\">\n            <ion-label>Live</ion-label>\n            <ion-toggle [checked]=\"item.active\" color=\"success\" (ionChange)=\"changeStatus($event,item._id)\" ></ion-toggle> \n          </ion-item>\n\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\"\n       class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size-xs=\"12\" size-sm=\"12\" size-md=\"8\" offset-md=\"2\" size-lg=\"6\" offset-lg=\"3\">\n        <ion-card color=\"success\" class=\"p-1\" *ngFor=\"let item of allEvent\">\n          <img [src]=\"item.image_url\">\n\n          <div class=\"ion-text-center\">\n            <ion-title mode=\"md\" class=\"text-uppercase font-weight-bold\">{{item.eventName}}</ion-title>\n            <ion-text>{{item.aboutEvent}} </ion-text>\n            <div *ngIf=\"item?.startDate\">{{item?.startDate |date}} to {{item?.endDate|date}} </div> <br>\n            <small class=\"text-center\">{{item?.startTime }} </small> <br>\n\n            <small class=\"text-center\">{{item.type}} </small>\n\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"handleDelete(item)\" name=\"trash\">\n            </ion-icon>\n          </div>\n\n          <ion-item color=\"dark\">\n            <ion-label>Live</ion-label>\n\n            <ion-toggle class=\"p-1\" [checked]=\"item.active\" color=\"success\" (ionChange)=\"changeStatus($event,item._id)\">\n            </ion-toggle>\n            <ion-button (click)=\"editEvent(item)\" color=\"light\">\n              edit\n            </ion-button>\n\n          </ion-item>\n\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>");
 
 /***/ }),
 
@@ -1162,6 +1175,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./components/buy-ticket/buy-ticket.component */ "./src/app/components/buy-ticket/buy-ticket.component.ts");
 /* harmony import */ var _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./components/ticket-item/ticket-item.component */ "./src/app/components/ticket-item/ticket-item.component.ts");
 /* harmony import */ var _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./components/web-ticket/web-ticket.component */ "./src/app/components/web-ticket/web-ticket.component.ts");
+/* harmony import */ var _components_edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./components/edit-event/edit-event.component */ "./src/app/components/edit-event/edit-event.component.ts");
 
 
 
@@ -1215,6 +1229,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let AppModule = class AppModule {
 };
 AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -1229,6 +1244,7 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"],
             _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"],
             _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"],
+            _components_edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_52__["EditEventComponent"],
             _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__["WebTicketComponent"],
             _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
         entryComponents: [_components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"],
@@ -1527,15 +1543,6 @@ let AccountComponent = class AccountComponent {
             amount: null,
             cashout: '',
             username: ''
-        };
-        this.RaveOptions = {
-            PBFPubKey: 'FLWPUBK_TEST-0e44fc52fddf09104dc7aa889c085b11-X',
-            customer_email: 'swagasoft@gmail.com',
-            custom_description: 'i-sabi credit',
-            amount: 500000,
-            currency: 'NGN',
-            customer_phone: '09026464646',
-            txref: '238485458496',
         };
         this.accountService.loadMyBalance();
         console.log('REF2', this.reference);
@@ -1905,7 +1912,7 @@ let AdminEventComponent = class AdminEventComponent {
         this.eventModel = {
             eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '', bankname: '',
             costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '', sharingRatio_company: '', accountNumber: '', accountName: '',
-            eventOwner: '', venue: null, startDate: null, time: null, businessSharingRatio: null
+            eventOwner: '', venue: null, startDate: null, time: null, businessSharingRatio: null, endDate: null, startTime: null
         };
     }
     ngOnInit() {
@@ -1933,7 +1940,7 @@ let AdminEventComponent = class AdminEventComponent {
             contactNumber: '', aboutEvent: '', bankname: '',
             costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',
             sharingRatio_company: '', accountNumber: '', accountName: '', eventOwner: '',
-            venue: null, startDate: null, time: null, businessSharingRatio: null
+            venue: null, startDate: null, time: null, businessSharingRatio: null, endDate: null, startTime: null
         };
     }
     addImagesFirebase(event) {
@@ -2203,6 +2210,137 @@ CongratsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./congrats.component.scss */ "./src/app/components/congrats/congrats.component.scss")).default]
     })
 ], CongratsComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/edit-event/edit-event.component.scss":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/edit-event/edit-event.component.scss ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZWRpdC1ldmVudC9lZGl0LWV2ZW50LmNvbXBvbmVudC5zY3NzIn0= */");
+
+/***/ }),
+
+/***/ "./src/app/components/edit-event/edit-event.component.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/components/edit-event/edit-event.component.ts ***!
+  \***************************************************************/
+/*! exports provided: EditEventComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditEventComponent", function() { return EditEventComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var src_app_services_firebase_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/services/firebase.service */ "./src/app/services/firebase.service.ts");
+/* harmony import */ var src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/logic.service */ "./src/app/services/logic.service.ts");
+/* harmony import */ var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/event.service */ "./src/app/shared/event.service.ts");
+
+
+
+
+
+
+let EditEventComponent = class EditEventComponent {
+    constructor(modalController, fireService, logicService, eventService) {
+        this.modalController = modalController;
+        this.fireService = fireService;
+        this.logicService = logicService;
+        this.eventService = eventService;
+        this.eventModel = {
+            _id: '',
+            eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '', bankName: '',
+            costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '', sharingRatio_company: '', accountNumber: '', accountName: '',
+            eventOwner: '', venue: null, startDate: null, businessSharingRatio: null, endDate: null, startTime: null
+        };
+    }
+    ngOnInit() {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3;
+        console.log(this.event);
+        this.image = (_a = this.event) === null || _a === void 0 ? void 0 : _a.image_url;
+        this.eventModel = {
+            eventName: (_b = this.event) === null || _b === void 0 ? void 0 : _b.eventName, type: (_c = this.event) === null || _c === void 0 ? void 0 : _c.type, image_url: (_d = this.event) === null || _d === void 0 ? void 0 : _d.image_url,
+            companyName: (_e = this.event) === null || _e === void 0 ? void 0 : _e.companyName, address: (_f = this.event) === null || _f === void 0 ? void 0 : _f.address, contactNumber: (_g = this.event) === null || _g === void 0 ? void 0 : _g.contactNumber,
+            aboutEvent: (_h = this.event) === null || _h === void 0 ? void 0 : _h.aboutEvent, bankName: (_k = (_j = this.event) === null || _j === void 0 ? void 0 : _j.voting_properties) === null || _k === void 0 ? void 0 : _k.bankName,
+            _id: this.event,
+            costPerVote: (_m = (_l = this.event) === null || _l === void 0 ? void 0 : _l.voting_properties) === null || _m === void 0 ? void 0 : _m.costPerVote, numberOfSlot: (_p = (_o = this.event) === null || _o === void 0 ? void 0 : _o.voting_properties) === null || _p === void 0 ? void 0 : _p.numberOfSlot,
+            sharingRatio_isabi: (_r = (_q = this.event) === null || _q === void 0 ? void 0 : _q.voting_properties) === null || _r === void 0 ? void 0 : _r.sharingRatio_isabi,
+            sharingRatio_company: (_t = (_s = this.event) === null || _s === void 0 ? void 0 : _s.voting_properties) === null || _t === void 0 ? void 0 : _t.sharingRatio_company, accountNumber: (_v = (_u = this.event) === null || _u === void 0 ? void 0 : _u.voting_properties) === null || _v === void 0 ? void 0 : _v.accountNumber,
+            accountName: (_x = (_w = this.event) === null || _w === void 0 ? void 0 : _w.voting_properties) === null || _x === void 0 ? void 0 : _x.accountName, startTime: (_y = this.event) === null || _y === void 0 ? void 0 : _y.startTime, endDate: (_z = this.event) === null || _z === void 0 ? void 0 : _z.endDate,
+            eventOwner: (_0 = this.event) === null || _0 === void 0 ? void 0 : _0.eventOwner, venue: (_1 = this.event) === null || _1 === void 0 ? void 0 : _1.venue, startDate: (_2 = this.event) === null || _2 === void 0 ? void 0 : _2.startDate,
+            businessSharingRatio: (_3 = this.event) === null || _3 === void 0 ? void 0 : _3.businessSharingRatio
+        };
+    }
+    dismiss() {
+        this.modalController.dismiss();
+    }
+    updateEvent() {
+        console.log(this.eventModel);
+        this.loading = true;
+        this.eventService.updateEvent(this.eventModel).subscribe(response => {
+            console.log(response);
+            this.modalController.dismiss(response, "exist");
+            this.loading = false;
+        }, err => {
+            this.loading = false;
+            this.logicService.presentToast(err.error.msg);
+        });
+    }
+    addImagesFirebase(event) {
+        const files = event.target.files;
+        const j = files.length;
+        let file;
+        for (let i = 0; i < j; i++) {
+            const reader = new FileReader();
+            file = files[i];
+            console.log(file);
+            this.uploadImageToFireBase(file);
+        }
+    }
+    uploadImageToFireBase(image) {
+        this.loading = true;
+        try {
+            this.fireService.uploadFile(image).then((success) => {
+                const imageRef = success.ref.fullPath;
+                this.fireService.downloadItem(imageRef).subscribe(imageUrl => {
+                    this.image = imageUrl;
+                    this.eventModel.image_url = imageUrl;
+                    this.loading = false;
+                });
+            });
+        }
+        catch (error) {
+            this.loading = false;
+            console.log(error);
+            this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
+        }
+    }
+};
+EditEventComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: src_app_services_firebase_service__WEBPACK_IMPORTED_MODULE_3__["FirebaseService"] },
+    { type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"] },
+    { type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"] }
+];
+EditEventComponent.propDecorators = {
+    event: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"] }]
+};
+EditEventComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-edit-event',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! raw-loader!./edit-event.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/edit-event/edit-event.component.html")).default,
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(/*! ./edit-event.component.scss */ "./src/app/components/edit-event/edit-event.component.scss")).default]
+    })
+], EditEventComponent);
 
 
 
@@ -3396,6 +3534,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/shared/event.service */ "./src/app/shared/event.service.ts");
 /* harmony import */ var src_app_shared_game_service_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/shared/game-service.service */ "./src/app/shared/game-service.service.ts");
 /* harmony import */ var src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/shared/user.service */ "./src/app/shared/user.service.ts");
+/* harmony import */ var _edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../edit-event/edit-event.component */ "./src/app/components/edit-event/edit-event.component.ts");
+
 
 
 
@@ -3404,17 +3544,42 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ManageEventComponent = class ManageEventComponent {
-    constructor(router, gameService, eventService, userService, alertController) {
+    constructor(router, gameService, eventService, userService, modalController, alertController) {
         this.router = router;
         this.gameService = gameService;
         this.eventService = eventService;
         this.userService = userService;
+        this.modalController = modalController;
         this.alertController = alertController;
         this.allEvent = [];
         this.loading = true;
     }
     ngOnInit() {
         this.getAllevent();
+    }
+    editEvent(event) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: _edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_7__["EditEventComponent"],
+                componentProps: { event }
+            });
+            yield modal.present();
+            const data = yield modal.onDidDismiss();
+            console.log(data);
+            if (data.role === 'exist') {
+                console.log(data === null || data === void 0 ? void 0 : data.data);
+                event = data.data;
+                this.allEvent = this.allEvent.map((eve) => {
+                    if (eve._id === data.data._id) {
+                        eve = data.data;
+                        return eve;
+                    }
+                    else {
+                        return eve;
+                    }
+                });
+            }
+        });
     }
     getAllevent() {
         this.eventService.getAllEventAdmin().subscribe(res => {
@@ -3489,6 +3654,7 @@ ManageEventComponent.ctorParameters = () => [
     { type: src_app_shared_game_service_service__WEBPACK_IMPORTED_MODULE_5__["GameServiceService"] },
     { type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_4__["EventService"] },
     { type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] }
 ];
 ManageEventComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -4737,13 +4903,16 @@ let EventService = class EventService {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + `/v2/check-ticket-id/${ticketId}/${eventId}`);
     }
     savePurchaseTicket(ticket) {
-        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/save-purched-ticket', ticket);
+        return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/save-purchased-ticket', ticket);
     }
     findMyTicket(eventId, email) {
         return this.http.get(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/find-my-ticket/' + eventId + "/" + email);
     }
     submitEvent(event) {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/submit-event', event);
+    }
+    updateEvent(event) {
+        return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/update-event', event);
     }
     createContestTant(contestant) {
         return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/create-contestant', contestant);

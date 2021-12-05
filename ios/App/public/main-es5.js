@@ -234,7 +234,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    \n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons> <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"  src=\"../../../assets/icon/Logoicon.png\">\n    </div> \n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content ion-padding>\n\n  <ion-grid >\n    <ion-row>\n      <ion-col sizeSm=\"12\" sizeXs=\"12\" sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"10\"  offsetMd=\"1\">\n\n        <ion-card >\n       \n          <form #eventForm=\"ngForm\" name=\"eventform\" (submit)=\"eventForm.valid && submitEvent()\">\n            <h5 class=\"ion-text-center\">CREATE EVENT</h5>\n\n                \n              <!-- image -->\n              <div class=\"mt-3 mb-2\">\n                <ion-progress-bar\n                  *ngIf=\"loading\"\n                  type=\"indeterminate\"\n                ></ion-progress-bar>\n                <div class=\"ion-text-center\">\n                  <div class=\"cover-photo\">\n                    <button  *ngIf=\"!image\"\n                      onclick=\"document.getElementById('single-image').click();\"\n                    >\n                      <i class=\"fas fa-image fa-5x lat\"></i>\n                    </button>\n                    <input\n                      id=\"single-image\"\n                      accept=\"image/*\"\n                      #singleImage\n                      (change)=\"addImagesFirebase($event)\"\n                      type=\"file\"\n                      name=\"name\"\n                      style=\"display: none\"\n                    />\n  \n                    <app-image-custom-spinner\n                      onclick=\"document.getElementById('single-image').click();\"\n                      *ngIf=\"image\"\n                      [imageUrl]=\"image\"\n                    ></app-image-custom-spinner>\n                  </div>\n                </div>\n              </div>\n              <!-- end image -->\n            \n            <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" > <small class=\"text-danger \">*</small> event name</ion-label>\n                  <ion-input  type=\"text\" #eventName=\"ngModel\" name=\"eventName\" \n                  [(ngModel)]=\"eventModel.eventName\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col>\n              <!-- select options -->\n              <ion-card>\n                <ion-label class=\"text-center\" ><small class=\"text-danger\">*</small>  select event type</ion-label>\n\n                <ion-item color=\"light\">\n                <ion-select select=\"success\" interface=\"popover\" name=\"type\"\n                 (ngModelChange)=\"eventType($event)\"  [(ngModel)]=\"eventModel.type\" >\n               <ion-select-option  value=\"VOTING\">VOTING</ion-select-option>\n               <ion-select-option  value=\"TICKETING\">TICKETING</ion-select-option>\n               <ion-select-option  value=\"FORM-SALES\">FORM-SALES</ion-select-option>\n                </ion-select>\n              </ion-item>\n              <small *ngIf=\"eventName.value && !eventModel.type\" class=\"text-center text-danger\"><small class=\"text-danger \">*</small>  select event type</small>\n            </ion-card>\n             </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> company name</ion-label>\n                  <ion-input  type=\"text\" #companyName=\"ngModel\" name=\"companyName\" \n                  [(ngModel)]=\"eventModel.companyName\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> address</ion-label>\n                  <ion-input  type=\"text\" #address=\"ngModel\" name=\"address\" \n                  [(ngModel)]=\"eventModel.address\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> contact number</ion-label>\n                  <ion-input  type=\"text\" #contactNumber=\"ngModel\" name=\"contactNumber\" \n                  [(ngModel)]=\"eventModel.contactNumber\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n             <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> about event</ion-label>\n                  <ion-input  type=\"text\" #aboutEvent=\"ngModel\" name=\"aboutEvent\" \n                  [(ngModel)]=\"eventModel.aboutEvent\" required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n             <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" ><small class=\"text-danger \">*</small> venue</ion-label>\n                  <ion-input  type=\"text\" #venue=\"ngModel\" name=\"venue\" \n                  [(ngModel)]=\"eventModel.venue\"required=\"true\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n        \n            <ion-row>\n              \n             <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >cost per vote</ion-label>\n                  <ion-input  type=\"text\" #costPerVote=\"ngModel\" name=\"costPerVote\" \n                  [(ngModel)]=\"eventModel.costPerVote\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n           \n\n             <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >date</ion-label>\n                  <ion-input  type=\"date\" #date=\"ngModel\" name=\"date\" \n                  [(ngModel)]=\"eventModel.startDate\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n\n             <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >time</ion-label>\n                  <ion-input  type=\"time\" #time=\"ngModel\" name=\"time\" \n                  [(ngModel)]=\"eventModel.time\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n               \n            <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >number of slot</ion-label>\n                  <ion-input  type=\"text\" #numberOfSlot=\"ngModel\" name=\"numberOfSlot\" \n                  [(ngModel)]=\"eventModel.numberOfSlot\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col> \n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\">i-sabi sharing ratio</ion-label>\n                  <ion-input  type=\"text\" #sharingRatio_isabi=\"ngModel\" name=\"sharingRatio_isabi\" \n                  [(ngModel)]=\"eventModel.sharingRatio_isabi\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >company's sharing ratio</ion-label>\n                  <ion-input  type=\"text\" #sharingRatio_company=\"ngModel\" name=\"sharingRatio_company\" \n                  [(ngModel)]=\"eventModel.sharingRatio_company\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >busin's partner sharing ratio</ion-label>\n                  <ion-input  type=\"text\" #businessSharingRatio=\"ngModel\" name=\"businessSharingRatio\" \n                  [(ngModel)]=\"eventModel.businessSharingRatio\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n            </ion-row>\n        \n            <ion-col >\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >account number</ion-label>\n                  <ion-input  type=\"text\" #accountNumber=\"ngModel\" name=\"accountNumber\" \n                  [(ngModel)]=\"eventModel.accountNumber\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n           <ion-row>\n            <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >account name</ion-label>\n                  <ion-input  type=\"text\" #accountName=\"ngModel\" name=\"accountName\" \n                  [(ngModel)]=\"eventModel.accountName\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n        \n            <ion-col>\n              <ion-item color=\"light\">\n                <div  class=\"text-input \">\n                  <ion-label position=\"floating\" >bank name</ion-label>\n                  <ion-input  type=\"text\" #bankname=\"ngModel\" name=\"bankname\" \n                  [(ngModel)]=\"eventModel.bankname\"></ion-input>\n              </div>\n            </ion-item>\n            </ion-col>\n           </ion-row>\n           <ion-list>\n             <ion-item color=\"light\">\n              <ion-input  type=\"text\" #bankname=\"ngModel\" name=\"bankname\" \n              [(ngModel)]=\"eventModel.eventOwner\" placeholder=\"(optional username)  event owner\"></ion-input>\n               \n             </ion-item>\n             <ion-item color=\"light\">\n              <div class=\"p-3\">\n              <ion-button (click)=\"submitEvent()\" *ngIf=\"eventModel.type  && eventForm.valid\">submit</ion-button>\n\n              </div>\n             </ion-item>\n           </ion-list>\n        \n            \n          </form>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n  \n</ion-content>";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"../../../assets/icon/Logoicon.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content ion-padding>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col sizeSm=\"12\" sizeXs=\"12\" sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"10\" offsetMd=\"1\">\n\n        <ion-card>\n\n          <form #eventForm=\"ngForm\" name=\"eventform\" (submit)=\"eventForm.valid && submitEvent()\">\n            <h5 class=\"ion-text-center\">CREATE EVENT</h5>\n\n\n            <!-- image -->\n            <div class=\"mt-3 mb-2\">\n              <ion-progress-bar *ngIf=\"loading\" type=\"indeterminate\"></ion-progress-bar>\n              <div class=\"ion-text-center\">\n                <div class=\"cover-photo\">\n                  <button *ngIf=\"!image\" onclick=\"document.getElementById('single-image').click();\">\n                    <i class=\"fas fa-image fa-5x lat\"></i>\n                  </button>\n                  <input id=\"single-image\" accept=\"image/*\" #singleImage (change)=\"addImagesFirebase($event)\"\n                    type=\"file\" name=\"name\" style=\"display: none\" />\n\n                  <app-image-custom-spinner onclick=\"document.getElementById('single-image').click();\" *ngIf=\"image\"\n                    [imageUrl]=\"image\"></app-image-custom-spinner>\n                </div>\n              </div>\n            </div>\n            <!-- end image -->\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"> <small class=\"text-danger \">*</small> event name</ion-label>\n                  <ion-input type=\"text\" #eventName=\"ngModel\" name=\"eventName\" [(ngModel)]=\"eventModel.eventName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <!-- select options -->\n              <ion-card>\n                <ion-label class=\"text-center\"><small class=\"text-danger\">*</small> select event type</ion-label>\n\n                <ion-item color=\"light\">\n                  <ion-select select=\"success\" interface=\"popover\" name=\"type\" (ngModelChange)=\"eventType($event)\"\n                    [(ngModel)]=\"eventModel.type\">\n                    <ion-select-option value=\"VOTING\">VOTING</ion-select-option>\n                    <ion-select-option value=\"TICKETING\">TICKETING</ion-select-option>\n                    <ion-select-option value=\"FORM-SALES\">FORM-SALES</ion-select-option>\n                  </ion-select>\n                </ion-item>\n                <small *ngIf=\"eventName.value && !eventModel.type\" class=\"text-center text-danger\"><small\n                    class=\"text-danger \">*</small> select event type</small>\n              </ion-card>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> company name</ion-label>\n                  <ion-input type=\"text\" #companyName=\"ngModel\" name=\"companyName\" [(ngModel)]=\"eventModel.companyName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> address</ion-label>\n                  <ion-input type=\"text\" #address=\"ngModel\" name=\"address\" [(ngModel)]=\"eventModel.address\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> contact number</ion-label>\n                  <ion-input type=\"text\" #contactNumber=\"ngModel\" name=\"contactNumber\"\n                    [(ngModel)]=\"eventModel.contactNumber\" required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> about event</ion-label>\n                  <ion-input type=\"text\" #aboutEvent=\"ngModel\" name=\"aboutEvent\" [(ngModel)]=\"eventModel.aboutEvent\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> venue</ion-label>\n                  <ion-input type=\"text\" #venue=\"ngModel\" name=\"venue\" [(ngModel)]=\"eventModel.venue\" required=\"true\">\n                  </ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-input type=\"date\" #startDate=\"ngModel\" name=\"date\" [(ngModel)]=\"eventModel.startDate\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-input type=\"date\" #endDate=\"ngModel\" name=\"date\" [(ngModel)]=\"eventModel.endDate\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n\n            <ion-row>\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">cost per vote</ion-label>\n                    <ion-input type=\"text\" #costPerVote=\"ngModel\" name=\"costPerVote\"\n                      [(ngModel)]=\"eventModel.costPerVote\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">Time</ion-label>\n                    <ion-input type=\"time\" #time=\"ngModel\" name=\"time\" [(ngModel)]=\"eventModel.startTime\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">time</ion-label>\n                    <ion-input type=\"time\" #time=\"ngModel\" name=\"time\" [(ngModel)]=\"eventModel.time\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">number of slot</ion-label>\n                    <ion-input type=\"text\" #numberOfSlot=\"ngModel\" name=\"numberOfSlot\"\n                      [(ngModel)]=\"eventModel.numberOfSlot\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">i-sabi sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_isabi=\"ngModel\" name=\"sharingRatio_isabi\"\n                      [(ngModel)]=\"eventModel.sharingRatio_isabi\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">company's sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_company=\"ngModel\" name=\"sharingRatio_company\"\n                      [(ngModel)]=\"eventModel.sharingRatio_company\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">busin's partner sharing ratio</ion-label>\n                    <ion-input type=\"text\" #businessSharingRatio=\"ngModel\" name=\"businessSharingRatio\"\n                      [(ngModel)]=\"eventModel.businessSharingRatio\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\">account number</ion-label>\n                  <ion-input type=\"text\" #accountNumber=\"ngModel\" name=\"accountNumber\"\n                    [(ngModel)]=\"eventModel.accountNumber\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">account name</ion-label>\n                    <ion-input type=\"text\" #accountName=\"ngModel\" name=\"accountName\"\n                      [(ngModel)]=\"eventModel.accountName\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">bank name</ion-label>\n                    <ion-input type=\"text\" #bankname=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.bankname\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n            <ion-list>\n              <ion-item color=\"light\">\n                <ion-input type=\"text\" #bankname=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.eventOwner\"\n                  placeholder=\"(optional username)  event owner\"></ion-input>\n\n              </ion-item>\n              <ion-item color=\"light\">\n                <div class=\"p-3\">\n                  <ion-button (click)=\"submitEvent()\" *ngIf=\"eventModel.type  && eventForm.valid\">submit</ion-button>\n\n                </div>\n              </ion-item>\n            </ion-list>\n\n\n          </form>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>";
       /***/
     },
 
@@ -275,6 +275,26 @@
 
 
       __webpack_exports__["default"] = "\n<div class=\"ion-padding\">\n  <ion-icon size=\"large\" (click)=\"dismissModal()\" slot=\"end\" name=\"close\"></ion-icon>\n \n </div>\n \n <ion-content>\n \n   <div class=\"content\">\n \n   <ion-grid fixed class=\"mt-5\">\n     <ion-row class=\"ion-justify-content-center\">\n       <ion-col size=\"8\">\n         \n         <div class=\"text-center\">\n           <img src=\"/assets/img/congrants_image.jpg\"  width=\"250\" alt=\"\">\n         </div>\n \n         <ion-list>\n           <ion-item class=\"ion-padding\" color=\"light\">\n             <ion-label>Elapsed </ion-label>\n             <div slot=\"end\" >  <strong>{{minutes}} </strong> min, <strong>{{seconds}} </strong> seconds  </div>\n             <div></div>\n           </ion-item>\n \n           <ion-item class=\"ion-padding\" color=\"light\">\n             <ion-label>Correct Questions </ion-label>\n             <div slot=\"end\"> <strong>{{correctQuestion}}/15 </strong> </div>\n           </ion-item>\n         </ion-list>\n \n         <ion-row class=\"ion-justify-content-center\">\n           <ion-button (click)=\"dismissModal()\" expand=\"block\" fill=\"outline\" color=\"dark\">\n            close\n           </ion-button>\n           <ion-button (click)=\"playAgain()\" expand=\"block\" fill=\"outline\" color=\"success\">\n             play \n           </ion-button>\n         </ion-row>\n         \n       </ion-col>\n     </ion-row>\n   </ion-grid>\n   </div>\n \n </ion-content>\n ";
+      /***/
+    },
+
+    /***/
+    "./node_modules/raw-loader/dist/cjs.js!./src/app/components/edit-event/edit-event.component.html":
+    /*!*******************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/components/edit-event/edit-event.component.html ***!
+      \*******************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function node_modulesRawLoaderDistCjsJsSrcAppComponentsEditEventEditEventComponentHtml(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-item>\n      <ion-button (click)=\"dismiss()\">\n        <ion-icon slot=\"start\" name=\"close\"></ion-icon>\n      </ion-button>\n    </ion-item>\n  </ion-toolbar>\n</ion-header>\n\n\n\n<ion-content ion-padding>\n\n  <ion-grid>\n    <ion-row>\n      <ion-col sizeSm=\"12\" sizeXs=\"12\" sizeLg=\"8\" offsetLg=\"2\" sizeMd=\"10\" offsetMd=\"1\">\n\n        <ion-card>\n\n          <form #eventForm=\"ngForm\" name=\"eventform\">\n            <h5 class=\"ion-text-center\">UPDATE EVENT</h5>\n\n\n            <!-- image -->\n            <div class=\"mt-3 mb-2\">\n              <ion-progress-bar *ngIf=\"loading\" type=\"indeterminate\"></ion-progress-bar>\n              <div class=\"ion-text-center\">\n                <div class=\"cover-photo\">\n                  <button *ngIf=\"!image\" onclick=\"document.getElementById('single-image').click();\">\n                    <i class=\"fas fa-image fa-5x lat\"></i>\n                  </button>\n                  <input id=\"single-image\" accept=\"image/*\" #singleImage (change)=\"addImagesFirebase($event)\"\n                    type=\"file\" name=\"name\" style=\"display: none\" />\n\n                  <app-image-custom-spinner onclick=\"document.getElementById('single-image').click();\" *ngIf=\"image\"\n                    [imageUrl]=\"image\"></app-image-custom-spinner>\n                </div>\n              </div>\n            </div>\n            <!-- end image -->\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"> <small class=\"text-danger \">*</small> event name</ion-label>\n                  <ion-input type=\"text\" #eventName=\"ngModel\" name=\"eventName\" [(ngModel)]=\"eventModel.eventName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <ion-label position=\"floating\">Start date</ion-label>\n                  <div class=\"text-input \">\n\n                    <ion-input type=\"date\" name=\"date\" [value]=\"eventModel?.startDate\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n              <ion-col size=\"6\">\n                <ion-item color=\"light\">\n                  <ion-label position=\"floating\">End date</ion-label>\n                  <div class=\"text-input \">\n                    <ion-input type=\"date\" name=\"date\" [value]=\"eventModel?.endDate\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> company name</ion-label>\n                  <ion-input type=\"text\" #companyName=\"ngModel\" name=\"companyName\" [(ngModel)]=\"eventModel.companyName\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> address</ion-label>\n                  <ion-input type=\"text\" #address=\"ngModel\" name=\"address\" [(ngModel)]=\"eventModel.address\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> contact number</ion-label>\n                  <ion-input type=\"text\" #contactNumber=\"ngModel\" name=\"contactNumber\"\n                    [(ngModel)]=\"eventModel.contactNumber\" required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> about event</ion-label>\n                  <ion-input type=\"text\" #aboutEvent=\"ngModel\" name=\"aboutEvent\" [(ngModel)]=\"eventModel.aboutEvent\"\n                    required=\"true\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-col *ngIf=\"eventModel.type === 'TICKETING'\">\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\"><small class=\"text-danger \">*</small> venue</ion-label>\n                  <ion-input type=\"text\" #venue=\"ngModel\" name=\"venue\" [(ngModel)]=\"eventModel.venue\" required=\"true\">\n                  </ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n\n            <ion-row>\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">cost per vote</ion-label>\n                    <ion-input type=\"text\" #costPerVote=\"ngModel\" name=\"costPerVote\"\n                      [(ngModel)]=\"eventModel.costPerVote\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">Start time</ion-label>\n                    <ion-input type=\"time\" #date=\"ngModel\" name=\"date\" [value]=\"eventModel?.startTime\"\n                      [(ngModel)]=\"eventModel.startTime\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n\n\n\n              <ion-col *ngIf=\"eventModel.type === 'VOTING'\">\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">number of slot</ion-label>\n                    <ion-input type=\"text\" #numberOfSlot=\"ngModel\" name=\"numberOfSlot\"\n                      [(ngModel)]=\"eventModel.numberOfSlot\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">i-sabi sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_isabi=\"ngModel\" name=\"sharingRatio_isabi\"\n                      [(ngModel)]=\"eventModel.sharingRatio_isabi\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">company's sharing ratio</ion-label>\n                    <ion-input type=\"text\" #sharingRatio_company=\"ngModel\" name=\"sharingRatio_company\"\n                      [(ngModel)]=\"eventModel.sharingRatio_company\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">busin's partner sharing ratio</ion-label>\n                    <ion-input type=\"text\" #businessSharingRatio=\"ngModel\" name=\"businessSharingRatio\"\n                      [(ngModel)]=\"eventModel.businessSharingRatio\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n\n            <ion-col>\n              <ion-item color=\"light\">\n                <div class=\"text-input \">\n                  <ion-label position=\"floating\">account number</ion-label>\n                  <ion-input type=\"text\" #accountNumber=\"ngModel\" name=\"accountNumber\"\n                    [(ngModel)]=\"eventModel.accountNumber\"></ion-input>\n                </div>\n              </ion-item>\n            </ion-col>\n\n            <ion-row>\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">account name</ion-label>\n                    <ion-input type=\"text\" #accountName=\"ngModel\" name=\"accountName\"\n                      [(ngModel)]=\"eventModel.accountName\"></ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n\n              <ion-col>\n                <ion-item color=\"light\">\n                  <div class=\"text-input \">\n                    <ion-label position=\"floating\">bank name</ion-label>\n                    <ion-input type=\"text\" #bankName=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.bankName\">\n                    </ion-input>\n                  </div>\n                </ion-item>\n              </ion-col>\n            </ion-row>\n            <ion-list>\n              <ion-item color=\"light\">\n                <ion-input type=\"text\" #bankname=\"ngModel\" name=\"bankname\" [(ngModel)]=\"eventModel.eventOwner\"\n                  placeholder=\"(optional username)  event owner\"></ion-input>\n\n              </ion-item>\n              <ion-item color=\"light\">\n                <div class=\"p-3\">\n                  <ion-button (click)=\"updateEvent()\" *ngIf=\" eventForm.valid\">update</ion-button>\n\n                </div>\n              </ion-item>\n            </ion-list>\n\n\n          </form>\n        </ion-card>\n\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n</ion-content>";
       /***/
     },
 
@@ -474,7 +494,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\"\n           src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size-xs=\"12\"\n               size-sm=\"12\"\n               size-md=\"8\"\n               offset-md=\"2\"\n               size-lg=\"6\"\n               offset-lg=\"3\">\n        <ion-card color=\"light\"\n                  *ngFor=\"let item of allEvent\">\n          <img [src]=\"item.image_url\">\n\n          <div class=\"ion-text-center\">\n            <ion-title mode=\"md\"\n                       class=\"text-uppercase font-weight-bold\">{{item.eventName}}</ion-title>\n            <ion-text>{{item.aboutEvent}} </ion-text>\n\n            <small>{{item.type}} </small>\n\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\"\n                      (click)=\"handleDelete(item)\"\n                      name=\"trash\">\n            </ion-icon>\n          </div>\n          \n          <ion-item color=\"dark\">\n            <ion-label>Live</ion-label>\n            <ion-toggle [checked]=\"item.active\" color=\"success\" (ionChange)=\"changeStatus($event,item._id)\" ></ion-toggle> \n          </ion-item>\n\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\"\n       class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>\n";
+      __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <div class=\"row d-flex justify-content-center\">\n      <img class=\"rounded-top\" src=\"assets/img/ISABI LOGO GREEN.png\">\n    </div>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-grid>\n    <ion-row>\n      <ion-col size-xs=\"12\" size-sm=\"12\" size-md=\"8\" offset-md=\"2\" size-lg=\"6\" offset-lg=\"3\">\n        <ion-card color=\"success\" class=\"p-1\" *ngFor=\"let item of allEvent\">\n          <img [src]=\"item.image_url\">\n\n          <div class=\"ion-text-center\">\n            <ion-title mode=\"md\" class=\"text-uppercase font-weight-bold\">{{item.eventName}}</ion-title>\n            <ion-text>{{item.aboutEvent}} </ion-text>\n            <div *ngIf=\"item?.startDate\">{{item?.startDate |date}} to {{item?.endDate|date}} </div> <br>\n            <small class=\"text-center\">{{item?.startTime }} </small> <br>\n\n            <small class=\"text-center\">{{item.type}} </small>\n\n            <ion-icon *ngIf=\"userService.getRole() == 'ADMIN'\" (click)=\"handleDelete(item)\" name=\"trash\">\n            </ion-icon>\n          </div>\n\n          <ion-item color=\"dark\">\n            <ion-label>Live</ion-label>\n\n            <ion-toggle class=\"p-1\" [checked]=\"item.active\" color=\"success\" (ionChange)=\"changeStatus($event,item._id)\">\n            </ion-toggle>\n            <ion-button (click)=\"editEvent(item)\" color=\"light\">\n              edit\n            </ion-button>\n\n          </ion-item>\n\n        </ion-card>\n      </ion-col>\n    </ion-row>\n  </ion-grid>\n\n  <!-- loader -->\n  <div *ngIf=\"loading\" class=\" \">\n    <div class=\"toast-container \">\n      <div class=\"lds-roller\">\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n        <div></div>\n      </div>\n    </div>\n  </div>\n</ion-content>";
       /***/
     },
 
@@ -1656,7 +1676,13 @@
 
       var _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(
       /*! ./components/web-ticket/web-ticket.component */
-      "./src/app/components/web-ticket/web-ticket.component.ts"); // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
+      "./src/app/components/web-ticket/web-ticket.component.ts");
+      /* harmony import */
+
+
+      var _components_edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(
+      /*! ./components/edit-event/edit-event.component */
+      "./src/app/components/edit-event/edit-event.component.ts"); // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 
 
       var AppModule = function AppModule() {
@@ -1664,7 +1690,7 @@
       };
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_20__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_27__["AppComponent"], _game_pipe__WEBPACK_IMPORTED_MODULE_36__["GamePipe"], _components_account_account_component__WEBPACK_IMPORTED_MODULE_19__["AccountComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_12__["HeaderComponent"], _adminnavigation_adminnavigation_component__WEBPACK_IMPORTED_MODULE_16__["AdminnavigationComponent"], _components_admin_event_admin_event_component__WEBPACK_IMPORTED_MODULE_13__["AdminEventComponent"], _components_forgetpassword_forgetpassword_component__WEBPACK_IMPORTED_MODULE_17__["ForgetpasswordComponent"], _components_inside_event_inside_event_component__WEBPACK_IMPORTED_MODULE_11__["InsideEventComponent"], _components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"], _components_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_8__["TabsComponent"], _components_gamesection_gamesection_component__WEBPACK_IMPORTED_MODULE_7__["GamesectionComponent"], _components_not_live_not_live_component__WEBPACK_IMPORTED_MODULE_6__["NotLiveComponent"], _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_42__["WebVotingComponent"], _components_image_custom_spinner_image_custom_spinner_component__WEBPACK_IMPORTED_MODULE_44__["ImageCustomSpinnerComponent"], _components_inside_ticketing_inside_ticketing_component__WEBPACK_IMPORTED_MODULE_46__["InsideTicketingComponent"], _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"], _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"], _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"], _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"], _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__["WebTicketComponent"], _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_27__["AppComponent"], _game_pipe__WEBPACK_IMPORTED_MODULE_36__["GamePipe"], _components_account_account_component__WEBPACK_IMPORTED_MODULE_19__["AccountComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_12__["HeaderComponent"], _adminnavigation_adminnavigation_component__WEBPACK_IMPORTED_MODULE_16__["AdminnavigationComponent"], _components_admin_event_admin_event_component__WEBPACK_IMPORTED_MODULE_13__["AdminEventComponent"], _components_forgetpassword_forgetpassword_component__WEBPACK_IMPORTED_MODULE_17__["ForgetpasswordComponent"], _components_inside_event_inside_event_component__WEBPACK_IMPORTED_MODULE_11__["InsideEventComponent"], _components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"], _components_tabs_tabs_component__WEBPACK_IMPORTED_MODULE_8__["TabsComponent"], _components_gamesection_gamesection_component__WEBPACK_IMPORTED_MODULE_7__["GamesectionComponent"], _components_not_live_not_live_component__WEBPACK_IMPORTED_MODULE_6__["NotLiveComponent"], _components_web_voting_web_voting_component__WEBPACK_IMPORTED_MODULE_42__["WebVotingComponent"], _components_image_custom_spinner_image_custom_spinner_component__WEBPACK_IMPORTED_MODULE_44__["ImageCustomSpinnerComponent"], _components_inside_ticketing_inside_ticketing_component__WEBPACK_IMPORTED_MODULE_46__["InsideTicketingComponent"], _components_inside_ticket_add_ticket_inside_ticket_add_ticket_component__WEBPACK_IMPORTED_MODULE_47__["InsideTicketAddTicketComponent"], _components_manage_event_manage_event_component__WEBPACK_IMPORTED_MODULE_48__["ManageEventComponent"], _components_buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_49__["BuyTicketComponent"], _components_ticket_item_ticket_item_component__WEBPACK_IMPORTED_MODULE_50__["TicketItemComponent"], _components_edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_52__["EditEventComponent"], _components_web_ticket_web_ticket_component__WEBPACK_IMPORTED_MODULE_51__["WebTicketComponent"], _pipes_safe_url_pipe__WEBPACK_IMPORTED_MODULE_38__["SafeResourceUrlPipe"], _components_congrats_congrats_component__WEBPACK_IMPORTED_MODULE_4__["CongratsComponent"], _components_fail_game_fail_game_component__WEBPACK_IMPORTED_MODULE_3__["FailGameComponent"], _privacy_policy_privacy_policy_component__WEBPACK_IMPORTED_MODULE_1__["PrivacyPolicyComponent"], _splash_splash_component__WEBPACK_IMPORTED_MODULE_23__["SplashComponent"]],
         entryComponents: [_components_inside_event_add_user_inside_event_add_user_component__WEBPACK_IMPORTED_MODULE_10__["InsideEventAddUserComponent"], _components_vote_now_vote_now_component__WEBPACK_IMPORTED_MODULE_9__["VoteNowComponent"]],
         imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_21__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_31__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_31__["ReactiveFormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_32__["HttpClientModule"], flutterwave_angular_v3__WEBPACK_IMPORTED_MODULE_41__["FlutterwaveModule"], _angular_fire__WEBPACK_IMPORTED_MODULE_37__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_43__["environment"].firebaseConfig), _ionic_angular__WEBPACK_IMPORTED_MODULE_24__["IonicModule"].forRoot(), _angular_fire__WEBPACK_IMPORTED_MODULE_37__["AngularFireModule"].initializeApp(src_environments_environment__WEBPACK_IMPORTED_MODULE_43__["environment"].firebaseConfig), _app_routing_module__WEBPACK_IMPORTED_MODULE_28__["AppRoutingModule"]],
         schemas: [_angular_core__WEBPACK_IMPORTED_MODULE_20__["NO_ERRORS_SCHEMA"], _angular_core__WEBPACK_IMPORTED_MODULE_20__["CUSTOM_ELEMENTS_SCHEMA"]],
@@ -2144,15 +2170,6 @@
             amount: null,
             cashout: '',
             username: ''
-          };
-          this.RaveOptions = {
-            PBFPubKey: 'FLWPUBK_TEST-0e44fc52fddf09104dc7aa889c085b11-X',
-            customer_email: 'swagasoft@gmail.com',
-            custom_description: 'i-sabi credit',
-            amount: 500000,
-            currency: 'NGN',
-            customer_phone: '09026464646',
-            txref: '238485458496'
           };
           this.accountService.loadMyBalance();
           console.log('REF2', this.reference);
@@ -2773,7 +2790,9 @@
             venue: null,
             startDate: null,
             time: null,
-            businessSharingRatio: null
+            businessSharingRatio: null,
+            endDate: null,
+            startTime: null
           };
         }
 
@@ -2829,7 +2848,9 @@
               venue: null,
               startDate: null,
               time: null,
-              businessSharingRatio: null
+              businessSharingRatio: null,
+              endDate: null,
+              startTime: null
             };
           }
         }, {
@@ -3286,6 +3307,241 @@
     },
 
     /***/
+    "./src/app/components/edit-event/edit-event.component.scss":
+    /*!*****************************************************************!*\
+      !*** ./src/app/components/edit-event/edit-event.component.scss ***!
+      \*****************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function srcAppComponentsEditEventEditEventComponentScss(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZWRpdC1ldmVudC9lZGl0LWV2ZW50LmNvbXBvbmVudC5zY3NzIn0= */";
+      /***/
+    },
+
+    /***/
+    "./src/app/components/edit-event/edit-event.component.ts":
+    /*!***************************************************************!*\
+      !*** ./src/app/components/edit-event/edit-event.component.ts ***!
+      \***************************************************************/
+
+    /*! exports provided: EditEventComponent */
+
+    /***/
+    function srcAppComponentsEditEventEditEventComponentTs(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "EditEventComponent", function () {
+        return EditEventComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "./node_modules/tslib/tslib.es6.js");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "./node_modules/@angular/core/fesm2015/core.js");
+      /* harmony import */
+
+
+      var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @ionic/angular */
+      "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+      /* harmony import */
+
+
+      var src_app_services_firebase_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! src/app/services/firebase.service */
+      "./src/app/services/firebase.service.ts");
+      /* harmony import */
+
+
+      var src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/services/logic.service */
+      "./src/app/services/logic.service.ts");
+      /* harmony import */
+
+
+      var src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/shared/event.service */
+      "./src/app/shared/event.service.ts");
+
+      var EditEventComponent = /*#__PURE__*/function () {
+        function EditEventComponent(modalController, fireService, logicService, eventService) {
+          _classCallCheck(this, EditEventComponent);
+
+          this.modalController = modalController;
+          this.fireService = fireService;
+          this.logicService = logicService;
+          this.eventService = eventService;
+          this.eventModel = {
+            _id: '',
+            eventName: '',
+            type: '',
+            image_url: '',
+            companyName: '',
+            address: '',
+            contactNumber: '',
+            aboutEvent: '',
+            bankName: '',
+            costPerVote: '',
+            numberOfSlot: '',
+            sharingRatio_isabi: '',
+            sharingRatio_company: '',
+            accountNumber: '',
+            accountName: '',
+            eventOwner: '',
+            venue: null,
+            startDate: null,
+            businessSharingRatio: null,
+            endDate: null,
+            startTime: null
+          };
+        }
+
+        _createClass(EditEventComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3;
+
+            console.log(this.event);
+            this.image = (_a = this.event) === null || _a === void 0 ? void 0 : _a.image_url;
+            this.eventModel = {
+              eventName: (_b = this.event) === null || _b === void 0 ? void 0 : _b.eventName,
+              type: (_c = this.event) === null || _c === void 0 ? void 0 : _c.type,
+              image_url: (_d = this.event) === null || _d === void 0 ? void 0 : _d.image_url,
+              companyName: (_e = this.event) === null || _e === void 0 ? void 0 : _e.companyName,
+              address: (_f = this.event) === null || _f === void 0 ? void 0 : _f.address,
+              contactNumber: (_g = this.event) === null || _g === void 0 ? void 0 : _g.contactNumber,
+              aboutEvent: (_h = this.event) === null || _h === void 0 ? void 0 : _h.aboutEvent,
+              bankName: (_k = (_j = this.event) === null || _j === void 0 ? void 0 : _j.voting_properties) === null || _k === void 0 ? void 0 : _k.bankName,
+              _id: this.event,
+              costPerVote: (_m = (_l = this.event) === null || _l === void 0 ? void 0 : _l.voting_properties) === null || _m === void 0 ? void 0 : _m.costPerVote,
+              numberOfSlot: (_p = (_o = this.event) === null || _o === void 0 ? void 0 : _o.voting_properties) === null || _p === void 0 ? void 0 : _p.numberOfSlot,
+              sharingRatio_isabi: (_r = (_q = this.event) === null || _q === void 0 ? void 0 : _q.voting_properties) === null || _r === void 0 ? void 0 : _r.sharingRatio_isabi,
+              sharingRatio_company: (_t = (_s = this.event) === null || _s === void 0 ? void 0 : _s.voting_properties) === null || _t === void 0 ? void 0 : _t.sharingRatio_company,
+              accountNumber: (_v = (_u = this.event) === null || _u === void 0 ? void 0 : _u.voting_properties) === null || _v === void 0 ? void 0 : _v.accountNumber,
+              accountName: (_x = (_w = this.event) === null || _w === void 0 ? void 0 : _w.voting_properties) === null || _x === void 0 ? void 0 : _x.accountName,
+              startTime: (_y = this.event) === null || _y === void 0 ? void 0 : _y.startTime,
+              endDate: (_z = this.event) === null || _z === void 0 ? void 0 : _z.endDate,
+              eventOwner: (_0 = this.event) === null || _0 === void 0 ? void 0 : _0.eventOwner,
+              venue: (_1 = this.event) === null || _1 === void 0 ? void 0 : _1.venue,
+              startDate: (_2 = this.event) === null || _2 === void 0 ? void 0 : _2.startDate,
+              businessSharingRatio: (_3 = this.event) === null || _3 === void 0 ? void 0 : _3.businessSharingRatio
+            };
+          }
+        }, {
+          key: "dismiss",
+          value: function dismiss() {
+            this.modalController.dismiss();
+          }
+        }, {
+          key: "updateEvent",
+          value: function updateEvent() {
+            var _this16 = this;
+
+            console.log(this.eventModel);
+            this.loading = true;
+            this.eventService.updateEvent(this.eventModel).subscribe(function (response) {
+              console.log(response);
+
+              _this16.modalController.dismiss(response, "exist");
+
+              _this16.loading = false;
+            }, function (err) {
+              _this16.loading = false;
+
+              _this16.logicService.presentToast(err.error.msg);
+            });
+          }
+        }, {
+          key: "addImagesFirebase",
+          value: function addImagesFirebase(event) {
+            var files = event.target.files;
+            var j = files.length;
+            var file;
+
+            for (var i = 0; i < j; i++) {
+              var reader = new FileReader();
+              file = files[i];
+              console.log(file);
+              this.uploadImageToFireBase(file);
+            }
+          }
+        }, {
+          key: "uploadImageToFireBase",
+          value: function uploadImageToFireBase(image) {
+            var _this17 = this;
+
+            this.loading = true;
+
+            try {
+              this.fireService.uploadFile(image).then(function (success) {
+                var imageRef = success.ref.fullPath;
+
+                _this17.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
+                  _this17.image = imageUrl;
+                  _this17.eventModel.image_url = imageUrl;
+                  _this17.loading = false;
+                });
+              });
+            } catch (error) {
+              this.loading = false;
+              console.log(error);
+              this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
+            }
+          }
+        }]);
+
+        return EditEventComponent;
+      }();
+
+      EditEventComponent.ctorParameters = function () {
+        return [{
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+        }, {
+          type: src_app_services_firebase_service__WEBPACK_IMPORTED_MODULE_3__["FirebaseService"]
+        }, {
+          type: src_app_services_logic_service__WEBPACK_IMPORTED_MODULE_4__["LogicService"]
+        }, {
+          type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_5__["EventService"]
+        }];
+      };
+
+      EditEventComponent.propDecorators = {
+        event: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }]
+      };
+      EditEventComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-edit-event',
+        template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! raw-loader!./edit-event.component.html */
+        "./node_modules/raw-loader/dist/cjs.js!./src/app/components/edit-event/edit-event.component.html"))["default"],
+        styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+        /*! ./edit-event.component.scss */
+        "./src/app/components/edit-event/edit-event.component.scss"))["default"]]
+      })], EditEventComponent);
+      /***/
+    },
+
+    /***/
     "./src/app/components/fail-game/fail-game.component.scss":
     /*!***************************************************************!*\
       !*** ./src/app/components/fail-game/fail-game.component.scss ***!
@@ -3530,24 +3786,24 @@
         }, {
           key: "submitNumber",
           value: function submitNumber(form) {
-            var _this16 = this;
+            var _this18 = this;
 
             this.loading = true;
             this.userService.confirmNumber(this.model.number).subscribe(function (res) {
-              _this16.loading = false;
+              _this18.loading = false;
 
-              _this16.showPasswordInput();
+              _this18.showPasswordInput();
 
-              _this16.otpFromServer = res['otp'];
-              _this16.phoneFromServer = res['phone'];
-              console.log(_this16.otpFromServer);
-              console.log(_this16.phoneFromServer);
-              _this16.showNumberForm = false;
-              _this16.showOTPInput = true;
+              _this18.otpFromServer = res['otp'];
+              _this18.phoneFromServer = res['phone'];
+              console.log(_this18.otpFromServer);
+              console.log(_this18.phoneFromServer);
+              _this18.showNumberForm = false;
+              _this18.showOTPInput = true;
             }, function (err) {
-              _this16.loading = false;
+              _this18.loading = false;
 
-              _this16.noUserFound();
+              _this18.noUserFound();
 
               console.log(err.error);
             });
@@ -3557,7 +3813,7 @@
           key: "showPasswordInput",
           value: function showPasswordInput() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
-              var _this17 = this;
+              var _this19 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee8$(_context8) {
@@ -3582,7 +3838,7 @@
                         }, {
                           text: 'Confirm',
                           handler: function handler(data) {
-                            _this17.allowResetpasswordIfTrue(data.otp);
+                            _this19.allowResetpasswordIfTrue(data.otp);
 
                             console.log(' clecked ok.....', data.otp);
                           }
@@ -3646,7 +3902,7 @@
         }, {
           key: "submitNewPassword",
           value: function submitNewPassword(password) {
-            var _this18 = this;
+            var _this20 = this;
 
             console.log(this.model.newPassword);
             console.log(this.model.confirmPassword);
@@ -3656,11 +3912,11 @@
               this.userService.resetPassword(this.model).subscribe(function (response) {
                 console.log(response);
 
-                _this18.router.navigate(['/login']);
+                _this20.router.navigate(['/login']);
 
                 var msg = 'Successful!!! you can login with your new password';
 
-                _this18.presentToast(msg);
+                _this20.presentToast(msg);
               }, function (error) {
                 console.log(error);
               });
@@ -3885,17 +4141,17 @@
           key: "autoSlide",
           value: function autoSlide() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee12() {
-              var _this19 = this;
+              var _this21 = this;
 
               return regeneratorRuntime.wrap(function _callee12$(_context12) {
                 while (1) {
                   switch (_context12.prev = _context12.next) {
                     case 0:
                       setInterval(function () {
-                        _this19.gameService.slideCounter = _this19.gameService.gameTipArray.length;
-                        _this19.gameService.slideCounter--;
+                        _this21.gameService.slideCounter = _this21.gameService.gameTipArray.length;
+                        _this21.gameService.slideCounter--;
 
-                        _this19.mySlider.slideNext(3000, true);
+                        _this21.mySlider.slideNext(3000, true);
                       }, 9000);
 
                     case 1:
@@ -4272,15 +4528,15 @@
         }, {
           key: "submitUser",
           value: function submitUser() {
-            var _this20 = this;
+            var _this22 = this;
 
             console.log(this.contesttModel);
             this.eventService.createContestTant(this.contesttModel).subscribe(function (res) {
-              _this20.closeModal();
+              _this22.closeModal();
 
-              _this20.userService.shortToast(res['msg']);
+              _this22.userService.shortToast(res['msg']);
             }, function (err) {
-              _this20.userService.longToast(err.error.msg);
+              _this22.userService.longToast(err.error.msg);
             });
           }
         }]);
@@ -4435,19 +4691,19 @@
         _createClass(InsideEventComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this21 = this;
+            var _this23 = this;
 
             this.route.params.subscribe(function (params) {
-              _this21.eventId = params['id'];
+              _this23.eventId = params['id'];
             });
           }
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this22 = this;
+            var _this24 = this;
 
             this.eventRefresher = setInterval(function () {
-              _this22.getAllContentant();
+              _this24.getAllContentant();
             }, 9000);
           }
         }, {
@@ -4486,26 +4742,26 @@
         }, {
           key: "getAllContentant",
           value: function getAllContentant() {
-            var _this23 = this;
+            var _this25 = this;
 
             this.eventService.getAllContestant(this.eventId).subscribe(function (res) {
               try {
-                _this23.refresherRef.complete();
+                _this25.refresherRef.complete();
               } catch (error) {}
 
-              _this23.loading = false;
-              _this23.contestant = res['contestant'];
-              console.log(_this23.contestant.length);
-              _this23.contestantData = _this23.contestant;
-              _this23.costPerVote = res['cost_per_vote'];
+              _this25.loading = false;
+              _this25.contestant = res['contestant'];
+              console.log(_this25.contestant.length);
+              _this25.contestantData = _this25.contestant;
+              _this25.costPerVote = res['cost_per_vote'];
             }, function (err) {
               try {
-                _this23.refresherRef.complete();
+                _this25.refresherRef.complete();
               } catch (error) {}
 
-              _this23.loading = false;
+              _this25.loading = false;
 
-              _this23.userService.longToast(err.error.msg);
+              _this25.userService.longToast(err.error.msg);
             });
           }
         }, {
@@ -4531,7 +4787,7 @@
           key: "addUser",
           value: function addUser() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee14() {
-              var _this24 = this;
+              var _this26 = this;
 
               var modal;
               return regeneratorRuntime.wrap(function _callee14$(_context14) {
@@ -4550,7 +4806,7 @@
                       modal = _context14.sent;
                       modal.onDidDismiss().then(function () {
                         // load all event
-                        _this24.getAllContentant();
+                        _this26.getAllContentant();
                       });
                       _context14.next = 6;
                       return modal.present();
@@ -4570,7 +4826,7 @@
           key: "voteNow",
           value: function voteNow(event_id, contestant_id, image_url, nickname, my_code, fullname) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee15() {
-              var _this25 = this;
+              var _this27 = this;
 
               var modal;
               return regeneratorRuntime.wrap(function _callee15$(_context15) {
@@ -4595,7 +4851,7 @@
                       modal = _context15.sent;
                       modal.onDidDismiss().then(function () {
                         // load all event
-                        _this25.getAllContentant();
+                        _this27.getAllContentant();
                       });
                       _context15.next = 6;
                       return modal.present();
@@ -4615,7 +4871,7 @@
           key: "deleteContestant",
           value: function deleteContestant(contestant) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee16() {
-              var _this26 = this;
+              var _this28 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee16$(_context16) {
@@ -4635,18 +4891,18 @@
                         }, {
                           text: 'Okay',
                           handler: function handler() {
-                            _this26.loading = true;
+                            _this28.loading = true;
 
-                            _this26.eventService.deleteContestant(contestant._id).subscribe(function (res) {
-                              _this26.loading = false;
+                            _this28.eventService.deleteContestant(contestant._id).subscribe(function (res) {
+                              _this28.loading = false;
 
-                              _this26.userService.generalToast(res['msg'], 2000);
+                              _this28.userService.generalToast(res['msg'], 2000);
 
-                              _this26.getAllContentant();
+                              _this28.getAllContentant();
                             }, function (err) {
-                              _this26.loading = false;
+                              _this28.loading = false;
 
-                              _this26.userService.generalAlert(err.error.msg);
+                              _this28.userService.generalAlert(err.error.msg);
                             });
                           }
                         }]
@@ -4843,7 +5099,7 @@
         }, {
           key: "uploadImageToFireBase",
           value: function uploadImageToFireBase(image) {
-            var _this27 = this;
+            var _this29 = this;
 
             this.loading = true;
 
@@ -4851,12 +5107,12 @@
               this.fireService.uploadFile(image).then(function (success) {
                 var imageRef = success.ref.fullPath;
 
-                _this27.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
-                  _this27.image = imageUrl;
+                _this29.fireService.downloadItem(imageRef).subscribe(function (imageUrl) {
+                  _this29.image = imageUrl;
 
-                  _this27.ticketForm.get('imageUrl').setValue(imageUrl);
+                  _this29.ticketForm.get('imageUrl').setValue(imageUrl);
 
-                  _this27.loading = false;
+                  _this29.loading = false;
                 });
               });
             } catch (error) {
@@ -4868,25 +5124,25 @@
         }, {
           key: "submitForm",
           value: function submitForm() {
-            var _this28 = this;
+            var _this30 = this;
 
             this.loading = true;
             console.log(this.ticketForm.value);
             this.eventService.submitTicket(this.ticketForm.value).subscribe(function (response) {
-              _this28.ticketForm.reset();
+              _this30.ticketForm.reset();
 
               console.log(response);
-              _this28.loading = false;
+              _this30.loading = false;
 
-              _this28.modalController.dismiss({
+              _this30.modalController.dismiss({
                 data: response['docs']
               });
             }, function (err) {
               var _a;
 
-              _this28.loading = false;
+              _this30.loading = false;
 
-              _this28.logicService.presentToast((_a = err.error) === null || _a === void 0 ? void 0 : _a.message);
+              _this30.logicService.presentToast((_a = err.error) === null || _a === void 0 ? void 0 : _a.message);
             });
           }
         }]);
@@ -5042,7 +5298,7 @@
         }, {
           key: "randomString",
           value: function randomString(len) {
-            var _this29 = this;
+            var _this31 = this;
 
             var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
@@ -5055,7 +5311,7 @@
             this.eventService.checkTicketIdIfExist(shortpass, this.eventId).subscribe(function (res) {
               console.log(res);
 
-              _this29.randomString(6);
+              _this31.randomString(6);
             }, function (err) {
               console.log(err);
             });
@@ -5064,11 +5320,11 @@
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this30 = this;
+            var _this32 = this;
 
             this.route.params.subscribe(function (params) {
-              _this30.eventId = params['id'];
-              console.log('seee id ', _this30.eventId);
+              _this32.eventId = params['id'];
+              console.log('seee id ', _this32.eventId);
             });
             this.getAllTicket();
             this.findMyTicket();
@@ -5163,41 +5419,41 @@
         }, {
           key: "getAllTicket",
           value: function getAllTicket() {
-            var _this31 = this;
+            var _this33 = this;
 
             this.eventService.getTicketByEventId(this.eventId).subscribe(function (res) {
               try {
-                _this31.refresherRef.complete();
+                _this33.refresherRef.complete();
               } catch (error) {}
 
-              _this31.loading = false;
+              _this33.loading = false;
               console.log(res);
-              _this31.ticketList = res['ticketList'];
+              _this33.ticketList = res['ticketList'];
             }, function (err) {
               try {
-                _this31.refresherRef.complete();
+                _this33.refresherRef.complete();
               } catch (error) {}
 
-              _this31.loading = false;
+              _this33.loading = false;
 
-              _this31.logicService.presentToast(err.error.msg);
+              _this33.logicService.presentToast(err.error.msg);
             });
           }
         }, {
           key: "findMyTicket",
           value: function findMyTicket() {
-            var _this32 = this;
+            var _this34 = this;
 
             this.eventService.findMyTicket(this.eventId, this.userService.getEmail()).subscribe(function (myList) {
               console.log('OBSSS ', myList);
-              _this32.myTicketList = myList['ticketList'];
+              _this34.myTicketList = myList['ticketList'];
             });
           }
         }, {
           key: "presentShareTicket",
           value: function presentShareTicket(ticket) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee19() {
-              var _this33 = this;
+              var _this35 = this;
 
               var alert;
               return regeneratorRuntime.wrap(function _callee19$(_context19) {
@@ -5239,44 +5495,44 @@
                             console.log('Confirm Ok', data);
 
                             if (!(data === null || data === void 0 ? void 0 : data.email) || !data.phone || !(data === null || data === void 0 ? void 0 : data.name) || !(data === null || data === void 0 ? void 0 : data.slot)) {
-                              return _this33.logicService.presentToast('one or more field is required!');
+                              return _this35.logicService.presentToast('one or more field is required!');
                             }
 
                             if (data.slot === 0) {
-                              return _this33.logicService.presentToast('slot must be greater tha zero');
+                              return _this35.logicService.presentToast('slot must be greater tha zero');
                             }
 
                             var remainingTicket = (ticket === null || ticket === void 0 ? void 0 : ticket.numberOfTicket) - parseInt(data.slot);
                             console.log('remain ', remainingTicket);
 
                             if (remainingTicket < 1) {
-                              return _this33.logicService.presentToast('You have requested more than your slot');
+                              return _this35.logicService.presentToast('You have requested more than your slot');
                             }
 
-                            _this33.loading = true;
+                            _this35.loading = true;
                             var newTicket = {
                               name: data.name,
                               amount: ticket.amount,
                               ticketDBId: ticket._id,
-                              ticketId: _this33.generatedTicketId,
+                              ticketId: _this35.generatedTicketId,
                               email: data.email,
                               numberOfTicket: data.slot,
                               phone: data.phone,
                               imageUrl: ticket.imageUrl
                             };
 
-                            _this33.eventService.shareTicket(newTicket).subscribe(function (response) {
+                            _this35.eventService.shareTicket(newTicket).subscribe(function (response) {
                               console.log(response);
 
-                              _this33.findMyTicket();
+                              _this35.findMyTicket();
 
-                              _this33.randomString(6);
+                              _this35.randomString(6);
 
-                              _this33.logicService.presentSucess('Shared successful', "you have successfully shared ".concat(newTicket === null || newTicket === void 0 ? void 0 : newTicket.numberOfTicket, " ") + "ticket(s)  to ".concat(newTicket === null || newTicket === void 0 ? void 0 : newTicket.email), 'close');
+                              _this35.logicService.presentSucess('Shared successful', "you have successfully shared ".concat(newTicket === null || newTicket === void 0 ? void 0 : newTicket.numberOfTicket, " ") + "ticket(s)  to ".concat(newTicket === null || newTicket === void 0 ? void 0 : newTicket.email), 'close');
 
-                              _this33.loading = false;
+                              _this35.loading = false;
                             }, function (err) {
-                              _this33.loading = false;
+                              _this35.loading = false;
                               console.log(err);
                             });
                           }
@@ -5343,14 +5599,14 @@
         }, {
           key: "confirmMessage",
           value: function confirmMessage(ticket) {
-            var _this34 = this;
+            var _this36 = this;
 
             console.log('confirm  ticket ', ticket);
             ticket.status = 'VALID';
             this.eventService.confirmTicketId(ticket._id).subscribe(function (data) {}, function (err) {
               ticket.status = 'UNALLOTED';
 
-              _this34.logicService.presentToast('error updating ticket status');
+              _this36.logicService.presentToast('error updating ticket status');
             });
           }
         }]);
@@ -5475,15 +5731,22 @@
       var src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/app/shared/user.service */
       "./src/app/shared/user.service.ts");
+      /* harmony import */
+
+
+      var _edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../edit-event/edit-event.component */
+      "./src/app/components/edit-event/edit-event.component.ts");
 
       var ManageEventComponent = /*#__PURE__*/function () {
-        function ManageEventComponent(router, gameService, eventService, userService, alertController) {
+        function ManageEventComponent(router, gameService, eventService, userService, modalController, alertController) {
           _classCallCheck(this, ManageEventComponent);
 
           this.router = router;
           this.gameService = gameService;
           this.eventService = eventService;
           this.userService = userService;
+          this.modalController = modalController;
           this.alertController = alertController;
           this.allEvent = [];
           this.loading = true;
@@ -5495,18 +5758,69 @@
             this.getAllevent();
           }
         }, {
+          key: "editEvent",
+          value: function editEvent(event) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
+              var modal, data;
+              return regeneratorRuntime.wrap(function _callee21$(_context21) {
+                while (1) {
+                  switch (_context21.prev = _context21.next) {
+                    case 0:
+                      _context21.next = 2;
+                      return this.modalController.create({
+                        component: _edit_event_edit_event_component__WEBPACK_IMPORTED_MODULE_7__["EditEventComponent"],
+                        componentProps: {
+                          event: event
+                        }
+                      });
+
+                    case 2:
+                      modal = _context21.sent;
+                      _context21.next = 5;
+                      return modal.present();
+
+                    case 5:
+                      _context21.next = 7;
+                      return modal.onDidDismiss();
+
+                    case 7:
+                      data = _context21.sent;
+                      console.log(data);
+
+                      if (data.role === 'exist') {
+                        console.log(data === null || data === void 0 ? void 0 : data.data);
+                        event = data.data;
+                        this.allEvent = this.allEvent.map(function (eve) {
+                          if (eve._id === data.data._id) {
+                            eve = data.data;
+                            return eve;
+                          } else {
+                            return eve;
+                          }
+                        });
+                      }
+
+                    case 10:
+                    case "end":
+                      return _context21.stop();
+                  }
+                }
+              }, _callee21, this);
+            }));
+          }
+        }, {
           key: "getAllevent",
           value: function getAllevent() {
-            var _this35 = this;
+            var _this37 = this;
 
             this.eventService.getAllEventAdmin().subscribe(function (res) {
               console.log(res);
-              _this35.allEvent = res['event'];
-              _this35.loading = false;
+              _this37.allEvent = res['event'];
+              _this37.loading = false;
             }, function (err) {
-              _this35.loading = false;
+              _this37.loading = false;
 
-              _this35.userService.longToast(err.error.msg);
+              _this37.userService.longToast(err.error.msg);
 
               console.log('error getting event', err);
             });
@@ -5529,15 +5843,15 @@
         }, {
           key: "handleDelete",
           value: function handleDelete(event) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee21() {
-              var _this36 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee22() {
+              var _this38 = this;
 
               var alert;
-              return regeneratorRuntime.wrap(function _callee21$(_context21) {
+              return regeneratorRuntime.wrap(function _callee22$(_context22) {
                 while (1) {
-                  switch (_context21.prev = _context21.next) {
+                  switch (_context22.prev = _context22.next) {
                     case 0:
-                      _context21.next = 2;
+                      _context22.next = 2;
                       return this.alertController.create({
                         header: 'Confirm!',
                         message: "Delete <strong>".concat(event.aboutEvent, " </strong>!!!"),
@@ -5551,34 +5865,34 @@
                         }, {
                           text: 'Okay',
                           handler: function handler() {
-                            _this36.loading = true;
+                            _this38.loading = true;
 
-                            _this36.eventService.deleteEvent(event._id).subscribe(function (res) {
-                              _this36.loading = false;
+                            _this38.eventService.deleteEvent(event._id).subscribe(function (res) {
+                              _this38.loading = false;
 
-                              _this36.userService.generalToast(res['msg'], 2000);
+                              _this38.userService.generalToast(res['msg'], 2000);
 
-                              _this36.getAllevent();
+                              _this38.getAllevent();
                             }, function (err) {
-                              _this36.loading = false;
+                              _this38.loading = false;
 
-                              _this36.userService.generalAlert(err.error.msg);
+                              _this38.userService.generalAlert(err.error.msg);
                             });
                           }
                         }]
                       });
 
                     case 2:
-                      alert = _context21.sent;
-                      _context21.next = 5;
+                      alert = _context22.sent;
+                      _context22.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context21.stop();
+                      return _context22.stop();
                   }
                 }
-              }, _callee21, this);
+              }, _callee22, this);
             }));
           }
         }, {
@@ -5615,6 +5929,8 @@
           type: src_app_shared_event_service__WEBPACK_IMPORTED_MODULE_4__["EventService"]
         }, {
           type: src_app_shared_user_service__WEBPACK_IMPORTED_MODULE_6__["UserService"]
+        }, {
+          type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]
         }, {
           type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"]
         }];
@@ -5787,40 +6103,40 @@
         }, {
           key: "autoSlide",
           value: function autoSlide() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee22() {
-              var _this37 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee23() {
+              var _this39 = this;
 
-              return regeneratorRuntime.wrap(function _callee22$(_context22) {
+              return regeneratorRuntime.wrap(function _callee23$(_context23) {
                 while (1) {
-                  switch (_context22.prev = _context22.next) {
+                  switch (_context23.prev = _context23.next) {
                     case 0:
                       setInterval(function () {
-                        _this37.gameService.slideCounter = _this37.gameService.gameTipArray.length;
-                        _this37.gameService.slideCounter--;
+                        _this39.gameService.slideCounter = _this39.gameService.gameTipArray.length;
+                        _this39.gameService.slideCounter--;
 
-                        _this37.mySlider.slideNext(3000, true);
+                        _this39.mySlider.slideNext(3000, true);
 
-                        console.log('slide to prev', _this37.gameService.slideCounter);
+                        console.log('slide to prev', _this39.gameService.slideCounter);
                       }, 9000);
 
                     case 1:
                     case "end":
-                      return _context22.stop();
+                      return _context23.stop();
                   }
                 }
-              }, _callee22);
+              }, _callee23);
             }));
           }
         }, {
           key: "presentNotice",
           value: function presentNotice() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee23() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee24() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee23$(_context23) {
+              return regeneratorRuntime.wrap(function _callee24$(_context24) {
                 while (1) {
-                  switch (_context23.prev = _context23.next) {
+                  switch (_context24.prev = _context24.next) {
                     case 0:
-                      _context23.next = 2;
+                      _context24.next = 2;
                       return this.alertController.create({
                         header: 'Notice!',
                         cssClass: 'success',
@@ -5835,16 +6151,16 @@
                       });
 
                     case 2:
-                      alert = _context23.sent;
-                      _context23.next = 5;
+                      alert = _context24.sent;
+                      _context24.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context23.stop();
+                      return _context24.stop();
                   }
                 }
-              }, _callee23, this);
+              }, _callee24, this);
             }));
           }
         }, {
@@ -5885,27 +6201,27 @@
         }, {
           key: "getYoutubeLink",
           value: function getYoutubeLink() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee24() {
-              var _this38 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee25() {
+              var _this40 = this;
 
-              return regeneratorRuntime.wrap(function _callee24$(_context24) {
+              return regeneratorRuntime.wrap(function _callee25$(_context25) {
                 while (1) {
-                  switch (_context24.prev = _context24.next) {
+                  switch (_context25.prev = _context25.next) {
                     case 0:
                       this.gameService.getYoutubeLink().subscribe(function (res) {
                         var youtubeVideo = res['doc']['link'];
                         console.log('link', youtubeVideo);
-                        _this38.safeVideo = _this38.sanitizer.bypassSecurityTrustResourceUrl(youtubeVideo);
+                        _this40.safeVideo = _this40.sanitizer.bypassSecurityTrustResourceUrl(youtubeVideo);
                       }, function (err) {
-                        _this38.userService.generalToast('youtube url not found!', 2000);
+                        _this40.userService.generalToast('youtube url not found!', 2000);
                       });
 
                     case 1:
                     case "end":
-                      return _context24.stop();
+                      return _context25.stop();
                   }
                 }
-              }, _callee24, this);
+              }, _callee25, this);
             }));
           }
         }, {
@@ -6131,12 +6447,12 @@
         _createClass(TicketItemComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this39 = this;
+            var _this41 = this;
 
             console.log('shared tick id ', this.id);
             this.eventService.getTicketById(this.id).subscribe(function (data) {
               console.log('data ', data);
-              _this39.ticket = data['ticket'];
+              _this41.ticket = data['ticket'];
             }, function (err) {
               console.log(err);
             });
@@ -6279,10 +6595,10 @@
         _createClass(VoteNowComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this40 = this;
+            var _this42 = this;
 
             this.accountService.getAccountBalance().subscribe(function (bal) {
-              return _this40.balance = bal;
+              return _this42.balance = bal;
             });
           }
         }, {
@@ -6303,7 +6619,7 @@
         }, {
           key: "finalize",
           value: function finalize() {
-            var _this41 = this;
+            var _this43 = this;
 
             var costPerVate = this.properties.purchase * this.properties.cost;
             var totalCost = this.balance - costPerVate;
@@ -6312,15 +6628,15 @@
               console.log('we can bid for this');
               this.loading = true;
               this.eventService.submitVote(this.properties).subscribe(function (res) {
-                _this41.loading = false;
+                _this43.loading = false;
 
-                _this41.userService.shortToast(res['msg']);
+                _this43.userService.shortToast(res['msg']);
 
-                _this41.closeModal();
+                _this43.closeModal();
               }, function (err) {
-                _this41.loading = false;
+                _this43.loading = false;
 
-                _this41.userService.longToast(err.error.msg);
+                _this43.userService.longToast(err.error.msg);
               });
             } else {
               this.userService.longToast('balance is to low!');
@@ -6454,22 +6770,22 @@
         _createClass(WebTicketComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this42 = this;
+            var _this44 = this;
 
             this.loading = true;
             this.activateRoute.queryParams.subscribe(function (params) {
-              _this42.eventId = _this42.activateRoute.snapshot.params['id'];
+              _this44.eventId = _this44.activateRoute.snapshot.params['id'];
 
-              if (_this42.eventId) {
-                _this42.eventService.getTicketByEventId(_this42.eventId).subscribe(function (response) {
+              if (_this44.eventId) {
+                _this44.eventService.getTicketByEventId(_this44.eventId).subscribe(function (response) {
                   console.log(response);
-                  _this42.loading = false;
-                  _this42.event = response['event'];
-                  _this42.ticketList = response['ticketList'];
+                  _this44.loading = false;
+                  _this44.event = response['event'];
+                  _this44.ticketList = response['ticketList'];
                 }, function (err) {
-                  _this42.loading = false;
+                  _this44.loading = false;
 
-                  _this42.logicService.presentAlert('Error getting event', ' it could be cause by connection error, check your connection and try again');
+                  _this44.logicService.presentAlert('Error getting event', ' it could be cause by connection error, check your connection and try again');
 
                   console.log(err);
                 });
@@ -6481,14 +6797,14 @@
           value: function buyNow(ticket) {
             var _a;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee25() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee26() {
               var modal, data;
-              return regeneratorRuntime.wrap(function _callee25$(_context25) {
+              return regeneratorRuntime.wrap(function _callee26$(_context26) {
                 while (1) {
-                  switch (_context25.prev = _context25.next) {
+                  switch (_context26.prev = _context26.next) {
                     case 0:
                       ticket.eventId = this.eventId;
-                      _context25.next = 3;
+                      _context26.next = 3;
                       return this.modalController.create({
                         component: _buy_ticket_buy_ticket_component__WEBPACK_IMPORTED_MODULE_6__["BuyTicketComponent"],
                         componentProps: {
@@ -6497,16 +6813,16 @@
                       });
 
                     case 3:
-                      modal = _context25.sent;
-                      _context25.next = 6;
+                      modal = _context26.sent;
+                      _context26.next = 6;
                       return modal.present();
 
                     case 6:
-                      _context25.next = 8;
+                      _context26.next = 8;
                       return modal.onDidDismiss();
 
                     case 8:
-                      data = _context25.sent;
+                      data = _context26.sent;
                       console.log(data.data.data);
 
                       if ((_a = data === null || data === void 0 ? void 0 : data.data) === null || _a === void 0 ? void 0 : _a.data) {
@@ -6515,10 +6831,10 @@
 
                     case 11:
                     case "end":
-                      return _context25.stop();
+                      return _context26.stop();
                   }
                 }
-              }, _callee25, this);
+              }, _callee26, this);
             }));
           }
         }]);
@@ -6643,31 +6959,31 @@
         _createClass(WebVotingComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this43 = this;
+            var _this45 = this;
 
             this.loading = true;
             this.activateRoute.queryParams.subscribe(function (params) {
-              _this43.contestanId = _this43.activateRoute.snapshot.params['id'];
+              _this45.contestanId = _this45.activateRoute.snapshot.params['id'];
 
-              if (_this43.contestanId) {
+              if (_this45.contestanId) {
                 var data = {
-                  id: _this43.contestanId
+                  id: _this45.contestanId
                 };
 
-                _this43.userService.getContestantById(data).subscribe(function (contestant) {
+                _this45.userService.getContestantById(data).subscribe(function (contestant) {
                   console.log(contestant);
-                  _this43.loading = false;
-                  _this43.properties.contestant_id = contestant['contestant']._id;
-                  _this43.properties.event_id = contestant['contestant'].event_id;
-                  _this43.properties.fullname = contestant['contestant'].fullname;
-                  _this43.properties.image_url = contestant['contestant'].image_url;
-                  _this43.properties.my_code = contestant['contestant'].my_code;
-                  _this43.properties.nickname = contestant['contestant'].nickname;
-                  _this43.properties.cost = contestant['cost_per_vote'];
+                  _this45.loading = false;
+                  _this45.properties.contestant_id = contestant['contestant']._id;
+                  _this45.properties.event_id = contestant['contestant'].event_id;
+                  _this45.properties.fullname = contestant['contestant'].fullname;
+                  _this45.properties.image_url = contestant['contestant'].image_url;
+                  _this45.properties.my_code = contestant['contestant'].my_code;
+                  _this45.properties.nickname = contestant['contestant'].nickname;
+                  _this45.properties.cost = contestant['cost_per_vote'];
                 }, function (err) {
-                  _this43.loading = false;
+                  _this45.loading = false;
 
-                  _this43.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again');
+                  _this45.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again');
 
                   console.log(err);
                 });
@@ -7202,16 +7518,16 @@
         _createClass(LogicService, [{
           key: "presentSucess",
           value: function presentSucess(header, msg, psitiveBtbText) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee26() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee27() {
               var resolveFunction, promise, toast;
-              return regeneratorRuntime.wrap(function _callee26$(_context26) {
+              return regeneratorRuntime.wrap(function _callee27$(_context27) {
                 while (1) {
-                  switch (_context26.prev = _context26.next) {
+                  switch (_context27.prev = _context27.next) {
                     case 0:
                       promise = new Promise(function (resolve) {
                         resolveFunction = resolve;
                       });
-                      _context26.next = 3;
+                      _context27.next = 3;
                       return this.toastController.create({
                         header: "".concat(header),
                         message: "".concat(msg),
@@ -7220,37 +7536,10 @@
                       });
 
                     case 3:
-                      toast = _context26.sent;
-                      toast.present();
-
-                    case 5:
-                    case "end":
-                      return _context26.stop();
-                  }
-                }
-              }, _callee26, this);
-            }));
-          }
-        }, {
-          key: "presentToast",
-          value: function presentToast(msg) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee27() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee27$(_context27) {
-                while (1) {
-                  switch (_context27.prev = _context27.next) {
-                    case 0:
-                      _context27.next = 2;
-                      return this.toastController.create({
-                        message: msg,
-                        duration: 2000
-                      });
-
-                    case 2:
                       toast = _context27.sent;
                       toast.present();
 
-                    case 4:
+                    case 5:
                     case "end":
                       return _context27.stop();
                   }
@@ -7259,18 +7548,45 @@
             }));
           }
         }, {
-          key: "alertDialog",
-          value: function alertDialog(head, msg) {
+          key: "presentToast",
+          value: function presentToast(msg) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee28() {
-              var resolveFunction, promise, alert;
+              var toast;
               return regeneratorRuntime.wrap(function _callee28$(_context28) {
                 while (1) {
                   switch (_context28.prev = _context28.next) {
                     case 0:
+                      _context28.next = 2;
+                      return this.toastController.create({
+                        message: msg,
+                        duration: 2000
+                      });
+
+                    case 2:
+                      toast = _context28.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context28.stop();
+                  }
+                }
+              }, _callee28, this);
+            }));
+          }
+        }, {
+          key: "alertDialog",
+          value: function alertDialog(head, msg) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee29() {
+              var resolveFunction, promise, alert;
+              return regeneratorRuntime.wrap(function _callee29$(_context29) {
+                while (1) {
+                  switch (_context29.prev = _context29.next) {
+                    case 0:
                       promise = new Promise(function (resolve) {
                         resolveFunction = resolve;
                       });
-                      _context28.next = 3;
+                      _context29.next = 3;
                       return this.alertController.create({
                         header: head,
                         message: msg,
@@ -7286,31 +7602,31 @@
                       });
 
                     case 3:
-                      alert = _context28.sent;
-                      _context28.next = 6;
+                      alert = _context29.sent;
+                      _context29.next = 6;
                       return alert.present();
 
                     case 6:
-                      return _context28.abrupt("return", promise);
+                      return _context29.abrupt("return", promise);
 
                     case 7:
                     case "end":
-                      return _context28.stop();
+                      return _context29.stop();
                   }
                 }
-              }, _callee28, this);
+              }, _callee29, this);
             }));
           }
         }, {
           key: "presentAlert",
           value: function presentAlert(header, message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee29() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee30() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee29$(_context29) {
+              return regeneratorRuntime.wrap(function _callee30$(_context30) {
                 while (1) {
-                  switch (_context29.prev = _context29.next) {
+                  switch (_context30.prev = _context30.next) {
                     case 0:
-                      _context29.next = 2;
+                      _context30.next = 2;
                       return this.alertController.create({
                         header: "".concat(header),
                         message: "".concat(message),
@@ -7323,16 +7639,16 @@
                       });
 
                     case 2:
-                      alert = _context29.sent;
-                      _context29.next = 5;
+                      alert = _context30.sent;
+                      _context30.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context29.stop();
+                      return _context30.stop();
                   }
                 }
-              }, _callee29, this);
+              }, _callee30, this);
             }));
           }
         }]);
@@ -7431,20 +7747,20 @@
         _createClass(AccountService, [{
           key: "loadMyBalance",
           value: function loadMyBalance() {
-            var _this44 = this;
+            var _this46 = this;
 
             console.log("GETTING BALANCE");
             this.getLeaderGameSection();
             this.appUser = localStorage.getItem("appUser");
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-account-balance").subscribe(function (value) {
-              _this44.setAccountBalance(value["balance"]);
+              _this46.setAccountBalance(value["balance"]);
 
-              console.log('NEW Balance ', _this44.accountSubject.getValue());
+              console.log('NEW Balance ', _this46.accountSubject.getValue());
 
-              _this44.getLeaderboard();
+              _this46.getLeaderboard();
 
-              _this44.user_id = localStorage.getItem("user_id");
-              _this44.appUsername = localStorage.getItem("appUser");
+              _this46.user_id = localStorage.getItem("user_id");
+              _this46.appUsername = localStorage.getItem("appUser");
             });
           }
         }, {
@@ -7480,10 +7796,10 @@
         }, {
           key: "getLeaderGameSection",
           value: function getLeaderGameSection() {
-            var _this45 = this;
+            var _this47 = this;
 
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_1__["environment"].apiBaseUrl + "/get-leaderboard-game-section").subscribe(function (value) {
-              _this45.leaderboardGameSection$ = value["document"];
+              _this47.leaderboardGameSection$ = value["document"];
             });
           }
         }, {
@@ -7801,7 +8117,7 @@
         }, {
           key: "savePurchaseTicket",
           value: function savePurchaseTicket(ticket) {
-            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/save-purched-ticket', ticket);
+            return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/v2/save-purchased-ticket', ticket);
           }
         }, {
           key: "findMyTicket",
@@ -7812,6 +8128,11 @@
           key: "submitEvent",
           value: function submitEvent(event) {
             return this.http.post(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/submit-event', event);
+          }
+        }, {
+          key: "updateEvent",
+          value: function updateEvent(event) {
+            return this.http.put(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/update-event', event);
           }
         }, {
           key: "createContestTant",
@@ -7985,21 +8306,21 @@
         _createClass(GameServiceService, [{
           key: "getAdminDate",
           value: function getAdminDate() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee30() {
-              var _this46 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee31() {
+              var _this48 = this;
 
-              return regeneratorRuntime.wrap(function _callee30$(_context30) {
+              return regeneratorRuntime.wrap(function _callee31$(_context31) {
                 while (1) {
-                  switch (_context30.prev = _context30.next) {
+                  switch (_context31.prev = _context31.next) {
                     case 0:
                       clearInterval(this.gameTime);
                       this.loading = true;
                       this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/get-admin-date').subscribe(function (res) {
-                        _this46.loading = false;
-                        _this46.applicationDate = res['doc']['appdate'];
-                        _this46.serverVersion = res['version']; //  console.log(this.serverVersion);
+                        _this48.loading = false;
+                        _this48.applicationDate = res['doc']['appdate'];
+                        _this48.serverVersion = res['version']; //  console.log(this.serverVersion);
 
-                        _this46.gameTimer(); //  setTimeout(()=> {
+                        _this48.gameTimer(); //  setTimeout(()=> {
                         //    if(this.serverVersion > environment.versionCode){
                         //       this.presentUpdate();
                         //    }
@@ -8009,22 +8330,22 @@
 
                     case 3:
                     case "end":
-                      return _context30.stop();
+                      return _context31.stop();
                   }
                 }
-              }, _callee30, this);
+              }, _callee31, this);
             }));
           }
         }, {
           key: "gameTimer",
           value: function gameTimer() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee31() {
-              var _this47 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee32() {
+              var _this49 = this;
 
               var fake_date, appDATE, deadline;
-              return regeneratorRuntime.wrap(function _callee31$(_context31) {
+              return regeneratorRuntime.wrap(function _callee32$(_context32) {
                 while (1) {
-                  switch (_context31.prev = _context31.next) {
+                  switch (_context32.prev = _context32.next) {
                     case 0:
                       fake_date = 'aug 29,2020 12:10:00';
                       appDATE = this.applicationDate;
@@ -8032,19 +8353,19 @@
                       this.gameTime = setInterval(function () {
                         var now = new Date().getTime();
                         var t = deadline - now;
-                        _this47.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
-                        _this47.timeHours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)).toString();
-                        _this47.timeMinute = Math.floor(t % (1000 * 60 * 60) / (1000 * 60)).toString();
-                        _this47.timeSeconds = Math.floor(t % (1000 * 60) / 1000).toString();
+                        _this49.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
+                        _this49.timeHours = Math.floor(t % (1000 * 60 * 60 * 24) / (1000 * 60 * 60)).toString();
+                        _this49.timeMinute = Math.floor(t % (1000 * 60 * 60) / (1000 * 60)).toString();
+                        _this49.timeSeconds = Math.floor(t % (1000 * 60) / 1000).toString();
 
                         if (t < 0) {
                           console.log('GAME IS LIVE....');
                           localStorage.setItem('GAMELIVE', 'true');
-                          clearInterval(_this47.gameTime);
-                          _this47.timeDays = '0';
-                          _this47.timeHours = '0';
-                          _this47.timeMinute = '0';
-                          _this47.timeSeconds = '0';
+                          clearInterval(_this49.gameTime);
+                          _this49.timeDays = '0';
+                          _this49.timeHours = '0';
+                          _this49.timeMinute = '0';
+                          _this49.timeSeconds = '0';
                         } else {
                           console.log('GAME NOT LIVE....');
                           localStorage.setItem('GAMELIVE', 'false');
@@ -8055,19 +8376,19 @@
 
                     case 4:
                     case "end":
-                      return _context31.stop();
+                      return _context32.stop();
                   }
                 }
-              }, _callee31, this);
+              }, _callee32, this);
             }));
           }
         }, {
           key: "getGameTip",
           value: function getGameTip() {
-            var _this48 = this;
+            var _this50 = this;
 
             this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiBaseUrl + '/game-fun-fact-tips').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["retry"])(3)).subscribe(function (tips) {
-              _this48.gameTipArray = tips['gamestips'];
+              _this50.gameTipArray = tips['gamestips'];
             });
           }
         }, {
@@ -8078,13 +8399,13 @@
         }, {
           key: "presentToast",
           value: function presentToast(message) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee32() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee33() {
               var toast;
-              return regeneratorRuntime.wrap(function _callee32$(_context32) {
+              return regeneratorRuntime.wrap(function _callee33$(_context33) {
                 while (1) {
-                  switch (_context32.prev = _context32.next) {
+                  switch (_context33.prev = _context33.next) {
                     case 0:
-                      _context32.next = 2;
+                      _context33.next = 2;
                       return this.toastController.create({
                         header: 'Info ',
                         message: "".concat(message),
@@ -8093,15 +8414,15 @@
                       });
 
                     case 2:
-                      toast = _context32.sent;
+                      toast = _context33.sent;
                       toast.present();
 
                     case 4:
                     case "end":
-                      return _context32.stop();
+                      return _context33.stop();
                   }
                 }
-              }, _callee32, this);
+              }, _callee33, this);
             }));
           }
         }, {
@@ -8147,13 +8468,13 @@
         }, {
           key: "presentUpdate",
           value: function presentUpdate() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee33() {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee34() {
               var alert;
-              return regeneratorRuntime.wrap(function _callee33$(_context33) {
+              return regeneratorRuntime.wrap(function _callee34$(_context34) {
                 while (1) {
-                  switch (_context33.prev = _context33.next) {
+                  switch (_context34.prev = _context34.next) {
                     case 0:
-                      _context33.next = 2;
+                      _context34.next = 2;
                       return this.alertController.create({
                         header: ' Update!',
                         cssClass: 'success',
@@ -8168,16 +8489,16 @@
                       });
 
                     case 2:
-                      alert = _context33.sent;
-                      _context33.next = 5;
+                      alert = _context34.sent;
+                      _context34.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context33.stop();
+                      return _context34.stop();
                   }
                 }
-              }, _callee33, this);
+              }, _callee34, this);
             }));
           }
         }]);
@@ -8303,34 +8624,6 @@
         _createClass(UserService, [{
           key: "shortToast",
           value: function shortToast(messages) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee34() {
-              var toast;
-              return regeneratorRuntime.wrap(function _callee34$(_context34) {
-                while (1) {
-                  switch (_context34.prev = _context34.next) {
-                    case 0:
-                      _context34.next = 2;
-                      return this.toastController.create({
-                        message: messages,
-                        position: 'middle',
-                        duration: 1000
-                      });
-
-                    case 2:
-                      toast = _context34.sent;
-                      toast.present();
-
-                    case 4:
-                    case "end":
-                      return _context34.stop();
-                  }
-                }
-              }, _callee34, this);
-            }));
-          }
-        }, {
-          key: "longToast",
-          value: function longToast(messages) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee35() {
               var toast;
               return regeneratorRuntime.wrap(function _callee35$(_context35) {
@@ -8341,7 +8634,7 @@
                       return this.toastController.create({
                         message: messages,
                         position: 'middle',
-                        duration: 3000
+                        duration: 1000
                       });
 
                     case 2:
@@ -8357,8 +8650,8 @@
             }));
           }
         }, {
-          key: "generalToast",
-          value: function generalToast(message, duration) {
+          key: "longToast",
+          value: function longToast(messages) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee36() {
               var toast;
               return regeneratorRuntime.wrap(function _callee36$(_context36) {
@@ -8367,8 +8660,9 @@
                     case 0:
                       _context36.next = 2;
                       return this.toastController.create({
-                        message: "".concat(message),
-                        duration: duration
+                        message: messages,
+                        position: 'middle',
+                        duration: 3000
                       });
 
                     case 2:
@@ -8384,15 +8678,42 @@
             }));
           }
         }, {
-          key: "generalAlert",
-          value: function generalAlert(message) {
+          key: "generalToast",
+          value: function generalToast(message, duration) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee37() {
-              var alert;
+              var toast;
               return regeneratorRuntime.wrap(function _callee37$(_context37) {
                 while (1) {
                   switch (_context37.prev = _context37.next) {
                     case 0:
                       _context37.next = 2;
+                      return this.toastController.create({
+                        message: "".concat(message),
+                        duration: duration
+                      });
+
+                    case 2:
+                      toast = _context37.sent;
+                      toast.present();
+
+                    case 4:
+                    case "end":
+                      return _context37.stop();
+                  }
+                }
+              }, _callee37, this);
+            }));
+          }
+        }, {
+          key: "generalAlert",
+          value: function generalAlert(message) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee38() {
+              var alert;
+              return regeneratorRuntime.wrap(function _callee38$(_context38) {
+                while (1) {
+                  switch (_context38.prev = _context38.next) {
+                    case 0:
+                      _context38.next = 2;
                       return this.alertController.create({
                         header: 'Alert',
                         message: "".concat(message),
@@ -8400,16 +8721,16 @@
                       });
 
                     case 2:
-                      alert = _context37.sent;
-                      _context37.next = 5;
+                      alert = _context38.sent;
+                      _context38.next = 5;
                       return alert.present();
 
                     case 5:
                     case "end":
-                      return _context37.stop();
+                      return _context38.stop();
                   }
                 }
-              }, _callee37, this);
+              }, _callee38, this);
             }));
           }
         }, {
@@ -8757,10 +9078,10 @@
         }, {
           key: "ionViewDidEnter",
           value: function ionViewDidEnter() {
-            var _this49 = this;
+            var _this51 = this;
 
             setTimeout(function () {
-              _this49.modalController.dismiss();
+              _this51.modalController.dismiss();
             }, 30);
             this.autoSlide();
           }
@@ -8785,19 +9106,19 @@
           value: function autoSlide() {
             var _a;
 
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee38() {
-              return regeneratorRuntime.wrap(function _callee38$(_context38) {
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee39() {
+              return regeneratorRuntime.wrap(function _callee39$(_context39) {
                 while (1) {
-                  switch (_context38.prev = _context38.next) {
+                  switch (_context39.prev = _context39.next) {
                     case 0:
                       (_a = this.mySlider) === null || _a === void 0 ? void 0 : _a.slideNext(3500, true);
 
                     case 1:
                     case "end":
-                      return _context38.stop();
+                      return _context39.stop();
                   }
                 }
-              }, _callee38, this);
+              }, _callee39, this);
             }));
           }
         }]);

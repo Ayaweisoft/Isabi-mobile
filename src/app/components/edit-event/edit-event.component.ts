@@ -20,7 +20,7 @@ eventModel = {
   _id: '',
   eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '',bankName:'',
   costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: '',
-  eventOwner:'', venue:null, startDate:null, time:null, businessSharingRatio:null, endDate:null, startTime:null
+  eventOwner:'', venue:null, startDate:null,  businessSharingRatio:null, endDate:null, startTime:null
 }
   loading: boolean;
 
@@ -39,7 +39,7 @@ eventModel = {
         sharingRatio_company: this.event?.voting_properties?.sharingRatio_company, accountNumber: this.event?.voting_properties?.accountNumber,
          accountName: this.event?.voting_properties?.accountName ,startTime:this.event?.startTime ,endDate:this.event?.endDate,
       eventOwner: this.event?.eventOwner, venue:this.event?.venue, startDate:this.event?.startDate,
-       time:this.event?.time, businessSharingRatio:this.event?.businessSharingRatio
+      businessSharingRatio:this.event?.businessSharingRatio
     }
 
   }

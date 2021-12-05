@@ -56,7 +56,7 @@
                   <ion-label position="floating">Start date</ion-label>
                   <div class="text-input ">
 
-                    <ion-input type="date" #startDate="ngModel" name="date" [(ngModel)]="eventModel.startDate">
+                    <ion-input type="date" name="date" [value]="eventModel?.startDate">
                     </ion-input>
                   </div>
                 </ion-item>
@@ -65,7 +65,7 @@
                 <ion-item color="light">
                   <ion-label position="floating">End date</ion-label>
                   <div class="text-input ">
-                    <ion-input type="date" #endDate="ngModel" name="date" [(ngModel)]="eventModel.endDate"></ion-input>
+                    <ion-input type="date" name="date" [value]="eventModel?.endDate"></ion-input>
                   </div>
                 </ion-item>
               </ion-col>
@@ -140,7 +140,8 @@
                 <ion-item color="light">
                   <div class="text-input ">
                     <ion-label position="floating">Start time</ion-label>
-                    <ion-input type="time" #date="ngModel" name="date" [(ngModel)]="eventModel.startTime"></ion-input>
+                    <ion-input type="time" #date="ngModel" name="date" [value]="eventModel?.startTime"
+                      [(ngModel)]="eventModel.startTime"></ion-input>
                   </div>
                 </ion-item>
               </ion-col>

@@ -37,6 +37,14 @@ async editEvent(event) {
   if(data.role === 'exist'){
     console.log(data?.data)
     event = data.data;
+    this.allEvent =  this.allEvent.map((eve)=> {
+      if(eve._id === data.data._id){
+        eve = data.data;
+        return eve;
+      }else{
+        return eve;
+      }
+    });
   }
 
 }
