@@ -20,10 +20,6 @@
 
 
 
-        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-        <script src="https://js.paystack.co/v1/paystack.js"></script>
-
-
         <div>
           <ion-card class="text-center">
             <ion-card-header color="success" class="font-weight-bold text-white"> PAYMENT</ion-card-header>
@@ -52,29 +48,11 @@
                 </div>
               </ion-row>
 
-              <!-- <ion-list>
-                                <ion-item *ngFor="let item of scheduled">
-                                  <ion-label text-wrap>
-                                    {{item.id}} {{item.title}}
-                                    <p>Trigger : {{item.trigger | json}}</p>
-                                  </ion-label>
-                                  
-                                </ion-item>
-                              </ion-list> -->
-
-
-
 
               <div *ngIf="showPaymentButtons">
-
-
                 <ion-chip *ngIf="showPaymentButtons">
-                  <h5 class="text-center font-weight-bold">I want to pay ₦ {{model.amount}} </h5>
+                  <h5 class="text-center font-weight-bold">I want to pay ₦ {{model.actual}} </h5>
                 </ion-chip> <br>
-
-
-                <!-- *ngIf="model?.amount > 99" -->
-
 
                 <!-- break line -->
                 <hr>
@@ -85,12 +63,23 @@
 
                       <!-- public_key="FLWPUBK_TEST-32c34a10b25063883487eb99f916159a-X" [amount]='model.amount' currency='NGN' -->
 
-                      <flutterwave-make-payment public_key="FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X"
+                      <!-- <flutterwave-make-payment public_key="FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X"
                         [amount]='model.amount' currency='NGN' payment_options="card" text="PAY NOW"
                         [customer]="customerDetails" [customizations]="customizations" [tx_ref]="reference"
                         (callback)="makePaymentCallback($event)" (close)="closedPaymentModal()">
                         <img src="../../../assets/banks/visa.gif">
-                      </flutterwave-make-payment>
+                      </flutterwave-make-payment> -->
+
+                      <ng-interswitch
+                       [merchantCode]="customerDetails.merchantCode" 
+                       [payItemID]="customerDetails.payItemID"
+                        [amount]="model.amount"
+                         [transactionReference]=" reference"
+                         [customerEmail]="customerDetails.email"
+                         [paymentMode]="'LIVE'"
+                        [customerName]="customerDetails.name"
+                         (paymentCallback)="paymentCallback($event)"
+                        [class]="'btn btn-danger'">PAY NOW</ng-interswitch>
 
                     </ion-col>
 
