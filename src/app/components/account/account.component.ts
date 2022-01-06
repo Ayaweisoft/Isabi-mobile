@@ -10,8 +10,9 @@ import { ModalController, AlertController, ToastController, Platform } from '@io
 
 import { NgModel } from '@angular/forms';
 import { LogicService } from 'src/app/services/logic.service';
-import { Flutterwave } from 'flutterwave-angular-v3';
-// import { LocalNotifications, ELocalNotificationTriggerUnit } from '@ionic-native/local-notifications/ngx';
+import { TransactionService } from 'src/app/services/transaction.service';
+
+
 
 @Component({
   selector: 'app-account',
@@ -34,18 +35,18 @@ export class AccountComponent implements OnInit, OnDestroy {
   @Input() middleInitial: string; 
   loading: boolean;
 
-  customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: ''}
-  
-  customizations = { logo: 'https://flutterwave.com/images/logo-colored.svg'}
   balance: any;
+
+  customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: '',
+  merchantCode: this.transService.merchant_code, payItemID: this.transService.pay_item_id}
+  
 
   constructor(private router: Router, public userService: UserService,
               public accountService: AccountService,
               public gameSevice : GameServiceService,
+              private transService: TransactionService,
               private platform: Platform,
               private logicService: LogicService,
-              // private localNotifications: LocalNotifications,
-              private flutterwave: Flutterwave,
               public alertController: AlertController,
               public toastController: ToastController,
               public modalController: ModalController
@@ -57,6 +58,7 @@ export class AccountComponent implements OnInit, OnDestroy {
 
 model = {
   amount: null, 
+  actual: null,
   cashout: '',
   username: ''
 };
@@ -64,7 +66,7 @@ model = {
 
 
 ngOnInit() {
-  this.generateRef();
+
   console.log('REF', this.reference);
   console.log('trans ref', )
   this.appUsername = localStorage.getItem('appUser');
@@ -75,42 +77,49 @@ ngOnInit() {
   })
 }
 
+ionViewDidEnter() {
+  this.generateReference()
+}
+
 
 ngOnDestroy() {
   // this.paymentDoneSub = '';
   this.model = {
       amount: null,
       cashout: '',
-      username: ''
+      username: '',
+      actual:''
     };
 }
 
-makePaymentCallback(response: any): void {
+paymentCallback(response: any): void {
   console.log("RESULT", response);
-  if(response.status == "successful"){
+  if(response.resp == "00"){
     this.generateReference();
     response.date = Date.now();
     response.account_id  = this.userService.getAuthId();
-    response.ref  = response.flw_ref;
+    response.ref  = response.retRef;
     response.username  = this.userService.getUsername();
     response.user_id  = this.userService.getAuthId();
-    response.transaction  = response.tx_ref;
+    response.transaction  = response.txnref;
+    response.amount  =  this.model.actual;
+    console.log('final response ', response);
     this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
       res => {
         console.log('new balance',res);
         this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
        this.accountService.loadMyBalance();
         
-       this.generateRef();
+    
+       this.generateReference();
       },
       err => {
-       this.generateRef();
+       this.generateReference()
        this.accountService.loadMyBalance();
       }
     );
 
-    this.flutterwave.closePaymentModal()
-    
+ 
   }else{
     console.log('data')
     this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
@@ -170,32 +179,30 @@ showNotiAlert(header, sub, msg){
 
 paymentCancel(){
   this.showPaymentButtons = false;
-  this.generateRef();
+  this.generateReference();
   // this.amountInput = null;
 }
 
-generateRef() {
-  this.reference = `${Math.ceil(Math.random() * 10e13)}`;
-}
 
-paymentDone(process: any) {
-  this.showPaymentButtons = false;
-  process.username = this.appUsername;
-  process.amount = this.model.amount;
 
-  this.paymentDoneSub = this.userService.postTransaction(process).subscribe(
-    res => {
-     this.accountService.loadMyBalance();
+// paymentDone(process: any) {
+//   this.showPaymentButtons = false;
+//   process.username = this.appUsername;
+//   process.amount = this.model.amount;
+
+//   this.paymentDoneSub = this.userService.postTransaction(process).subscribe(
+//     res => {
+//      this.accountService.loadMyBalance();
       
-     this.generateRef();
-    },
-    err => {
-     this.generateRef();
-     this.accountService.loadMyBalance();
-    }
-  );
-  console.log( process);
- }
+//      this.generateReference()
+//     },
+//     err => {
+//      this.generateReference()
+//      this.accountService.loadMyBalance();
+//     }
+//   );
+//   console.log( process);
+//  }
 
 
  profileSection(){
@@ -207,67 +214,65 @@ paymentDone(process: any) {
   
 }
 
-mobileTransfer(){
-  console.log(this.model.amount.valueOf());
-  this.showAlert();
+// mobileTransfer(){
+//   console.log(this.model.amount.valueOf());
+//   this.showAlert();
+// }
 
 
-}
+// async showAlert() {
+//   const alert = await this.alertController.create({
+//     header: 'MOBILE TRANSFER',
+//     message: `Add this id (${this.accountService.user_id})
+//     to your mobile transfer info. <br> after a successful transfer click OK.
+//              <p><h6 class=" font-weight-bold">Account Number: 3585745013</h6></p>
+//              <p><h6  class="font-weight-bold">Bank : FCMB </h6></p>
+//              <p><h6  class=" fiont-weight-bold">Account Name : Ayaweisoft </h6></p>
+//              <p> <h4 class=" fiont-weight-bold"> Amount : ₦ ${this.model.amount}</h4></p>`,
+//     buttons: [
+//       {
+//         text: 'Cancel',
+//         role: 'cancel',
+//         cssClass: 'secondary', 
+//         handler: () => {
+//          this.showPaymentButtons = false;
+//          this.generateRef();
+//         }
+//       }, {
+//         text: 'Okay',
+//         handler: () => {
+//          this.showPaymentButtons = false;
+//          const process = { username : this.appUsername , amount: this.model.amount, status : 'processing',
+//           trxref: this.reference, account_id: this.accountService.user_id, transaction : ' manual transfer'};
 
+//          process.username = this.appUsername;
+//          console.log('Confirm Okay', process);
+//          this.userService.postManualTrans(process).subscribe(
+//             res => {
+//               console.log(res);
+//               this.presentSucess();
+//             },
+//             err => {
+//               console.log(err); 
+//             }
+//           );
+//         }
+//       }
+//     ]
+//   });
 
-async showAlert() {
-  const alert = await this.alertController.create({
-    header: 'MOBILE TRANSFER',
-    message: `Add this id (${this.accountService.user_id})
-    to your mobile transfer info. <br> after a successful transfer click OK.
-             <p><h6 class=" font-weight-bold">Account Number: 3585745013</h6></p>
-             <p><h6  class="font-weight-bold">Bank : FCMB </h6></p>
-             <p><h6  class=" fiont-weight-bold">Account Name : Ayaweisoft </h6></p>
-             <p> <h4 class=" fiont-weight-bold"> Amount : ₦ ${this.model.amount}</h4></p>`,
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary', 
-        handler: () => {
-         this.showPaymentButtons = false;
-         this.generateRef();
-        }
-      }, {
-        text: 'Okay',
-        handler: () => {
-         this.showPaymentButtons = false;
-         const process = { username : this.appUsername , amount: this.model.amount, status : 'processing',
-          trxref: this.reference, account_id: this.accountService.user_id, transaction : ' manual transfer'};
+//   await alert.present();
+// }
 
-         process.username = this.appUsername;
-         console.log('Confirm Okay', process);
-         this.userService.postManualTrans(process).subscribe(
-            res => {
-              console.log(res);
-              this.presentSucess();
-            },
-            err => {
-              console.log(err); 
-            }
-          );
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}
-
-async presentSucess() {
-  this.showPaymentButtons = false;
-  const toast = await this.toastController.create({
-    message: 'Your account will be updated shortly.',
-    position: 'middle',
-    duration: 4000
-  });
-  toast.present(); 
-}
+// async presentSucess() {
+//   this.showPaymentButtons = false;
+//   const toast = await this.toastController.create({
+//     message: 'Your account will be updated shortly.',
+//     position: 'middle',
+//     duration: 4000
+//   });
+//   toast.present(); 
+// }
 
 
 async enterAmountInput() {
@@ -287,15 +292,17 @@ async enterAmountInput() {
         cssClass: 'danger',
         handler: (blah) => {
           console.log('cancel amount input');
-          this.generateRef();
+          this.generateReference()
         }
       }, {
         text: 'Confirm',
         cssClass : 'success',
         handler: (val) => {
           console.log(val.amount)
+          console.log(typeof(val.amount))
           this.showPaymentButtons = true;
-          this.model.amount = val.amount;
+          this.model.amount = val.amount+'00'
+          this.model.actual = val.amount
         }
       }
     ]
@@ -305,34 +312,34 @@ async enterAmountInput() {
 
 }
 
-async presentAmountInput() {
-  const alert = await this.alertController.create({
-    header: 'ENTER AMOUNT',
-    inputs: [ {
-        name: 'amount',
-        type: 'text',
-        placeholder: 'example 2000'
-      }],
-    buttons: [ {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: (blah) => {
-          console.log('Confirm Cancel: blah');
-        }
-      }, {
-        text: 'Okay',
-        handler: (value) => {
-          console.log('Confirm Okay', value);
-          this.model.amount = value.amount;
-          this.payNow();
-        }
-      }
-    ]
-  });
+// async presentAmountInput() {
+//   const alert = await this.alertController.create({
+//     header: 'ENTER AMOUNT',
+//     inputs: [ {
+//         name: 'amount',
+//         type: 'text',
+//         placeholder: 'example 2000'
+//       }],
+//     buttons: [ {
+//         text: 'Cancel',
+//         role: 'cancel',
+//         cssClass: 'secondary',
+//         handler: (blah) => {
+//           console.log('Confirm Cancel: blah');
+//         }
+//       }, {
+//         text: 'Okay',
+//         handler: (value) => {
+//           console.log('Confirm Okay', value);
+//           this.model.amount = value.amount;
+//           this.payNow();
+//         }
+//       }
+//     ]
+//   });
 
-  await alert.present();
-}
+//   await alert.present();
+// }
 
 // cashout
 async enterCashoutAmount() {

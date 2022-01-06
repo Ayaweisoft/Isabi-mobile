@@ -44,7 +44,6 @@ import { AngularFireModule } from '@angular/fire';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
 import { BehavourService } from './services/behavour.service';
-import { FlutterwaveModule } from 'flutterwave-angular-v3';
 import { WebVotingComponent } from './components/web-voting/web-voting.component';
 import { environment } from 'src/environments/environment';
 import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/image-custom-spinner.component';
@@ -56,6 +55,8 @@ import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
 import { WebTicketComponent } from './components/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
+import { TransactionService } from './services/transaction.service';
+import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
 
 
 @NgModule({
@@ -72,14 +73,14 @@ import { EditEventComponent } from './components/edit-event/edit-event.component
     EditEventComponent,
     WebTicketComponent,
      SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
-  entryComponents: [InsideEventAddUserComponent, VoteNowComponent,
+  entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    NgInterswitchModule,
     HttpClientModule,
-    FlutterwaveModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     IonicModule.forRoot(),
      AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -95,6 +96,7 @@ import { EditEventComponent } from './components/edit-event/edit-event.component
     StatusBar,
     EventService,
     DemoQuestionsService,
+    TransactionService,
     // AppRate,
     UserService,
     LogicService,
