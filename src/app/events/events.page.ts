@@ -1,9 +1,9 @@
-import { AlertController } from '@ionic/angular';
+import { IonSlides, AlertController } from '@ionic/angular';
 import { EventService } from './../shared/event.service';
 import { GameServiceService } from './../shared/game-service.service';
 import { UserService } from './../shared/user.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { AccountService } from '../shared/account.service';
 import { environment } from 'src/environments/environment';
 import { LogicService } from '../services/logic.service';
@@ -14,11 +14,21 @@ import { LogicService } from '../services/logic.service';
   styleUrls: ['./events.page.scss'],
 })
 export class EventsPage implements OnInit {
+@ViewChild('mySlider', {static : false}) mySlider: IonSlides;
 allEvent = [];
 loading = true;
 webLink = environment.webVotingUrl;
-  constructor(private router: Router, private gameService: GameServiceService, 
-              private eventService: EventService, public  userService: UserService,
+slideCounter =  0;
+
+opts = {
+  slidePerView: 1,
+  spaceBetween: 20
+}
+
+  constructor(private router: Router,
+              private eventService: EventService,
+              public  userService: UserService,
+              public gameService: GameServiceService,
               private accountService: AccountService,
               private logicService: LogicService,
               public alertController: AlertController) {
@@ -26,7 +36,35 @@ webLink = environment.webVotingUrl;
 
   ngOnInit() { 
     this.getAllevent();
+    this.gameService.getGameTip();
+    this.gameService.getAdminDate();
+    console.log("day", this.gameService.timeDays);
+    this.autoSlide();
   }
+
+  async autoSlide() {
+    setInterval(()=> {
+       this.gameService.slideCounter = this.gameService.gameTipArray.length;
+       this.gameService.slideCounter --;
+       this.mySlider.slideNext(3000, true);
+       console.log('slide to prev', this.gameService.slideCounter);
+    
+    
+    },9000)
+
+ }
+
+ 
+  
+ clickSlidetoNext() {
+  console.log('slide to next')
+  this.mySlider.slideNext();
+}
+
+clickSlidePrevious() {
+  console.log('slide to previous');
+  this.mySlider.slidePrev();
+}
 
 
   getAllevent(){
@@ -108,9 +146,4 @@ async handleDelete(event) {
 
   await alert.present();
 }
-
-
- 
-
-
 }

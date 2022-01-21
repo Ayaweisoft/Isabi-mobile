@@ -22,7 +22,7 @@ import { WebTicketComponent } from './components/web-ticket/web-ticket.component
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tabs/gamesection',
+    redirectTo: 'tabs/events',
     pathMatch: 'full'
   },
 

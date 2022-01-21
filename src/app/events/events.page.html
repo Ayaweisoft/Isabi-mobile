@@ -1,60 +1,108 @@
 <ion-header>
   <ion-toolbar>
-
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <div class="row d-flex justify-content-center">
+    <div class="logo">
       <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
+  <div class="content">
+
+    <div class="timer-section">
+      <span class="h">COUNTDOWN TO GAME</span>
+      <div class="row">
+          <div class="time">
+            <span class="days" id="day">{{gameService.timeDays}}</span>
+            <small>DAY</small>
+          </div>
+          <div class="time">
+            <span class="hours" id="hour">{{gameService.timeHours}} </span>
+            <small>HR</small>
+          </div>
+          <div class="time">
+            <span class="minutes" id="minute">{{gameService.timeMinute}} </span>
+            <small>MIN</small>
+          </div>
+          <div class="time">
+            <span class="seconds" id="second">{{gameService.timeSeconds}} </span>
+            <small>SEC</small>
+          </div>
+      </div>
+    </div>
+
+    <div class="clue-tips">
+        <div class="icon" slot="start">
+          <ion-icon (click)="clickSlidePrevious()" size="large" color="light" name="arrow-back"></ion-icon>
+        </div>
+      <div class="col-tip">
+        <div class="tips">
+          <h2>Clue Tips</h2>
+          <ion-slides #mySlider [options]="opts">
+            <ion-slide *ngFor="let item of gameService?.gameTipArray">
+              <p>{{item.tip}}</p>
+            </ion-slide>
+          </ion-slides>
+        </div>
+      </div>
+        <div class="icon" slot="end">
+          <ion-icon (click)="clickSlidetoNext()" size="large" color="light" name="arrow-forward"></ion-icon>
+        </div>
+      </div>
+    <ion-row>
+      <ion-col>
+        <ion-searchbar></ion-searchbar>
+      </ion-col>
+    </ion-row>
+
     <ion-row>
       <ion-col size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
         <ion-card color="light" *ngFor="let item of allEvent">
           <img [src]="item.image_url">
-
-          <div class="ion-text-center">
-            <ion-title mode="md" class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
-            <ion-text>{{item.aboutEvent}} </ion-text>
-
-            <small>{{item.type}} </small>
-
-            <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="handleDelete(item)" name="trash">
-            </ion-icon>
-          </div>
-
-          <div class="row d-flex justify-content-center">
-            <ion-button (click)="insideEvent(item)">ENTER
-            </ion-button>
-          </div>
+          <ion-row class="text">
+            <ion-col class="main-text" size="8">
+              <div class="main-text ion-text-left ion-title-left">
+                <ion-title mode="md" class="ion-text-left text-uppercase font-weight-bold">{{item.eventName}}
+                </ion-title>
+                <ion-text>{{item.aboutEvent}} </ion-text>
+                <small>{{item.type}} </small>
+                <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="handleDelete(item)" name="trash">
+                </ion-icon>
+              </div>
+            </ion-col>
+            <ion-col class="button-container" size="4">
+              <div class="button">
+                <ion-button (click)="insideEvent(item)">
+                  ENTER
+                </ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
           <div *ngIf="userService.getRole() == 'ADMIN'" class="ion-text-center">
             <input readonly type="text" [value]="webLink +'/'+'web-event-ticket/'+ item._id " #userinput size="35">
             <ion-button color="dark" size="small" (click)="copyInputMessage(userinput)" value="click to copy">Copy
             </ion-button>
-
           </div>
         </ion-card>
-
       </ion-col>
     </ion-row>
-  </ion-grid>
 
-  <!-- loader -->
-  <div *ngIf="loading" class=" ">
-    <div class="toast-container ">
-      <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- loader -->
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
   </div>

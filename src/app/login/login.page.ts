@@ -53,7 +53,7 @@ export class LoginPage implements OnInit {
       this.userService.loadBalance();
 
       this.loading = false;
-      this.router.navigate(['/tabs/gamesection']);
+      this.router.navigate(['/']);
    
         
     }, err => {
