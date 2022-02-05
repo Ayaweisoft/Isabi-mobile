@@ -65,6 +65,7 @@ export class GameServiceService  {
     this.gameTime = setInterval(() => {
    let now = new Date().getTime();
    let t = deadline - now;
+  
    this.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
    this.timeHours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString();
    this.timeMinute = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)).toString();

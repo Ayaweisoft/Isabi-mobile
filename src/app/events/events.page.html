@@ -1,43 +1,54 @@
-<ion-header>
-  <ion-toolbar>
+<div class="header">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <div class="logo">
-      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
+    <div class="logo" slot="end">
     </div>
-  </ion-toolbar>
-</ion-header>
+</div>
 
-<ion-content>
-  <div class="content">
-
+<ion-content class="main-content">
+  <div class="head-section">
     <div class="timer-section">
       <span class="h">COUNTDOWN TO GAME</span>
       <div class="row">
-          <div class="time">
-            <span class="days" id="day">{{gameService.timeDays}}</span>
-            <small>DAY</small>
+        <div class="time">
+          <div class="circle-loader">
+            <div class="days circle" id="day">
+              {{gameService.timeDays}}
+            </div>
           </div>
-          <div class="time">
-            <span class="hours" id="hour">{{gameService.timeHours}} </span>
-            <small>HR</small>
+          <small>DAYS</small>
+        </div>
+        <div class="time">
+          <div class="circle-loader">
+            <div class="hours circle" id="hour">
+              {{gameService.timeHours}}
+            </div>
           </div>
-          <div class="time">
-            <span class="minutes" id="minute">{{gameService.timeMinute}} </span>
-            <small>MIN</small>
+          <small>HOURS</small>
+        </div>
+        <div class="time">
+          <div class="circle-loader">
+            <div class="minutes circle" id="minute">
+              {{gameService.timeMinute}}
+            </div>
+          </div> 
+          <small>MUNITES</small>
+        </div>
+        <div class="time">
+          <div class="circle-loader">
+            <div class="seconds circle" id="second">
+              {{gameService.timeSeconds}}
+            </div>
           </div>
-          <div class="time">
-            <span class="seconds" id="second">{{gameService.timeSeconds}} </span>
-            <small>SEC</small>
-          </div>
+          <small>SECONDS</small>
+        </div>
       </div>
     </div>
-
     <div class="clue-tips">
-        <div class="icon" slot="start">
-          <ion-icon (click)="clickSlidePrevious()" size="large" color="light" name="arrow-back"></ion-icon>
-        </div>
+      <div class="icon" slot="start">
+        <ion-icon (click)="clickSlidePrevious()" size="large" color="light" name="arrow-back"></ion-icon>
+      </div>
       <div class="col-tip">
         <div class="tips">
           <h2>Clue Tips</h2>
@@ -48,17 +59,38 @@
           </ion-slides>
         </div>
       </div>
-        <div class="icon" slot="end">
-          <ion-icon (click)="clickSlidetoNext()" size="large" color="light" name="arrow-forward"></ion-icon>
+      <div class="icon" slot="end">
+        <ion-icon (click)="clickSlidetoNext()" size="large" color="light" name="arrow-forward"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="event-section">
+    <h2>Events</h2>
+    <div class="search">
+      <input type="search">
+    </div>
+    <div class="event-card" *ngFor="let item of allEvent">
+      <div class="event-top">
+        <div class="event-pics">
+          <img class="event-pic" [src]="item.image_url">
+        </div>
+        <div class="event-desc">
+          <h3>{{item.eventName}}</h3>
+          <p>{{item.aboutEvent}}</p>
+          <p>type: {{item.type}}</p>
         </div>
       </div>
-    <ion-row>
-      <ion-col>
-        <ion-searchbar></ion-searchbar>
-      </ion-col>
-    </ion-row>
+      <div class="event-bottom">
+        <div class="event-icons">
+        </div>
+        <div class="event-button">
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <ion-row>
+  <!-- <ion-row>
       <ion-col size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
         <ion-card color="light" *ngFor="let item of allEvent">
           <img [src]="item.image_url">
@@ -88,21 +120,20 @@
           </div>
         </ion-card>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
-    <!-- loader -->
-    <div *ngIf="loading" class=" ">
-      <div class="toast-container ">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+  <!-- loader -->
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </div>
   </div>

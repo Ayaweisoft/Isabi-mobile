@@ -47,12 +47,16 @@ p{
 }
 
 .content {
-	background-image: url('./assets/img/i-sabi -bgd.jpeg');
+	background-color: #348A40;
 	height: 100%;
 	width: 100%;
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+ion-header{
+	background-color: #07360e;
 }
 
 ion-content {
