@@ -10,21 +10,21 @@
       </div>
     </div>
     <div class="main-section">
-      <form class="form" id="form" *ngIf="userRecordNotAvalible"  #profileForm ngform="profileForm" name="form" 
+      <form class="form" id="form"  #profileForm ngform="profileForm" name="form" 
       (submit)="createProfile(profileForm)">
         <div class="inputs">
 
           <div class="inputBox">
-            <input type="text" #fullname name="fullname" position="floating" id="fullName">
+            <input type="text" #fullname name="fullname" position="floating" id="fullName" [(ngModel)]="model.fullname" value="{{ myProfile?.email }}">
             <span class="text">Full Name</span>
           </div>
           <div class="inputBox">
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username"> 
             <span class="text">Username</span>
           </div>
           <div class="inputBox">
             <input #email name="email" position="floating"  [(ngModel)]="model.email"
-            type="email" required  [pattern]="emailRegex">
+            type="email" required  [pattern]="emailRegex" value="{{ myProfile?.email }}">
             <span class="text">Email</span>
           </div>          
           <div class="inputBox">
@@ -37,7 +37,8 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="submit-btn">Submit</button>
+          
+          <button class="submit-btn" type="submit">Submit</button>
           <button class="cancel-btn">Cancel</button>
         </div>
 

@@ -10,164 +10,37 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
+  <div class="main-content">
+    <div class="top-section">
+      <h2>Leaderboard</h2>
+    </div>
+    <div class="main-section">
+      <div class="lead">
+        <div class="first-position">
+          <div class="pic left-picture">
+          </div>
+          <div class="name">Nick</div>
+          <div class="record">150 secs</div>
+        </div>
+        <div class="first-position">
+          <div class="pic center-picture"></div>
+          <div class="name">Prince</div>
+          <div class="record">150 secs</div>
+        </div>
+        <div class="first-position">
+          <div class="pic right-picture"></div>
+          <div class="name">David</div>
+          <div class="record">150 secs</div>
+        </div>
+      </div>
+      <div class="the-rest">
 
-        <!-- content area -->
-        <ion-refresher #refresherRef
-                       (ionRefresh)="doRefresh($event)"
-                       slot="fixed">
-          <ion-refresher-content>
-          </ion-refresher-content>
-        </ion-refresher>
+      </div>
+    </div>
+  </div>
 
-        <!-- display if no users on leaderboard -->
-        <ion-row *ngIf="leaderBoard.length === 0 && !loading">
-          <ion-col size-xs="12"
-                   size-sm="12"
-                   size-md="6"
-                   offset-md="3"
-                   size-lg="4"
-                   offset-lg="4">
-            <ion-card class="text-center no-user">
-              <ion-card-header>
-                <ion-card-title>No User on Leader Board</ion-card-title>
-              </ion-card-header>
-
-              <div>
-                <ion-icon color="success"
-                          slot="icon-only"
-                          size="large"
-                          name="trophy"></ion-icon>
-              </div>
-
-              <ion-card-content class="font-weight-bold">
-                To show up on leaderboard, <br>
-                Get 15 questions correctly.
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-
-        <!-- display for users on leaderboard -->
-        <ion-row class="ion-no-padding">
-          <ion-col class="ion-no-padding"
-                   size-xs="12"
-                   size-sm="12"
-                   size-md="8"
-                   offset-md="2"
-                   size-lg="6"
-                   offset-lg="3">
-
-            <ion-title mode="md">Leaderboard</ion-title>
-            <!-- for first, second and third -->
-            <ion-row class="ion-no-padding ion-margin-bottom ion-margin-top">
-              <ion-col class="gen ion-no-padding"
-                       size="3">
-                <ion-icon color="primary"
-                          name="caret-up"></ion-icon>
-                <ion-avatar>
-                  <ion-icon size="large"
-                            color="success"
-                            name="person"></ion-icon>
-                </ion-avatar>
-                <span>2</span>
-                <ion-row>
-                  <ion-col class="user-details"
-                           size="12">
-                    <ion-text class="mt-2">{{secondPerson?.user}}</ion-text>
-                    <small>{{secondPerson?.minutes}} min : {{secondPerson?.seconds}}s</small>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-
-              <ion-col class="leader ion-no-padding"
-                       size="6">
-                <ion-icon class="mb-2 trophy"
-                          name="trophy"></ion-icon>
-                <ion-avatar>
-                  <ion-icon size="large"
-                            color="success"
-                            name="person"></ion-icon>
-                </ion-avatar>
-                <span>1</span>
-                <ion-row>
-                  <ion-col class="user-details"
-                           size="12">
-                    <ion-text class="mt-2">{{firstPerson?.user}}</ion-text>
-                    <small>{{firstPerson?.minutes}} min : {{firstPerson?.seconds}}s</small>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-
-              <ion-col class="gen ion-no-padding"
-                       size="3">
-                <ion-icon color="danger"
-                          name="caret-down"></ion-icon>
-                <ion-avatar class="three">
-                  <ion-icon size="large"
-                            color="success"
-                            name="person"></ion-icon>
-                </ion-avatar>
-                <span>3</span>
-                <ion-row>
-                  <ion-col class="user-details"
-                           size="12">
-                    <ion-text class="mt-2">{{thirdPerson?.user}}</ion-text>
-                    <small>{{thirdPerson?.minutes}} min : {{thirdPerson?.seconds}}s</small>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-            </ion-row>
-
-            <!-- show user rank -->
-            <!-- <ion-row>
-              <ion-col>
-                <ion-text>You currently rank</ion-text>
-                <div>
-                  <ion-text>126</ion-text>
-                  <ion-icon color="danger"
-                            name="caret-down"></ion-icon>
-                </div>
-              </ion-col>
-            </ion-row> -->
-
-            <!-- for others -->
-            <ion-row class="ion-margin-top">
-              <ion-col size="4"
-                       offset="3">
-                <ion-text class="font-italic font-weight-lighter"
-                          color="success">Username</ion-text>
-              </ion-col>
-              <ion-col class="ion-text-end"
-                       size="5">
-                <ion-text class="font-italic font-weight-lighter"
-                          color="success">Elapsed time</ion-text>
-              </ion-col>
-            </ion-row>
-
-            <div class="others"
-                 *ngFor="let item of leaderBoard; index as i">
-              <div class="avatar-block">
-                <ion-avatar class="mr-4">
-                  <ion-icon size="large"
-                            color="success"
-                            name="person"></ion-icon>
-                </ion-avatar>
-                <ion-text class="font-weight-bold">{{item?.user}}</ion-text>
-              </div>
-              <ion-text>{{item?.minutes}} min : {{item?.seconds}}s</ion-text>
-            </div>
-          </ion-col>
-        </ion-row>
-        <!-- end content area -->
-
-        <!-- loader -->
+  
         <div *ngIf="loading">
           <div class="toast-container "></div>
         </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-content>

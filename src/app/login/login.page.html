@@ -1,10 +1,54 @@
 <ion-content>
-  <ion-grid>
+
+
+  <div class="main-content">
+    <div class="illustration"></div>
+    <div class="main-section">
+      <h2>Sign In</h2>
+      <div class="input-section">
+          <form class="form" class="form" #loginForm="ngForm" name="form" (submit)="login(loginForm)">
+            <div class="inputs">
+              <!-- <div *ngIf="emailUser.dirty && emailUser.errors" class="text-center">
+                <small class="text-danger ">phone number or email is required</small>
+              </div> -->
+              <div class="inputBox">
+                <span class="text">Email Address</span>
+                <input type="email" required="true"
+                #emailUser="ngModel"
+                name="number"
+                clearInput
+                [(ngModel)]="model.number"
+                autocomplete="off"
+                minlength="11">
+              </div>
+              <div class="inputBox">
+                <span class="text">Username</span>
+                <input type="password" name="password" id="password" #password="ngModel" name="password" minlength="6"
+                  [(ngModel)]="model.password" clearInput>
+                <a class="text forgot-password" [routerLink]="['/forgetpassword']">Forgot password?
+                </a>
+              </div>
+              <input class="signin-btn" type="submit" value="Sign in">
+            </div>
+
+            <p class="text">Don't have account?
+              <span (click)="register()"
+              class="text-signup">
+                Sign up
+              </span>
+            </p>
+          </form>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- <ion-grid>
     <ion-row>
       <ion-col size="12">
         <section class="ion-padding logo">
           <img src="assets/img/ISABI LOGO GREEN.png"
-               alt="isabi logo"
+               alt="isar logo"
                title="isabi logo" />
         </section>
       </ion-col>
@@ -23,7 +67,7 @@
               #loginForm="ngForm"
               name="form"
               (submit)="login(loginForm)">
-          <!-- username -->
+          
           <div class="utility">
             <div class="text-input">
               <ion-input autofocus
@@ -137,68 +181,21 @@
     <div class="toast-container">
       <div class="lds-roller"></div>
     </div>
-  </div>
+  </div> -->
 
-  <!-- fab button with options on click -->
-  <!-- <ion-fab horizontal="start"
-           vertical="bottom"
-           slot="fixed">
-    <ion-fab-button color="success">
-      <ion-icon name="alert"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-button color="success"
-                  size="small">
-        <a class=" info text-white"
-           [routerLink]="['/testimonials']">
-          <ion-icon name="trophy"></ion-icon> TESTIMONIALS
-        </a>
-      </ion-button>
-      <ion-button color="success"
-                  size="small">
-        <a class=" info text-white"
-           [routerLink]="['/howtoplay']">
-          <ion-icon name="logo-game-controller-a"></ion-icon> HOW TO PLAY
-        </a>
-      </ion-button>
-      <ion-button color="success"
-                  size="small">
-        <a class=" info text-white"
-           [routerLink]="['/contactus']">
-          <ion-icon name="chatbubbles"></ion-icon> CONTACT US
-        </a>
-      </ion-button>
-      <ion-button color="success"
-                  size="small">
-        <a class="info text-white "
-           href="https:/i-sabi.com/faq/">
-          <ion-icon name="help"></ion-icon> FAQ
-        </a>
-      </ion-button>
-      <ion-button color="success"
-                  size="small">
-        <a class="info text-white "
-           href="https:/i-sabi.com/privacy-policy-2/">
-          <ion-icon name="list"></ion-icon> POLICY
-        </a>
-      </ion-button>
-    </ion-fab-list>
-  </ion-fab> -->
-
-  <!-- loader -->
-  <div *ngIf="loading"
-       class=" ">
-    <div class="toast-container ">
-      <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
+    <!-- loader -->
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
       </div>
     </div>
-  </div>
 </ion-content>
