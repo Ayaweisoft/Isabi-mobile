@@ -24,21 +24,10 @@ export class AppComponent {
   balance : any;
   authenticate = false;
   public appPages = [
-   
     {
-      title: 'EVENTS',
-      url: '/tabs/events',
-      icon: 'star-outline'
-    },
-     {
-      title: 'PLAY GAME',
-      url: '/tabs/gamesection',
+      title: 'PLAY DEMO',
+      url: '/tabs/playdemo',
       icon: 'game-controller'
-    },
-    {
-      title: 'ACCOUNT',
-      url: '/tabs/account',
-      icon: 'wallet'
     },
     {
       title: 'LEADERBOARD',
@@ -46,10 +35,24 @@ export class AppComponent {
       icon: 'trophy'
     },
     {
-      title: 'PLAY DEMO',
-      url: '/tabs/playdemo',
+      title: 'PLAY GAME',
+      url: '/tabs/gamesection',
       icon: 'game-controller'
     },
+   
+    {
+      title: 'EVENTS',
+      url: '/tabs/events',
+      icon: 'star-outline'
+    },
+     
+    {
+      title: 'ACCOUNT',
+      url: '/tabs/account',
+      icon: 'wallet'
+    },
+    
+    
     {
       title: 'MY RECORD',
       url: '/tabs/myrecord',
