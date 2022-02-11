@@ -142,6 +142,10 @@ p{
 	z-index: 100;
 }
 
+.input-section {
+	width: 80%;
+	margin-top: 30px;
+}
 
 form{
 	display: flex;
@@ -162,7 +166,9 @@ form{
 			display: flex;
 			flex-direction: column;
 
+		
 			.text{
+				margin-top: 10px;
 				font-size: 11px;
 				color: black;
 			}
@@ -173,6 +179,8 @@ form{
 				border: none;
 				width: 100%;
 				background: #ffffff;
+				outline: none;
+				padding: 0 10px;
 			}
 		}
 
