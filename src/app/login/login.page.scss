@@ -166,7 +166,8 @@ form{
 	height: 100%;
 	gap: 4px;
 	width: 100%;
-
+	margin: auto;
+    max-width: 500px;
 	.inputs{
 		display: flex;
 		flex-direction: column;
@@ -177,7 +178,7 @@ form{
 			width: 100%;
 			display: flex;
 			flex-direction: column;
-
+			
 			.text{
 				margin-top: 10px;
 				font-size: 11px;
@@ -187,7 +188,7 @@ form{
 			input{
 				height: 40px;
 				border-radius: 10px;
-				border: none;
+				border: 1px solid #bbb;
 				width: 100%;
 				background: #ffffff;
 				outline: none;
