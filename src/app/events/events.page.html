@@ -57,7 +57,7 @@
               {{gameService.timeMinute}}
             </div>
           </div> 
-          <small>MUNITES</small>
+          <small>MINUTES</small>
         </div>
         <div class="time">
           <div class="circle-loader">
@@ -95,6 +95,27 @@
       <input type="search">
     </div>
     <div class="event-cards">
+                 <!-- loader -->
+  <div *ngIf="loading" class="">
+    <div class="loading-card" >
+      <div class="loading-top">
+        <div class="loading-pics">
+          <div class="loading-pic" ></div>
+        </div>
+        <div class="loading-desc">
+          <div class="loading-name"></div>
+          <div class="loading-details"></div>
+          <div class="loading-type"></div>
+        </div>
+      </div>
+      <div class="loading-bottom">
+        <div class="loading-icons">
+        </div>
+        <div class="loading-button">
+        </div>
+      </div>
+    </div>
+  </div>
       <div class="event-card" *ngFor="let item of allEvent">
         <div class="event-top">
           <div class="event-pics">
@@ -148,19 +169,5 @@
       </ion-col>
     </ion-row> -->
 
-  <!-- loader -->
-  <div *ngIf="loading" class=" ">
-    <div class="toast-container ">
-      <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
+  
 </ion-content>
