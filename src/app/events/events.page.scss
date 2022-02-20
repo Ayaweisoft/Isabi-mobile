@@ -7,9 +7,24 @@
 	align-items: center;
 
 	ion-menu-button{
-		--background: #f2f5f2;
+		// --background: #f2f5f2;
+		color: #fff;
 	}
-
+	.timer_small {
+		display: flex;
+		align-items: center;
+		color: #fff;
+		font-weight: bold;
+		gap: 20px;
+		div {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		p {
+			margin-bottom: 0;
+		}
+	}
 	.logo{
 		width: 30px;
 		height: 30px;
@@ -19,6 +34,8 @@
 	}
 
 }
+
+
 
 .main-content {
 	height: fit-content;
@@ -31,7 +48,9 @@
 		flex-direction: column;
 		padding: 5px;
 		gap: 10px;
-
+		@media (min-width: 1024px) {
+			// display: none;
+		  }
 		.h{
 			
 			margin: 0;
@@ -101,6 +120,9 @@
 		padding-left: 20px; 
 		padding-right: 20px;
 		padding-top: 10px;
+		max-width: 500px;
+		margin: auto;
+		margin-bottom: 2em;
 		.icon{
 			display: flex;
 			justify-content: end;
@@ -191,6 +213,8 @@
 		border: 1px solid #07360e;
 		opacity: 36%;
 		color: black;
+		max-width: 500px;
+		margin: auto;
 
 		input{
 			overflow: hidden;
@@ -217,7 +241,14 @@
 		margin: 0;
 		z-index: 150;
 	}
-
+	.event-cards {
+		margin: auto;
+		margin-top: 10px;
+		display: grid;
+		gap: 10px;
+		justify-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	}
 	.event-card{
 		background-color: #EEF7EE;
 		border-radius: 10px;
@@ -226,6 +257,7 @@
 		gap: 10px;
 		width: 93%;
 		flex-direction: column;
+		justify-content: space-between;
 		padding: 16px;
 
 		.event-top{
