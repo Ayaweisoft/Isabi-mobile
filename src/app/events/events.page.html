@@ -2,7 +2,31 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <div class="logo" slot="end">
+    <div class="timer_small" >
+        <div class="days">
+          <p>
+            {{gameService.timeDays}}
+          </p>
+          <p>DAYS</p>
+        </div>
+        <div class="hours">
+          <p>{{gameService.timeHours}}</p>
+          <p>HOURS</p>
+        </div>
+        <div class="minutes">
+          <p>{{gameService.timeMinute}}</p>
+          <p>MINUTES</p>
+        </div>
+        <div class="seconds">
+          <p>{{gameService.timeSeconds}}</p>
+          <p>SECONDS</p>
+        </div>
+    </div>
+    <div class="header_end" slot="end">
+      <div class="user_info">John Doe</div>
+    <div class="logo" >
+      
+    </div>
     </div>
 </div>
 
@@ -70,21 +94,23 @@
     <div class="search">
       <input type="search">
     </div>
-    <div class="event-card" *ngFor="let item of allEvent">
-      <div class="event-top">
-        <div class="event-pics">
-          <img class="event-pic" [src]="item.image_url">
+    <div class="event-cards">
+      <div class="event-card" *ngFor="let item of allEvent">
+        <div class="event-top">
+          <div class="event-pics">
+            <img class="event-pic" [src]="item.image_url">
+          </div>
+          <div class="event-desc">
+            <h3>{{item.eventName}}</h3>
+            <p>{{item.aboutEvent}}</p>
+            <p>type: {{item.type}}</p>
+          </div>
         </div>
-        <div class="event-desc">
-          <h3>{{item.eventName}}</h3>
-          <p>{{item.aboutEvent}}</p>
-          <p>type: {{item.type}}</p>
-        </div>
-      </div>
-      <div class="event-bottom">
-        <div class="event-icons">
-        </div>
-        <div class="event-button">
+        <div class="event-bottom">
+          <div class="event-icons">
+          </div>
+          <div class="event-button">
+          </div>
         </div>
       </div>
     </div>
