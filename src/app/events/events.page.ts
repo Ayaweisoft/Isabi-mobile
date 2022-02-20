@@ -88,7 +88,7 @@ clickSlidePrevious() {
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.logicService.presentToast('text  coppied' );
+    this.logicService.presentToast('Text copied!' );
   }
 
 
