@@ -71,6 +71,11 @@ ion-content {
 .main-content{
 	height: 100%;
 	width: 100%;
+	@media (min-width: 1024px) {
+		display: flex;
+		padding: 0;
+		// display: none;
+	  }
 }
 
 .illustration{
@@ -151,6 +156,13 @@ p{
 	border-top-right-radius: 30px;
 	margin-top: -30px;
 	z-index: 100;
+
+
+	@media (min-width: 1024px) {
+		// display: none;
+		height: 100%;
+		justify-content: center;
+	  }
 }
 
 .input-section{
