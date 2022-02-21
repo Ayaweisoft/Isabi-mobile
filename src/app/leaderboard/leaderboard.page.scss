@@ -27,12 +27,12 @@ main{
 	padding: 20px;
 	padding-top: 0;
 	position: relative;
-	// background-image: url("../../assets/mobile_bg.png");
-    // background-repeat: no-repeat;
-    // background-size: cover;
+	background-image: url("../../assets/figma/unsplash_ws21sn-vDdY.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
 	background-color: #348A40;
 	width: 100%;
-	height: 25%;
+	height: 231px;
 	// z-index: -1;
 
 }
@@ -42,7 +42,7 @@ h2{
 	font-weight: bold;
 	padding-top: 20px;
 	color: #f2f5f2;
-	font-size: 18px;
+	font-size: 23px;
 	text-align: center;
 }
 
@@ -75,12 +75,14 @@ h2{
 		flex-direction: column;
 		height: 100%;
 		width: 30%;
-		gap: 10px;
+		gap: 30px;  
 
 		.pic-container{
 			height: 65%;
 			width: 100%;
 			display: flex;
+			justify-content: center;
+			align-items: flex-end;
 
 			.pic{
 				border-radius: 100%;
@@ -109,12 +111,8 @@ h2{
 			.person-name{
 				font-weight: bold;
 				font-size: 22px;
-				// margin-top: 30px;
 			}
 			
-			// .center-name{
-			// 	margin-top: 46px;
-			// }
 			
 			.record{
 				background-color: #EEF7EE;
@@ -126,6 +124,34 @@ h2{
 		
 	}
 }
+
+.the-rest{
+	height: fit-content;
+	width: 100%;
+	background-color: transparent;
+	display: flex;
+	flex-direction: column;
+
+	.leader-container{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-bottom: 1px solid rgb(224, 224, 224);
+
+		.score{
+			background-color: #EEF7EE;
+			border-radius: 10px;
+			font-size: 11px;
+		}
+		.pic{
+			height: 30px;
+			width: 30px;
+			background-color: #a7a7a7;
+		}
+	}
+}
+
+
 
 
 

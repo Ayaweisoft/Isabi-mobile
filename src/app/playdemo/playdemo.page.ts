@@ -108,8 +108,8 @@ export class PlaydemoPage implements OnInit {
   }
 
   getQuestionForGame() { 
-  this.lastQuestion = 0;
-  this.runningQuestion = 0;
+    this.lastQuestion = 0;
+    this.runningQuestion = 0;
     this.gameQuestions = this.demoQuestionsService.demoQuestions;
     this.lastQuestion =  this.gameQuestions.length - 1;
     this.loadingGame = false;
@@ -117,20 +117,20 @@ export class PlaydemoPage implements OnInit {
 
   selectChange( $event) {
     this.playByCategory($event);
-        }
+  }
 
-        playByCategory(category){
-          this.loadingGame = true;
-          this.playCategory =  this.userService.playByCategory(category).subscribe(
-            res => {
-              this.loadingGame = false;
-              this.gameQuestions = res['questions'];
-              this.lastQuestion =  this.gameQuestions.length - 1;
-      
-            }
-          );
-      
-        }
+  playByCategory(category){
+    this.loadingGame = true;
+    this.playCategory =  this.userService.playByCategory(category).subscribe(
+      res => {
+        this.loadingGame = false;
+        this.gameQuestions = res['questions'];
+        this.lastQuestion =  this.gameQuestions.length - 1;
+
+      }
+    );
+
+  }
 
 
   gameisOver(){ 

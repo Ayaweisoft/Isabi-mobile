@@ -69,6 +69,108 @@
     </div>
 
 
+    <div class="main-content">
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
+        </div>
+        <div class="timer-section">
+          <span class="h">COUNTDOWN TO GAME</span>
+          <div class="row">
+            <div class="time">
+              <div class="circle-loader">
+                <div class="days circle" id="day">
+                  {{gameService.timeDays}}
+                </div>
+              </div>
+              <small>DAYS</small>
+            </div>
+            <div class="time">
+              <div class="circle-loader">
+                <div class="hours circle" id="hour">
+                  {{gameService.timeHours}}
+                </div>
+              </div>  
+              <small>HOURS</small>
+            </div>
+            <div class="time">
+              <div class="circle-loader">
+                <div class="minutes circle" id="minute">
+                  {{gameService.timeMinute}}
+                </div>
+              </div> 
+              <small>MUNITES</small>
+            </div>
+            <div class="time">
+              <div class="circle-loader">
+                <div class="seconds circle" id="second">
+                  {{gameService.timeSeconds}}
+                </div>
+              </div>
+              <small>SECONDS</small>
+            </div>
+          </div>
+        </div>
+        <div class="clue-tips">
+          <div class="icon" (click)="clickSlidePrevious()" slot="start">
+            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g opacity="0.6">
+                <path d="M9.16732 4.66699L3.33398 10.5003L9.16732 16.3337" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M3.33398 10.5H16.6673" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+          <div class="col-tip">
+            <div class="tips">
+              <h2>Clue Tips</h2>
+              <ion-slides #mySlider [options]="opts">
+                <ion-slide *ngFor="let item of gameService?.gameTipArray">
+                  <p>{{item.tip}}</p>
+                </ion-slide>
+              </ion-slides>
+            </div>
+          </div>
+          <div class="icon" (click)="clickSlidetoNext()" slot="end">
+            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g opacity="0.6">
+                <path d="M10.8327 16.333L16.666 10.4997L10.8327 4.66634" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M16.666 10.5L3.33268 10.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </g>
+            </svg>          
+          </div>
+        </div>
+      </div>
+    
+      <div class="category-section">
+        <h2>Events</h2>
+        <div class="search">
+          <input type="search">
+        </div>
+        <div class="event-card" *ngFor="let item of allEvent">
+          <div class="event-top">
+            <div class="event-pics">
+              <img class="event-pic" [src]="item.image_url">
+            </div>
+            <div class="event-desc">
+              <h3>{{item.eventName}}</h3>
+              <p>{{item.aboutEvent}}</p>
+              <p>type: {{item.type}}</p>
+            </div>
+          </div>
+          <div class="event-bottom">
+            <div class="event-icons">
+            </div>
+            <div class="event-button">
+              <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="category-container" *ngIf="!loadingGame  && !startGame">
       <div class="timer" *ngIf="!gameOver">

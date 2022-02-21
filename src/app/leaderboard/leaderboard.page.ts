@@ -19,6 +19,41 @@ export class LeaderboardPage implements OnInit {
   secondPerson: any;
   firstPerson: any;
 
+  public leaders = [
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    }
+  ]
+
   constructor(
     public menu: MenuController,
     private userService: UserService,
@@ -53,8 +88,8 @@ export class LeaderboardPage implements OnInit {
     this.accountServive.getLeaderboard().subscribe(val => {
       this.leaderBoard = val["document"];
       this.firstPerson = this.leaderBoard[0];
-       this.secondPerson = this.leaderBoard[1];
-        this.thirdPerson = this.leaderBoard[2];
+      this.secondPerson = this.leaderBoard[1];
+      this.thirdPerson = this.leaderBoard[2];
       console.log('getting leaderboard')
       this.loading = false;
     });

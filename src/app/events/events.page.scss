@@ -39,26 +39,31 @@
 				color: #fff;
 
 				.circle-loader{
-					display: flex;
-					justify-content: center;
-					align-items: center;
+					position: relative;
 					background-color: rgb(183, 233, 183);
 					width: 62px;
 					height: 62px;
-					border-radius: 100%;
-					flex-direction: column;
-					.circle {
-						background-color: #07360E;
-						color: #fff;
-						font-size: 21px;
-						display: flex;
-						height: 56.5px;
-						border-radius: 100%;
-						width: 56.5px;
-						font-weight: bolder;
-						justify-content: center;
-						align-items: center;
-					}
+					border-radius: 50%;
+					display: grid;
+					place-items: center;
+				}
+
+				.circle-loader::before{
+					content: "";
+					position: absolute;
+					background-color: #348A40;
+					height: 90%;
+					
+					width: 90%;
+					//background-color: #fff;/
+					border-radius: 50%;		
+				}
+
+				.text{
+					position: relative;
+					color: #fff;
+					font-size: 14px;
+					font-weight: bolder;
 				}
 
 				span {
@@ -267,6 +272,8 @@
 			}
 
 			.event-button{
+				display: grid;
+				place-items: center;
 				background-color: rgb(204, 197, 197);
 				height: 40px;
 				flex: 1;
@@ -278,7 +285,8 @@
 
 
 
-// ion-card {
+// ion-card {  let hour = document.querySelector(".hour-loader");
+
 // 	img {
 // 		height: 90%;
 // 		width: 100%;

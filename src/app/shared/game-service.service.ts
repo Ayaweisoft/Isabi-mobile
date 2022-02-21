@@ -66,26 +66,29 @@ export class GameServiceService  {
    let now = new Date().getTime();
    let t = deadline - now;
   
-   this.timeDays = Math.floor(t / (1000 * 60 * 60 * 24)).toString();
-   this.timeHours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString();
-   this.timeMinute = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60)).toString();
-   this.timeSeconds = Math.floor((t % (1000 * 60)) / 1000).toString();
-   
+   let d = Math.floor(t / (1000 * 60 * 60 * 24));
+   let h = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+   let m = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+   let s = Math.floor((t % (1000 * 60)) / 1000);
+    
+   this.timeDays = d < 10 ? '0' + d.toString() : d;
+   this.timeHours = h < 10 ? '0' + h.toString() : h;
+   this.timeMinute = m < 10 ? '0' + m.toString() : m;
+   this.timeSeconds = s < 10 ? '0' + s.toString() : s;
+
    if (t < 0) {
     console.log('GAME IS LIVE....');
     localStorage.setItem( 'GAMELIVE', 'true');
     clearInterval(this.gameTime);
-    this.timeDays = '0';
-    this.timeHours = '0';
-    this.timeMinute = '0';
-    this.timeSeconds = '0';
+    this.timeDays = '00';
+    this.timeHours = '00';
+    this.timeMinute = '00';
+    this.timeSeconds = '00';
   
          } else {
            console.log('GAME NOT LIVE....');
            localStorage.setItem( 'GAMELIVE', 'false');
 
-        
-           
          }
    console.log('fake pass');
   
@@ -98,7 +101,7 @@ export class GameServiceService  {
     });
   }
 
- 
+
 
   sendSms(sms){
    return this.http.post(environment.apiBaseUrl + '/send-sms', sms);
