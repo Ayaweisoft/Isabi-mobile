@@ -51,6 +51,30 @@ export class LeaderboardPage implements OnInit {
     {
       name: "John Doe",
       score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
+    },
+    {
+      name: "John Doe",
+      score: '150'
     }
   ]
 

@@ -43,10 +43,14 @@
       </div>
       <div class="the-rest">
         <div class="leader-container" *ngFor="let leader of leaders">
-          <span class="number">1</span>
-          <div class="pic"></div>
-          <div class="name">{{ leader.name }}</div>
-          <div class="score">{{ leader.score }}</div>
+          <div class="start">
+            <span class="number">1</span>
+            <div class="pic"></div>
+            <div class="name">{{ leader.name }}</div>
+          </div>
+          <div class="end">
+            <div class="score">{{ leader.score }} secs</div>
+          </div>
         </div>
       </div>
     </div>
