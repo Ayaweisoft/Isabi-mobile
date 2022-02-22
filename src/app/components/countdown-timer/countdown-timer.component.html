@@ -1,0 +1,37 @@
+<div class="timer-section">
+  <span class="h">COUNTDOWN TO GAME</span>
+  <div class="row">
+    <div class="time">
+      <div class="circle-loader">
+        <div class="days circle" id="day">
+          {{gameService.timeDays}}
+        </div>
+      </div>
+      <small>DAYS</small>
+    </div>
+    <div class="time">
+      <div class="circle-loader">
+        <div class="hours circle" id="hour">
+          {{gameService.timeHours}}
+        </div>
+      </div>
+      <small>HOURS</small>
+    </div>
+    <div class="time">
+      <div class="circle-loader">
+        <div class="minutes circle" id="minute">
+          {{gameService.timeMinute}}
+        </div>
+      </div> 
+      <small>MINUTES</small>
+    </div>
+    <div class="time">
+      <div class="circle-loader">
+        <div class="seconds circle" id="second">
+          {{gameService.timeSeconds}}
+        </div>
+      </div>
+      <small>SECONDS</small>
+    </div>
+  </div>
+</div>
