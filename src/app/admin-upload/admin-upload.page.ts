@@ -1,6 +1,6 @@
-import { ForgetpasswordComponent } from './../components/forgetpassword/forgetpassword.component';
+import { ForgetpasswordComponent } from '../forgetpassword/forgetpassword.component';
 import { AdminnavigationComponent } from './../adminnavigation/adminnavigation.component';
-import { AccountComponent } from './../components/account/account.component';
+import { AccountComponent } from '../account/account.component';
 import { UserService } from 'src/app/shared/user.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuController, ToastController, AlertController, PopoverController } from '@ionic/angular';

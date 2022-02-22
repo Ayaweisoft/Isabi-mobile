@@ -1,4 +1,4 @@
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './account/account.component';
 
 import { AccountService } from './shared/account.service';
 import { UserService } from './shared/user.service';

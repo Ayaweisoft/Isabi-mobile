@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
-import { AccountService } from './../../shared/account.service';
+import { AccountService } from '../shared/account.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';

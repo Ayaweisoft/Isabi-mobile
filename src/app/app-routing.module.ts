@@ -1,23 +1,23 @@
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { RegisterPage } from './register/register.page';
 import { GameGuard } from './auth/game.guard';
-import { NotLiveComponent } from './components/not-live/not-live.component';
-import { GamesectionComponent } from './components/gamesection/gamesection.component';
+import { NotLiveComponent } from './not-live/not-live.component';
+import { GamesectionComponent } from './gamesection/gamesection.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { InsideEventComponent } from './components/inside-event/inside-event.component';
 import { AdminEventComponent } from './components/admin-event/admin-event.component';
 import { MerchantGuard } from './merchant.guard';
 import { AdminnavigationComponent } from './adminnavigation/adminnavigation.component';
-import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
+import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
 import { AdminGuard } from './auth/admin.guard';
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './account/account.component';
 import { AuthguardGuard } from './auth/authguard.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
-import { WebVotingComponent } from './components/web-voting/web-voting.component';
+import { WebVotingComponent } from './web-voting/web-voting.component';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { ManageEventComponent } from './components/manage-event/manage-event.component';
-import { WebTicketComponent } from './components/web-ticket/web-ticket.component';
+import { WebTicketComponent } from './web-ticket/web-ticket.component';
 
 const routes: Routes = [
   {

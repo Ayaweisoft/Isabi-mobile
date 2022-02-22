@@ -1,5 +1,5 @@
 import { Subscription, Observable } from 'rxjs';
-import { GameServiceService } from './../../shared/game-service.service';
+import { GameServiceService } from '../shared/game-service.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
