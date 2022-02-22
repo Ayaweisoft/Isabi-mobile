@@ -1,7 +1,7 @@
 import { PopoverController, AlertController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../shared/account.service';
-import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
+import { AccountService } from '../../shared/account.service';
+import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 
 @Component({
   selector: 'app-admintransfer',

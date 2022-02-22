@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
+import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 import { AlertController, PopoverController } from '@ionic/angular';
-import { UserService } from '../shared/user.service';
-import { AccountService } from '../shared/account.service';
+import { UserService } from '../../shared/user.service';
+import { AccountService } from '../../shared/account.service';
 
 @Component({
   selector: 'app-admin-play',

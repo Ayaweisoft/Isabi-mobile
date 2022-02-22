@@ -1,8 +1,8 @@
-import { GameServiceService } from './../shared/game-service.service';
+import { GameServiceService } from '../../shared/game-service.service';
 import { PopoverController, IonRefresher } from '@ionic/angular';
-import { AccountService } from './../shared/account.service';
+import { AccountService } from '../../shared/account.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
+import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 
 @Component({
   selector: 'app-cashout-request',

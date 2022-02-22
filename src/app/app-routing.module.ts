@@ -1,16 +1,16 @@
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { RegisterPage } from './register/register.page';
 import { GameGuard } from './auth/game.guard';
-import { NotLiveComponent } from './not-live/not-live.component';
-import { GamesectionComponent } from './gamesection/gamesection.component';
+import { NotLiveComponent } from './pages/not-live/not-live.component';
+import { GamesectionComponent } from './pages/gamesection/gamesection.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { InsideEventComponent } from './components/inside-event/inside-event.component';
 import { AdminEventComponent } from './components/admin-event/admin-event.component';
 import { MerchantGuard } from './merchant.guard';
-import { AdminnavigationComponent } from './adminnavigation/adminnavigation.component';
-import { ForgetpasswordComponent } from './forgetpassword/forgetpassword.component';
+import { AdminnavigationComponent } from './components/adminnavigation/adminnavigation.component';
+import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
 import { AdminGuard } from './auth/admin.guard';
-import { AccountComponent } from './account/account.component';
+import { AccountComponent } from './pages/account/account.component';
 import { AuthguardGuard } from './auth/authguard.guard';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
@@ -18,6 +18,8 @@ import { WebVotingComponent } from './web-voting/web-voting.component';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { ManageEventComponent } from './components/manage-event/manage-event.component';
 import { WebTicketComponent } from './web-ticket/web-ticket.component';
+import { LeaderboardPageModule } from './pages/leaderboard/leaderboard.module';
+import { LeaderboardPage } from './pages/leaderboard/leaderboard.page';
 
 const routes: Routes = [
   {
@@ -58,7 +60,7 @@ const routes: Routes = [
 
       {
         path: 'leaderboard',
-        loadChildren: './leaderboard/leaderboard.module#LeaderboardPageModule',
+        loadChildren: './pages/leaderboard/leaderboard.module#LeaderboardPageModule',
         canActivate: [AuthguardGuard]
       },
       {
@@ -74,7 +76,7 @@ const routes: Routes = [
       },
       {
         path: 'myrecord',
-        loadChildren: './myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
+        loadChildren: './pages/myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
       },
       {
         path: 'playsection',
@@ -178,7 +180,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
     path: 'forgetpassword', component: ForgetpasswordComponent

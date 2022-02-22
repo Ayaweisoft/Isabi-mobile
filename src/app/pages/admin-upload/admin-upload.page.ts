@@ -1,5 +1,5 @@
 import { ForgetpasswordComponent } from '../forgetpassword/forgetpassword.component';
-import { AdminnavigationComponent } from './../adminnavigation/adminnavigation.component';
+import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 import { AccountComponent } from '../account/account.component';
 import { UserService } from 'src/app/shared/user.service';
 import { Component, OnInit } from '@angular/core';

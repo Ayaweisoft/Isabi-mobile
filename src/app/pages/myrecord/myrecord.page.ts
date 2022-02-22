@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/user.service';
-import { AccountService } from '../shared/account.service';
+import { UserService } from '../../shared/user.service';
+import { AccountService } from '../../shared/account.service';
 import { MenuController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 

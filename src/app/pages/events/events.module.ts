@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 
 import { EventsPage } from './events.page';
 
-import { CountdownTimerComponent } from '../components/countdown-timer/countdown-timer.component';
-import { ClueTipsComponent } from '../components/clue-tips/clue-tips.component';
+import { CountdownTimerComponent } from '../../components/countdown-timer/countdown-timer.component';
+import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
 
 const routes: Routes = [
   {

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/user.service';
+import { UserService } from '../../shared/user.service';
 import { MenuController, AlertController, PopoverController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';

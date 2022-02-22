@@ -1,12 +1,12 @@
 import { Router } from '@angular/router';
-import { GameServiceService } from './../shared/game-service.service';
+import { GameServiceService } from '../../shared/game-service.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController } from '@ionic/angular';
-import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
+import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { BehavourService } from '../services/behavour.service';
-import { LogicService } from '../services/logic.service';
+import { BehavourService } from '../../services/behavour.service';
+import { LogicService } from '../../services/logic.service';
 
 @Component({
   selector: 'app-admin-account',

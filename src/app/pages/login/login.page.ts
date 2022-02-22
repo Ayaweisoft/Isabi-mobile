@@ -1,10 +1,10 @@
-import { GameServiceService } from './../shared/game-service.service';
+import { GameServiceService } from '../../shared/game-service.service';
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, AlertController, ToastController } from '@ionic/angular';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from '../shared/user.service';
-import { AccountService } from '../shared/account.service';
+import { UserService } from '../../shared/user.service';
+import { AccountService } from '../../shared/account.service';
 // import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 

@@ -1,12 +1,12 @@
 import { IonSlides, AlertController } from '@ionic/angular';
-import { EventService } from './../shared/event.service';
-import { GameServiceService } from './../shared/game-service.service';
-import { UserService } from './../shared/user.service';
+import { EventService } from '../../shared/event.service';
+import { GameServiceService } from '../../shared/game-service.service';
+import { UserService } from '../../shared/user.service';
 import { Router } from '@angular/router';
 import { Component, ViewChild, OnInit } from '@angular/core';
-import { AccountService } from '../shared/account.service';
+import { AccountService } from '../../shared/account.service';
 import { environment } from 'src/environments/environment';
-import { LogicService } from '../services/logic.service';
+import { LogicService } from '../../services/logic.service';
 
 @Component({
   selector: 'app-events',

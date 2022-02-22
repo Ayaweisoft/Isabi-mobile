@@ -1,7 +1,7 @@
 import { AccountService } from 'src/app/shared/account.service';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController, AlertController } from '@ionic/angular';
-import { AdminnavigationComponent } from '../adminnavigation/adminnavigation.component';
+import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 
 @Component({
   selector: 'app-admin-leaderbord',

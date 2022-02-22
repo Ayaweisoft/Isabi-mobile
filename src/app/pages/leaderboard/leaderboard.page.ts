@@ -2,7 +2,7 @@ import { filter } from 'rxjs/operators';
 import { AccountService } from "src/app/shared/account.service";
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MenuController, ToastController, IonRefresher } from "@ionic/angular";
-import { UserService } from "../shared/user.service";
+import { UserService } from "../../shared/user.service";
 import { Router } from "@angular/router";
 
 @Component({
