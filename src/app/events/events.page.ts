@@ -39,33 +39,7 @@ opts = {
     this.gameService.getGameTip();
     this.gameService.getAdminDate();
     console.log("day", this.gameService.timeDays);
-    this.autoSlide();
   }
-
-  async autoSlide() {
-    setInterval(()=> {
-       this.gameService.slideCounter = this.gameService.gameTipArray.length;
-       this.gameService.slideCounter --;
-       this.mySlider.slideNext(3000, true);
-       console.log('slide to prev', this.gameService.slideCounter);
-    
-    
-    },9000)
-
- }
-
- 
-  
- clickSlidetoNext() {
-  console.log('slide to next')
-  this.mySlider.slideNext();
-}
-
-clickSlidePrevious() {
-  console.log('slide to previous');
-  this.mySlider.slidePrev();
-}
-
 
   getAllevent(){
       this.eventService.getAllEvent().subscribe(

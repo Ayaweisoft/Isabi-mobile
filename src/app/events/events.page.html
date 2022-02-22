@@ -31,45 +31,11 @@
 </div>
 
 <ion-content class="main-content">
+  
   <div class="head-section">
-    <div class="timer-section">
-      <span class="h">COUNTDOWN TO GAME</span>
-      <div class="row">
-        <div class="time">
-          <div class="circle-loader">
-            <div class="days circle" id="day">
-              {{gameService.timeDays}}
-            </div>
-          </div>
-          <small>DAYS</small>
-        </div>
-        <div class="time">
-          <div class="circle-loader">
-            <div class="hours circle" id="hour">
-              {{gameService.timeHours}}
-            </div>
-          </div>
-          <small>HOURS</small>
-        </div>
-        <div class="time">
-          <div class="circle-loader">
-            <div class="minutes circle" id="minute">
-              {{gameService.timeMinute}}
-            </div>
-          </div> 
-          <small>MINUTES</small>
-        </div>
-        <div class="time">
-          <div class="circle-loader">
-            <div class="seconds circle" id="second">
-              {{gameService.timeSeconds}}
-            </div>
-          </div>
-          <small>SECONDS</small>
-        </div>
-      </div>
-    </div>
-    <div class="clue-tips">
+    <countdown-timer></countdown-timer>
+    <clue-tips></clue-tips>
+    <!-- <div class="clue-tips">
       <div class="icon" slot="start">
         <ion-icon (click)="clickSlidePrevious()" size="large" color="light" name="arrow-back"></ion-icon>
       </div>
@@ -86,10 +52,11 @@
       <div class="icon" slot="end">
         <ion-icon (click)="clickSlidetoNext()" size="large" color="light" name="arrow-forward"></ion-icon>
       </div>
-    </div>
+    </div> -->
   </div>
-
+  
   <div class="event-section">
+    
     <h2>Events</h2>
     <div class="search">
       <input type="search">
