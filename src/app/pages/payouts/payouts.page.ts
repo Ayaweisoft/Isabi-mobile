@@ -1,6 +1,6 @@
-import { GameServiceService } from './../shared/game-service.service';
+import { GameServiceService } from '../../shared/game-service.service';
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from '../shared/account.service';
+import { AccountService } from '../../shared/account.service';
 
 @Component({
   selector: 'app-payouts',

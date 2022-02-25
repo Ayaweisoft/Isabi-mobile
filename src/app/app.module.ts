@@ -1,4 +1,4 @@
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { DemoQuestionsService } from './shared/demo-questions.service';
 import { FailGameComponent } from './components/fail-game/fail-game.component';
 import { CongratsComponent } from './components/congrats/congrats.component';
@@ -21,7 +21,7 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
-import { SplashComponent } from './splash/splash.component';
+import { SplashComponent } from './components/splash/splash.component';
 
 
 
@@ -44,7 +44,7 @@ import { AngularFireModule } from '@angular/fire';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
 import { BehavourService } from './services/behavour.service';
-import { WebVotingComponent } from './web-voting/web-voting.component';
+import { WebVotingComponent } from './pages/web-voting/web-voting.component';
 import { environment } from 'src/environments/environment';
 import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/image-custom-spinner.component';
 import { FirebaseService } from './services/firebase.service';
@@ -53,7 +53,7 @@ import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-t
 import { ManageEventComponent } from './components/manage-event/manage-event.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
-import { WebTicketComponent } from './web-ticket/web-ticket.component';
+import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';

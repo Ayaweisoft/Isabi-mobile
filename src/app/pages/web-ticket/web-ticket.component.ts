@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { Ticket } from 'src/app/interfaces/ticket';
 import { LogicService } from 'src/app/services/logic.service';
 import { EventService } from 'src/app/shared/event.service';
-import { BuyTicketComponent } from '../components/buy-ticket/buy-ticket.component';
+import { BuyTicketComponent } from '../../components/buy-ticket/buy-ticket.component';
 
 @Component({
   selector: 'app-web-ticket',

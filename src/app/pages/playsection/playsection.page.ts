@@ -1,13 +1,13 @@
-import { FailGameComponent } from './../components/fail-game/fail-game.component';
-import { CongratsComponent } from './../components/congrats/congrats.component';
+import { FailGameComponent } from '../../components/fail-game/fail-game.component';
+import { CongratsComponent } from '../../components/congrats/congrats.component';
 import { GameServiceService } from 'src/app/shared/game-service.service';
 import { UserService } from 'src/app/shared/user.service';
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { IonSlides, MenuController, AlertController, ModalController } from '@ionic/angular';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { AccountService } from '../shared/account.service';
-import { BehavourService } from '../services/behavour.service';
+import { AccountService } from '../../shared/account.service';
+import { BehavourService } from '../../services/behavour.service';
 // import { NativeAudio } from '@ionic-native/native-audio';
 
 @Component({

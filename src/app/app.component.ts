@@ -6,7 +6,7 @@ import { Component, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
 import { NavController, Platform, AlertController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { SplashComponent } from './splash/splash.component';
+import { SplashComponent } from './components/splash/splash.component';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { timer } from 'rxjs';
 

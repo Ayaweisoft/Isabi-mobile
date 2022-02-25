@@ -1,4 +1,4 @@
-import { GameServiceService } from './../shared/game-service.service';
+import { GameServiceService } from '../../shared/game-service.service';
 import { AccountService } from 'src/app/shared/account.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 

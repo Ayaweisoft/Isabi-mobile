@@ -1,12 +1,12 @@
-import { DemoQuestionsService } from './../shared/demo-questions.service';
+import { DemoQuestionsService } from '../../shared/demo-questions.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { UserService } from '../shared/user.service';
-import { GameServiceService } from '../shared/game-service.service';
-import { AccountService } from '../shared/account.service';
+import { UserService } from '../../shared/user.service';
+import { GameServiceService } from '../../shared/game-service.service';
+import { AccountService } from '../../shared/account.service';
 import { AlertController, ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { CongratsComponent } from '../components/congrats/congrats.component';
-import { FailGameComponent } from '../components/fail-game/fail-game.component';
+import { CongratsComponent } from '../../components/congrats/congrats.component';
+import { FailGameComponent } from '../../components/fail-game/fail-game.component';
 
 @Component({
   selector: 'app-playdemo',

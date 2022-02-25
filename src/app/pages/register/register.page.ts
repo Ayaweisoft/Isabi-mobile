@@ -1,9 +1,9 @@
-import { GameServiceService } from './../shared/game-service.service';
+import { GameServiceService } from '../../shared/game-service.service';
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/user.service';
+import { UserService } from '../../shared/user.service';
 import { AlertController, ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { LogicService } from '../services/logic.service';
+import { LogicService } from '../../services/logic.service';
 
 @Component({
   selector: 'app-register',
