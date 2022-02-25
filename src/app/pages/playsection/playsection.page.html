@@ -10,7 +10,63 @@
 </ion-header>
 
 <ion-content>
-  <div class="play-area content">
+  <div class="curved-section">
+    
+    <div class="game_categories" style="display: none;">
+      <h2>Games</h2>
+    <ul>
+      <li>
+        <div class="icon"></div>
+        <div class="details">
+          <p class="name">Sports</p>
+          <p>70 players</p>
+        </div>
+        <p>TO</p>
+      </li>
+    </ul>
+    </div>
+    <div class="question_section">
+      <div class="question_section__header">
+        <p class="question_section--pass">5</p>
+        <div class="round_timer">
+          <!-- TODO: Implement Round timer -->
+          <!-- TODO: Abstract Round timer to component from timer component -->
+        </div>
+        <p class="question_section--fail">3</p>
+      </div>
+      <div class="score_bar">
+        <!-- TODO: Implement Score bar (might use gradient or clip-path) -->
+      </div>
+      <div class="question_header">Question 1/15</div>
+      <h3 class="question">
+        What is your name?
+      </h3>
+
+      <ol class="question_options">
+        <li class="question_option">
+          <input type="checkbox" name="question_option" id="">
+          <p>Change of plan</p>
+        </li>
+        <li class="question_option">
+          <input type="checkbox" name="question_option" id="">
+          <p>Change of plan</p>
+        </li>
+        <li class="question_option">
+          <input type="checkbox" name="question_option" id="">
+          <p>Change of plan</p>
+        </li>
+        <li class="question_option">
+          <input type="checkbox" name="question_option" id="">
+          <p>Change of plan</p>
+        </li>
+      </ol>
+    </div>
+    <div class="question_support">
+      <p>Is there anything wrong with the question? Click here!</p>
+    </div>
+  </div>
+
+  <div class="play-area content" style="display: none;">
     <div *ngIf="startGame" class="question-container">
       <!-- timer -->
       <div class="timer" *ngIf="!gameOver">

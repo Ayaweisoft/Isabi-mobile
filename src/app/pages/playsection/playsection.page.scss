@@ -278,3 +278,16 @@
 	}
 
 }
+
+li {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1em;
+	list-style: none;
+	.icon {
+		width: 100px;
+		height: 100px;
+		background: #000;
+	}
+}
