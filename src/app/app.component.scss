@@ -89,6 +89,7 @@
 					width: 100%;
 					gap: 25px;
 					padding: 10px;
+					cursor: pointer;
 					height: fit-content;
 					align-items: center;
 				}
@@ -121,4 +122,33 @@
 		font-size: 15px;
 	}
 
+}
+
+.curved-section{
+	background-color: #fafafa;
+	z-index: 100;
+	margin-top: -30px;
+	border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    display: flex;
+    gap: 13px;
+    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    padding: 10px;
+	
+	
+
+	h2{
+		color: black;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		text-align: center;
+		line-height: 13px;
+		margin: 0;
+	}
+	
+	
 }
