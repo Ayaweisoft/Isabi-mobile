@@ -247,8 +247,20 @@
               <ion-item color="light">
                 <ion-input type="text" #bankname="ngModel" name="bankname" [(ngModel)]="eventModel.eventOwner"
                   placeholder="(optional username)  event owner"></ion-input>
-
               </ion-item>
+
+              <ion-item color="light">
+                <ion-input type="text" #pay_item_id="ngModel" name="pay_item_id" [(ngModel)]="eventModel.pay_item_id"
+                  placeholder="pay item Id"></ion-input>
+              </ion-item>
+
+              <ion-item color="light">
+                <ion-input type="text" #merchant_code="ngModel" name="merchant_code" [(ngModel)]="eventModel.merchant_code"
+                  placeholder="Merchant code"></ion-input>
+              </ion-item>
+
+             
+
               <ion-item color="light">
                 <div class="p-3">
                   <ion-button (click)="submitEvent()" *ngIf="eventModel.type  && eventForm.valid">submit</ion-button>
