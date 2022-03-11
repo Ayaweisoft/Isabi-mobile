@@ -1,157 +1,165 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <div class="logo">
-      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
-    </div>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <div class="curved-section">
-    
-    <div class="game_categories" style="display: none;">
-      <h2>Games</h2>
-    <ul>
-      <li>
-        <div class="icon"></div>
-        <div class="details">
-          <p class="name">Sports</p>
-          <p>70 players</p>
-        </div>
-        <p>TO</p>
-      </li>
-    </ul>
-    </div>
-    <div class="question_section">
-      <div class="question_section__header">
-        <p class="question_section--pass">5</p>
-        <div class="round_timer">
-          <!-- TODO: Implement Round timer -->
-          <!-- TODO: Abstract Round timer to component from timer component -->
-        </div>
-        <p class="question_section--fail">3</p>
-      </div>
-      <div class="score_bar">
-        <!-- TODO: Implement Score bar (might use gradient or clip-path) -->
-      </div>
-      <div class="question_header">Question 1/15</div>
-      <h3 class="question">
-        What is your name?
-      </h3>
+  <div class="main-content">
 
-      <ol class="question_options">
-        <li class="question_option">
-          <input type="checkbox" name="question_option" id="">
-          <p>Change of plan</p>
-        </li>
-        <li class="question_option">
-          <input type="checkbox" name="question_option" id="">
-          <p>Change of plan</p>
-        </li>
-        <li class="question_option">
-          <input type="checkbox" name="question_option" id="">
-          <p>Change of plan</p>
-        </li>
-        <li class="question_option">
-          <input type="checkbox" name="question_option" id="">
-          <p>Change of plan</p>
-        </li>
-      </ol>
-    </div>
-    <div class="question_support">
-      <p>Is there anything wrong with the question? Click here!</p>
-    </div>
-  </div>
 
-  <div class="play-area content" style="display: none;">
     <div *ngIf="startGame" class="question-container">
-      <!-- timer -->
-      <div class="timer" *ngIf="!gameOver">
-        <b>{{timeMinute}} : {{timeSeconds}}</b>
-      </div>
-      <!-- question section -->
-      <ion-card *ngIf="startGame" class="play-area">
-        <!-- counter -->
-        <div class="count">
-          <div class="cont" #correct>
-            <p>{{correctAns}}</p>
-            <div class="indicator right"></div>
-          </div>
-          <div class="cont rev" #wrong>
-            <p>{{wrongAns}}</p>
-            <div class="indicator wrong"></div>
+
+      <!-- head section -->
+      <div class="head-section question-head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
           </div>
         </div>
-        <!-- question number-->
+      </div>
+
+      <div class="question-section">
+        <div class="timer"> 
+          <div class="circle-loader">
+            <div class="text" id="day">
+              {{timeMinute}} : {{timeSeconds}}
+            </div>
+          </div>
+        </div>
+        <div class="counter">
+
+        </div>
         <div class="question-number">
           Question <span>{{runningQuestion + 1}}</span>/15
         </div>
-        <!-- question -->
-        <div class="question">
-          <p>{{currentQuestion?.question}}</p>
+        <div class="questions">
+          {{currentQuestion?.question}}
         </div>
-      </ion-card>
+        <div class="answers">
+          <ion-button [color]="btnColor1" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer); getColor1()">
+            {{currentQuestion?.option1}}
+          </ion-button>
 
-      <!-- select answer -->
-      <div class="answers" *ngIf="startGame">
-        <ion-button [color]="btnColor1" expand="full" class="option mb-3" [disabled]="disableClick"
-          (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer); getColor1()">
-          {{currentQuestion?.option1}}
-        </ion-button>
+          <ion-button [color]="btnColor2" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); getColor2()">
+            {{currentQuestion?.option2}}
+          </ion-button>
 
-        <ion-button [color]="btnColor2" expand="full" class="option mb-3" [disabled]="disableClick"
-          (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); getColor2()">
-          {{currentQuestion?.option2}}
-        </ion-button>
+          <ion-button [color]="btnColor3" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); getColor3() ">
+            {{currentQuestion?.option3}}
+          </ion-button>
 
-        <ion-button [color]="btnColor3" expand="full" class="option mb-3" [disabled]="disableClick"
-          (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); getColor3() ">
-          {{currentQuestion?.option3}}
-        </ion-button>
+          <ion-button [color]="btnColor4" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); getColor4()">
+            {{currentQuestion?.option4}}
+          </ion-button>
 
-        <ion-button [color]="btnColor4" expand="full" class="option mb-3" [disabled]="disableClick"
-          (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); getColor4()">
-          {{currentQuestion?.option4}}
-        </ion-button>
+        </div>
+        <div class="bottom-text"></div>
       </div>
     </div>
 
 
     <div class="category-container" *ngIf="!loadingGame  && !startGame">
-      <div class="timer" *ngIf="!gameOver">
-        <b>{{timeMinute}} : {{timeSeconds}}</b>
-      </div>
-
-        <div class="logo-container">
-          <img class="img" src="assets/img/ISABI LOGO GREEN.png">
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
         </div>
-        <!-- select filter -->
-        <ion-item>
-          <ion-label class="text-center">select your category</ion-label>
-          <ion-select select="success" interface="popover" (ngModelChange)="selectChange($event)"
-            [(ngModel)]="model.filterOptions">
-            <ion-select-option class="text-dark" value="economics">Economics</ion-select-option>
-            <ion-select-option color="success" value="sport">Sport</ion-select-option>
-            <ion-select-option color="success" value="movie">Movie</ion-select-option>
-            <ion-select-option color="success" value="science">Science</ion-select-option>
-            <ion-select-option color="success" value="history">History</ion-select-option>
-            <ion-select-option color="success" value="politics">Politics</ion-select-option>
-            <ion-select-option color="success" value="arts">Art</ion-select-option>
-            <ion-select-option color="success" value="tourism">Tourism</ion-select-option>
-          </ion-select>
-        </ion-item>
-
-      <div class="ion-text-center ion-padding">
-        <ion-button color="success" size="medium" color="success" *ngIf="!startGame" (click)="startQuestion()">
-          PLAY NOW !</ion-button>
-      </div> 
+        <!-- <div class="timer-section">
+          <span class="h">COUNTDOWN TO GAME</span>
+          <div class="row">
+            <div class="time">
+              <div class="circle-loader day-loader">
+                <div class="text" id="day">
+                  {{gameService.timeDays}}
+                </div>
+              </div>
+              <small>DAYS</small>
+            </div>
+            <div class="time">
+              <div class="circle-loader hour-loader">
+                <div class="text" id="hour">
+                  {{gameService.timeHours}}
+                </div>
+              </div>
+              <small>HOURS</small>
+            </div>
+            <div class="time">
+              <div class="circle-loader minute-loader">
+                <div class="text" id="minute">
+                  {{gameService.timeMinute}}
+                </div>
+              </div>
+              <small>MUNITES</small>
+            </div>
+            <div class="time">
+              <div class="circle-loader second-loader">
+                <div class="text" id="second">
+                  {{gameService.timeSeconds}}
+                </div>
+              </div>
+              <small>SECONDS</small>
+            </div>
+          </div>
+        </div> -->
+        <countdown-timer></countdown-timer>
+        <clue-tips></clue-tips>
+        <!-- <div class="clue-tips">
+          <div class="icon" (click)="clickSlidePrevious()" slot="start">
+            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g opacity="0.6">
+                <path d="M9.16732 4.66699L3.33398 10.5003L9.16732 16.3337" stroke="white" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M3.33398 10.5H16.6673" stroke="white" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </g>
+            </svg>
+          </div>
+          <div class="col-tip">
+            <div class="tips">
+              <h2>Clue Tips</h2>
+              <ion-slides #mySlider [options]="opts">
+                <ion-slide *ngFor="let item of gameService?.gameTipArray">
+                  <p>{{item.tip}}</p>
+                </ion-slide>
+              </ion-slides>
+            </div>
+          </div>
+          <div class="icon" (click)="clickSlidetoNext()" slot="end">
+            <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g opacity="0.6">
+                <path d="M10.8327 16.333L16.666 10.4997L10.8327 4.66634" stroke="white" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M16.666 10.5L3.33268 10.5" stroke="white" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </g>
+            </svg>
+          </div>
+        </div> -->
+      </div>
+      <div class="category-section">
+        <h2>PLAY DEMO</h2>
+        <div class="game-category-card" *ngFor="let item of allCategory" (click)="playByCategory(item.name)">
+          <div class="game-category-card-logo">
+            <!-- <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon"> -->
+          </div>
+          <div class="game-category-card-desc">
+            <div class="game-category-card-name">
+              {{ item.name }}
+            </div>
+            <div class="game-category-card-participant">
+              {{ item.participant }} participants
+            </div>
+          </div>
+          <div class="game-category-card-arrow">
+            <img src="../../assets/figma/akar-icons_arrow-left.svg" alt="foward icon">
+          </div>
+        </div>
+      </div>
     </div>
-
-
-
     <br>
 
     <div *ngIf="low_balance" class=" ">
@@ -163,7 +171,6 @@
         </ion-chip>
       </div>
     </div>
-
     <!-- loader -->
     <div *ngIf="loadingGame" class=" ">
       <div class="toast-container ">

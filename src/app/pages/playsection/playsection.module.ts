@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { PlaysectionPage } from './playsection.page';
+import { CountdownTimerComponent } from 'src/app/components/countdown-timer/countdown-timer.component';
+import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PlaysectionPage]
+  declarations: [PlaysectionPage, CountdownTimerComponent, ClueTipsComponent]
 })
 export class PlaysectionPageModule {}
