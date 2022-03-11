@@ -16,6 +16,8 @@ import { LogicService } from '../../services/logic.service';
 export class EventsPage implements OnInit {
 @ViewChild('mySlider', {static : false}) mySlider: IonSlides;
 allEvent = [];
+displayedEvents = [];
+shadowEvents = [0,0,0];
 loading = true;
 webLink = environment.webVotingUrl;
 slideCounter =  0;
@@ -125,7 +127,11 @@ let minuteprogress = setInterval(() => {
 
  }
 
- 
+ parseText(text){
+  let length =  55;
+  text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
+  return text;
+}
   
  clickSlidetoNext() {
   console.log('slide to next')
@@ -143,6 +149,7 @@ clickSlidePrevious() {
         res => {
           console.log(res);
           this.allEvent = res['event'];
+          this.displayedEvents = this.allEvent;
           this.loading = false;
         },
         err => {
@@ -154,7 +161,11 @@ clickSlidePrevious() {
         }
       );
   }
-
+  filterEvents(value, list = this.allEvent){
+    let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
+    this.displayedEvents = newEvents
+    console.log("ÿoooooo")
+  }
   copyInputMessage(inputElement){
     inputElement.select();
     document.execCommand('copy');

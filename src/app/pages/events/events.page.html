@@ -55,13 +55,20 @@
     </div> -->
   </div>
   
-  <div class="event-section">
+  <div class="curved-section event-section">
     
     <h2>Events</h2>
     <div class="search">
-      <input type="search">
+      <div class="search_button">
+        <img class="search-icon" src="../../assets/figma/akar-icons_search.svg" alt="search">
+      </div>
+      <input type="search" (input)="filterEvents($event.target.value)" placeholder="Find an event...">
+      <div class="search_button">
+        <img class="filter-icon" src="../../assets/figma/bi_filter.svg" alt="filter">
+      </div>
     </div>
-    <div class="event-cards">
+    <!-- *ngIf="" -->
+    <div  class="event-cards">
                  <!-- loader -->
   <div *ngIf="loading" class="">
     <div class="loading-card" >
@@ -83,14 +90,14 @@
       </div>
     </div>
   </div>
-      <div class="event-card" *ngFor="let item of allEvent">
+      <div class="event-card" *ngFor="let item of displayedEvents">
         <div class="event-top">
           <div class="event-pics">
             <img class="event-pic" [src]="item.image_url">
           </div>
           <div class="event-desc">
             <h3>{{item.eventName}}</h3>
-            <p>{{item.aboutEvent}}</p>
+            <p>{{parseText(item.aboutEvent)}}</p>
             <p>type: {{item.type}}</p>
           </div>
         </div>
@@ -98,9 +105,16 @@
           <div class="event-icons">
           </div>
           <div class="event-button">
+            <!-- <div class="event-button" (click)="insideEvent(item)">
+              <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon">
+            </div> -->
+            <button class="event-button" (click)="insideEvent(item)">
+              <ion-icon name="arrow-forward"></ion-icon>
+            </button>
           </div>
         </div>
       </div>
+      <div class="shadow-event-card" *ngFor="let item of shadowEvents"><h3>{{item.eventName}}</h3></div>
     </div>
   </div>
 
