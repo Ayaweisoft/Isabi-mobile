@@ -1,4 +1,4 @@
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { PrivacyPolicyPageModule } from './pages/privacy-policy/privacy-policy.module';
 import { RegisterPage } from './pages/register/register.page';
 import { GameGuard } from './auth/game.guard';
 import { NotLiveComponent } from './pages/not-live/not-live.component';
@@ -158,10 +158,6 @@ const routes2: Routes = [
     path: 'testimonials',
     loadChildren: './pages/testimonials/testimonials.module#TestimonialsPageModule'
   },
-    {
-        path: 'privacypolicy',
-        component: PrivacyPolicyComponent
-      },
   {
     path: 'contactus',
     loadChildren: './pages/contactus/contactus.module#ContactusPageModule'
@@ -225,7 +221,7 @@ const routes: Routes = [
       
       {
         path: 'leaderboard',
-        loadChildren: './pages//leaderboard/leaderboard.module#LeaderboardPageModule',
+        loadChildren: './pages/leaderboard/leaderboard.module#LeaderboardPageModule',
         
       },
       {
@@ -249,8 +245,16 @@ const routes: Routes = [
         loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthguardGuard]
       },
       {
+        path: 'settings',
+        loadChildren: './pages/settings/settings.module#SettingsPageModule', canActivate: [AuthguardGuard]
+      },
+      {
+        path: 'privacy-policy',
+        loadChildren: './pages/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule', canActivate: [AuthguardGuard]
+      },
+      {
         path: 'myrecord',
-        loadChildren: './pages//myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
+        loadChildren: './pages/myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
       },
       
  
@@ -335,6 +339,14 @@ const routes: Routes = [
   },
     // { path: "*", redirectTo: 'tabs/events' }
 ];
+
+const routes3: Routes = [
+  {
+    path: '',
+    redirectTo: 'tabs/events',
+    pathMatch: 'full'
+  },
+]
 
 @NgModule({
   imports: [

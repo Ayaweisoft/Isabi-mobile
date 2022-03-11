@@ -1,4 +1,4 @@
-import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { PrivacyPolicyPage } from './pages/privacy-policy/privacy-policy.page';
 import { DemoQuestionsService } from './shared/demo-questions.service';
 import { FailGameComponent } from './components/fail-game/fail-game.component';
 import { CongratsComponent } from './components/congrats/congrats.component';
@@ -72,7 +72,7 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     TicketItemComponent,
     EditEventComponent,
     WebTicketComponent,
-     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
+     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyPage,SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
   imports: [
