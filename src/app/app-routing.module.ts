@@ -67,25 +67,25 @@ const routes2: Routes = [
       },
       {
         path: 'playdemo',
-        loadChildren: './pages//playdemo/playdemo.module#PlaydemoPageModule', canActivate: [AuthguardGuard]
+        loadChildren: './pages/playdemo/playdemo.module#PlaydemoPageModule', canActivate: [AuthguardGuard]
       },
       {
         path: 'profile',
-        loadChildren: './pages//profile/profile.module#ProfilePageModule', canActivate: [AuthguardGuard]
+        loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthguardGuard]
       },
       {
         path: 'myrecord',
-        loadChildren: './pages//myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
+        loadChildren: './pages/myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
       },
       {
         path: 'playsection',
-        loadChildren: './pages//playsection/playsection.module#PlaysectionPageModule',
+        loadChildren: './pages/playsection/playsection.module#PlaysectionPageModule',
         canActivate: [AuthguardGuard, GameGuard]
       },
 
       {
         path: 'transaction',
-        loadChildren: './pages//transaction/transaction.module#TransactionPageModule',
+        loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
         canActivate: [AuthguardGuard]
       },
 

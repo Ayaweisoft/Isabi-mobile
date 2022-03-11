@@ -17,9 +17,9 @@ main{
 }
 
 .main-content{
-	height: 100%;
 	width: 100%;
 	display: flex;
+	background-color: #fafafa;
 	flex-direction: column;
 }
 
@@ -114,7 +114,7 @@ h2{
 
 			.person-name{
 				font-weight: bold;
-				font-size: 22px;
+				font-size: 15px;
 			}
 			
 			
@@ -142,16 +142,22 @@ h2{
 		position: relative;
 		display: flex;
 		padding: 10px 0;
-		justify-content: center;
+		justify-content: space-around;
 		align-items: center;
 		border-bottom: 1px solid rgba(224, 224, 224, 0.815);
 
 		.start{
-			width: 45%;
+			width: 100%;
 			display: flex;
 			gap: 10px;
 			justify-content: flex-start;
 			align-items: center;
+			padding-left: 25px;
+		}
+
+		.number{
+			position: absolute;
+			left: 0;
 		}
 
 		.end{
