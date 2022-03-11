@@ -1,320 +1,56 @@
 <ion-content>
-    <div class="top-section">
-      <div class="top-row">
-        <div class="arrow"></div>
-        <h2>Settings</h2>
-        <span>Save</span>
-      </div>
-      <div class="profile-section"> 
-        <div class="profile-pic"></div>
-      </div>
+  <div class="top-section">
+    <div class="top-row">
+      <h2>Settings</h2>
     </div>
-    <div class="main-section">
-      <form class="form" id="form"  #profileForm ngform="profileForm" name="form" 
-      (submit)="createProfile(profileForm)">
-        <div class="inputs">
-
-          <div class="inputBox">
-            <input type="text" #fullname name="fullname" position="floating" id="fullName" [(ngModel)]="model.fullname" value="{{ myProfile?.email }}">
-            <span class="text">Full Name</span>
-          </div>
-          <div class="inputBox">
-            <input type="text" name="username" id="username"> 
-            <span class="text">Username</span>
-          </div>
-          <div class="inputBox">
-            <input #email name="email" position="floating"  [(ngModel)]="model.email"
-            type="email" required  [pattern]="emailRegex" value="{{ myProfile?.email }}">
-            <span class="text">Email</span>
-          </div>          
-          <div class="inputBox">
-            <input type="tel" name="phone" id="phone">
-            <span class="text">Phone</span>
-          </div>
-          <div class="inputBox">
-            <input type="date" name="dateOfBirth">
-            <span class="text">Date Of Birth</span>
-          </div>
+    <div class="bottom-row">
+      <div class="bottom-row-desc">
+        <div class="bottom-row-desc-pic"></div>
+        <div class="bottom-row-desc-names">
+          <div class="bottom-row-desc-nickname">Princecodes247</div>
+          <div class="bottom-row-desc-fullname">Gbalam Prince</div>
         </div>
-        <div class="buttons">
+      </div>
+      <div class="bottom-row-icon">
+        <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M22.5 11.5C22.5 17.5751 17.5751 22.5 11.5 22.5C5.42487 22.5 0.5 17.5751 0.5 11.5C0.5 5.42487 5.42487 0.5 11.5 0.5C17.5751 0.5 22.5 5.42487 22.5 11.5Z" stroke="#F2F2F2"/>
+          <path d="M11.0445 13.5944L8.71458 11.2645C9.13088 10.5316 9.73808 9.80557 10.5354 9.08874C11.5635 8.1626 13.3782 6.59707 15.9787 4.39214C16.2422 4.16865 16.5801 4.05244 16.9253 4.06658C17.2705 4.08073 17.5977 4.2242 17.842 4.4685C18.0863 4.7128 18.2298 5.04005 18.244 5.38524C18.2581 5.73044 18.1419 6.06833 17.9184 6.3318C15.7104 8.93694 14.1456 10.7516 13.2226 11.7751C12.5057 12.5702 11.7797 13.1766 11.0445 13.5944ZM7.65888 12.3785L9.93204 14.6509L8.88478 16.1122L4.83984 17.4883L6.19761 13.425L7.65888 12.3785Z" fill="#F5FAF5"/>
+        </svg>
           
-          <button class="submit-btn" type="submit">Submit</button>
-          <button class="cancel-btn">Cancel</button>
-        </div>
-
-      </form>
+      </div>
     </div>
-
-
-
-         
-<!-- <div class="content">
-
-   <ion-card class="content m-0 p-0">
-      <ion-card-header class="text-center text-white"> MY ACCOUNT</ion-card-header> 
-      <ion-card-content>
-
-       
-
-        <ion-grid fixed>
-          <ion-row>
-            <ion-col size="1"></ion-col>
-            <ion-col size="10">
-
-
-<form *ngIf="userRecordNotAvalible"  #profileForm ngform="profileForm" name="form" 
-(submit)="createProfile(profileForm)" class="text-center" >
-<div class="m-3">
-    <p class="text-danger text-center">*Ensure you enter correct details. Records cannot be modified after update</p>
+  </div>
+  <div class="main-section">
+    <div class="setting-card" *ngFor="let item of settingRoutes" [routerLink]="[ item.url ]">
+      <div class="setting-card-route-name">{{ item.name }}</div>
+      <div class="setting-card-foward-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.61598 2.04469C6.38164 2.2791 6.25 2.59699 6.25 2.92844C6.25 3.2599 6.38164 3.57778 6.61598 3.81219L12.8035 9.99969L6.61598 16.1872C6.38829 16.4229 6.26229 16.7387 6.26514 17.0664C6.26799 17.3942 6.39945 17.7077 6.63121 17.9395C6.86297 18.1712 7.17649 18.3027 7.50423 18.3055C7.83198 18.3084 8.14773 18.1824 8.38348 17.9547L15.4547 10.8834C15.6891 10.649 15.8207 10.3311 15.8207 9.99969C15.8207 9.66824 15.6891 9.35035 15.4547 9.11594L8.38348 2.04469C8.14907 1.81036 7.83119 1.67871 7.49973 1.67871C7.16828 1.67871 6.85039 1.81036 6.61598 2.04469V2.04469Z" fill="black"/>
+        </svg>          
+      </div>
+    </div>
+    <div class="setting-card" (click)="userService.logout()">
+      <div class="setting-card-route-name">Log Out</div>
+      <div class="setting-card-foward-icon">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6.61598 2.04469C6.38164 2.2791 6.25 2.59699 6.25 2.92844C6.25 3.2599 6.38164 3.57778 6.61598 3.81219L12.8035 9.99969L6.61598 16.1872C6.38829 16.4229 6.26229 16.7387 6.26514 17.0664C6.26799 17.3942 6.39945 17.7077 6.63121 17.9395C6.86297 18.1712 7.17649 18.3027 7.50423 18.3055C7.83198 18.3084 8.14773 18.1824 8.38348 17.9547L15.4547 10.8834C15.6891 10.649 15.8207 10.3311 15.8207 9.99969C15.8207 9.66824 15.6891 9.35035 15.4547 9.11594L8.38348 2.04469C8.14907 1.81036 7.83119 1.67871 7.49973 1.67871C7.16828 1.67871 6.85039 1.81036 6.61598 2.04469V2.04469Z" fill="black"/>
+        </svg>          
+      </div>
+    </div>
   </div>
 
-  <ion-list>
-    
-
-<ion-item>
-<ion-label position="floating">Fullname</ion-label>
-<ion-input #fullname name="fullname" position="floating"  [(ngModel)]="model.fullname"
-type="text" required ></ion-input>
-</ion-item>
-<ion-item>
-<ion-label position="floating">Email</ion-label>
-<ion-input #email name="email" position="floating"  [(ngModel)]="model.email"
-type="email" required  [pattern]="emailRegex"></ion-input>
-</ion-item>
-
-<ion-item>
-<ion-label>Nationality</ion-label>
-<ion-select #selectCountry name="selectCountry" interface="popover"  (ngModelChange)="selectChange($event)" 
-[(ngModel)]="setNationality.selectedOption" name="nationality" #nationality>
-<ion-select-option value="Afghanistan">	Afghanistan  </ion-select-option>
-<ion-select-option value="Aland Islands">		Aland Islands  </ion-select-option>
-<ion-select-option value="Albania">		Albania  </ion-select-option>
-<ion-select-option value="Algeria">			Algeria  </ion-select-option>
-<ion-select-option value="American Samoa">	American Samoa </ion-select-option>
-<ion-select-option value="Andorra"> Andorra </ion-select-option>
-<ion-select-option value="Angola"> Angola </ion-select-option>
-<ion-select-option value="Anguilla"> Anguilla</ion-select-option>
-<ion-select-option value="Antarctica">Antarctica</ion-select-option>
-<ion-select-option value="Antigua and Barbuda">Antigua and Barbuda</ion-select-option>
-<ion-select-option value="Argentina">Argentina</ion-select-option>
-<ion-select-option value="Armenia">Armenia</ion-select-option>
-<ion-select-option value="Aruba">Aruba</ion-select-option>
-<ion-select-option value="Australia">Australia</ion-select-option>
-<ion-select-option value="Austria">Austria</ion-select-option>
-<ion-select-option value="Azerbaijan">Azerbaijan</ion-select-option>
-<ion-select-option value="Bahamas">Bahamas</ion-select-option>
-<ion-select-option value="Bahrain">Bahrain</ion-select-option>
-<ion-select-option value="Bangladesh">Bangladesh</ion-select-option>
-<ion-select-option value="Barbados">Barbados</ion-select-option>
-<ion-select-option value="Belarus">Belarus</ion-select-option>
-<ion-select-option value="Belgium">Belgium</ion-select-option>
-<ion-select-option value="Belize">Belize</ion-select-option>
-<ion-select-option value="Republic of Benin">Republic of Benin</ion-select-option>
-<ion-select-option value="Bermuda">Bermuda</ion-select-option>
-<ion-select-option value="Bolivia"> Bolivia</ion-select-option>
-<ion-select-option value="Netherland">Netherland</ion-select-option>
-<ion-select-option value="Botswana">Botswana</ion-select-option>
-<ion-select-option value="Brazil">Brazil</ion-select-option>
-<ion-select-option value="Bulgaria">Bulgaria</ion-select-option>
-<ion-select-option value="Burundi">Burundi</ion-select-option>
-<ion-select-option value="Cambodia">Cambodia</ion-select-option>
-<ion-select-option value="Canada">Canada</ion-select-option>
-<ion-select-option value="Chad">Chad</ion-select-option>
-<ion-select-option value=" Chile"> Chile</ion-select-option>
-<ion-select-option value="China">China</ion-select-option>
-<ion-select-option value="Colombia">Colombia</ion-select-option>
-<ion-select-option value="Costa Rica">Costa Rica</ion-select-option>
-<ion-select-option value="Cote d'Ivoire">Cote d'Ivoire</ion-select-option>
-<ion-select-option value="Croatia">Croatia</ion-select-option>
-<ion-select-option value="Cuba">Cuba</ion-select-option>
-<ion-select-option value="Curacao">Curacao</ion-select-option>
-<ion-select-option value="Czech Republic">Czech Republic</ion-select-option>
-<ion-select-option value="Congo">Congo</ion-select-option>
-<ion-select-option value="Denmark">Denmark</ion-select-option>
-<ion-select-option value="Ecuador">Ecuador</ion-select-option>
-<ion-select-option value="Egypt">Egypt</ion-select-option>
-<ion-select-option value="England">England</ion-select-option>
-<ion-select-option value="Guinea">Guinea</ion-select-option>
-<ion-select-option value="Estonia">Estonia</ion-select-option>
-<ion-select-option value="Ethiopia">Ethiopia</ion-select-option>
-<ion-select-option value="Finland">Finland</ion-select-option>
-<ion-select-option value="Gambia">Gambia</ion-select-option>
-<ion-select-option value="Germany">Germany</ion-select-option>
-<ion-select-option value="Ghana">Ghana</ion-select-option>
-<ion-select-option value="Honduras">Honduras</ion-select-option>
-<ion-select-option value="Hong Kong">Hong Kong</ion-select-option>
-<ion-select-option value="Hungary">Hungary</ion-select-option>
-<ion-select-option value="Iceland">Iceland</ion-select-option>
-<ion-select-option value="India">India</ion-select-option>
-<ion-select-option value="Indonesia">Indonesia</ion-select-option>
-<ion-select-option value="Iran">Iran</ion-select-option>
-<ion-select-option value="Iraq">Iraq</ion-select-option>
-<ion-select-option value="Ireland">Ireland</ion-select-option>
-<ion-select-option value="Israel">Israel</ion-select-option>
-<ion-select-option value="Italy">Italy</ion-select-option>
-<ion-select-option value="Jamaica">Jamaica</ion-select-option>
-<ion-select-option value="Japan">Japan</ion-select-option>
-<ion-select-option value="Kazakhstan">Kazakhstan</ion-select-option>
-<ion-select-option value="Kenya">Kenya</ion-select-option>
-<ion-select-option value="Kuwait">Kuwait</ion-select-option>
-<ion-select-option value="Latvia">Latvia</ion-select-option>
-<ion-select-option value="Lebanon">Lebanon</ion-select-option>
-<ion-select-option value="Lesotho">Lesotho</ion-select-option>
-<ion-select-option value="Liberia">Liberia</ion-select-option>
-<ion-select-option value="Libya">Libya</ion-select-option>
-<ion-select-option value="Lithuania">Lithuania</ion-select-option>
-<ion-select-option value="Luxembourg">Luxembourg</ion-select-option>
-<ion-select-option value="Macedonia">Macedonia</ion-select-option>
-<ion-select-option value="Madagascar">Madagascar</ion-select-option>
-<ion-select-option value="Malawi">Malawi</ion-select-option>
-<ion-select-option value="Malaysia">Malaysia</ion-select-option>
-<ion-select-option value="Mali">Mali</ion-select-option>
-<ion-select-option value="Malta">Malta</ion-select-option>
-<ion-select-option value="Mauritania">Mauritania</ion-select-option>
-<ion-select-option value="Mauritius">Mauritius</ion-select-option>
-<ion-select-option value="Mexico">Mexico</ion-select-option>
-<ion-select-option value="Moldova">Moldova</ion-select-option>
-<ion-select-option value="Morocco">Morocco</ion-select-option>
-<ion-select-option value="Mozambique">Mozambique</ion-select-option>
-<ion-select-option value="Mozambique">Mozambique</ion-select-option>
-<ion-select-option value="Namibia">Namibia</ion-select-option>
-<ion-select-option value="Netherlands">Netherlands</ion-select-option>
-<ion-select-option value="New Zealand">New Zealand</ion-select-option>
-<ion-select-option value="Niger">Niger</ion-select-option>
-<ion-select-option value="Nigeria">Nigeria</ion-select-option>
-<ion-select-option value="Republic of Korea">Republic of Korea</ion-select-option>
-<ion-select-option value="Norway">Norway</ion-select-option>
-<ion-select-option value="Pakistan">Pakistan</ion-select-option>
-<ion-select-option value="Panama">Panama</ion-select-option>
-<ion-select-option value="Paraguay">Paraguay</ion-select-option>
-<ion-select-option value="Philippines">Philippines</ion-select-option>
-<ion-select-option value="Peru">Peru</ion-select-option>
-<ion-select-option value="Philippines">Philippines</ion-select-option>
-<ion-select-option value="Poland">Poland</ion-select-option>
-<ion-select-option value="Portugal">Portugal</ion-select-option>
-<ion-select-option value="Qatar">Qatar</ion-select-option>
-<ion-select-option value="Congo">Congo</ion-select-option>
-<ion-select-option value="Romania">Romania</ion-select-option>
-<ion-select-option value="Russia">Russia</ion-select-option>
-<ion-select-option value="Rwanda">Rwanda</ion-select-option>
-<ion-select-option value="Scotland">Scotland</ion-select-option>
-<ion-select-option value="Senegal">Senegal</ion-select-option>
-<ion-select-option value="Serbia">Serbia</ion-select-option>
-<ion-select-option value="Seychelles">Seychelles</ion-select-option>
-<ion-select-option value="Sierra Leone">Sierra Leone</ion-select-option>
-<ion-select-option value="Singapore">Singapore</ion-select-option>
-<ion-select-option value="Slovakia">Slovakia</ion-select-option>
-<ion-select-option value="Slovenia">Slovenia</ion-select-option>
-<ion-select-option value="South Africa">South Africa</ion-select-option>
-<ion-select-option value="South Korea">South Korea</ion-select-option>
-<ion-select-option value="Sudan">Sudan</ion-select-option>
-<ion-select-option value="Spain">Spain</ion-select-option>
-<ion-select-option value="Sri Lanka">Sri Lanka</ion-select-option>
-<ion-select-option value="Sudan">Sudan</ion-select-option>
-<ion-select-option value="Swaziland">Swaziland</ion-select-option>
-<ion-select-option value="Sweden">Sweden</ion-select-option>
-<ion-select-option value="Switzerland">Switzerland</ion-select-option>
-<ion-select-option value="Taiwan">Taiwan</ion-select-option>
-<ion-select-option value="Tanzania">Tanzania</ion-select-option>
-<ion-select-option value="Togo">Togo</ion-select-option>
-<ion-select-option value="Tunisia">Tunisia</ion-select-option>
-<ion-select-option value="Turkey">Turkey</ion-select-option>
-<ion-select-option value="Uganda">Uganda</ion-select-option>
-<ion-select-option value="Ukraine">Ukraine</ion-select-option>
-<ion-select-option value="United Arab Emirates">United Arab Emirates</ion-select-option>
-<ion-select-option value="USA">USA</ion-select-option>
-<ion-select-option value="Uruguay">Uruguay</ion-select-option>
-<ion-select-option value="Venezuela">Venezuela</ion-select-option>
-<ion-select-option value="Vietnam">Vietnam</ion-select-option>
-<ion-select-option value="Wales">Wales</ion-select-option>
-<ion-select-option value="Zambia">Zambia</ion-select-option>
-<ion-select-option value="Zimbabwe">Zimbabwe</ion-select-option>
-</ion-select>
-</ion-item>
-
-
-<ion-item>
-<ion-label position="floating">Bank</ion-label>
-<ion-input #bank name="bank" position="floating" [(ngModel)]="model.bank"
-type="text" required  ></ion-input>
-</ion-item>
-
-<ion-item>
-<ion-label position="floating">Bank Acount number</ion-label>
-<ion-input #bank_number name="bank_number" position="floating" [(ngModel)]="model.accountNumber"
-type="text" required  ></ion-input>
-</ion-item>
-
-<ion-item>
-<ion-label position="floating">Bank Acount name</ion-label>
-<ion-input #bank_acount_name name="bank_acount_number" position="floating" [(ngModel)]="model.accountName"
-type="text" required  ></ion-input>
-</ion-item>
-
-<ion-button expand="full" type="submit" [disabled]="!bank.value || setNationality.selectedOption.length == 0
-|| !fullname.value || !bank_number.value "
-class="text-white" color="success" >Submit</ion-button> 
-</ion-list>      
-</form>
-
-            </ion-col>
-            <ion-col size="1"></ion-col>
-          </ion-row>
-        </ion-grid>
-
-
-
-
-
-<ion-grid >
-  <ion-row>
-    <ion-col size="1"></ion-col>
-    <ion-col size="10">
-      <ion-item *ngIf="myProfile"  class="text-uppercase">
-        <ion-list>
-          <h6> FULLNAME : <p class="text-success"> {{myProfile?.fullname}}</p>  </h6>
-       
-        <br>
-       
-          <h6> email : <p class="text-success">{{myProfile?.email}}</p>  </h6>
-       
-        <br>
-        
-          <h6> nationality : <p class="text-success"> {{myProfile?.nationality}}</p>  </h6>
-        
-        <br>
-       
-          <h6> bank : <p class="text-success">{{myProfile?.bank}}</p>  </h6>
-        
-        <br>
-          <h6> bank user name : <p class="text-success"> {{myProfile?.account_name}}</p>  </h6>
-        
-        <br>
-       
-          <h6> accountnumber : <p class="text-success">{{myProfile?.acount_number}} </p> </h6>
-       
-        <br>
-        
-          <h6> created : <p class="text-success"> {{myProfile?.date | date}}</p>  </h6>
-        </ion-list>
-      </ion-item>
-      
-    </ion-col>
-    <ion-col size="1"></ion-col>
-  </ion-row>
-</ion-grid> -->
-
-  <!-- loader -->
-  
-
-<!-- 
-      </ion-card-content>
-  </ion-card>
-</div> -->
-<div *ngIf="loading" class=" ">
-  <div class="toast-container ">
-      <div class="lds-roller"><div></div><div></div><div></div><div></div>
-      <div></div><div></div><div></div><div></div></div>
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
   </div>
-</div>
 </ion-content>
