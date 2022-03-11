@@ -1,7 +1,11 @@
 <ion-content>
     <div class="top-section">
       <div class="top-row">
-        <div class="arrow"></div>
+        <div class="back-button" [routerLink]="[ '/tabs/settings' ]">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.9999 11H6.41394L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13H20.9999V11Z" fill="#F5FAF5"/>
+          </svg>            
+        </div>
         <h2>Profile</h2>
         <span>Save</span>
       </div>
@@ -37,9 +41,8 @@
           </div>
         </div>
         <div class="buttons">
-          
           <button class="submit-btn" type="submit">Save</button>
-          <button class="cancel-btn">Cancel</button>
+          <button class="cancel-btn" [routerLink]="[ '/tabs/settings' ]">Cancel</button>
         </div>
 
       </form>

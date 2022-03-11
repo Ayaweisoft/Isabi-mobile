@@ -44,10 +44,10 @@ main{
     width: 100%;
     height: 30%;
 
-    .arrow{
+    .back-button{
       height: 20px;
       width: 34px;
-      background: white;
+      background: transparent;
     }
     
     span{
@@ -63,7 +63,7 @@ main{
     width: 100%;
 
     .profile-pic{
-		--size: 65px;
+		--size: 80px;
       border-radius: 100%;
       height: var(--size);
       width: var(--size);
