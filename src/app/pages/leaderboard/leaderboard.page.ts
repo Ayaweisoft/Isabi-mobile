@@ -21,19 +21,19 @@ export class LeaderboardPage implements OnInit {
 
   public leaders = [
     {
-      name: "John Doe",
+      name: "John Doe1",
       score: '150'
     },
     {
-      name: "John Doe",
+      name: "John Doe2",
       score: '150'
     },
     {
-      name: "John Doe",
+      name: "John Doe3",
       score: '150'
     },
     {
-      name: "John Doe",
+      name: "John Doe4",
       score: '150'
     },
     {

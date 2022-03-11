@@ -16,8 +16,8 @@
             </div>
           </div>
           <div class="name">
-            <div class="person-name">Nick</div>
-            <div class="record">150 secs</div>
+            <div class="person-name">{{leaders[1].name}}</div>
+            <div class="record">{{leaders[1].score}}</div>
           </div>   
         </div>
         <div class="first-position position">
@@ -26,8 +26,8 @@
             </div>
           </div>
           <div class="name">
-            <div class="person-name">Prince</div>
-            <div class="record">150 secs</div>
+            <div class="person-name">{{leaders[0].name}}</div>
+            <div class="record">{{leaders[0].score}}</div>
           </div>
         </div>
         <div class="third-position position">
@@ -36,15 +36,15 @@
             </div>
           </div>
           <div class="name">
-            <div class="person-name">David</div>
-            <div class="record">150 secs</div>
+            <div class="person-name">{{leaders[2].name}}</div>
+            <div class="record">{{leaders[2].score}}</div>
           </div>
         </div>
       </div>
       <div class="the-rest">
-        <div class="leader-container" *ngFor="let leader of leaders">
+        <div class="leader-container" *ngFor="let leader of leaders.slice(3); let i = index">
           <div class="start">
-            <span class="number">1</span>
+            <span class="number">{{i+4}}</span>
             <div class="pic"></div>
             <div class="name">{{ leader.name }}</div>
           </div>
