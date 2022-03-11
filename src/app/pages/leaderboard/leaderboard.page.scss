@@ -50,7 +50,7 @@ h2{
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
-	height: calc(75% + 30px);
+	min-height: calc(75% + 30px);
 	width: 100%;
 	background-color: #fafafa;
 	border-top-left-radius: 30px;
