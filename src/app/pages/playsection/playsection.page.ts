@@ -25,7 +25,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     currentQuestion: any;
     startGame = false;
     progress: any;
-    correcQuestion  = 0;
+    correctQuestion  = 0;
     wrongQuestion = 0;
     timerTicker : any;
      runningQuestion  = 0;
@@ -66,6 +66,42 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     // }, 12000);
   }
 
+
+  public allCategory = [
+    {
+      name: "Art",
+      participant: '150'
+    },
+    {
+      name: "Economics",
+      participant: '150'
+    },
+    {
+      name: "History",
+      participant: '150'
+    },
+    {
+      name: "Movie",
+      participant: '150'
+    },
+    {
+      name: "Politics",
+      participant: '150'
+    },
+    {
+      name: "Science",
+      participant: '150'
+    },
+    {
+      name: "Sport",
+      participant: '150'
+    },
+    {
+      name: "Tourism",
+      participant: '150'
+    }
+  ]
+
   model = {
     filterOptions : [
     ]
@@ -84,7 +120,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   getRemoteAmount(){
-    console.log('getting remote amoutn')
+    console.log('getting remote amount')
     this.loadingGame =  true;
     this.gameService.getGameAmount().subscribe(res => {
       if(res.data?.amount){
@@ -151,12 +187,16 @@ export class PlaysectionPage implements OnInit, OnDestroy {
 
         playByCategory(category){
           this.loadingGame = true;
-          this.playCategory =  this.userService.playByCategory(category).subscribe(
+          this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
             res => {
               this.loadingGame = false;
+              this.startGame = true;
               this.gameQuestions = res['questions'];
+              console.log(this.gameQuestions);
               this.lastQuestion =  this.gameQuestions.length - 1;
-      
+              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+              this.startTimer();
+
             }
           );
       
@@ -207,11 +247,11 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   checkAnswer(selection, correctAnswer) {
       this.disableClick = true;
       if (selection == correctAnswer){
-        this.correct.nativeElement.classList.add('heartBeat');
+        // this.correct.nativeElement.classList.add('heartBeat');
         this.correctAns = this.correctAns + 1;
           } else {
         this.wrongAns = this.wrongAns + 1;
-        this.wrong.nativeElement.classList.add('wobble');
+        // this.wrong.nativeElement.classList.add('wobble');
         }
         // tslint:disable-next-line: align
         setTimeout(() => {
@@ -269,8 +309,8 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.btnColor2 = 'success';
     this.btnColor3 = 'success';
     this.btnColor4 = 'success';
-    this.wrong.nativeElement.classList.remove('wobble');
-    this.correct.nativeElement.classList.remove('heartBeat');
+    // this.wrong.nativeElement.classList.remove('wobble');
+    // this.correct.nativeElement.classList.remove('heartBeat');
     if ( this.runningQuestion  < this.lastQuestion  ) {
       this.runningQuestion ++;
       this.renderQuestion();
@@ -369,7 +409,7 @@ async presentResult(min, secs, correct) {
         text: 'OK',
         cssClass : 'success',
         handler: (val) => {
-         this.router.navigate(['/tabs/gamesection']);
+         this.router.navigate(['/tabs/playsection']);
         }
       }
     ]
@@ -378,7 +418,7 @@ async presentResult(min, secs, correct) {
   await alert.present();
 
   setTimeout(()=> {
-    this.router.navigate(['/tabs/gamesection']);
+    this.router.navigate(['/tabs/playsection']);
     alert.dismiss()
   },3000);
 }
