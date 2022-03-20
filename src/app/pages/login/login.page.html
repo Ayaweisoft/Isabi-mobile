@@ -1,0 +1,201 @@
+<ion-content>
+
+
+  <div class="main-content">
+    <div class="illustration"></div>
+    <div class="main-section">
+      <h2>Sign In</h2>
+      <div class="input-section">
+          <form class="form" class="form" #loginForm="ngForm" name="form" (submit)="login(loginForm)">
+            <div class="inputs">
+              <!-- <div *ngIf="emailUser.dirty && emailUser.errors" class="text-center">
+                <small class="text-danger ">phone number or email is required</small>
+              </div> -->
+              <div class="inputBox">
+                <span class="text">Email Address</span>
+                <input type="email" required="true"
+                #emailUser="ngModel"
+                name="number"
+                clearInput
+                [(ngModel)]="model.number"
+                autocomplete="off"
+                minlength="11">
+              </div>
+              <div class="inputBox">
+                <span class="text">Username</span>
+                <input type="password" name="password" id="password" #password="ngModel" name="password" minlength="6"
+                  [(ngModel)]="model.password" clearInput>
+                <a class="text forgot-password" [routerLink]="['/forgetpassword']">Forgot password?
+                </a>
+              </div>
+              <input class="signin-btn" type="submit" value="Sign in">
+            </div>
+
+            <p class="text">Don't have account?
+              <span (click)="register()"
+              class="text-signup">
+                Sign up
+              </span>
+            </p>
+          </form>
+      </div>
+    </div>
+  </div>
+
+
+    <!-- <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <section class="ion-padding logo">
+          <img src="assets/img/ISABI LOGO GREEN.png"
+               alt="isar logo"
+               title="isabi logo" />
+        </section>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xs="10"
+               offset-xs="1"
+               size-sm="8"
+               offset-sm="2"
+               size-md="6"
+               offset-md="3"
+               size-lg="4"
+               offset-lg="4">
+        <form class="form"
+              #loginForm="ngForm"
+              name="form"
+              (submit)="login(loginForm)">
+          
+          <div class="utility">
+            <div class="text-input">
+              <ion-input autofocus
+                         type="text"
+                         class="pl-4 pr-2"
+                         placeholder="Email or Phone"
+                         #emailUser="ngModel"
+                         name="number"
+                         clearInput
+                         [(ngModel)]="model.number"
+                         autocomplete="off"
+                         minlength="11"
+                         required="true">
+                <ion-icon class="mr-2"
+                          name="person-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+            <div *ngIf="emailUser.dirty && emailUser.errors"
+                 class="text-center">
+              <small class="text-danger ">phone number or email is required</small>
+            </div>
+          </div>
+
+          <div class="utility">
+            <div class="text-input">
+              <ion-input type="password"
+                         class="pl-4 pr-2"
+                         input
+                         placeholder="Password"
+                         #password="ngModel"
+                         name="password"
+                         minlength="6"
+                         [(ngModel)]="model.password"
+                         clearInput
+                         required="true">
+                <ion-icon class="mr-2"
+                          name="lock-closed-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+            <div *ngIf="password.dirty && password.errors"
+                 class="text-center">
+              <small class="text-danger ">password is required</small>
+            </div>
+          </div>
+
+
+          <a class="ion-float-right forgot-password"
+             [routerLink]="['/forgetpassword']">Forgot password?
+          </a>
+
+          <ion-button class="login"
+                      shape="round"
+                      [disabled]="!loginForm.valid"
+                      (submit)="login(loginForm)"
+                      expand="block"
+                      type="submit">Login</ion-button>
+
+          <div *ngIf="loading">
+            <ion-progress-bar type="indeterminate"></ion-progress-bar>
+          </div>
+        </form>
+
+        <ion-row>
+          <ion-col class="sign-up"
+                   size="12">
+            <p class="text-dark">Don't have account?
+              <ion-label (click)="register()"
+                         class="font-weight-bold text-dark">Sign up
+              </ion-label>
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center mt-5">
+        <ion-label>Sign in with</ion-label>
+        <ion-row>
+          <ion-col class="social-icons"
+                   size-xs="6"
+                   offset-xs="3"
+                   size-sm="6"
+                   offset-sm="3"
+                   size-md="3"
+                   offset-md="4.5"
+                   size-lg="2"
+                   offset-lg="5">
+            <div>
+              <img src="/assets/img/Facebook_Logo.png"
+                   alt="facebook logo" />
+            </div>
+            <div>
+              <img src="assets/img/google-plus-logo.png"
+                   alt="google plus logo" />
+            </div>
+            <div>
+              <img src="assets/img/twitter--logo.png"
+                   alt="twitter logo" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div *ngIf="loading"
+       class="">
+    <div class="toast-container">
+      <div class="lds-roller"></div>
+    </div>
+  </div> -->
+
+    <!-- loader -->
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+</ion-content>

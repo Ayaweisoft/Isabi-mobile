@@ -1,6 +1,6 @@
 <ion-app>
   <ion-menu contentId="main-content" type="overlay">
-    <ion-header>
+    <!-- <ion-header>
       <ion-toolbar>
         <div class="menu">
           <ion-title mode="md">Menu</ion-title>
@@ -9,7 +9,7 @@
             <ion-text class="font-weight-bold mt-3">{{accountService.appUser}}</ion-text>
           </ion-item>
 
-          <!-- <ion-item lines="none">UserId: ({{accountService.user_id}}) </ion-item> -->
+         
 
           <ion-item lines="none"><span class="mr-2"> Balance: </span>
             <ion-badge> ₦ {{balance | currency:'₦'}} </ion-badge>
@@ -17,11 +17,154 @@
           </ion-item>
         </div>
       </ion-toolbar>
-    </ion-header>
+    </ion-header> -->
 
     <ion-content>
-      <ion-list color="light" class="drawer-list">
-        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+
+      <div class="main-content">
+        <div class="top-section">
+          <div class="profile-pic-name">
+            <div class="profile-pic"></div>
+            <span class="user-name">Gbalam Prince</span>
+          </div>
+          <div class="bottom">
+            <div class="text balance">Balance: {{balance | currency:'₦'}}</div>
+            <div class="text bonus">Bonus: 200</div>
+          </div>
+        </div>
+        <div class="main-section">
+          <div class=" section quiz-section">
+            <span class="heading">Quiz Trivia</span>
+            <div class="heading-section">
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/playdemo']"
+                routerLinkActive="router-link-active">
+                  <div class="logo">
+                    <img src="../../assets/figma/ion_game-controller-outline.svg" alt="">
+                  </div>
+                  <span class="name">Demo</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/leaderboard']"
+                routerLinkActive="router-link-active">
+                  <div class="logo">
+                    <img src="../../assets/figma/Group 47.svg" alt="">
+                  </div>
+                  <span class="name">Leaderboard</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/playsection']"
+                routerLinkActive="router-link-active">
+                  <div class="logo">
+                    <img src="../../assets/figma/ion_game-controller-outline.svg" alt="">
+                  </div>
+                  <span class="name">Live Game</span>
+                </div>
+              </ion-menu-toggle>
+            </div>
+          </div>
+          <div class="section events-section">
+            <span class="heading">Events</span>
+            <div class="heading-section">
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" >
+                  <div class="logo">
+                    <img src="../../assets/figma/fluent_vote-24-regular.svg" alt="">
+                  </div>
+                  <span class="name">E-Voting</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo">
+                  <div class="logo">
+                    <img src="../../assets/figma/icon-park-outline_ticket.svg" alt="">
+                  </div>
+                  <span class="name">E-Ticketing</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/events']"
+                routerLinkActive="router-link-active">
+                  <div class="logo">
+                    <img src="../../assets/figma/carbon_event-schedule.svg" alt="">
+                  </div>
+                  <span class="name">Onboarding Event</span>
+                </div>
+              </ion-menu-toggle>
+            </div>
+          </div>
+          <div class="section settings-section">
+            <span class="heading">Settings</span>
+            <div class="heading-section">
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" >
+                  <div class="logo">
+                    <img src="../../assets/figma/ep_setting.svg" alt="">
+                  </div>
+                  <span class="name">General Settings</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/profile']"
+                routerLinkActive="router-link-active">
+                  <div class="logo">
+                    <img src="../../assets/figma/iconoir_profile-circled.svg" alt="">
+                  </div>
+                  <span class="name">User Profile</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo">
+                  <div class="logo">
+                    <img src="../../assets/figma/ic_outline-account-balance.svg" alt="">
+                  </div>
+                  <span class="name">Account Info</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo">
+                  <div class="logo">
+                    <img src="../../assets/figma/mdi_theme-light-dark.svg" alt="">
+                  </div>
+                  <span class="name">Theme</span>
+                </div>
+              </ion-menu-toggle>
+            </div>
+          </div>
+          <div class="section account-section">
+            <span class="heading">Account</span>
+            <div class="heading-section">
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/account']"
+                routerLinkActive="router-link-active">
+                  <div class="logo"></div>
+                  <span class="name">Account</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'"ss [routerLink]="['/tabs/transaction']"
+                routerLinkActive="router-link-active">
+                  <div class="logo"></div>
+                  <span class="name">Transaction</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo">
+                  <div class="logo"></div>
+                  <span class="name">Account</span>
+                </div>
+              </ion-menu-toggle>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- <ion-list color="light" class="drawer-list">
+        <ion-menu-toggle auto-hide="false">
           <ion-item tappable color="light" [routerDirection]="'root'" [routerLink]="[p.url]"
             routerLinkActive="router-link-active">
             <ion-icon slot="start" [name]="p.icon"></ion-icon>
@@ -36,18 +179,6 @@
             <ion-label class="ml-4">MERCHANT</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <!-- <ion-menu-toggle (click)="rateYourApp()">
-                <ion-item color="secondary" >
-                <ion-icon name="thumbs-up"></ion-icon>
-                <ion-label  class="ml-4">RATE MY APP</ion-label>
-              </ion-item>
-            </ion-menu-toggle> -->
-        <!-- <ion-menu-toggle>
-                <ion-item color="secondary" (click)="userService.logout()" >
-                <ion-icon name="power"></ion-icon>
-                <ion-label  class="ml-4">LOGOUT</ion-label>
-              </ion-item>
-            </ion-menu-toggle> -->
 
         <ion-item>
           <ion-icon slot="start" name="moon-outline"></ion-icon>
@@ -73,7 +204,7 @@
             <ion-label tappable [routerLink]="label.url">{{ label.title }}</ion-label>
           </ion-item>
         </ion-menu-toggle>
-      </ion-list>
+      </ion-list> -->
 
     </ion-content>
   </ion-menu>

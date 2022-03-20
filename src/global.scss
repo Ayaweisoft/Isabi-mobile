@@ -12,6 +12,10 @@
 /* Core CSS required for Ionic components to work properly */
 @import '~@ionic/angular/css/core.css';
 
+//fonts
+@import url(https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic);
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
 /* Basic CSS for apps built with Ionic */
 @import '~@ionic/angular/css/normalize.css';
 @import '~@ionic/angular/css/structure.css';
@@ -34,12 +38,54 @@
 // 	src: url('assets/fonts/Roboto/Roboto-Regular.ttf');
 // }
 
-ion-content {
-	font-family: 'Montserrat' !important;
+
+h1,h1,h3,h4{
+	font-family: 'Poppins', sans-serif;
 }
 
-ion-menu-button {
-	color: black;
+p{
+	font-family: 'Open Sans', sans-serif;
+}
+
+
+.main-content{
+	font-family: 'Open Sans', sans-serif;
+	background-color: #f2f2f2;
+	height: fit-content;
+	min-height: 100%;
+}	
+
+.header{
+	height: 55px;
+	width: 100%;
+	padding: 0 10px;
+	display: flex;
+	background-color: transparent;
+	justify-content: space-between;
+	align-items: center;
+
+	ion-menu-button{
+		height: 30px;
+		width: 30px;
+		color: #f2f5f2
+	}
+
+	.logo{
+		width: 30px;
+		height: 30px;
+		border-radius: 100%;
+		background-color: rgb(83, 80, 80);
+	}
+
+}
+
+.content {
+	background-color: #348A40;
+	height: 100%;
+	width: 100%;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .modal-fullscreen {
@@ -54,9 +100,44 @@ ion-menu-button {
 }
 
 .rounded-top {
-	width: 100px;
-	height: 35px;
+	position: absolute;
+    left: 137px;
+    bottom: 11px;
+    width: 80px;
+    height: 30px;
 }
+
+.curved-section{
+	background-color: #fafafa;
+	background: #000;
+	z-index: 100;
+	margin-top: -30px;
+	border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+    display: flex;
+    gap: 13px;
+    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    padding: 10px;
+	position: relative;
+	
+	
+
+	h2{
+		color: black;
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 20px;
+		text-align: center;
+		line-height: 13px;
+		margin: 0;
+	}
+	
+	
+}
+
 
 // spinner
 .lds-roller {

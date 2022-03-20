@@ -1,0 +1,124 @@
+<ion-content>
+  <div class="main-content">
+    <div *ngIf="startGame" class="question-container">
+
+      <!-- head section -->
+      <div class="head-section question-head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
+        </div>
+      </div>
+
+      <div class="question-section">
+        <div class="timer"> 
+          <div class="circle-loader">
+            <div class="text" id="day">
+              {{timeMinute}} : {{timeSeconds}}
+            </div>
+          </div>
+        </div>
+        <div class="counter">
+          
+        </div>
+        <div class="question-number">
+          Question <span>{{runningQuestion + 1}}</span>/15
+        </div>
+        <div class="questions">
+          {{currentQuestion?.question}}
+        </div>
+        <div class="answers">
+          <div class="answer"
+            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer);">
+            <div class="answer-letter">A.</div>
+            <div class="answer-text">
+              {{currentQuestion?.option1}}
+            </div>
+          </div>
+
+          <div class="answer"
+            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer);">
+            <div class="answer-letter">B.</div>
+            <div class="answer-text">
+              {{currentQuestion?.option2}}
+            </div>
+          </div>
+
+          <div class="answer"
+            (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer);">
+            <div class="answer-letter">C.</div>
+            <div class="answer-text">
+              {{currentQuestion?.option3}}
+            </div>
+          </div>
+
+          <div class="answer"
+            (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer);">
+            <div class="answer-letter">D.</div>
+            <div class="answer-text">
+              {{currentQuestion?.option4}}
+            </div>
+          </div>
+        </div>
+        <div class="report-text">
+          Is there something wrong with this question? Report here
+        </div>  
+      </div>
+    </div>
+
+    <div class="category-container" *ngIf="!loadingGame  && !startGame">
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
+        </div>
+        <countdown-timer></countdown-timer>
+        <clue-tips></clue-tips>
+      </div>
+      <div class="category-section">
+        <h2>PLAY DEMO</h2>
+        <div class="game-category-card" *ngFor="let item of allCategory" (click)="playByCategory(item.name)">
+          <div class="game-category-card-logo">
+            <!-- <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon"> -->
+          </div>
+          <div class="game-category-card-desc">
+            <div class="game-category-card-name">
+              {{ item.name }}
+            </div>
+            <div class="game-category-card-participant">
+              {{ item.participant }} participants
+            </div>
+          </div>
+          <div class="game-category-card-arrow">
+            <img src="../../assets/figma/akar-icons_arrow-left.svg" alt="foward icon">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+
+    <!-- loader -->
+    <div *ngIf="loadingGame" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <p style="margin-top: 30%;" class="bg-dark  text-white text-center"> preparing questions...</p>
+    </div>
+    </div>
+</ion-content> 

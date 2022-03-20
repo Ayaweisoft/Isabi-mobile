@@ -1,0 +1,239 @@
+<ion-content>
+
+  <div class="main-content">
+    <div class="illustration"></div>
+    <div class="main-section">
+      <h2>Sign In</h2>
+      <div class="input-section">
+        <form class="form" class="form" #signUpForm="ngForm" name="signUpForm" (submit)="register()" autocomplete="off">
+          <div class="inputs">
+            <!-- <div *ngIf="emailUser.dirty && emailUser.errors" class="text-center">
+                <small class="text-danger ">phone number or email is required</small>
+              </div> -->
+            <div class="inputBox">
+              <span class="text">Username</span>
+              <input type="text" required="true" #username="ngModel" placeholder="Username" name="username"
+                [(ngModel)]="model.username" type="text" ngControl="title">
+            </div>
+            <div class="inputBox">
+              <span class="text">Email Address</span>
+              <input type="email" required="true" name="email" [(ngModel)]="model.email" ngControl="title">
+            </div>
+            <div class="inputBox">
+              <span class="text">Phone</span>
+              <input #number="ngModel" name="number" [(ngModel)]="model.number" type="text" required minlength="11"
+                [pattern]="phoneRegex" ngControl="title">
+            </div>
+            <div class="inputBox">
+              <span class="text">Password</span>
+              <input type="password" required="true" #password="ngModel" name="password" [(ngModel)]="model.password"
+                ngControl="title" minlength="6">
+            </div>
+            <div *ngIf="password.dirty && password.value !== conf_password.value" class=" text-center">
+              <small class="text-danger ">password not matched</small>
+            </div>
+            <div class="inputBox">
+              <span class="text">Confirm Password</span>
+              <input type="password" required="true" #conf_password="ngModel" name="password"
+                [(ngModel)]="model.conf_password" ngControl="title" minlength="6">
+            </div>
+            <input class="signin-btn" type="submit" value="Sign up" [disabled]="!signUpForm.valid && password.value == true">
+          </div>
+          <p class="text">Already have an account?
+            <a [routerLink]="['/login']" class="text-signup">Login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        <section class="ion-padding logo">
+          <img src="assets/img/ISABI LOGO GREEN.png" alt="isabi logo" title="isabi logo" />
+        </section>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size-xs="10" offset-xs="1" size-sm="8" offset-sm="2" size-md="6" offset-md="3" size-lg="4" offset-lg="4">
+        <form class="form" #signUpForm="ngForm" name="signUpForm" (submit)="register()">
+
+          <div *ngIf="loading">
+            <ion-progress-bar type="indeterminate"></ion-progress-bar>
+          </div>
+
+          <!-- username and validation -->
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2" #username="ngModel" placeholder="Username" name="username"
+                position="floating" [(ngModel)]="model.username" type="text" required ngControl="title">
+                <ion-icon class="mr-2" name="person-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+            <div *ngIf="username.dirty && username.errors" class=" text-danger text-center">
+              <small class="text-danger ">username is required</small>
+            </div>
+          </div>
+
+
+          <!-- email and validation
+          TO DO - implement validation for email field -->
+
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2" placeholder="example@mail.com" name="email" [(ngModel)]="model.email"
+                position="floating" type="email" required ngControl="title">
+                <ion-icon class="mr-2" name="mail-outline"></ion-icon>
+              </ion-input>
+            </div>
+          </div>
+          <!-- <div *ngIf="email.dirty && email.errors"
+               class=" text-danger text-center">
+            <small class="text-danger "
+                   *ngIf="password?.errors.invalid">email is required</small>
+          </div> -->
+
+          <!-- phone number and validation -->
+
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2" #number="ngModel" name="number" [(ngModel)]="model.number"
+                placeholder="Phone" type="text" required minlength="11" [pattern]="phoneRegex" ngControl="title">
+                <ion-icon class="mr-2" name="phone-portrait-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+
+            <div *ngIf="number.dirty && number.errors" class="text-center">
+              <small class="text-danger " *ngIf="number?.errors.required">phone is required</small>
+            </div>
+          </div>
+
+          <!-- password and validation -->
+          <div class="utility">
+            <div class="text-input">
+              <ion-input class="pl-4 pr-2" #password="ngModel" name="password" placeholder="Password"
+                position="floating" [(ngModel)]="model.password" type="password" required ngControl="title"
+                minlength="6">
+                <ion-icon class="mr-2" name="lock-closed-outline"></ion-icon>
+              </ion-input>
+            </div>
+
+            <div *ngIf="password.dirty && password.errors" class=" text-danger text-center">
+              <small class="text-danger " *ngIf="password?.errors.invalid">password is required</small>
+              <small class="text-danger " *ngIf="password?.errors.minlength">password must be at least 6
+                characters</small>
+            </div>
+          </div>
+
+          <div *ngIf="password.dirty && password.value !== conf_password.value" class=" text-center">
+            <small class="text-danger ">password not matched</small>
+          </div>
+
+          <div class="text-input">
+            <ion-input class="pl-4 pr-2" #conf_password="ngModel" placeholder="Confirm password" name="password"
+              position="floating" [(ngModel)]="model.conf_password" type="password" required ngControl="title"
+              minlength="6">
+              <ion-icon class="mr-2" name="lock-closed-outline"></ion-icon>
+            </ion-input>
+          </div>
+
+
+          <ion-row>
+            <ion-col class="d-flex align-items-center ion-margin-top">
+              <ion-checkbox class="mr-2" mode="ios" disabled="false"></ion-checkbox>
+              <a [routerLink]="['/privacypolicy']">
+                <ion-label>Privacy Policy, Terms & Conditions</ion-label>
+              </a>
+            </ion-col>
+          </ion-row>
+
+          <div class="signup-block">
+            <ion-button class="login" shape="round" [disabled]="!signUpForm.valid && password.value == true"
+              expand="block" type="submit">Sign up</ion-button>
+          </div>
+        </form>
+
+        <div class="ion-text-center mt-5 login">
+          <p class="text-dark">Already have an account?
+            <a [routerLink]="['/login']" class="font-weight-bold text-dark">Login</a>
+          </p>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col class="ion-text-center mt-3">
+        <ion-label>Sign up with</ion-label>
+        <ion-row>
+          <ion-col class="social-icons" size-xs="6" offset-xs="3" size-sm="6" offset-sm="3" size-md="3" offset-md="4.5"
+            size-lg="2" offset-lg="5">
+            <div>
+              <img src="/assets/img/Facebook_Logo.png" alt="facebook logo" />
+            </div>
+            <div>
+              <img src="assets/img/google-plus-logo.png" alt="google plus logo" />
+            </div>
+            <div>
+              <img src="assets/img/twitter--logo.png" alt="twitter logo" />
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- loader -->
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller"> </div>
+    </div>
+  </div>
+
+  <!-- fab button with options on click -->
+  <!-- <ion-fab horizontal="start"
+             vertical="bottom"
+             slot="fixed">
+      <ion-fab-button color="success">
+        <ion-icon name="alert"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="top">
+        <ion-button color="success">
+          <a class=" info text-white"
+             [routerLink]="['/testimonials']">
+            <ion-icon name="trophy"></ion-icon> TESTIMONIALS
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class=" info text-white"
+             [routerLink]="['/howtoplay']">
+            <ion-icon name="logo-game-controller-a"></ion-icon> HOW TO PLAY
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class=" info text-white"
+             [routerLink]="['/contactus']">
+            <ion-icon name="chatbubbles"></ion-icon> CONTACT US
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class="info text-white  "
+             href="https:/i-sabi.com/faq/">
+            <ion-icon name="help"></ion-icon> FAQ
+          </a>
+        </ion-button>
+        <ion-button color="success">
+          <a class="info text-white  "
+             href="https:/i-sabi.com/privacy-policy-2/">
+            <ion-icon name="list"></ion-icon> POLICY
+          </a>
+        </ion-button>
+      </ion-fab-list>
+    </ion-fab> -->
+</ion-content>

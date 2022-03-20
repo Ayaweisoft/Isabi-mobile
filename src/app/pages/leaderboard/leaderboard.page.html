@@ -1,0 +1,63 @@
+<ion-content>
+  <div class="main-content">
+    <div class="top-section">
+      <div class="header">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+      </div>
+      <h2>Leaderboard</h2>
+    </div>
+    <div class="main-section">
+      <div class="lead">
+        <div class="second-position position">
+          <div class="pic-container">        
+            <div class="pic second-position-picture">
+            </div>
+          </div>
+          <div class="name">
+            <div class="person-name">{{leaders[1].name}}</div>
+            <div class="record">{{leaders[1].score}} secs</div>
+          </div>   
+        </div>
+        <div class="first-position position">
+          <div class="pic-container">
+            <div class="pic first-position-picture">
+            </div>
+          </div>
+          <div class="name">
+            <div class="person-name">{{leaders[0].name}}</div>
+            <div class="record">{{leaders[0].score}} secs</div>
+          </div>
+        </div>
+        <div class="third-position position">
+          <div class="pic-container">
+            <div class="pic third-position-picture">
+            </div>
+          </div>
+          <div class="name">
+            <div class="person-name">{{leaders[2].name}}</div>
+            <div class="record">{{leaders[2].score}} secs</div>
+          </div>
+        </div>
+      </div>
+      <div class="the-rest">
+        <div class="leader-container" *ngFor="let leader of leaders.slice(3); let i = index">
+          <div class="start">
+            <span class="number">{{i+4}}</span>
+            <div class="pic"></div>
+            <div class="name">{{ leader.name }}</div>
+          </div>
+          <div class="end">
+            <div class="score">{{ leader.score }} secs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+        <div *ngIf="loading">
+          <div class="toast-container "></div>
+        </div>
+</ion-content>

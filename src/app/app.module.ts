@@ -1,10 +1,10 @@
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { PrivacyPolicyPage } from './pages/privacy-policy/privacy-policy.page';
 import { DemoQuestionsService } from './shared/demo-questions.service';
 import { FailGameComponent } from './components/fail-game/fail-game.component';
 import { CongratsComponent } from './components/congrats/congrats.component';
 import { GameGuard } from './auth/game.guard';
-import { NotLiveComponent } from './components/not-live/not-live.component';
-import { GamesectionComponent } from './components/gamesection/gamesection.component';
+import { NotLiveComponent } from './pages/not-live/not-live.component';
+import { GamesectionComponent } from './pages/gamesection/gamesection.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { VoteNowComponent } from './components/vote-now/vote-now.component';
 import { InsideEventAddUserComponent } from './components/inside-event-add-user/inside-event-add-user.component';
@@ -13,15 +13,15 @@ import { HeaderComponent } from './components/header/header.component';
 import { AdminEventComponent } from './components/admin-event/admin-event.component';
 import { EventService } from './shared/event.service';
 import { MerchantGuard } from './merchant.guard';
-import { AdminnavigationComponent } from './adminnavigation/adminnavigation.component';
-import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
+import { AdminnavigationComponent } from './components/adminnavigation/adminnavigation.component';
+import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
 import { AdminGuard } from './auth/admin.guard';
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './pages/account/account.component';
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
-import { SplashComponent } from './splash/splash.component';
+import { SplashComponent } from './components/splash/splash.component';
 
 
 
@@ -44,7 +44,7 @@ import { AngularFireModule } from '@angular/fire';
 import { SafeResourceUrlPipe } from './pipes/safe-url.pipe';
 import { LogicService } from './services/logic.service';
 import { BehavourService } from './services/behavour.service';
-import { WebVotingComponent } from './components/web-voting/web-voting.component';
+import { WebVotingComponent } from './pages/web-voting/web-voting.component';
 import { environment } from 'src/environments/environment';
 import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/image-custom-spinner.component';
 import { FirebaseService } from './services/firebase.service';
@@ -53,7 +53,7 @@ import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-t
 import { ManageEventComponent } from './components/manage-event/manage-event.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
-import { WebTicketComponent } from './components/web-ticket/web-ticket.component';
+import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
@@ -72,7 +72,7 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     TicketItemComponent,
     EditEventComponent,
     WebTicketComponent,
-     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyComponent,SplashComponent],
+     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyPage,SplashComponent],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
   imports: [

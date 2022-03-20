@@ -1,4 +1,4 @@
-import { AccountComponent } from './components/account/account.component';
+import { AccountComponent } from './pages/account/account.component';
 
 import { AccountService } from './shared/account.service';
 import { UserService } from './shared/user.service';
@@ -6,7 +6,7 @@ import { Component, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 
 import { NavController, Platform, AlertController, ModalController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { SplashComponent } from './splash/splash.component';
+import { SplashComponent } from './components/splash/splash.component';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { timer } from 'rxjs';
 
@@ -24,21 +24,10 @@ export class AppComponent {
   balance : any;
   authenticate = false;
   public appPages = [
-   
     {
-      title: 'EVENTS',
-      url: '/tabs/events',
-      icon: 'star-outline'
-    },
-     {
-      title: 'PLAY GAME',
-      url: '/tabs/gamesection',
+      title: 'PLAY DEMO',
+      url: '/tabs/playdemo',
       icon: 'game-controller'
-    },
-    {
-      title: 'ACCOUNT',
-      url: '/tabs/account',
-      icon: 'wallet'
     },
     {
       title: 'LEADERBOARD',
@@ -46,10 +35,24 @@ export class AppComponent {
       icon: 'trophy'
     },
     {
-      title: 'PLAY DEMO',
-      url: '/tabs/playdemo',
+      title: 'PLAY GAME',
+      url: '/tabs/gamesection',
       icon: 'game-controller'
     },
+   
+    {
+      title: 'EVENTS',
+      url: '/tabs/events',
+      icon: 'star-outline'
+    },
+     
+    {
+      title: 'ACCOUNT',
+      url: '/tabs/account',
+      icon: 'wallet'
+    },
+    
+    
     {
       title: 'MY RECORD',
       url: '/tabs/myrecord',

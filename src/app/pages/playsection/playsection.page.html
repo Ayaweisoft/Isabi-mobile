@@ -1,0 +1,121 @@
+<ion-content>
+  <div class="main-content">
+
+    <div *ngIf="startGame" class="question-container">
+
+      <!-- head section -->
+      <div class="head-section question-head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
+        </div>
+      </div>
+
+      <div class="question-section">
+        <div class="timer"> 
+          <div class="circle-loader">
+            <div class="text" id="day">
+              {{timeMinute}} : {{timeSeconds}}
+            </div>
+          </div>
+        </div>
+        <div class="counter">
+
+        </div>
+        <div class="question-number">
+          Question <span>{{runningQuestion + 1}}</span>/15
+        </div>
+        <div class="questions">
+          {{currentQuestion?.question}}
+        </div>
+        <div class="answers">
+          <ion-button [color]="btnColor1" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer); getColor1()">
+            {{currentQuestion?.option1}}
+          </ion-button>
+
+          <ion-button [color]="btnColor2" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); getColor2()">
+            {{currentQuestion?.option2}}
+          </ion-button>
+
+          <ion-button [color]="btnColor3" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); getColor3() ">
+            {{currentQuestion?.option3}}
+          </ion-button>
+
+          <ion-button [color]="btnColor4" expand="full" class="option mb-3" [disabled]="disableClick"
+            (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); getColor4()">
+            {{currentQuestion?.option4}}
+          </ion-button>
+
+        </div>
+        <div class="bottom-text"></div>
+      </div>
+    </div>
+
+    <div class="category-container" *ngIf="!loadingGame  && !startGame">
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
+        </div>
+        <countdown-timer></countdown-timer>
+        <clue-tips></clue-tips>
+      </div>
+      <div class="category-section">
+        <h2>PLAY GAME</h2>
+        <div class="game-category-card" *ngFor="let item of allCategory" (click)="playByCategory(item.name)">
+          <div class="game-category-card-logo">
+            <!-- <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon"> -->
+          </div>
+          <div class="game-category-card-desc">
+            <div class="game-category-card-name">
+              {{ item.name }}
+            </div>
+            <div class="game-category-card-participant">
+              {{ item.participant }} participants
+            </div>
+          </div>
+          <div class="game-category-card-arrow">
+            <img src="../../assets/figma/akar-icons_arrow-left.svg" alt="foward icon">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div *ngIf="low_balance" class=" ">
+      <div class="toast-container mb-5">
+        <ion-chip>
+          <!-- <ion-icon name="hand" color="danger"></ion-icon> -->
+          <ion-label class="font-weight-bold text-danger"> YOUR ACCOUNT IS LOW! CLICK HERE </ion-label> <br>
+          <ion-icon [routerLink]="['/account']" size="large" name="wallet" color="success"></ion-icon>
+        </ion-chip>
+      </div>
+    </div>
+    <!-- loader -->
+    <div *ngIf="loadingGame" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <p style="margin-top: 30%;" class="bg-dark  text-white text-center"> preparing questions...</p>
+    </div>
+  </div>
+
+</ion-content>
