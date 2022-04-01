@@ -109,6 +109,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    console.log('init');
     this.behaviorService.getGameAmount().subscribe(amount => {
       console.log('see AMount', amount)
       this.currentGameAmount =  amount;
@@ -141,7 +142,21 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     console.log('will enter');
   }
 
-  
+  ionViewWillLeave(){
+    this.QuestionSub = '';
+    this.playCategory = '';
+    this.loadBalanceSub = '';
+    this.deductSub = '';
+    this.timeSeconds = 0;
+    this.timeMinute = 0;
+    this.startGame = false;
+    this.lastQuestion =  0;
+    this.runningQuestion = 0;
+
+    clearInterval(this.timerTicker);
+    console.log('levdestroyed');
+    this.loadingGame = true;
+  }
   ngOnDestroy() {
     // this.gameQuestions.unsubscribe();
     this.QuestionSub = '';
@@ -150,8 +165,11 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.deductSub = '';
     this.timeSeconds = 0;
     this.timeMinute = 0;
+    this.currentQuestion  = "";
+    this.startGame = false;
+    this.lastQuestion =  0;
     clearInterval(this.timerTicker);
-    
+    console.log('destroyed');
   }
 
   getColor1(){

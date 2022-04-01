@@ -1,18 +1,8 @@
-<div class="clue-tips">
-  <div class="icon" slot="start">
-    <ion-icon (click)="clickSlidePrevious()" size="large" color="light" name="arrow-back"></ion-icon>
-  </div>
-  <div class="col-tip">
-    <div class="tips">
-      <h2>Clue Tips</h2>
-      <ion-slides #mySlider [options]="opts">
-        <ion-slide *ngFor="let item of gameService?.gameTipArray">
-          <p>{{item.tip}}</p>
-        </ion-slide>
-      </ion-slides>
-    </div>
-  </div>
-  <div class="icon" slot="end">
-    <ion-icon (click)="clickSlidetoNext()" size="large" color="light" name="arrow-forward"></ion-icon>
+<div class="loader_container">
+  <div class="loader">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
   </div>
 </div>
