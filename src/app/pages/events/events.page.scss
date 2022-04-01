@@ -196,19 +196,6 @@
 	padding-bottom: 20px;
 }
 
-// .head-section::before{
-// 	content: "";
-//     background-color: #fff;
-//     position: absolute;
-//     left: 0;
-//     bottom: -12px;
-//     z-index: 100;
-//     border-top-right-radius: 30px;
-//     border-top-left-radius: 30px;
-//     height: 40px;
-//     width: 100%;
-// }
-
 .event-section{
 	
 	
@@ -268,6 +255,8 @@
 		flex-direction: column;
 		align-items: centers;
 		width: 100%;
+
+		
 
 		.loading-card{
 			background-color: #EEF7EE;
