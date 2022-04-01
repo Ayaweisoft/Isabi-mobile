@@ -9,6 +9,7 @@ import { EventsPage } from './events.page';
 
 import { CountdownTimerComponent } from '../../components/countdown-timer/countdown-timer.component';
 import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
+// import { HeaderComponent } from 'src/app/components/header/header.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     RouterModule.forChild(routes)
     
   ],
+  // declarations: [EventsPage, HeaderComponent, CountdownTimerComponent, ClueTipsComponent]
   declarations: [EventsPage, CountdownTimerComponent, ClueTipsComponent]
 })
 export class EventsPageModule {}

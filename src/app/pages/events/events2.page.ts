@@ -9,17 +9,22 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   Renderer2,
+  HostListener,
 } from "@angular/core";
 import { AccountService } from "../../shared/account.service";
 import { environment } from "src/environments/environment";
 import { LogicService } from "../../services/logic.service";
+import { Observable } from "rxjs";
+import { WindowScrollService } from "src/app/services/window-scroll.service";
 
 @Component({
   selector: "app-events",
   templateUrl: "./events.page.html",
   styleUrls: ["./events.page.scss"],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EventsPage implements OnInit {
+  listener;
   @ViewChild("mySlider", { static: false }) mySlider: IonSlides;
   allEvent = [];
   displayedEvents = [];
@@ -28,11 +33,17 @@ export class EventsPage implements OnInit {
   webLink = environment.webVotingUrl;
   slideCounter = 0;
   headerIsActive: true;
+  scrollY$: Observable<number>;
 
   opts = {
     slidePerView: 1,
     spaceBetween: 20,
   };
+
+
+  @HostListener('window:scroll') onScroll(e: Event): void {
+    this.windowScrollService.scrollY.next(this.getYPosition(e));
+}
 
   constructor(
     private router: Router,
@@ -42,11 +53,13 @@ export class EventsPage implements OnInit {
     private accountService: AccountService,
     private logicService: LogicService,
     public alertController: AlertController,
+    private windowScrollService: WindowScrollService
   ) {
-  
+    this.scrollY$ = this.windowScrollService.scrollY$;
   }
- 
-
+  getYPosition(e: Event): number {
+    return (e.target as Element).scrollTop;
+  }
   ngOnInit() {
     this.getAllevent();
     this.gameService.getGameTip();

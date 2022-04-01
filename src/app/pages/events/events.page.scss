@@ -35,6 +35,10 @@
 
 }
 
+.header.headerIsActive {
+	display: none;
+}
+
 
 
 .main-content {
@@ -384,7 +388,11 @@
 
 }
 
-
+.noEvents {
+	p {
+		font-size: 1.2em;
+	}
+}
 
 // ion-card {  let hour = document.querySelector(".hour-loader");
 

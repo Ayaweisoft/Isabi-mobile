@@ -1,35 +1,36 @@
-<div class="header">
+
+<!-- <app-header></app-header> -->
+<div class="header" [class.headerIsActive]="headerIsActive">
   <ion-buttons slot="start">
     <ion-menu-button></ion-menu-button>
   </ion-buttons>
-  <div class="timer_small">
-    <div class="days">
-      <p>
-        {{gameService.timeDays}}
-      </p>
-      <p>DAYS</p>
-    </div>
-    <div class="hours">
-      <p>{{gameService.timeHours}}</p>
-      <p>HOURS</p>
-    </div>
-    <div class="minutes">
-      <p>{{gameService.timeMinute}}</p>
-      <p>MINUTES</p>
-    </div>
-    <div class="seconds">
-      <p>{{gameService.timeSeconds}}</p>
-      <p>SECONDS</p>
-    </div>
+  <div class="timer_small" >
+      <div class="days">
+        <p>
+          {{gameService.timeDays}}
+        </p>
+        <p>DAYS</p>
+      </div>
+      <div class="hours">
+        <p>{{gameService.timeHours}}</p>
+        <p>HOURS</p>
+      </div>
+      <div class="minutes">
+        <p>{{gameService.timeMinute}}</p>
+        <p>MINUTES</p>
+      </div>
+      <div class="seconds">
+        <p>{{gameService.timeSeconds}}</p>
+        <p>SECONDS</p>
+      </div>
   </div>
   <div class="header_end" slot="end">
     <div class="user_info">John Doe</div>
-    <div class="logo">
-
-    </div>
+  <div class="logo" >
+    
+  </div>
   </div>
 </div>
-
 <ion-content class="main-content">
 
   <div class="head-section">
@@ -99,6 +100,9 @@
       <div class="shadow-event-card" *ngFor="let item of shadowEvents">
         <h3>{{item.eventName}}</h3>
       </div>
+    </div>
+    <div class="noEvents" *ngIf="!displayedEvents.length > 0">
+      <p>No events found...</p>
     </div>
   </div>
 

@@ -337,7 +337,7 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
-    // { path: "*", redirectTo: 'tabs/events' }
+    { path: "*", redirectTo: 'tabs/events' }
 ];
 
 const routes3: Routes = [
