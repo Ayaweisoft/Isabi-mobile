@@ -39,18 +39,5 @@
     </div>
   </div>
 
-  <div *ngIf="loading" class=" ">
-    <div class="toast-container ">
-      <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
+  <loading-spinner *ngIf="loading"></loading-spinner>
 </ion-content>
