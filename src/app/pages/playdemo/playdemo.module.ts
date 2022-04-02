@@ -5,9 +5,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
+import { LoadingSpinnerComponent } from 'src/app/components/loading-spinner/loading-spinner.component';
 import { PlaydemoPage } from './playdemo.page';
 import { CountdownTimerComponent } from 'src/app/components/countdown-timer/countdown-timer.component';
 import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
+import { ScoreCounterComponent } from 'src/app/components/score-counter/score-counter.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PlaydemoPage, CountdownTimerComponent, ClueTipsComponent]
+  declarations: [PlaydemoPage, CountdownTimerComponent, ClueTipsComponent, ScoreCounterComponent, LoadingSpinnerComponent]
 })
 export class PlaydemoPageModule {}

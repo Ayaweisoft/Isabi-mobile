@@ -21,9 +21,8 @@
             </div>
           </div>
         </div>
-        <div class="counter">
-          
-        </div>
+        <score-counter style="width: 100%" [wrongValue]="wrongAns"
+        [rightValue]="correctAns"></score-counter>
         <div class="question-number">
           Question <span>{{runningQuestion + 1}}</span>/15
         </div>
@@ -105,20 +104,6 @@
     <br>
 
     <!-- loader -->
-    <div *ngIf="loadingGame" class=" ">
-      <div class="toast-container ">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <p style="margin-top: 30%;" class="bg-dark  text-white text-center"> preparing questions...</p>
-    </div>
+    <loading-spinner *ngIf="loading"></loading-spinner>
     </div>
 </ion-content> 
