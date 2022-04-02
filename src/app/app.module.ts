@@ -21,6 +21,8 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
+// import {MatIconModule} from '@angular/material/icon';
+
 import { SplashComponent } from './components/splash/splash.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { Socket } from 'ngx-socket-io';
@@ -32,7 +34,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { ProfilePhotoComponent } from './components/profile-photo/profile-photo.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './shared/user.service';
@@ -63,19 +65,36 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
 
 
 @NgModule({
-  declarations: [AppComponent, GamePipe, AccountComponent,HeaderComponent,
-    AdminnavigationComponent, AdminEventComponent, ForgetpasswordComponent,InsideEventComponent,
-    InsideEventAddUserComponent, VoteNowComponent, TabsComponent, GamesectionComponent, NotLiveComponent,
+  declarations: [
+    AccountComponent,
+    AdminEventComponent, 
+    AdminnavigationComponent, 
+    AppComponent, 
+    GamePipe, 
+    HeaderComponent,
+    BuyTicketComponent,
+    CongratsComponent, 
+    EditEventComponent,
+    FailGameComponent, 
+    ForgetpasswordComponent,
+    InsideEventComponent,
+    ProfilePhotoComponent,
+    InsideEventAddUserComponent, 
+    VoteNowComponent, 
+    TabsComponent, 
+    GamesectionComponent, 
+    NotLiveComponent,
     WebVotingComponent,
     ImageCustomSpinnerComponent,
     InsideTicketingComponent,
     InsideTicketAddTicketComponent,
     ManageEventComponent,
-    BuyTicketComponent,
     TicketItemComponent,
-    EditEventComponent,
     WebTicketComponent,
-     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyPage,SplashComponent],
+    SafeResourceUrlPipe, 
+    PrivacyPolicyPage,
+    SplashComponent
+  ],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
   imports: [
