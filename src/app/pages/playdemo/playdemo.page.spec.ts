@@ -12,7 +12,6 @@ describe('PlaydemoPage', () => {
       declarations: [ PlaydemoPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
-    .compileComponents();
   }));
 
   beforeEach(() => {

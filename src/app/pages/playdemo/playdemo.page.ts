@@ -229,7 +229,7 @@ export class PlaydemoPage implements OnInit {
       this.disableClick = true;
       console.log("clicked");
       if (selection == correctAnswer){
-        // this.correct.nativeElement.classList.add('heartBeat');
+        this.correct.nativeElement.classList.add('heartBeat');
         this.correctAns = this.correctAns + 1;
           } else {
         this.wrongAns = this.wrongAns + 1;
