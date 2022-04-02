@@ -1,6 +1,6 @@
 <div class="timer-section">
   <span class="h">COUNTDOWN TO GAME</span>
-  <div class="row">
+  <div *ngIf="notLive" class="row">
     <div class="time">
       <div class="circle-loader">
         <div class="days circle" id="day">
