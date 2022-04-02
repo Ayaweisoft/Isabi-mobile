@@ -162,7 +162,7 @@
 					img{
 						height: 50px;
 						width: 50px;
-						background-color: #c4c4c4;
+						background-color: transparent
 					}
 				}
 
@@ -438,18 +438,39 @@
 			background-color: transparent;
 			display: flex;
 			justify-content: space-between;
+			border: 1px solid #E7E4E4;
+			background-color: #fafafa;
+			border-radius: 30px;
 			align-items: center;
+			height: 42px;
 			width: 100%;
 
 			.answer-letter{
-				width: 10%;
+				display: grid;
+				place-items: center;
+				background-color: #B6B6B6;
+				border-radius: 50%;
+				color: #fafafa;
+				font-size: 16px;
+				font-weight: bold;
+				width: 35px;
+				height: 35px;
+			}
+
+			.answer-letter-right{
+				background-color: #348A40;
+			}
+
+			.answer-letter-wrong{
+				background-color: #9F1616;
 			}
 
 			.answer-text{
 				width: 70%;
+				font-size: 15px;
+				font-weight: 600;
 			}
 		}
-
 
 
 

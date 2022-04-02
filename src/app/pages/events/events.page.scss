@@ -371,17 +371,25 @@
 			align-items: center;
 			gap: 3px;
 			.event-icons{
-				background-color: rgb(202, 199, 199);
+				background-color: transparent;
+				border: 1px solid rgb(202, 199, 199);
 				height: 40px;
+				border-radius: 5px;
 				flex: 4;
 			}
 
 			.event-button{
 				display: grid;
 				place-items: center;
-				background-color: rgb(204, 197, 197);
+				border-radius: 5px;
+				border: 1px solid rgb(202, 199, 199);
+				background-color: transparent;
 				height: 40px;
 				flex: 1;
+
+				ion-icon{
+					border: none;
+				}
 			}
 		}
 	}
