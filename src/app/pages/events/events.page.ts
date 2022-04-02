@@ -25,6 +25,7 @@ export class EventsPage implements OnInit {
   displayedEvents = [];
   shadowEvents = [0, 0, 0];
   loading = true;
+  loadingCards = Array(6).fill(0);
   webLink = environment.webVotingUrl;
   slideCounter = 0;
   headerIsActive: true;

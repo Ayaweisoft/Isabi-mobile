@@ -51,28 +51,29 @@
       </div>
     </div>
     <!-- *ngIf="" -->
-    <div class="event-cards">
-      <!-- loader -->
-      <div *ngIf="loading" class="">
-        <div class="loading-card">
-          <div class="loading-top">
-            <div class="loading-pics">
-              <div class="loading-pic"></div>
-            </div>
-            <div class="loading-desc">
-              <div class="loading-name"></div>
-              <div class="loading-details"></div>
-              <div class="loading-type"></div>
-            </div>
+     <!-- loader -->
+     <div *ngIf="loading" class="loading">
+      <div *ngFor="let card of loadingCards" class="loading-card">
+        <div class="loading-top">
+          <div class="loading-pics">
+            <div class="loading-pic"></div>
           </div>
-          <div class="loading-bottom">
-            <div class="loading-icons">
-            </div>
-            <div class="loading-button">
-            </div>
+          <div class="loading-desc">
+            <div class="loading-name"></div>
+            <div class="loading-details"></div>
+            <div class="loading-type"></div>
+          </div>
+        </div>
+        <div class="loading-bottom">
+          <div class="loading-icons">
+          </div>
+          <div class="loading-button">
           </div>
         </div>
       </div>
+    </div>
+    <div class="event-cards">
+     
       <div class="event-card" *ngFor="let item of displayedEvents">
         <div class="event-top">
           <div class="event-pics">
