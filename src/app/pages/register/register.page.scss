@@ -67,6 +67,11 @@ ion-content {
 	height: 100%;
 	width: 100%;
 	background-color: #f2f2f2;
+	@media (min-width: 1024px) {
+		display: flex;
+		padding: 0;
+		// display: none;
+	  }
 }
 
 .illustration{
@@ -77,12 +82,16 @@ ion-content {
 	padding: 15px;
 	padding-top: 20px;
 	position: relative;
-	background-image: url("../../../assets/figma/Rectangle 80.png");
+	background-image: url("../../../assets/figma/signup_img.svg");
     background-repeat: no-repeat;
-    background-size: cover;
+  background-size: contain;
+  background-position: center;
 	background-color: white;
 	width: 100%;
-	height: 20%;
+	height: 40%;
+	@media screen and (min-width: 1024px) {
+		height: 100%;
+	}
 	// z-index: -1;
 }
 
