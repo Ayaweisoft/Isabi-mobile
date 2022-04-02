@@ -22,7 +22,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 import { SplashComponent } from './components/splash/splash.component';
-
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 
 
 
@@ -83,7 +85,8 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     IonicModule.forRoot(),
-     AngularFireModule.initializeApp(environment.firebaseConfig),
+    SocketIoModule.forRoot(config),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     
   ],
