@@ -1,29 +1,28 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Socket } from 'ngx-socket-io';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
-socket : any;
-// baseUri : string  = "ws://localhost:8000";
 
-  constructor() {
-    // this.socket = io(this.baseUri);
-   }
+baseUri : string  = "http://localhost:8000";
 
-  // listen(eventName: string){
-  //   return new Observable((sub)=> {
-  //     this.socket.on(eventName, (data)=> {
-  //       sub.next();
-  //     })
-  //   })
-  // }
+constructor(private socket: Socket) {}
 
-  // emit(eventName: string, data: any){
-  //   this.socket.emit(eventName, data);
-  // }
+  listen(eventName: string){
+    return new Observable((sub)=> {
+      this.socket.on(eventName, (data)=> {
+        sub.next();
+      })
+    })
+  }
+
+  emit(eventName: string, data: any){
+    this.socket.emit(eventName, data);
+  }
  
 
 }

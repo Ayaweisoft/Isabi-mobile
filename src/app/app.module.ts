@@ -23,6 +23,7 @@ import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 import { SplashComponent } from './components/splash/splash.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { Socket } from 'ngx-socket-io';
 // const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
 const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 

@@ -13,6 +13,7 @@ import {
 import { AccountService } from "../../shared/account.service";
 import { environment } from "src/environments/environment";
 import { LogicService } from "../../services/logic.service";
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: "app-events",
@@ -43,6 +44,7 @@ export class EventsPage implements OnInit {
     private accountService: AccountService,
     private logicService: LogicService,
     public alertController: AlertController,
+    private socketService: SocketService
   ) {
   
   }
@@ -55,8 +57,11 @@ export class EventsPage implements OnInit {
     //this.initializeTimer();
     console.log("day", this.gameService.timeDays);
     this.autoSlide();
+    // this.testSocket();
   }
-
+  testSocket() {
+    this.socketService.emit("connection", {});
+  }
   async initializeTimer() {
     let day = document.querySelector(".day-loader");
     let hour = document.querySelector(".hour-loader");
