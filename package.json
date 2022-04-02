@@ -40,7 +40,7 @@
     "firebase": "^8.7.1",
     "jwt-decode": "^3.1.2",
     "ng-otp-input": "^1.6.2",
-    "ng-socket-io": "^0.2.4",
+    "ngx-socket-io": "^3.2.0",
     "number-flip": "^1.1.8",
     "rxjs": "~6.5.5",
     "symbol-observable": "^4.0.0",
