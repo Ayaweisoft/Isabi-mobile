@@ -31,7 +31,11 @@
         </div>
         <div class="answers">
           <div class="answer"
-            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer);">
+          [ngClass]="{
+            'answer--right' : option1.includes('correct'),
+            'answer--wrong' : option1.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer, 'option1');">
             <div class="answer-letter">A</div>
             <div class="answer-text">
               {{currentQuestion?.option1}}
@@ -39,7 +43,11 @@
           </div>
 
           <div class="answer"
-            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer);">
+          [ngClass]="{
+            'answer--right' : option2.includes('correct'),
+            'answer--wrong' : option2.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer, 'option2');">
             <div class="answer-letter">B</div>
             <div class="answer-text">
               {{currentQuestion?.option2}}
@@ -47,7 +55,11 @@
           </div>
 
           <div class="answer"
-            (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer);">
+          [ngClass]="{
+            'answer--right' : option3.includes('correct'),
+            'answer--wrong' : option3.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option3, currentQuestion?.answer, 'option3');">
             <div class="answer-letter">C</div>
             <div class="answer-text">
               {{currentQuestion?.option3}}
@@ -55,7 +67,11 @@
           </div>
 
           <div class="answer"
-            (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer);">
+          [ngClass]="{
+            'answer--right' : option4.includes('correct'),
+            'answer--wrong' : option4.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option4, currentQuestion?.answer, 'option4');">
             <div class="answer-letter">D</div>
             <div class="answer-text">
               {{currentQuestion?.option4}}

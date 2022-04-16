@@ -444,6 +444,8 @@
 			align-items: center;
 			height: 42px;
 			width: 100%;
+			
+			padding-left: 0.2em;
 
 			.answer-letter{
 				display: grid;
@@ -457,14 +459,22 @@
 				height: 35px;
 			}
 
-			.answer-letter-right{
-				background-color: #348A40;
+			&--right {
+				border-color: #83b983;
+
+				.answer-letter{
+					background-color: #348A40;
+				}
 			}
 
-			.answer-letter-wrong{
-				background-color: #9F1616;
-			}
+			&--wrong {
+				border-color: #9F1616;
 
+				.answer-letter{
+					background-color: #9F1616;
+				}
+			}
+			
 			.answer-text{
 				width: 70%;
 				font-size: 15px;
