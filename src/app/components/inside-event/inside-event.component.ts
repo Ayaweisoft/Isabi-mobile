@@ -19,6 +19,7 @@ export class InsideEventComponent implements OnInit {
 eventId;
 loading = true;
 contestant = [];
+displayedContestant = [];
 contestantData = [];
 costPerVote = null;
 personalLink = environment.webVotingUrl;
@@ -68,6 +69,10 @@ personalLink = environment.webVotingUrl;
       let length =  15;
       text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
       return text;
+    }
+
+    getChildData(data){
+      this.displayedContestant = data;
     }
   
   getItems() {

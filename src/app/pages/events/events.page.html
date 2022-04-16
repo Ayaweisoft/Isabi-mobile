@@ -50,7 +50,7 @@
         <img class="filter-icon" src="../../assets/figma/bi_filter.svg" alt="filter">
       </div>
     </div> -->
-    <searchbar [allEvents]="allEvent" (displayedEvents)="getChildData($event)"></searchbar>
+    <searchbar [allItems]="allEvent" (displayedItems)="getChildData($event)"></searchbar>
     <!-- *ngIf="" -->
      <!-- loader -->
      <div *ngIf="loading" class="loading">

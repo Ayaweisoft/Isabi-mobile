@@ -8,6 +8,7 @@ import { EventService } from 'src/app/shared/event.service';
 import { UserService } from 'src/app/shared/user.service';
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 import { InsideTicketAddTicketComponent } from '../inside-ticket-add-ticket/inside-ticket-add-ticket.component';
+import { SearchbarComponent } from '../searchbar/searchbar.component';
 
 @Component({
   selector: 'app-inside-ticketing',

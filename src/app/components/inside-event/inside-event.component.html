@@ -14,9 +14,10 @@
       </div>
 
       <div class="voting-section">  
-        <h2 class="voting-title">Voting</h2> 
+        <h2 class="voting-title">Voting</h2>
+        <searchbar [allItems]="c  ontestant" (displayedItems)="getChildData($event)"></searchbar> 
         <div class="voting-segment">
-          <div class="voting-card" *ngFor="let item of contestant">
+          <div class="voting-card" *ngFor="let item of displayedContestant">
             <div class="voting-card-pic">
               <img [src]="item.image_url">
             </div>

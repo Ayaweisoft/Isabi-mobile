@@ -7,9 +7,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
   @Input()
-  allEvents: Array<any> = [];
+  allItems: Array<any> = [];
   @Output()
-  displayedEvents: EventEmitter<any[]>  = new EventEmitter<any[]>();
+  displayedItems: EventEmitter<any[]>  = new EventEmitter<any[]>();
   // displayEvents: Array<any> = [];
 
   constructor() { }
@@ -18,9 +18,9 @@ export class SearchbarComponent implements OnInit {
     
   }
 
-  filterItem(value, list = this.allEvents){
+  filterItem(value, list = this.allItems){
     let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
     // this.displayedEvents = newEvent¦s;
-    this.displayedEvents.emit(newEvents);
+    this.displayedItems.emit(newEvents);
   }
 }
