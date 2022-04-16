@@ -46,7 +46,7 @@ export class SettingsPage implements OnInit {
     },
     {
       name: "Account Details",
-      url: '/tabs/settings'
+      url: '/tabs/account'
     },
     {
       name: "Dark Mode",
