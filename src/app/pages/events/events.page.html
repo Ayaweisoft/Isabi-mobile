@@ -41,7 +41,7 @@
   <div class="curved-section event-section">
 
     <h2>Events</h2>
-    <div class="search">
+    <!-- <div class="search">
       <div class="search_button">
         <img class="search-icon" src="../../assets/figma/akar-icons_search.svg" alt="search">
       </div>
@@ -49,7 +49,8 @@
       <div class="search_button">
         <img class="filter-icon" src="../../assets/figma/bi_filter.svg" alt="filter">
       </div>
-    </div>
+    </div> -->
+    <searchbar [allEvents]="allEvent" (displayedEvents)="getChildData($event)"></searchbar>
     <!-- *ngIf="" -->
      <!-- loader -->
      <div *ngIf="loading" class="loading">

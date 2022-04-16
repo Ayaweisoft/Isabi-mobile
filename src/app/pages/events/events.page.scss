@@ -198,42 +198,6 @@
 }
 
 .event-section {
-  .search {
-    height: 35px;
-    position: relative;
-    width: 80%;
-    background-color: #f2f2f2;
-    border-radius: 10px;
-    border: 1px solid #348a40;
-    // opacity: 36%;
-    padding: 0 1em;
-    color: black;
-    max-width: 500px;
-    margin: auto;
-    display: flex;
-
-    .search_button {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      img {
-        width: 20px;
-      }
-    }
-    input {
-      overflow: hidden;
-      outline: none;
-      // position: absolute;
-      color: black;
-      border: none;
-      bottom: 0;
-      height: 100%;
-      left: 0;
-      padding: 0 3px;
-      background: transparent;
-      width: 100%;
-    }
-  }
 
   h2 {
     color: black;

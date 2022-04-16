@@ -54,8 +54,6 @@ personalLink = environment.webVotingUrl;
   initializeItems(){
     this.contestant = this.contestantData;
      }
- 
-
 
      copyInputMessage(inputElement){
       inputElement.select();
@@ -64,6 +62,13 @@ personalLink = environment.webVotingUrl;
       this.logicService.presentToast('text  coppied' );
     }
 
+
+
+    parseText(text){
+      let length =  15;
+      text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
+      return text;
+    }
   
   getItems() {
     // Reset items back to all of the items

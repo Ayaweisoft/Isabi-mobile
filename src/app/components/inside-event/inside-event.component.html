@@ -1,16 +1,66 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <div class="row d-flex justify-content-center">
-      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
-    </div>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  <!-- content area -->
+  <div class="main-content">
+    <div class="voting-container">
+
+      <!-- head section -->
+      <div class="head-section voting-head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <div class="logo" slot="end">
+          </div>
+        </div>
+      </div>
+
+      <div class="voting-section">  
+        <h2 class="voting-title">Voting</h2> 
+        <div class="voting-segment">
+          <div class="voting-card" *ngFor="let item of contestant">
+            <div class="voting-card-pic">
+              <img [src]="item.image_url">
+            </div>
+            <div class="voting-card-name">
+              <small class="fullname">00{{item.my_code }} {{ parseText(item.fullname) }}</small>
+              <div class="nickname">{{item.nickname}}</div>
+            </div>
+            <div class="voting-card-bottom">
+              <div class="voting-card-bottom-votes">
+                {{item.vote_count | number}} vote(s)
+              </div>
+              <div class="voting-card-bottom-button">
+                <button (click)="voteNow(item.event_id,item._id,item.image_url,
+                item.nickname,item.my_code, item.fullname)">
+                  Vote Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+<!-- Segment with anchors -->
+  <!-- loader -->
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<!-- <ion-content>
+
   <ion-refresher #refresherRef (ionRefresh)="doRefresh($event)" slot="fixed">
     <ion-refresher-content>
     </ion-refresher-content>
@@ -37,7 +87,6 @@
       <ion-col size="6" size-lg="3" size-md="4" size-xs="6" size-sm="6" size-xl="3" *ngFor="let item of contestant"
         index as i>
         <ion-card class="text-center font-weight-bold pb-2 ion-no-margin">
-          <!-- <ion-icon name="swap"></ion-icon> {{item.vote_count | number}}  -->
           <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="deleteContestant(item)" name="trash"></ion-icon>
           <img [src]="item.image_url">
 
@@ -62,19 +111,5 @@
     </ion-row>
   </ion-grid>
 
-  <!-- loader -->
-  <div *ngIf="loading" class=" ">
-    <div class="toast-container ">
-      <div class="lds-roller">
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</ion-content>
+ 
+</ion-content> -->

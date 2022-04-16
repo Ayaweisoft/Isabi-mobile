@@ -161,10 +161,13 @@ clickSlidePrevious() {
         }
       );
   }
-  filterEvents(value, list = this.allEvent){
-    let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
-    this.displayedEvents = newEvents
-    console.log("ÿoooooo")
+  // filterEvents(value, list = this.allEvent){
+  //   let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
+  //   this.displayedEvents = newEvents
+  //   console.log("ÿoooooo") 
+  // }
+  getChildData(data){
+    this.displayedEvents = data;
   }
   copyInputMessage(inputElement){
     inputElement.select();
