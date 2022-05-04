@@ -71,9 +71,9 @@ personalLink = environment.webVotingUrl;
       return text;
     }
 
-    getChildData(data){
-      this.displayedContestant = data;
-    }
+    // getChildData(data){
+    //   this.displayedContestant = data;
+    // }
   
   getItems() {
     // Reset items back to all of the items
