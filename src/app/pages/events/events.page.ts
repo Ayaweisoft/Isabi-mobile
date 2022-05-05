@@ -119,11 +119,8 @@ let minuteprogress = setInterval(() => {
     setInterval(()=> {
        this.gameService.slideCounter = this.gameService.gameTipArray.length;
        this.gameService.slideCounter --;
-       this.mySlider.slideNext(3000, true);
        console.log('slide to prev', this.gameService.slideCounter);
-    
-    
-    },9000)
+    },3000)
 
  }
 
