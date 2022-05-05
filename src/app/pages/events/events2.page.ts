@@ -66,7 +66,7 @@ export class EventsPage implements OnInit {
     this.gameService.getAdminDate();
     //this.initializeTimer();
     console.log("day", this.gameService.timeDays);
-    this.autoSlide();
+    
   }
 
   async initializeTimer() {
@@ -136,14 +136,6 @@ export class EventsPage implements OnInit {
     }, speed);
   }
 
-  async autoSlide() {
-    setInterval(() => {
-      this.gameService.slideCounter = this.gameService.gameTipArray.length;
-      this.gameService.slideCounter--;
-      this.mySlider.slideNext(3000, true);
-      console.log("slide to prev", this.gameService.slideCounter);
-    }, 9000);
-  }
 
   parseText(text) {
     let length = 55;
@@ -152,16 +144,6 @@ export class EventsPage implements OnInit {
         ? text.substring(0, length - 3) + "..."
         : text.substring(0, text.length - 3) + "...";
     return text;
-  }
-
-  clickSlidetoNext() {
-    console.log("slide to next");
-    this.mySlider.slideNext();
-  }
-
-  clickSlidePrevious() {
-    console.log("slide to previous");
-    this.mySlider.slidePrev();
   }
 
   getAllevent() {

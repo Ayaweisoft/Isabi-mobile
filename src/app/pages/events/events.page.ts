@@ -42,7 +42,7 @@ opts = {
     this.gameService.getAdminDate();
     //this.initializeTimer();
     console.log("day", this.gameService.timeDays);
-    this.autoSlide();
+    
 
   }
 
@@ -115,30 +115,13 @@ let minuteprogress = setInterval(() => {
   }, speed)
 }
 
-  async autoSlide() {
-    setInterval(()=> {
-       this.gameService.slideCounter = this.gameService.gameTipArray.length;
-       this.gameService.slideCounter --;
-       console.log('slide to prev', this.gameService.slideCounter);
-    },3000)
-
- }
-
  parseText(text){
   let length =  55;
   text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
   return text;
 }
   
- clickSlidetoNext() {
-  console.log('slide to next')
-  this.mySlider.slideNext();
-}
 
-clickSlidePrevious() {
-  console.log('slide to previous');
-  this.mySlider.slidePrev();
-}
 
 
   getAllevent(){
