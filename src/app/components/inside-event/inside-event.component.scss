@@ -53,11 +53,14 @@
             .voting-segment{
                 position: relative;
                 display: grid;
-				grid-template-columns: 1fr 1fr;
+				grid-template-columns: repeat(4, 1fr);
                 place-items: center;
                 gap: 20px;
 				padding: 0 1rem;
                 width: 100%;
+                @media screen and (max-width: 768px){
+                        grid-template-columns: repeat(2, 1fr);
+                }
 
                 .voting-card{
                     display: flex;
@@ -160,4 +163,8 @@
         }
 	}
 }
+
+//media query desktop
+
+
 
