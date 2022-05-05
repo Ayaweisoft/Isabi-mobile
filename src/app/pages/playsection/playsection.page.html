@@ -1,6 +1,5 @@
 <ion-content>
   <div class="main-content">
-
     <div *ngIf="startGame" class="question-container">
 
       <!-- head section -->
@@ -22,9 +21,8 @@
             </div>
           </div>
         </div>
-        <div class="counter">
-
-        </div>
+        <score-counter style="width: 100%" [wrongValue]="wrongAns"
+        [rightValue]="correctAns"></score-counter>
         <div class="question-number">
           Question <span>{{runningQuestion + 1}}</span>/15
         </div>
@@ -32,28 +30,57 @@
           {{currentQuestion?.question}}
         </div>
         <div class="answers">
-          <ion-button [color]="btnColor1" expand="full" class="option mb-3" [disabled]="disableClick"
-            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer); getColor1()">
-            {{currentQuestion?.option1}}
-          </ion-button>
+          <div class="answer"
+          [ngClass]="{
+            'answer--right' : option1.includes('correct'),
+            'answer--wrong' : option1.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option1, currentQuestion?.answer, 'option1');">
+            <div class="answer-letter">A</div>
+            <div class="answer-text">
+              {{currentQuestion?.option1}}
+            </div>
+          </div>
 
-          <ion-button [color]="btnColor2" expand="full" class="option mb-3" [disabled]="disableClick"
-            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer); getColor2()">
-            {{currentQuestion?.option2}}
-          </ion-button>
+          <div class="answer"
+          [ngClass]="{
+            'answer--right' : option2.includes('correct'),
+            'answer--wrong' : option2.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option2, currentQuestion?.answer, 'option2');">
+            <div class="answer-letter">B</div>
+            <div class="answer-text">
+              {{currentQuestion?.option2}}
+            </div>
+          </div>
 
-          <ion-button [color]="btnColor3" expand="full" class="option mb-3" [disabled]="disableClick"
-            (click)="checkAnswer(currentQuestion?.option3, currentQuestion.answer); getColor3() ">
-            {{currentQuestion?.option3}}
-          </ion-button>
+          <div class="answer"
+          [ngClass]="{
+            'answer--right' : option3.includes('correct'),
+            'answer--wrong' : option3.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option3, currentQuestion?.answer, 'option3');">
+            <div class="answer-letter">C</div>
+            <div class="answer-text">
+              {{currentQuestion?.option3}}
+            </div>
+          </div>
 
-          <ion-button [color]="btnColor4" expand="full" class="option mb-3" [disabled]="disableClick"
-            (click)="checkAnswer(currentQuestion?.option4, currentQuestion.answer); getColor4()">
-            {{currentQuestion?.option4}}
-          </ion-button>
-
+          <div class="answer"
+          [ngClass]="{
+            'answer--right' : option4.includes('correct'),
+            'answer--wrong' : option4.includes('wrong')
+          }"
+            (click)="checkAnswer(currentQuestion?.option4, currentQuestion?.answer, 'option4');">
+            <div class="answer-letter">D</div>
+            <div class="answer-text">
+              {{currentQuestion?.option4}}
+            </div>
+          </div>
         </div>
-        <div class="bottom-text"></div>
+        <div class="report-text">
+          Is there something wrong with this question? Report here
+        </div>  
       </div>
     </div>
 
@@ -69,6 +96,7 @@
         <countdown-timer></countdown-timer>
         <clue-tips></clue-tips>
       </div>
+      <br>
       <div class="category-section">
         <h2>PLAY GAME</h2>
         <div class="game-category-card" *ngFor="let item of allCategory" (click)="playByCategory(item.name)">
@@ -89,6 +117,9 @@
         </div>
       </div>
     </div>
+
+    
+    </div>
     <br>
 
     <div *ngIf="low_balance" class=" ">
@@ -99,7 +130,7 @@
           <ion-icon [routerLink]="['/account']" size="large" name="wallet" color="success"></ion-icon>
         </ion-chip>
       </div>
-    </div>
+    <!-- </div> -->
     <!-- loader -->
     
       <loading-spinner *ngIf="loadingGame"></loading-spinner>

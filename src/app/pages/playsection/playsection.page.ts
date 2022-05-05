@@ -37,6 +37,10 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     wrongAns: any = 0;
     disableClick : boolean = false;
     low_balance = false;
+    option1 = "none";
+    option2 = "none";
+    option3 = "none";
+    option4 = "none";
     btnColor1 ="success";
     btnColor2 ="success";
     btnColor3 ="success";
@@ -192,6 +196,10 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.gameQuestions = res['questions'];
         this.lastQuestion =  this.gameQuestions.length - 1;
         this.loadingGame = false;
+        this.lastQuestion = 0;
+        this.runningQuestion = 0;
+        this.lastQuestion = this.gameQuestions.length - 1;
+        this.loadingGame = false;
       },
       err => {
         console.log(err);
@@ -262,20 +270,37 @@ export class PlaysectionPage implements OnInit, OnDestroy {
       );
     }
 
-  checkAnswer(selection, correctAnswer) {
+    checkAnswer(selection, correctAnswer, option) {
       this.disableClick = true;
-      if (selection == correctAnswer){
-        // this.correct.nativeElement.classList.add('heartBeat');
+      
+      if (selection == correctAnswer) {
+        this[option] = 'correct'
         this.correctAns = this.correctAns + 1;
-          } else {
+      } else {
         this.wrongAns = this.wrongAns + 1;
-        // this.wrong.nativeElement.classList.add('wobble');
-        }
-        // tslint:disable-next-line: align
-        setTimeout(() => {
-          this.nextQuestion();
-        }, 1000);
-  }
+        this[option] = 'wrong'
+        const options = [
+          this.currentQuestion.option1,
+          this.currentQuestion.option2,
+          this.currentQuestion.option3,
+          this.currentQuestion.option4,
+        ]
+        let correctOption = options.findIndex(el=> {
+          return el.includes(correctAnswer)
+        }) + 1
+        console.log(correctOption)
+        this['option' + correctOption] = 'correct'
+  
+      }
+      // tslint:disable-next-line: align
+      setTimeout(() => {
+        this.option1 = 'none'
+        this.option2 = 'none'
+        this.option3 = 'none'
+        this.option4 = 'none'
+        this.nextQuestion();
+      }, 1000);
+    }
 
 
   startQuestion() {
