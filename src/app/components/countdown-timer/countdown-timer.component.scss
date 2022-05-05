@@ -33,6 +33,7 @@
             color: #EEF7EE;
 
             .circle-loader{
+                position: relative;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -41,7 +42,17 @@
                 height: 62px;
                 border-radius: 100%;
                 flex-direction: column;
+                .circle-back {
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    background: #000;
+                    // border-radius: 999px;
+                    clip-path: polygon(0% 0%, 40% 0%, 50% 50%, 60% 0%, 100% 0%, 100% 100%, 0% 100%);
+                }
                 .circle {
+                    position: relative;
+                    z-index: 6;
                     background-color: #348A40;
                     color: #f2f2f2;
                     font-size: 21px;
