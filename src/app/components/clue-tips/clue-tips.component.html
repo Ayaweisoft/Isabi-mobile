@@ -6,8 +6,8 @@
     <div class="tips">
       <h2>Clue Tips</h2>
       <ion-slides #mySlider [options]="opts">
-        <ion-slide *ngFor="let item of gameService?.gameTipArray">
-          <p>{{item.tip}}</p>
+        <ion-slide *ngFor="let tip of gameService?.gameTipArray">
+          <p>{{tip}}</p>
         </ion-slide>
       </ion-slides>
     </div>

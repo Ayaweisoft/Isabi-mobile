@@ -14,29 +14,29 @@
       </div>
     </div>
     <div class="main-section">
-      <form class="form" id="form"  #profileForm ngform="profileForm" name="form" 
+      <form class="form" id="form"  #profileForm ngForm="profileForm" name="form" 
       (submit)="createProfile(profileForm)">
         <div class="inputs">
 
           <div class="inputBox">
-            <input type="text" #fullname name="fullname" position="floating" id="fullName" [(ngModel)]="model.fullname" value="{{ myProfile?.email }}">
+            <input type="text" #fullname="ngModel" name="fullname" position="floating" id="fullname" [(ngModel)]="model.fullname" value="{{ myProfile?.fullname }}">
             <span class="text">Full Name</span>
           </div>
           <div class="inputBox">
-            <input type="text" name="username" id="username"> 
+            <input type="text" #username="ngModel" name="username" id="username" [(ngModel)]="model.username" value="{{ myProfile?.username }}"> 
             <span class="text">Username</span>
           </div>
           <div class="inputBox">
-            <input #email name="email" position="floating"  [(ngModel)]="model.email"
+            <input #email="ngModel" name="email" position="floating"  [(ngModel)]="model.email"
             type="email" required  [pattern]="emailRegex" value="{{ myProfile?.email }}">
             <span class="text">Email</span>
           </div>          
           <div class="inputBox">
-            <input type="tel" name="phone" id="phone">
+            <input type="tel" #phone="ngModel" name="phone" id="phone" [(ngModel)]="model.phone" value="{{ myProfile?.phone }}">
             <span class="text">Phone</span>
           </div>
           <div class="inputBox">
-            <input type="date" name="dateOfBirth">
+            <input type="date" name="date_of_birth" #dateOfBirth="ngModel" id="date_of_birth" [(ngModel)]="model.date_of_birth" value="{{ myProfile?.date_of_birth }}">
             <span class="text">Date Of Birth</span>
           </div>
         </div>

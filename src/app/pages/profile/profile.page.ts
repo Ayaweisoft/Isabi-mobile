@@ -24,7 +24,10 @@ export class ProfilePage implements OnInit {
 
                  
   model = {
-    fullname :'',
+    fullname: '',
+    username: '',
+    phone: '',
+    date_of_birth: '', 
     nationality: '',
     accountNumber: '', 
     accountName: '',
@@ -51,14 +54,15 @@ export class ProfilePage implements OnInit {
 
   createProfile(form : NgForm){
     this.loading = true;
-      console.log(this.model);
+      console.log('before saving' + this.model);
      
       this.userService.saveUserProfile(this.model).subscribe(res => {
-        console.log(res);
+        
         this.loading = false;
         this.getMyProfile();
       },
       err => {
+        
         this.loading =false;
         console.log(err);
       });

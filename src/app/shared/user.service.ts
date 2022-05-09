@@ -173,6 +173,10 @@ constructor(private http: HttpClient,
       return this.http.post(environment.apiBaseUrl + '/save-user-profile',credentials);
     }
 
+    updateUserProfile(credentials){
+      return this.http.post(environment.apiBaseUrl + '/update-user-profile',credentials);
+    }
+
     getUserProfile(): Observable<any> {
       return this.http.get(environment.apiBaseUrl + '/get-user-profile');
     }

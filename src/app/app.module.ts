@@ -24,10 +24,12 @@ import { RouteReuseStrategy } from '@angular/router';
 // import {MatIconModule} from '@angular/material/icon';
 
 import { SplashComponent } from './components/splash/splash.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { Socket } from 'ngx-socket-io';
+// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
 // const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
-const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
+// const config: SocketIoConfig = { 
+//   url: 'http://localhost:8000',
+//   options: {} };
 
 
 
@@ -105,7 +107,7 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     IonicModule.forRoot(),
-    SocketIoModule.forRoot(config),
+    // SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     
