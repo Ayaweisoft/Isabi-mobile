@@ -43,13 +43,14 @@ main{
     font-size: 23px;
     color: #ffffff;
     text-align: left;
-    
+    z-index: 5;
   }
   .bottom-row{
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    z-index: 5;
     
     .bottom-row-desc{
       display: flex;
@@ -63,6 +64,14 @@ main{
       width: 50px;
       background-color: #aaaaaa;
       border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #3B9C48;
+
+      img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     .bottom-row-desc-names{

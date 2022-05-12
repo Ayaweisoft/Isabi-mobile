@@ -8,9 +8,8 @@
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <div class="logo" slot="end">
-          </div>
-        </div>
+          <profile-photo [className]="'profile-header'" ></profile-photo>
+        </div>   
       </div>
 
       <div class="question-section">
@@ -90,8 +89,7 @@
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
           </ion-buttons>
-          <div class="logo" slot="end">
-          </div>
+          <profile-photo [className]="'profile-header'" ></profile-photo>
         </div>
         <countdown-timer></countdown-timer>
         <clue-tips></clue-tips>

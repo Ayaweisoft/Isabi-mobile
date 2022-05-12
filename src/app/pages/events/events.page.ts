@@ -40,7 +40,7 @@ onlineUsers = 0;
               private logicService: LogicService,
               public SocketService: SocketService,
               public alertController: AlertController) {
-               }
+  }
 
   ngOnInit() { 
     this.getAllevent();
@@ -56,16 +56,11 @@ onlineUsers = 0;
     console.log('number of users online: ' + this.onlineUsers)
   }
 
-
-
- parseText(text){
-  let length =  55;
-  text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
-  return text;
-}
-  
-
-
+  parseText(text){
+    let length =  55;
+    text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
+    return text;
+  }
 
   getAllevent(){
     this.eventService.getAllEvent().subscribe(
@@ -77,9 +72,7 @@ onlineUsers = 0;
       },
       err => {
         this.loading = false;
-        this.userService.longToast(err.error.msg)
-        
-
+        this.userService.longToast(err.error.msg);
         console.log('error getting event', err);
       }
     );
@@ -87,18 +80,18 @@ onlineUsers = 0;
   // filterEvents(value, list = this.allEvent){
   //   let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
   //   this.displayedEvents = newEvents
-  //   console.log("ÿoooooo") 
+  //   console.log("ÿoooooo")
   // }
   getChildData(data){
     this.displayedEvents = data;
   }
+
   copyInputMessage(inputElement){
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
     this.logicService.presentToast('Text copied!' );
   }
-
 
   insideEvent(event){
     switch (event.type) {
@@ -114,44 +107,40 @@ onlineUsers = 0;
     
       default:
         break;
-    }
-    
-  
+    }  
   }
 
-
-async handleDelete(event) {
-  const alert = await this.alertController.create({
-    header: 'Confirm!',
-    message: `Delete <strong>${event.aboutEvent} </strong>!!!`,
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: () => {
-          console.log('Confirm Cancel: blah');
+  async handleDelete(event) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: `Delete <strong>${event.aboutEvent} </strong>!!!`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.loading = true;
+            this.eventService.deleteEvent(event._id).subscribe(
+              res => {
+                this.loading = false;
+                this.userService.generalToast(res['msg'], 2000);
+                this.getAllevent();
+              },
+              err => {
+                this.loading = false;
+                this.userService.generalAlert(err.error.msg);
+              }
+            );
+          }
         }
-      }, {
-        text: 'Okay',
-        handler: () => {
-          this.loading = true;
-          this.eventService.deleteEvent(event._id).subscribe(
-            res => {
-              this.loading = false;
-              this.userService.generalToast(res['msg'], 2000);
-              this.getAllevent();
-            },
-            err => {
-              this.loading = false;
-              this.userService.generalAlert(err.error.msg);
-            }
-          );
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}
+      ]
+    });
+    await alert.present();
+  }
 }

@@ -40,7 +40,7 @@ export class RegisterPage implements OnInit {
  async register(){
     this.loading = true; 
     console.log(this.model);
-    this.userService.registerUser( this.model).subscribe( 
+    this.userService.registerUser(this.model).subscribe( 
       response => {
         this.loading = false;
         let message = "Registraion successful!";

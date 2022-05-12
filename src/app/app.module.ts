@@ -36,7 +36,6 @@ import { SplashComponent } from './components/splash/splash.component';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ProfilePhotoComponent } from './components/profile-photo/profile-photo.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './shared/user.service';
@@ -80,7 +79,6 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     FailGameComponent, 
     ForgetpasswordComponent,
     InsideEventComponent,
-    ProfilePhotoComponent,
     InsideEventAddUserComponent, 
     VoteNowComponent, 
     TabsComponent, 
@@ -105,7 +103,6 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     ReactiveFormsModule,
     NgInterswitchModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     IonicModule.forRoot(),
     // SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),

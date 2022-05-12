@@ -104,7 +104,7 @@ export class LeaderboardPage implements OnInit {
     console.log('Begin async operation');
     await this.getLeaderBoard();
     this.refresherRef.complete();
-   
+  
   }
 
   getLeaderBoard() {
@@ -114,8 +114,8 @@ export class LeaderboardPage implements OnInit {
       this.firstPerson = this.leaderBoard[0];
       this.secondPerson = this.leaderBoard[1];
       this.thirdPerson = this.leaderBoard[2];
-      console.log('getting leaderboard')
+      console.log('getting leaderboard' + val)
       this.loading = false;
     });
-  }
+  }  
 }

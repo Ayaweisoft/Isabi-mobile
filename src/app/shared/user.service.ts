@@ -170,7 +170,15 @@ constructor(private http: HttpClient,
     }
   
     saveUserProfile(credentials){
-      return this.http.post(environment.apiBaseUrl + '/save-user-profile',credentials);
+      return this.http.post(environment.apiBaseUrl + '/save-user-profile', credentials);
+    }
+
+    getProfilePic(): Observable<any> {
+      return this.http.get(environment.apiBaseUrl + '/get-profile-pic');
+    }
+
+    updateProfilePic(credentials){
+      return this.http.post(environment.apiBaseUrl + '/update-profile-pic',credentials);
     }
 
     updateUserProfile(credentials){
@@ -178,7 +186,7 @@ constructor(private http: HttpClient,
     }
 
     getUserProfile(): Observable<any> {
-      return this.http.get(environment.apiBaseUrl + '/get-user-profile');
+      return this.http.get(environment.apiBaseUrl + `/get-user-profile`);
     }
   
     getRandomQuestionsForGame(){
@@ -223,6 +231,8 @@ constructor(private http: HttpClient,
       }
      
      }
+
+    
    
 
      getRole(){
@@ -253,8 +263,8 @@ constructor(private http: HttpClient,
      getUsername(){
       try {
         let payLoad = jwtDecode(this.getToken());
-      let role = payLoad['username'];
-      return role;
+      let username = payLoad['username'];
+      return username;
       } catch (error) {
         
       }
@@ -274,8 +284,11 @@ constructor(private http: HttpClient,
    
      setToken(token: string) {
       localStorage.setItem('token', token);
-   
      }
+     setUsername(username: string) {
+      localStorage.setItem('username', username);
+     }
+
      deleteToken() {
        window.localStorage.removeItem('token');
      }

@@ -1,5 +1,6 @@
 <ion-content>
     <div class="top-section">
+      <img [src]="image" alt="" class="top-section-cover-img">
       <div class="top-row">
         <div class="back-button" [routerLink]="[ '/tabs/settings' ]">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -10,8 +11,17 @@
         <span>Save</span>
       </div>
       <div class="profile-section"> 
-        <div class="profile-pic"></div>
-      </div>
+        <div class="profile-pic">
+          <div class="profile-pic-cta" *ngIf="!image" onclick="document.getElementById('single-image').click();">
+             no img
+          </div>
+          <input id="single-image" style="display: none" accept="image/*" #singleImage (change)="addImagesFirebase($event)"
+                    type="file" name="name" style="display: none" />
+          <div class="profile-pic-cta" *ngIf="image" onclick="document.getElementById('single-image').click();">
+            <img [src]="image" alt="">
+          </div> 
+        </div>
+      </div>  
     </div>
     <div class="main-section">
       <form class="form" id="form"  #profileForm ngForm="profileForm" name="form" 

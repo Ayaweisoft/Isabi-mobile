@@ -1,14 +1,17 @@
 <ion-content>
   <div class="top-section">
+    <img [src]="image" alt="" class="top-section-cover-img">
     <div class="top-row">
       <h2>Settings</h2>
     </div>
     <div class="bottom-row">
       <div class="bottom-row-desc">
-        <div class="bottom-row-desc-pic"></div>
+        <div class="bottom-row-desc-pic"> 
+          <img [src]="image" alt="">
+        </div>
         <div class="bottom-row-desc-names">
-          <div class="bottom-row-desc-nickname">Princecodes247</div>
-          <div class="bottom-row-desc-fullname">Gbalam Prince</div>
+          <div class="bottom-row-desc-nickname">{{username}}</div>
+          <div class="bottom-row-desc-fullname">{{fullname}}</div>
         </div>
       </div>
       <div class="bottom-row-icon" [routerLink]="[ '/tabs/profile' ]">

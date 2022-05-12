@@ -10,6 +10,7 @@ import { PlaydemoPage } from './playdemo.page';
 import { CountdownTimerComponent } from 'src/app/components/countdown-timer/countdown-timer.component';
 import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
 import { ScoreCounterComponent } from 'src/app/components/score-counter/score-counter.component';
+import { ProfilePhotoComponent } from 'src/app/components/profile-photo/profile-photo.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [PlaydemoPage, CountdownTimerComponent, ClueTipsComponent, ScoreCounterComponent, LoadingSpinnerComponent]
+  declarations: [PlaydemoPage, CountdownTimerComponent, ClueTipsComponent, ScoreCounterComponent, LoadingSpinnerComponent, ProfilePhotoComponent]
 })
 export class PlaydemoPageModule {}

@@ -11,6 +11,7 @@ import { CountdownTimerComponent } from '../../components/countdown-timer/countd
 import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 // import { HeaderComponent } from 'src/app/components/header/header.component';
+import {ProfilePhotoComponent} from '../../components/profile-photo/profile-photo.component'
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
     
   ],
   // declarations: [EventsPage, HeaderComponent, CountdownTimerComponent, ClueTipsComponent]
-  declarations: [EventsPage, CountdownTimerComponent, ClueTipsComponent, SearchbarComponent]
+  declarations: [EventsPage, CountdownTimerComponent, ClueTipsComponent, SearchbarComponent, ProfilePhotoComponent]
 })
 export class EventsPageModule {}
    
