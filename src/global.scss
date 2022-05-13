@@ -47,13 +47,20 @@ p{
 	font-family: 'Open Sans', sans-serif;
 }
 
+ion-content{
+	--background: #fafafa;
+}
 
 .main-content{
 	font-family: 'Open Sans', sans-serif;
-	background-color: #f2f2f2;
+	background-color: #fafafa;
 	height: fit-content;
 	min-height: 100%;
-}	
+}
+
+.inner-scroll{
+	background: #fafafa;
+}
 
 .header{
 	height: 55px;
