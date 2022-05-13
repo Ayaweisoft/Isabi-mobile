@@ -26,10 +26,12 @@ export class RegisterPage implements OnInit {
 
             model = {
               number: '',
+              fullname: '',
               password: '',
               email:'',
               username: '',
-              conf_password:''
+              conf_password:'',
+              referrer: ''
             };
 
   ngOnInit() {
@@ -39,13 +41,12 @@ export class RegisterPage implements OnInit {
   
  async register(){
     this.loading = true; 
-    console.log(this.model);
     this.userService.registerUser(this.model).subscribe( 
       response => {
         this.loading = false;
         let message = "Registraion successful!";
-        this.logicService.presentSucess('success','registration successful', 'continue');       
-        
+        this.logicService.presentSucess('success','registration successful', 'continue'); 
+        this.router.navigate(['/login']);
       },
       error => {
         this.loading = false;

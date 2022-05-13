@@ -11,6 +11,11 @@
                 <small class="text-danger ">phone number or email is required</small>
               </div> -->
             <div class="inputBox">
+              <span class="text">Fullname</span>
+              <input type="text" required="true" #fullname="ngModel" placeholder="fullname" name="fullname"
+                [(ngModel)]="model.fullname" type="text" ngControl="title">
+            </div>
+            <div class="inputBox">
               <span class="text">Username</span>
               <input type="text" required="true" #username="ngModel" placeholder="Username" name="username"
                 [(ngModel)]="model.username" type="text" ngControl="title">
@@ -36,6 +41,11 @@
               <span class="text">Confirm Password</span>
               <input type="password" required="true" #conf_password="ngModel" name="password"
                 [(ngModel)]="model.conf_password" ngControl="title" minlength="6">
+            </div>
+            <div class="inputBox">
+              <span class="text">referrer</span>
+              <input type="text" required="false" #referrer="ngModel" name="referrer"
+                [(ngModel)]="model.referrer" ngControl="title">
             </div>
             <input class="signin-btn" type="submit" value="Sign up" [disabled]="!signUpForm.valid && password.value == true">
           </div>
