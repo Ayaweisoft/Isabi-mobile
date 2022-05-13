@@ -73,11 +73,6 @@ export class PlaydemoPage implements OnInit {
 
   public allCategory = [
     {
-      name: "Art",
-      participant: "150",
-      logo: "../../assets/figma/akar-icons_search.svg",
-    },
-    {
       name: "Economics",
       participant: "150",
       logo: "../../assets/figma/akar-icons_search.svg",
