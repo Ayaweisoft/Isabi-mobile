@@ -7,7 +7,7 @@
             <path d="M20.9999 11H6.41394L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13H20.9999V11Z" fill="#F5FAF5"/>
           </svg>            
         </div>
-        <h2>Profile</h2>
+        <h2>Personal details</h2>
         <span>Save</span>
       </div>
       <div class="profile-section"> 
@@ -40,13 +40,13 @@
             <input #email="ngModel" name="email" position="floating"  [(ngModel)]="model.email"
             type="email" required  [pattern]="emailRegex" value="{{ myProfile?.email }}">
             <span class="text">Email</span>
-          </div>          
+          </div>
           <div class="inputBox">
             <input type="tel" #phone="ngModel" name="phone" id="phone" [(ngModel)]="model.phone" value="{{ myProfile?.phone }}">
             <span class="text">Phone</span>
           </div>
           <div class="inputBox">
-            <input type="date" name="date_of_birth" #dateOfBirth="ngModel" id="date_of_birth" [(ngModel)]="model.date_of_birth" value="{{ myProfile?.date_of_birth }}">
+            <input type="date" name="dateOfBirth" #dateOfBirth="ngModel" id="dateOfBirth" [(ngModel)]="model.dateOfBirth" value="{{ myProfile?.date_of_birth }}">
             <span class="text">Date Of Birth</span>
           </div>
         </div>

@@ -15,7 +15,7 @@ export class ProfilePage implements OnInit {
   myProfile: any;
   userRecordNotAvalible: boolean = false;
   image: any;
-  username: any = 'oracle247';
+  username: any;
   
   loading :boolean = true;
   emailRegex = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/'
@@ -38,7 +38,7 @@ export class ProfilePage implements OnInit {
     username: '',
     email: '',
     phone: '',
-    date_of_birth: '', 
+    dateOfBirth: '', 
   }
 
   setNationality = {
