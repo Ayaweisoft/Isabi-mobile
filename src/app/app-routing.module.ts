@@ -266,6 +266,11 @@ const routes: Routes = [
     },
 
     {
+      path: 'network',
+      loadChildren: () => import('./pages/network/network.module').then( m => m.NetworkPageModule)
+    },
+
+    {
       path: 'transaction',
       loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
       canActivate: [AuthguardGuard]
@@ -343,6 +348,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
   },
     { path: "*", redirectTo: 'tabs/events' },
+  
+
 
 ];
 

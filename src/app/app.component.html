@@ -103,7 +103,8 @@
             <span class="heading">Settings</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" >
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/setting']"
+                routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/ep_setting.svg" alt="">
                   </div>
@@ -125,6 +126,15 @@
                     <img src="../../assets/figma/ic_outline-account-balance.svg" alt="">
                   </div>
                   <span class="name">Account Info</span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/network']"
+                routerLinkActive="router-link-active">
+                  <div class="logo">
+                    <img src="../../assets/figma/ic_outline-account-balance.svg" alt="">
+                  </div>
+                  <span class="name">Network</span>
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
@@ -162,13 +172,25 @@
               </ion-menu-toggle>
             </div>
           </div>
-          <div class="section account-section">
+          <div class="section logout-section">
             <span class="heading">Logout</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
                 <div class="Demo" (click)="userService.logout()">
                   <div class="logo"></div>
                   <span class="name">Logout</span>
+                </div>
+              </ion-menu-toggle>
+            </div>
+          </div>
+          <div class="section admin-section">
+            <span class="heading">Admin</span>
+            <div class="heading-section">
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" *ngFor="let label of labels" [routerDirection]="'root'" [routerLink]="label.url"
+                routerLinkActive="router-link-active">
+                  <div class="logo"></div>
+                  <span class="name">{{ label.title }}</span>
                 </div>
               </ion-menu-toggle>
             </div>

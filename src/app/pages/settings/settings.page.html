@@ -1,6 +1,11 @@
 <ion-content>
   <div class="top-section">
     <img [src]="image" alt="" class="top-section-cover-img">
+    <div class="header">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    </div>
     <div class="top-row">
       <h2>Settings</h2>
     </div>
@@ -24,21 +29,18 @@
     </div>
   </div>
   <div class="main-section">
-    <div class="setting-card" *ngFor="let item of settingRoutes" [routerLink]="[ item.url ]">
-      <div class="setting-card-route-name">{{ item.name }}</div>
-      <div class="setting-card-foward-icon">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6.61598 2.04469C6.38164 2.2791 6.25 2.59699 6.25 2.92844C6.25 3.2599 6.38164 3.57778 6.61598 3.81219L12.8035 9.99969L6.61598 16.1872C6.38829 16.4229 6.26229 16.7387 6.26514 17.0664C6.26799 17.3942 6.39945 17.7077 6.63121 17.9395C6.86297 18.1712 7.17649 18.3027 7.50423 18.3055C7.83198 18.3084 8.14773 18.1824 8.38348 17.9547L15.4547 10.8834C15.6891 10.649 15.8207 10.3311 15.8207 9.99969C15.8207 9.66824 15.6891 9.35035 15.4547 9.11594L8.38348 2.04469C8.14907 1.81036 7.83119 1.67871 7.49973 1.67871C7.16828 1.67871 6.85039 1.81036 6.61598 2.04469V2.04469Z" fill="black"/>
-        </svg>          
+    <div class="setting-cards">
+      <div class="setting-card" *ngFor="let item of settingRoutes" [routerLink]="[ item.url ]">
+        <div class="setting-card-route-name">{{ item.name }}</div>
+        <div class="setting-card-foward-icon">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.61598 2.04469C6.38164 2.2791 6.25 2.59699 6.25 2.92844C6.25 3.2599 6.38164 3.57778 6.61598 3.81219L12.8035 9.99969L6.61598 16.1872C6.38829 16.4229 6.26229 16.7387 6.26514 17.0664C6.26799 17.3942 6.39945 17.7077 6.63121 17.9395C6.86297 18.1712 7.17649 18.3027 7.50423 18.3055C7.83198 18.3084 8.14773 18.1824 8.38348 17.9547L15.4547 10.8834C15.6891 10.649 15.8207 10.3311 15.8207 9.99969C15.8207 9.66824 15.6891 9.35035 15.4547 9.11594L8.38348 2.04469C8.14907 1.81036 7.83119 1.67871 7.49973 1.67871C7.16828 1.67871 6.85039 1.81036 6.61598 2.04469V2.04469Z" fill="black"/>
+          </svg>          
+        </div>
       </div>
     </div>
-    <div class="setting-card" (click)="userService.logout()">
+    <div class="log-out" (click)="userService.logout()">
       <div class="setting-card-route-name">Log Out</div>
-      <div class="setting-card-foward-icon">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M6.61598 2.04469C6.38164 2.2791 6.25 2.59699 6.25 2.92844C6.25 3.2599 6.38164 3.57778 6.61598 3.81219L12.8035 9.99969L6.61598 16.1872C6.38829 16.4229 6.26229 16.7387 6.26514 17.0664C6.26799 17.3942 6.39945 17.7077 6.63121 17.9395C6.86297 18.1712 7.17649 18.3027 7.50423 18.3055C7.83198 18.3084 8.14773 18.1824 8.38348 17.9547L15.4547 10.8834C15.6891 10.649 15.8207 10.3311 15.8207 9.99969C15.8207 9.66824 15.6891 9.35035 15.4547 9.11594L8.38348 2.04469C8.14907 1.81036 7.83119 1.67871 7.49973 1.67871C7.16828 1.67871 6.85039 1.81036 6.61598 2.04469V2.04469Z" fill="black"/>
-        </svg>          
-      </div>
     </div>
   </div>
 
