@@ -63,6 +63,7 @@ import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
+import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
 
 @NgModule({
@@ -93,7 +94,8 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     WebTicketComponent,
     SafeResourceUrlPipe, 
     PrivacyPolicyPage,
-    SplashComponent
+    SplashComponent,
+    MinutesToSecondsPipe
   ],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
