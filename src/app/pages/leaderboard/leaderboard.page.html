@@ -29,8 +29,8 @@
             <div class="badge">2</div>
           </div>
           <div class="name">
-            <div class="person-name">{{leaders[1].name}}</div>
-            <div class="record">{{leaders[1].score}} secs</div>
+            <div class="person-name">{{leaderBoard[1]?.user}}</div>
+            <div class="record">{{leaderBoard[1]?.seconds}} secs</div>
           </div>   
         </div>
         <div class="first-position position">
@@ -53,8 +53,8 @@
             <div class="badge">1</div>
           </div>
           <div class="name">
-            <div class="person-name">{{leaders[0].name}}</div>
-            <div class="record">{{leaders[0].score}} secs</div>
+            <div class="person-name">{{leaderBoard[0]?.user}}</div>
+            <div class="record">{{leaderBoard[0]?.seconds}} secs</div>
           </div>
         </div>
         <div class="third-position position">
@@ -64,20 +64,20 @@
             <div class="badge">3</div>
           </div>
           <div class="name">
-            <div class="person-name">{{leaders[2].name}}</div>
-            <div class="record">{{leaders[2].score}} secs</div>
+            <div class="person-name">{{leaderBoard[2]?.user}}</div>
+            <div class="record">{{leaderBoard[2]?.seconds}} secs</div>
           </div>
         </div>
       </div>
       <div class="the-rest">
-        <div class="leader-container" *ngFor="let leader of leaders.slice(3); let i = index">
+        <div class="leader-container" *ngFor="let leader of leaderBoard.slice(3); let i = index">
           <div class="start">
             <span class="number">{{i+4}}</span>
             <div class="pic"></div>
-            <div class="name">{{ leader.name }}</div>
+            <div class="name">{{ leader.user }}</div>
           </div>
           <div class="end">
-            <div class="score">{{ leader.score }} secs</div>
+            <div class="score">{{ leader.seconds }} secs</div>
           </div>
         </div>
       </div>
