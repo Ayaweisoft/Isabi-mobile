@@ -50,6 +50,7 @@ export class LoginPage implements OnInit {
     this.loading = true;
     this.userService.login(this.model).subscribe(response => {
       this.userService.setToken(response['token']);
+      // this.userService.setUsername(response.doc[]);
       this.userService.loadBalance();
 
       this.loading = false;

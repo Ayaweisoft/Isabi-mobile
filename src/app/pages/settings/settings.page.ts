@@ -13,6 +13,9 @@ import { NgForm } from '@angular/forms';
 export class SettingsPage implements OnInit {
 
   myProfile: any;
+  image: any;
+  username: String;
+  fullname: String;
   userRecordNotAvalible: boolean = false;
   
   loading :boolean = true;
@@ -21,17 +24,12 @@ export class SettingsPage implements OnInit {
                 public menu: MenuController,
                 public toastController: ToastController,
                 public accountService: AccountService) {
+                  
                   this.getMyProfile();
                  }
 
-                 
-  model = {
-    fullname :'',
-    nationality: '',
-    accountNumber: '', 
-    accountName: '',
-    bank : '',
-    email : ''
+  ionViewWillEnter(){
+    this.getMyProfile();
   }
 
   setNationality = {
@@ -46,7 +44,7 @@ export class SettingsPage implements OnInit {
     },
     {
       name: "Account Details",
-      url: '/tabs/settings'
+      url: '/tabs/account-details'
     },
     {
       name: "Dark Mode",
@@ -66,6 +64,7 @@ export class SettingsPage implements OnInit {
 
   
   ngOnInit() {
+    this.getMyProfile();
   }
   async presentFailNetwork() {
     const toast = await this.toastController.create({
@@ -74,42 +73,24 @@ export class SettingsPage implements OnInit {
     toast.present();
   }
 
-
-  createProfile(form : NgForm){
+  getMyProfile() {
     this.loading = true;
-      console.log(this.model);
-     
-      this.userService.saveUserProfile(this.model).subscribe(res => {
-        console.log(res);
+    this.userService.getUserProfile().subscribe(
+      res => {      
+        this.myProfile = res;
+        this.image = res.image_url;
+        this.fullname = res.fullname;
+        this.username = res.username;
+        console.log(this.myProfile);
+        this.userRecordNotAvalible = false;
         this.loading = false;
-        this.getMyProfile();
       },
       err => {
-        this.loading =false;
-        console.log(err);
-      });
+        this.loading = false;
+        this.userRecordNotAvalible = true;
+      }
+    );
   }
-
-  selectChange( $event) {
-    console.log($event);
-    this.model.nationality = $event;
-    // this.setNationality.selectedOption = $event;
-      }
-
-      getMyProfile() {
-        this.userService.getUserProfile().subscribe(
-          res => {
-            this.loading = false;
-            this.myProfile = res;
-            console.log(this.myProfile);
-            this.userRecordNotAvalible = false;
-          },
-          err => {
-            this.loading = false;
-            this.userRecordNotAvalible = true;
-          }
-        );
-      }
 
 
 }

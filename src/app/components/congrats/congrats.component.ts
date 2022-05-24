@@ -25,7 +25,7 @@ export class CongratsComponent implements OnInit {
   
     dismissModal(){
       this.modalController.dismiss();
-      this.router.navigate(['/tabs/gamesection']);
+      this.router.navigate(['/tabs/events']);
       
     }
     playAgain(){

@@ -7,6 +7,7 @@ import { IonSlides, MenuController, AlertController, ModalController } from '@io
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AccountService } from '../../shared/account.service';
+import { LogicService } from 'src/app/services/logic.service';
 import { BehavourService } from '../../services/behavour.service';
 // import { NativeAudio } from '@ionic-native/native-audio';
 
@@ -37,6 +38,10 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     wrongAns: any = 0;
     disableClick : boolean = false;
     low_balance = false;
+    option1 = "none";
+    option2 = "none";
+    option3 = "none";
+    option4 = "none";
     btnColor1 ="success";
     btnColor2 ="success";
     btnColor3 ="success";
@@ -49,6 +54,9 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     private loadBalanceSub;
     private deductSub;
 
+    gameLiveStatusString: string;
+    gameLiveStatus: boolean;
+
     GameTimeMinute: any = 0;
   GameTimeSeconds: any = 0;
   currentGameAmount: any;
@@ -59,56 +67,67 @@ export class PlaysectionPage implements OnInit, OnDestroy {
               public accountService: AccountService, private alertController : AlertController,
               private modalController : ModalController,
               private behaviorService: BehavourService,
+              private logicService: LogicService,
               // private nativeAudio: NativeAudio,
               private router: Router) {
     // setTimeout(()=> {
     //   this.info.nativeElement.classList.remove('infinite');
     // }, 12000);
+    this.gameLiveStatusString = gameService.getGameLiveStatus();
+    console.log('Game Status' + this.gameLiveStatusString)
+    if(this.gameLiveStatusString === 'true'){
+      this.gameLiveStatus = true;
+    } else {
+      this.gameLiveStatus = false;
+    }
   }
 
 
   public allCategory = [
     {
-      name: "Art",
-      participant: '150'
-    },
-    {
       name: "Economics",
-      participant: '150'
+      participant: "150",
+      logo: "../../assets/figma/akar-icons_search.svg",
     },
     {
       name: "History",
-      participant: '150'
+      participant: "150",
+      logo: "../../assets/figma/fluent_history-20-filled.svg",
     },
     {
       name: "Movie",
-      participant: '150'
+      participant: "150",
+      logo: "../../assets/figma/bx_movie-play.svg",
     },
     {
       name: "Politics",
-      participant: '150'
+      participant: "150",
+      logo: "../../assets/figma/ic_outline-how-to-vote.svg",
     },
     {
       name: "Science",
-      participant: '150'
+      participant: "150",
+      logo: "../../assets/figma/eos-icons_science-outlined.svg",
     },
     {
       name: "Sport",
-      participant: '150'
+      participant: "150",
+      logo: "../../assets/figma/fluent_sport-basketball-24-regular.svg",
     },
     {
       name: "Tourism",
-      participant: '150'
-    }
-  ]
+      participant: "150",
+      logo: "../../assets/figma/icon-park-outline_tour-bus.svg",
+    },
+  ];
 
   model = {
     filterOptions : [
     ]
   } 
 
-
   ngOnInit() {
+    console.log('init');
     this.behaviorService.getGameAmount().subscribe(amount => {
       console.log('see AMount', amount)
       this.currentGameAmount =  amount;
@@ -133,15 +152,27 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     });
   }
 
-
-
   ionViewWillEnter() {
     this.gameService.getAdminDate();
     this.getQuestionForGame();
     console.log('will enter');
   }
 
-  
+  ionViewWillLeave(){
+    this.QuestionSub = '';
+    this.playCategory = '';
+    this.loadBalanceSub = '';
+    this.deductSub = '';
+    this.timeSeconds = 0;
+    this.timeMinute = 0;
+    this.startGame = false;
+    this.lastQuestion =  0;
+    this.runningQuestion = 0;
+
+    clearInterval(this.timerTicker);
+    console.log('levdestroyed');
+    this.loadingGame = true;
+  }
   ngOnDestroy() {
     // this.gameQuestions.unsubscribe();
     this.QuestionSub = '';
@@ -150,8 +181,11 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.deductSub = '';
     this.timeSeconds = 0;
     this.timeMinute = 0;
+    this.currentQuestion  = "";
+    this.startGame = false;
+    this.lastQuestion =  0;
     clearInterval(this.timerTicker);
-    
+    console.log('destroyed');
   }
 
   getColor1(){
@@ -174,6 +208,10 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.gameQuestions = res['questions'];
         this.lastQuestion =  this.gameQuestions.length - 1;
         this.loadingGame = false;
+        this.lastQuestion = 0;
+        this.runningQuestion = 0;
+        this.lastQuestion = this.gameQuestions.length - 1;
+        this.loadingGame = false;
       },
       err => {
         console.log(err);
@@ -183,24 +221,26 @@ export class PlaysectionPage implements OnInit, OnDestroy {
 
   selectChange( $event) {
     this.playByCategory($event);
-        }
+  }
 
-        playByCategory(category){
-          this.loadingGame = true;
-          this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
-            res => {
-              this.loadingGame = false;
-              this.startGame = true;
-              this.gameQuestions = res['questions'];
-              console.log(this.gameQuestions);
-              this.lastQuestion =  this.gameQuestions.length - 1;
-              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
-              this.startTimer();
-
-            }
-          );
-      
+  playByCategory(category){
+    if(this.gameLiveStatus){
+      this.loadingGame = true;
+      this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
+        res => {
+          this.loadingGame = false;
+          this.startGame = true;
+          this.gameQuestions = res['questions'];
+          console.log(this.gameQuestions);
+          this.lastQuestion =  this.gameQuestions.length - 1;
+          this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+          this.startQuestion();
         }
+      );
+    } else {
+      this.logicService.presentAlert('Game Alert','Game is not live yet');
+    }     
+  }
 
 
   gameisOver(){ 
@@ -242,23 +282,39 @@ export class PlaysectionPage implements OnInit, OnDestroy {
           clearInterval(this.timerTicker);
             }
       );
-    }
-
-  checkAnswer(selection, correctAnswer) {
-      this.disableClick = true;
-      if (selection == correctAnswer){
-        // this.correct.nativeElement.classList.add('heartBeat');
-        this.correctAns = this.correctAns + 1;
-          } else {
-        this.wrongAns = this.wrongAns + 1;
-        // this.wrong.nativeElement.classList.add('wobble');
-        }
-        // tslint:disable-next-line: align
-        setTimeout(() => {
-          this.nextQuestion();
-        }, 1000);
   }
 
+  checkAnswer(selection, correctAnswer, option) {
+    this.disableClick = true;
+    
+    if (selection == correctAnswer) {
+      this[option] = 'correct'
+      this.correctAns = this.correctAns + 1;
+    } else {
+      this.wrongAns = this.wrongAns + 1;
+      this[option] = 'wrong'
+      const options = [
+        this.currentQuestion.option1,
+        this.currentQuestion.option2,
+        this.currentQuestion.option3,
+        this.currentQuestion.option4,
+      ]
+      let correctOption = options.findIndex(el=> {
+        return el.includes(correctAnswer)
+      }) + 1
+      console.log(correctOption)
+      this['option' + correctOption] = 'correct'
+
+    }
+    // tslint:disable-next-line: align
+    setTimeout(() => {
+      this.option1 = 'none'
+      this.option2 = 'none'
+      this.option3 = 'none'
+      this.option4 = 'none'
+      this.nextQuestion();
+    }, 1000);
+  }
 
   startQuestion() {
     this.loadingGame = true;
@@ -292,17 +348,13 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.loadingGame = false;
       }
     );
-
   }
 
-
- 
   renderQuestion() {
-  this.startGame = true;
-  this.disableClick = false;
-  this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+    this.startGame = true;
+    this.disableClick = false;
+    this.currentQuestion  = this.gameQuestions[this.runningQuestion];
   }
-
 
   nextQuestion(){
     this.btnColor1 = 'success';
@@ -321,7 +373,6 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     }
   }
   
-
   renderProgress() {
     for (let qIndex = 0; qIndex <= this.lastQuestion; qIndex++ ) {
       this.progress = qIndex;
@@ -386,42 +437,40 @@ export class PlaysectionPage implements OnInit, OnDestroy {
  }
 
 
- async presentFailedModal(minutes, seconds, correctQuestion) {
-   console.log('QSTTT',correctQuestion);
-   const modal = await this.modalController.create({
-   component: FailGameComponent,
-   componentProps: {minutes, seconds, correctQuestion }
-   });
+  async presentFailedModal(minutes, seconds, correctQuestion) {
+    console.log('QSTTT',correctQuestion);
+    const modal = await this.modalController.create({
+    component: FailGameComponent,
+    componentProps: {minutes, seconds, correctQuestion }
+    });
+
+    await modal.present();
+    const data = await modal.onDidDismiss();
+
+  }
  
-   await modal.present();
-   const data = await modal.onDidDismiss();
  
- }
- 
- 
-async presentResult(min, secs, correct) {
-  const alert = await this.alertController.create({
-    header: ' GAME RESULT',
-    message : `<h1>Score  ${correct}/15</h1>  <br>
-              <h4 class="text-success">Elapsed ${min} min , ${secs} secs</h4>`,
- 
-    buttons: [ {
-        text: 'OK',
-        cssClass : 'success',
-        handler: (val) => {
-         this.router.navigate(['/tabs/playsection']);
+  async presentResult(min, secs, correct) {
+    const alert = await this.alertController.create({
+      header: ' GAME RESULT',
+      message : `<h1>Score  ${correct}/15</h1>  <br>
+                <h4 class="text-success">Elapsed ${min} min , ${secs} secs</h4>`,
+  
+      buttons: [ {
+          text: 'OK',
+          cssClass : 'success',
+          handler: (val) => {
+          this.router.navigate(['/tabs/playsection']);
+          }
         }
-      }
-    ]
-  });
+      ]
+    });
 
-  await alert.present();
+    await alert.present();
 
-  setTimeout(()=> {
-    this.router.navigate(['/tabs/playsection']);
-    alert.dismiss()
-  },3000);
-}
-
-
+    setTimeout(()=> {
+      this.router.navigate(['/tabs/playsection']);
+      alert.dismiss()
+    },3000);
+  }
 }

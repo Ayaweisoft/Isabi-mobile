@@ -11,45 +11,73 @@
     <div class="main-section">
       <div class="lead">
         <div class="second-position position">
-          <div class="pic-container">        
+          <div class="pic-container">  
+            <svg width="0" height="0" viewBox="0 0 70 78" fill="none">
+              <defs>
+                  <clipPath id="hexaFrame2">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.66406 10.8306C2.20117 12.4966 0 15.9996 0 19.8414V46.1744C0 49.8765 2.04492 53.275 5.31445 55.0093L25.7539 65.8492C28.7793 67.4537 32.4141 67.399 35.3887 65.7037L54.0605 55.0679C57.1836 53.2886 59.1113 49.9722 59.1113 46.3785V19.6441C59.1113 15.9048 57.0254 12.4781 53.7031 10.7603L35.043 1.11676C32.252 -0.325627 28.9453 -0.373479 26.1152 0.988826L5.66406 10.8306Z" fill="none"/>
+            </clipPath>
+            <clipPath id="hexaImgFrame2">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.66384 9.61386C2.20152 11.28 0 14.7825 0 18.6248V41.4905C0 45.1919 2.04455 48.5905 5.31452 50.3248L23.006 59.7078C26.0308 61.3121 29.6662 61.2573 32.6413 59.5625L48.7553 50.3831C51.8776 48.6044 53.8055 45.2874 53.8055 41.694V18.4275C53.8055 14.688 51.7191 11.261 48.3971 9.54395L32.2956 1.22189C29.5049 -0.220489 26.1987 -0.267669 23.368 1.09449L5.66384 9.61386Z" fill="none"/>
+            </clipPath>
+            </defs>
+            </svg>
+                    
             <div class="pic second-position-picture">
+              <img src="../../../assets/img/profile_icon.png" alt="">
             </div>
+            <div class="badge">2</div>
           </div>
           <div class="name">
-            <div class="person-name">{{leaders[1].name}}</div>
-            <div class="record">{{leaders[1].score}} secs</div>
+            <div class="person-name">{{leaderBoard[1]?.user}}</div>
+            <div class="record">{{leaderBoard[1]?.seconds}} secs</div>
           </div>   
         </div>
         <div class="first-position position">
           <div class="pic-container">
+            <svg width="0" height="0" viewBox="0 0 70 78" fill="none">
+              <defs>
+                  <clipPath id="hexaFrame1">
+                      <path d="M0 22.2977C0 18.4136 2.24902 14.8809 5.76812 13.2373L31.8624 1.04931C34.6336 -0.245009 37.8446 -0.200016 40.5784 1.17144L64.4841 13.1642C67.8654 14.8605 70 18.3196 70 22.1025V54.4413C70 58.0802 68.0233 61.4318 64.8388 63.1926L40.9206 76.4175C38.0017 78.0314 34.4703 78.0838 31.5048 76.5572L5.42297 63.1306C2.09292 61.4163 0 57.9849 0 54.2395V22.2977Z" fill="none"/>
+                  </clipPath>
+                  <clipPath id="hexaImgFrame1">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.76241 10.4619C2.24641 12.1068 0 15.6379 0 19.5197V43.7655C0 47.5084 2.09027 50.938 5.41703 52.6534L25.1598 62.8335C28.1285 64.3643 31.6656 64.3118 34.5876 62.6935L52.6043 52.7153C55.7854 50.9535 57.7594 47.6037 57.7594 43.9673V19.3244C57.7594 15.5438 55.6274 12.0865 52.2494 10.389L34.2452 1.34201C31.5083 -0.0332732 28.2921 -0.0783873 25.5177 1.21959L5.76241 10.4619Z" fill="none"/>
+                  </clipPath>
+              </defs>
+              </svg>
+              
+                
             <div class="pic first-position-picture">
+              <img src="../../../assets/img/profile_icon.png" alt="">
             </div>
+            <div class="badge">1</div>
           </div>
           <div class="name">
-            <div class="person-name">{{leaders[0].name}}</div>
-            <div class="record">{{leaders[0].score}} secs</div>
+            <div class="person-name">{{leaderBoard[0]?.user}}</div>
+            <div class="record">{{leaderBoard[0]?.seconds}} secs</div>
           </div>
         </div>
         <div class="third-position position">
           <div class="pic-container">
             <div class="pic third-position-picture">
             </div>
+            <div class="badge">3</div>
           </div>
           <div class="name">
-            <div class="person-name">{{leaders[2].name}}</div>
-            <div class="record">{{leaders[2].score}} secs</div>
+            <div class="person-name">{{leaderBoard[2]?.user}}</div>
+            <div class="record">{{leaderBoard[2]?.seconds}} secs</div>
           </div>
         </div>
       </div>
       <div class="the-rest">
-        <div class="leader-container" *ngFor="let leader of leaders.slice(3); let i = index">
+        <div class="leader-container" *ngFor="let leader of leaderBoard.slice(3); let i = index">
           <div class="start">
             <span class="number">{{i+4}}</span>
             <div class="pic"></div>
-            <div class="name">{{ leader.name }}</div>
+            <div class="name">{{ leader.user }}</div>
           </div>
           <div class="end">
-            <div class="score">{{ leader.score }} secs</div>
+            <div class="score">{{ leader.seconds }} secs</div>
           </div>
         </div>
       </div>
@@ -57,7 +85,5 @@
   </div>
 
   
-        <div *ngIf="loading">
-          <div class="toast-container "></div>
-        </div>
+  <loading-spinner *ngIf="loading"></loading-spinner>
 </ion-content>

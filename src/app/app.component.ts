@@ -22,7 +22,10 @@ export class AppComponent {
   showSplash = true;
   @ViewChild('nav', {static: false}) nav: NavController;
   balance : any;
+  image: any;
+  username: String;
   authenticate = false;
+  loading: boolean = true;
   public appPages = [
     {
       title: 'PLAY DEMO',
@@ -119,6 +122,17 @@ export class AppComponent {
 
   }
 
+  ngOnInit(){
+    this.getProfilePic();
+    this.username = this.userService.getUsername();
+  }
+  ionViewWillEnter(){
+    this.getProfilePic();
+    this.username = this.userService.getUsername();
+  }
+
+
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -130,7 +144,9 @@ export class AppComponent {
         //   let msg = res.data ? res.data.mydata : '';
         //   this.showAlert(res.title, res.text);
         // });
-    
+      this.getProfilePic();
+      this.username = this.userService.getUsername();
+      
       
       this.statusBar.show();
       // this.splashScreen.hide();
@@ -154,6 +170,19 @@ export class AppComponent {
       message : msg
     });
     await alert.present();
+  }
+
+  getProfilePic() {
+    this.userService.getProfilePic().subscribe(
+      res => {
+        this.loading = false;
+        this.image = res.image_url;
+        console.log(this.image);
+      },
+      err => {
+        this.loading = false;
+      }
+    )
   }
 
 }

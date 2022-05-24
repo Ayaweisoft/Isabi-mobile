@@ -1,0 +1,31 @@
+
+.score_counter {
+    width: 100%;
+ }
+ .score_counter__points {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 3em;
+    margin-top: -5.5em;
+    margin-bottom: 1.5em;
+
+ }
+ .score_counter__wrong__value {
+
+ }
+ .score_counter__right__value {
+
+ }
+ .score_counter__level {
+    background: #000;
+    height: 4px;
+    background: red;
+    width: 100%;
+ }
+ .score_counter__level__value {
+    height: 100%;
+    width: 50%;
+    transition: width 500ms;
+    background: green;
+ }

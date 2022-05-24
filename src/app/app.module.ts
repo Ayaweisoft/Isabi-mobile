@@ -21,15 +21,21 @@ import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/cor
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
-import { SplashComponent } from './components/splash/splash.component';
+// import {MatIconModule} from '@angular/material/icon';
 
+import { SplashComponent } from './components/splash/splash.component';
+// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { Socket } from 'ngx-socket-io';
+// const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
+// const config: SocketIoConfig = { 
+//   url: 'http://localhost:8000',
+//   options: {} };
 
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { UserService } from './shared/user.service';
@@ -57,22 +63,40 @@ import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
+import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
 
 @NgModule({
-  declarations: [AppComponent, GamePipe, AccountComponent,HeaderComponent,
-    AdminnavigationComponent, AdminEventComponent, ForgetpasswordComponent,InsideEventComponent,
-    InsideEventAddUserComponent, VoteNowComponent, TabsComponent, GamesectionComponent, NotLiveComponent,
+  declarations: [
+    AccountComponent,
+    AdminEventComponent, 
+    AdminnavigationComponent, 
+    AppComponent, 
+    GamePipe, 
+    HeaderComponent,
+    BuyTicketComponent,
+    CongratsComponent, 
+    EditEventComponent,
+    FailGameComponent, 
+    ForgetpasswordComponent,
+    InsideEventComponent,
+    InsideEventAddUserComponent, 
+    VoteNowComponent, 
+    TabsComponent, 
+    GamesectionComponent, 
+    NotLiveComponent,
     WebVotingComponent,
     ImageCustomSpinnerComponent,
     InsideTicketingComponent,
     InsideTicketAddTicketComponent,
     ManageEventComponent,
-    BuyTicketComponent,
     TicketItemComponent,
-    EditEventComponent,
     WebTicketComponent,
-     SafeResourceUrlPipe, CongratsComponent, FailGameComponent, PrivacyPolicyPage,SplashComponent],
+    SafeResourceUrlPipe, 
+    PrivacyPolicyPage,
+    SplashComponent,
+    MinutesToSecondsPipe
+  ],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
   imports: [
@@ -81,9 +105,9 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
     ReactiveFormsModule,
     NgInterswitchModule,
     HttpClientModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
     IonicModule.forRoot(),
-     AngularFireModule.initializeApp(environment.firebaseConfig),
+    // SocketIoModule.forRoot(config),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     
   ],

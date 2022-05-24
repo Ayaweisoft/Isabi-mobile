@@ -19,6 +19,7 @@ export class InsideEventComponent implements OnInit {
 eventId;
 loading = true;
 contestant = [];
+displayedContestant = [];
 contestantData = [];
 costPerVote = null;
 personalLink = environment.webVotingUrl;
@@ -54,8 +55,6 @@ personalLink = environment.webVotingUrl;
   initializeItems(){
     this.contestant = this.contestantData;
      }
- 
-
 
      copyInputMessage(inputElement){
       inputElement.select();
@@ -64,6 +63,17 @@ personalLink = environment.webVotingUrl;
       this.logicService.presentToast('text  coppied' );
     }
 
+
+
+    parseText(text){
+      let length =  15;
+      text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
+      return text;
+    }
+
+    // getChildData(data){
+    //   this.displayedContestant = data;
+    // }
   
   getItems() {
     // Reset items back to all of the items

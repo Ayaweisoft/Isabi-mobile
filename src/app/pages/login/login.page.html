@@ -22,7 +22,7 @@
                 minlength="11">
               </div>
               <div class="inputBox">
-                <span class="text">Username</span>
+                <span class="text">Password</span>
                 <input type="password" name="password" id="password" #password="ngModel" name="password" minlength="6"
                   [(ngModel)]="model.password" clearInput>
                 <a class="text forgot-password" [routerLink]="['/forgetpassword']">Forgot password?
@@ -184,18 +184,6 @@
   </div> -->
 
     <!-- loader -->
-    <div *ngIf="loading" class=" ">
-      <div class="toast-container ">
-        <div class="lds-roller">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
+    
+      <loading-spinner *ngIf="loading"></loading-spinner>
 </ion-content>

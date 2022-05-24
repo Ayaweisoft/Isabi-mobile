@@ -1,42 +1,52 @@
 <ion-content>
     <div class="top-section">
+      <img [src]="image" alt="" class="top-section-cover-img">
       <div class="top-row">
         <div class="back-button" [routerLink]="[ '/tabs/settings' ]">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M20.9999 11H6.41394L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13H20.9999V11Z" fill="#F5FAF5"/>
           </svg>            
         </div>
-        <h2>Profile</h2>
+        <h2>Personal details</h2>
         <span>Save</span>
       </div>
       <div class="profile-section"> 
-        <div class="profile-pic"></div>
-      </div>
+        <div class="profile-pic">
+          <div class="profile-pic-cta" *ngIf="!image" onclick="document.getElementById('single-image').click();">
+             no img
+          </div>
+          <input id="single-image" style="display: none" accept="image/*" #singleImage (change)="addImagesFirebase($event)"
+                    type="file" name="name" style="display: none" />
+          <div class="profile-pic-cta" *ngIf="image" onclick="document.getElementById('single-image').click();">
+            <img [src]="image" alt="">
+          </div> 
+        </div>
+      </div>  
     </div>
     <div class="main-section">
-      <form class="form" id="form"  #profileForm ngform="profileForm" name="form" 
+      <form class="form" id="form"  #profileForm ngForm="profileForm" name="form" 
       (submit)="createProfile(profileForm)">
         <div class="inputs">
 
           <div class="inputBox">
-            <input type="text" #fullname name="fullname" position="floating" id="fullName" [(ngModel)]="model.fullname" value="{{ myProfile?.email }}">
+            <input type="text" #fullname="ngModel" name="fullname" position="floating" id="fullname" [(ngModel)]="model.fullname" value="{{ myProfile?.fullname }}">
             <span class="text">Full Name</span>
           </div>
           <div class="inputBox">
-            <input type="text" name="username" id="username"> 
+            <input type="text" #username="ngModel" name="username" id="username" [(ngModel)]="model.username" value="{{ myProfile?.username }}"> 
             <span class="text">Username</span>
           </div>
           <div class="inputBox">
-            <input #email name="email" position="floating"  [(ngModel)]="model.email"
+            <input #email="ngModel" name="email" position="floating"  [(ngModel)]="model.email"
             type="email" required  [pattern]="emailRegex" value="{{ myProfile?.email }}">
             <span class="text">Email</span>
-          </div>          
+          </div>
           <div class="inputBox">
-            <input type="tel" name="phone" id="phone">
+            <input type="tel" #phone="ngModel" name="phone" id="phone" [(ngModel)]="model.phone" value="{{ myProfile?.phone }}">
             <span class="text">Phone</span>
           </div>
           <div class="inputBox">
-            <input type="date" name="dateOfBirth">
+            <input type="date" name="dateOfBirth" #dateOfBirth="ngModel" id="dateOfBirth" [(ngModel)]="model.dateOfBirth" value="{{ myProfile?.date_of_birth }}">
             <span class="text">Date Of Birth</span>
           </div>
         </div>

@@ -77,7 +77,7 @@ export class GameServiceService  {
    this.timeSeconds = s < 10 ? '0' + s.toString() : s;
 
    if (t < 0) {
-    console.log('GAME IS LIVE....');
+    // console.log('GAME IS LIVE....');
     localStorage.setItem( 'GAMELIVE', 'true');
     clearInterval(this.gameTime);
     this.timeDays = '00';
@@ -86,22 +86,23 @@ export class GameServiceService  {
     this.timeSeconds = '00';
   
          } else {
-           console.log('GAME NOT LIVE....');
+          //  console.log('GAME NOT LIVE....');
            localStorage.setItem( 'GAMELIVE', 'false');
-
          }
-   console.log('fake pass');
+  //  console.log('fake pass');
   
    }, 1000);
      }
+  
+  getGameLiveStatus(){
+    return localStorage.getItem('GAMELIVE');
+  }
 
   getGameTip(){
     this.http.get(environment.apiBaseUrl + '/game-fun-fact-tips').pipe(retry(3)).subscribe((tips) => {
       this.gameTipArray = tips['gamestips'];
     });
   }
-
-
 
   sendSms(sms){
    return this.http.post(environment.apiBaseUrl + '/send-sms', sms);

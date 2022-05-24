@@ -1,0 +1,114 @@
+<ion-content>
+  <div class="main-content">
+    <div class="network-container">
+
+      <!-- head section -->
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <profile-photo [className]="'profile-header'"></profile-photo>
+        </div>
+      </div>
+
+      <div class="network-section">      
+        <div class="network-level">
+          <div class="network-level-username">@oracle_codes</div>
+          <div class="network-level-box"> 
+            <div class="network-level-status">
+              <div class="network-level-name">Pearl</div>
+              <div class="network-level-status-bar"></div>
+            </div>
+            <div class="network-level-cta">
+              <svg width="13" height="6" viewBox="0 0 13 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path opacity="0.6" d="M6.26599 6L12.0917 0.75H0.4403L6.26599 6Z" fill="black"/>
+              </svg>                
+            </div>
+          </div>
+        </div>
+        <div class="network-link">
+          <div class="network-link-bar">
+            <div class="network-link-input">wwww.isabi.app/register/h74Fj7</div>
+            <div class="network-link-button">Copy</div>
+          </div>
+          <div class="network-link-text">copy invite link</div>
+        </div>
+        <div class="network-earnings">
+          <div class="network-earning rank-earning">
+            <div class="network-earning-heading">Rank Earning</div>
+            <div class="network-earning-box">
+              <div class="network-earning-input">Amount #5000</div>
+              <div class="network-earning-button">Claim</div>
+            </div>
+          </div>
+          <div class="network-earning">
+            <div class="network-earning-heading">Referral Earning</div>
+            <div class="network-earning-box">
+              <div class="network-earning-input">Amount #2500</div>
+              <div class="network-earning-button">Claim</div>
+            </div>
+          </div>
+          <div class="network-earning">
+            <div class="network-earning-heading">Compesational Earnings</div>
+            <div class="network-earning-box">
+              <div class="network-earning-input">Amount #3000</div>
+              <div class="network-earning-button">Claim</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="network-referrals">
+          <div class="network-referrals-heading">My Network: 300</div>
+          <div class="network-referral-tab">
+            <ion-segment (ionChange)="segmentChanged($event)" [value]="segment">
+              <ion-segment-button value="direct" class="network-referral-direct">
+                <ion-icon slot="start" name="list"></ion-icon>
+                <ion-label>Direct Referral</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="indirect" class="network-referral-indirect">
+                <ion-label>Indirect Referral</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+          <div class="network-referral-tab-card" *ngIf="segment === 'direct'">
+            <div class="network-referral-tab-card-heading">Level 1</div>
+            <div class="network-referral-tab-card-users">
+              <div class="network-referral-tab-card-user">
+                <div class="network-referral-tab-card-user-name">David</div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+            <div class="network-referral-tab-card-users">
+              <div class="network-referral-tab-card-user">
+                <div class="network-referral-tab-card-user-name">David</div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+            <div class="network-referral-tab-card-users">
+              <div class="network-referral-tab-card-user">
+                <div class="network-referral-tab-card-user-name">David</div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+            <div class="network-referral-tab-card-users">
+              <div class="network-referral-tab-card-user">
+                <div class="network-referral-tab-card-user-name">David</div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+            <div class="network-referral-tab-card-users">
+              <div class="network-referral-tab-card-user">
+                <div class="network-referral-tab-card-user-name">David</div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- loader -->
+    <loading-spinner *ngIf="loading"></loading-spinner>
+  </div>  
+</ion-content>
