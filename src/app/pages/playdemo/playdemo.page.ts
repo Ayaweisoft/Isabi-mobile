@@ -190,11 +190,11 @@ export class PlaydemoPage implements OnInit {
         this.loadingGame = false;
         this.startGame = true;
         this.gameQuestions = res["questions"];
-        console.log(this.gameQuestions);
+        // console.log(this.gameQuestions);
         this.lastQuestion = this.gameQuestions.length - 1;
         this.currentQuestion = this.gameQuestions[this.runningQuestion];
         this.startTimer();
-      });
+      }); 
   }
 
   gameisOver() {

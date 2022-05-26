@@ -15,32 +15,18 @@ export class ProfilePhotoComponent implements OnInit {
   image: any;
 
   constructor(public userService: UserService,) {
-    this.getProfilePic();
-    this.username = this.userService.getUsername();
+    this.userService.loadProfilePicture();
+    this.userService.getProfilePicture().subscribe(pic => this.image = pic );
+    this.userService.getUsername().subscribe(name => this.username = name);
   }
 
   ngOnInit() {
-    this.getProfilePic();
-    this.username = this.userService.getUsername();
+    this.userService.getUsername().subscribe(name => this.username = name);
   }
 
-  ionViewWillEnter(){
-    this.getProfilePic();
-    this.username = this.userService.getUsername();
-  }
-
-  getProfilePic() {
-    this.loading = true;
-    this.userService.getProfilePic().subscribe(
-      res => {
-        this.loading = false;
-        this.image = res.image_url;
-        console.log(this.image);
-      },
-      err => {
-        this.loading = false;
-      }
-    )
-  }
+  // ionViewWillEnter(){
+  //   this.getProfilePic();
+  //   this.username = this.userService.getUsername();
+  // }
 
 }

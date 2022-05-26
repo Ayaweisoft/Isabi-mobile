@@ -46,6 +46,7 @@ onlineUsers = 0;
     this.getAllevent();
     this.gameService.getGameTip();  
     this.gameService.getAdminDate();
+    // this.appUser = localStorage.getItem('appUser');
     //this.initializeTimer(); 
     console.log("day", this.gameService.timeDays);
     // this.SocketService.fetchOnlineUsers(this.onlineUsers)

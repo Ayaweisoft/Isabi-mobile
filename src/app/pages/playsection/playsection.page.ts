@@ -38,6 +38,8 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     wrongAns: any = 0;
     disableClick : boolean = false;
     low_balance = false;
+    gameCategory: any;
+    showModal: boolean = false;
     option1 = "none";
     option2 = "none";
     option3 = "none";
@@ -127,9 +129,9 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   } 
 
   ngOnInit() {
-    console.log('init');
+    // console.log('init');
     this.behaviorService.getGameAmount().subscribe(amount => {
-      console.log('see AMount', amount)
+      //console.log('see AMount', amount)
       this.currentGameAmount =  amount;
       if(amount === null){
         this.getRemoteAmount();
@@ -159,19 +161,23 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   ionViewWillLeave(){
-    this.QuestionSub = '';
-    this.playCategory = '';
-    this.loadBalanceSub = '';
-    this.deductSub = '';
+     // this.gameQuestions.unsubscribe();
+    this.QuestionSub = "";
+    this.playCategory = "";
+    this.loadBalanceSub = "";
+    this.deductSub = "";
     this.timeSeconds = 0;
     this.timeMinute = 0;
-    this.startGame = false;
-    this.lastQuestion =  0;
-    this.runningQuestion = 0;
-
     clearInterval(this.timerTicker);
-    console.log('levdestroyed');
+    // this.gameOver = true;
     this.loadingGame = true;
+    this.startGame = false;
+    this.gameOver = false;
+    this.disableClick = false;
+    this.runningQuestion = 0;
+    this.lastQuestion = 0;
+    this.correctAns = 0;
+    this.wrongAns = 0;
   }
   ngOnDestroy() {
     // this.gameQuestions.unsubscribe();
@@ -223,25 +229,99 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.playByCategory($event);
   }
 
+  setCategory(category: any){
+    this.gameCategory = category;
+    this.showModal = true;
+  }
+
   playByCategory(category){
     if(this.gameLiveStatus){
-      this.loadingGame = true;
+      // this.loadingGame = true;
       this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
         res => {
-          this.loadingGame = false;
-          this.startGame = true;
+          // this.loadingGame = false;
+          // this.startGame = true;
           this.gameQuestions = res['questions'];
-          console.log(this.gameQuestions);
+          // console.log(this.gameQuestions);
           this.lastQuestion =  this.gameQuestions.length - 1;
           this.currentQuestion  = this.gameQuestions[this.runningQuestion];
-          this.startQuestion();
+          // this.startQuestion();
         }
       );
     } else {
-      this.logicService.presentAlert('Game Alert','Game is not live yet');
+      this.logicService.presentAlert('Game Alert!!!','Game is not live yet');
     }     
   }
 
+  playWithBalance(){
+    this.showModal = false;
+    this.playByCategory(this.gameCategory);
+    this.loadBalanceSub =  this.accountService.loadBalanceForCalculation().subscribe(
+      res => {
+        const UserBalance = res['balance'];
+        if (UserBalance <  this.currentGameAmount){
+          this.low_balance = true;
+          setTimeout(() => {
+            this.low_balance = false;
+          }, 7000);
+          // this.logicService.presentAlert('Game Alert','Insuficient funds');
+        } else {
+          this.loadingGame = true;
+        this.deductSub =  this.accountService.deductGameAmountFromAccount().subscribe(
+            (res) => {
+              console.log('PAY RES',res)
+              this.accountService.loadMyBalance();
+              this.startGame = true;
+              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+              this.startTimer();
+              this.loadingGame = false;
+
+            },
+            error => {console.log('ERROR', error); }
+          );
+        }
+      },  
+      err => {
+        console.error(err);
+        this.loadingGame = false;
+      }
+    );
+  }
+
+  playWithBonus(){
+    this.showModal = false;
+    this.playByCategory(this.gameCategory);
+    
+    this.loadBalanceSub =  this.accountService.loadBonusForCalculation().subscribe(
+      res => {
+        const UserBonus = res['bonus'];
+        if (UserBonus <  this.currentGameAmount){
+          this.low_balance = true;
+          setTimeout(() => {
+            this.low_balance = false;
+          }, 7000);
+        } else {
+          this.loadingGame = true;
+        this.deductSub =  this.accountService.deductGameAmountFromBonus().subscribe(
+            (res) => {
+              console.log('PAY RES',res)
+              this.accountService.loadMyBonus();
+              this.startGame = true;
+              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+              this.startTimer();
+              this.loadingGame = false;
+
+            },
+            error => {console.log('ERROR', error); }
+          );
+        }
+      },
+      err => {
+        console.error(err);
+        this.loadingGame = false;
+      }
+    );
+  }
 
   gameisOver(){ 
     this.GameTimeMinute = this.timeMinute;
@@ -264,24 +344,24 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     
     const record = {minutes , seconds, correct_qst, wrong_qst};
     this.userService.postQuestionRecord(record).subscribe(
-        res => {
-          this.loadingGame = false;
-          console.log('record submitted..');
-          this.gameOver = null;
-          this.disableClick = false;
-          this.loadingGame = false;
-          this.startGame = false;
+      res => {
+        this.loadingGame = false;
+        console.log('record submitted..');
+        this.gameOver = null;
+        this.disableClick = false;
+        this.loadingGame = false;
+        this.startGame = false;
 
 
-          this.runningQuestion = 0;
-          this.playCategory = '';
-          this.loadBalanceSub = '';
-          this.deductSub = '';
-          this.timeSeconds = 0;
-          this.timeMinute = 0;
-          clearInterval(this.timerTicker);
-            }
-      );
+        this.runningQuestion = 0;
+        this.playCategory = '';
+        this.loadBalanceSub = '';
+        this.deductSub = '';
+        this.timeSeconds = 0;
+        this.timeMinute = 0;
+        clearInterval(this.timerTicker);
+      }
+    );
   }
 
   checkAnswer(selection, correctAnswer, option) {
@@ -302,7 +382,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
       let correctOption = options.findIndex(el=> {
         return el.includes(correctAnswer)
       }) + 1
-      console.log(correctOption)
+      // console.log(correctOption)
       this['option' + correctOption] = 'correct'
 
     }
@@ -316,39 +396,36 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     }, 1000);
   }
 
-  startQuestion() {
-    this.loadingGame = true;
-    this.loadBalanceSub =  this.accountService.loadBalanceForCalculation().subscribe(
-      res => {
-        const UserBalance = res['balance'];
-        if (UserBalance <  this.currentGameAmount){
-          this.low_balance = true;
-          setTimeout(() => {
-            this.low_balance = false;
-          }, 7000);
-          this.loadingGame = false;
-        } else {
+  // startQuestion() {
+  //   this.loadingGame = true;
+  //   this.loadBalanceSub =  this.accountService.loadBalanceForCalculation().subscribe(
+  //     res => {
+  //       const UserBalance = res['balance'];
+  //       if (UserBalance <  this.currentGameAmount){
+  //         this.low_balance = true;
+  //         this.loadingGame = false;
+  //       } else {
 
-        this.deductSub =  this.accountService.deductGameAmountFromAccount().subscribe(
-            (res) => {
-              console.log('PAY RES',res)
-              this.accountService.loadMyBalance();
-              this.startGame = true;
-              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
-              this.startTimer();
-              this.loadingGame = false;
+  //       this.deductSub =  this.accountService.deductGameAmountFromAccount().subscribe(
+  //           (res) => {
+  //             console.log('PAY RES',res)
+  //             this.accountService.loadMyBalance();
+  //             this.startGame = true;
+  //             this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+  //             this.startTimer();
+  //             this.loadingGame = false;
 
-            },
-            error => {console.log('ERROR', error); }
-          );
-        }
-      },
-      err => {
-        console.error(err);
-        this.loadingGame = false;
-      }
-    );
-  }
+  //           },
+  //           error => {console.log('ERROR', error); }
+  //         );
+  //       }
+  //     },
+  //     err => {
+  //       console.error(err);
+  //       this.loadingGame = false;
+  //     }
+  //   );
+  // }
 
   renderQuestion() {
     this.startGame = true;
@@ -361,8 +438,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.btnColor2 = 'success';
     this.btnColor3 = 'success';
     this.btnColor4 = 'success';
-    // this.wrong.nativeElement.classList.remove('wobble');
-    // this.correct.nativeElement.classList.remove('heartBeat');
+
     if ( this.runningQuestion  < this.lastQuestion  ) {
       this.runningQuestion ++;
       this.renderQuestion();
@@ -416,13 +492,13 @@ export class PlaysectionPage implements OnInit, OnDestroy {
    this.wrongAns = 0;
    this.router.navigate(['/leaderboard']);
  }
+
  gameOverToRecords(){
    this.gameOver = undefined;
    this.correctAns = 0;
    this.wrongAns = 0;
    this.router.navigate(['/myrecord']);
  }
-
 
  async presentCongratsModal(minutes, seconds, correctQuestion) {
    const modal = await this.modalController.create({
@@ -436,7 +512,6 @@ export class PlaysectionPage implements OnInit, OnDestroy {
  
  }
 
-
   async presentFailedModal(minutes, seconds, correctQuestion) {
     console.log('QSTTT',correctQuestion);
     const modal = await this.modalController.create({
@@ -448,7 +523,6 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     const data = await modal.onDidDismiss();
 
   }
- 
  
   async presentResult(min, secs, correct) {
     const alert = await this.alertController.create({

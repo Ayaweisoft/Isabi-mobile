@@ -29,7 +29,7 @@ export class AccountDetailsPage implements OnInit {
                   this.getMyProfile();
                   this.getProfilePic();
                   console.log('username; ' + userService.getUsername())
-                  this.model.name = userService.getUsername()
+                  userService.getUsername().subscribe(name => this.model.name = name);
                  }
 
                  
@@ -56,6 +56,14 @@ export class AccountDetailsPage implements OnInit {
   
   ngOnInit() {
   }
+
+  ionViewWillEnter(){
+    this.getMyProfile();
+    this.getProfilePic();
+    console.log('username; ' + this.userService.getUsername());
+    this.userService.getUsername().subscribe(name => this.model.name = name);
+  }
+
   async presentFailNetwork() {
     const toast = await this.toastController.create({
       message: 'No internet connection!!!',
@@ -85,7 +93,8 @@ export class AccountDetailsPage implements OnInit {
   //     }
 
       getMyProfile() {
-        this.model.name = this.userService.getUsername()
+        // this.model.name = this.userService.getUsername()
+        this.userService.getUsername().subscribe(name => this.model.name = name);
         this.userService.getUserProfile().subscribe(
           res => {
             this.loading = false;
@@ -145,7 +154,7 @@ export class AccountDetailsPage implements OnInit {
               this.fireService.downloadItem(imageRef).subscribe(imageUrl => {
                 this.image = imageUrl;
                 this.picModel.image_url = imageUrl;
-                this.picModel.name = this.userService.getUsername();
+                this.userService.getUsername().subscribe(name => this.picModel.name = name);
                 this.uploadImage(this.picModel);
                 this.loading = false;
               });
