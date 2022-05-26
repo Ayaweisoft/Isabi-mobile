@@ -114,7 +114,8 @@ export class LeaderboardPage implements OnInit {
       this.firstPerson = this.leaderBoard[0];
       this.secondPerson = this.leaderBoard[1];
       this.thirdPerson = this.leaderBoard[2];
-      console.log('getting leaderboard' + val)
+      console.log('getting leaderboard')
+      console.log(this.leaderBoard)
       this.loading = false;
     });
   }  
