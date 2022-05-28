@@ -19,8 +19,8 @@ export class EventsPage implements OnInit {
 @ViewChild('mySlider', {static : false}) mySlider: IonSlides;
 allEvent = [];
 displayedEvents = [];
-shadowEvents = [0,0,0];
-loading = true;
+loadingCards = [0,0,0];
+loading = false;
 webLink = environment.webVotingUrl;
 slideCounter =  0;
 socket: any;
@@ -56,7 +56,7 @@ onlineUsers = 0;
     // })
     console.log('number of users online: ' + this.onlineUsers)
   }
-
+ 
   parseText(text){
     let length =  55;
     text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
