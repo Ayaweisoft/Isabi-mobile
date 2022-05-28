@@ -1,5 +1,5 @@
 
-import { Observable, observable } from 'rxjs';
+import { BehaviorSubject, Observable } from "rxjs";
 import { AccountService } from 'src/app/shared/account.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -17,6 +17,8 @@ export class UserService {
   token: any;
   accountBalance: any;
   username: any;
+  profilePic = new BehaviorSubject<any>('');
+  user_name = new BehaviorSubject<any>('');
   networkDisconnet = false;
 
 
@@ -181,6 +183,10 @@ constructor(private http: HttpClient,
       return this.http.post(environment.apiBaseUrl + '/update-profile-pic',credentials);
     }
 
+    // getUsername(): Observable<any> {
+    //   return this.http.get(environment.apiBaseUrl + '/get-profile-name');
+    // }
+
     updateUserProfile(credentials){
       return this.http.post(environment.apiBaseUrl + '/update-user-profile',credentials);
     }
@@ -259,11 +265,13 @@ constructor(private http: HttpClient,
      }
      
      }
-   
-     getUsername(){
+     
+     getUserName(){
       try {
         let payLoad = jwtDecode(this.getToken());
       let username = payLoad['username'];
+      console.log('getting username: ', payLoad['username'])
+      console.log('payload: ', payLoad);
       return username;
       } catch (error) {
         
@@ -280,14 +288,46 @@ constructor(private http: HttpClient,
         
       }
      }
+
+    setProfilePicture(pic: any){
+      this.profilePic.next(pic);
+    }
+
+    getProfilePicture(): BehaviorSubject<any> {
+      return this.profilePic;
+    }
+
+    loadProfilePicture(){
+      this.http.get(environment.apiBaseUrl + '/get-profile-pic')
+      .subscribe(value => {
+        this.setProfilePicture(value['image_url'])
+        console.log('Update Image ',this.profilePic.getValue())
+      })
+    }
+
+    setUsername(name: string){
+      this.user_name.next(name)
+    }
+
+    getUsername(): BehaviorSubject<any> {
+      return this.user_name;
+    }
+
+    loadUsername(){
+      this.http.get(environment.apiBaseUrl + '/get-user-name')
+      .subscribe(value => {
+        this.setUsername(value['username'])
+        console.log('Update username ',this.profilePic.getValue())
+      })
+    }
   
    
      setToken(token: string) {
       localStorage.setItem('token', token);
      }
-     setUsername(username: string) {
-      localStorage.setItem('username', username);
-     }
+    //  setUsername(username: string) {
+    //   localStorage.setItem('username', username);
+    //  }
 
      deleteToken() {
        window.localStorage.removeItem('token');
@@ -322,6 +362,8 @@ constructor(private http: HttpClient,
       this.token = '';
       this.username = '';
       this.accountBalance = '';
+      this.profilePic.next('');
+      this.user_name.next('');
       localStorage.removeItem('appUser');
       this.router.navigateByUrl('/login');
      }
