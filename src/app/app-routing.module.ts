@@ -353,6 +353,10 @@ const routes: Routes = [
     path: 'acct-page',
     loadChildren: () => import('./pages/acct-page/acct-page.module').then( m => m.AcctPagePageModule)
   },
+  {
+    path: 'account-new',
+    loadChildren: () => import('./pages/account-new/account-new.module').then( m => m.AccountNewPageModule)
+  },
 
   {
     path: '**', pathMatch: 'full',

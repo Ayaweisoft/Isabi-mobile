@@ -8,7 +8,9 @@ import { UserService } from '../../shared/user.service';
 })
 export class ProfilePhotoComponent implements OnInit {
   @Input()
-  className: String; 
+  className: String;
+  @Input()
+  userNameVisible: boolean = true; 
 
   username: String;
   loading: boolean = true;
