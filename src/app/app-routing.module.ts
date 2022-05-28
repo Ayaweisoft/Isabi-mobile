@@ -227,13 +227,10 @@ const routes: Routes = [
       path: 'account', component: AccountComponent, canActivate: [AuthguardGuard]
     },
     {
-<<<<<<< HEAD
       path: 'account-new',
       loadChildren: () => import('./pages/account-new/account-new.module').then( m => m.AccountNewPageModule)
     },
     {
-=======
->>>>>>> a6f1af728b8675387cbba6dad103cc49fad3d5a6
       path: 'account-details',
       loadChildren: () => import('./pages/account-details/account-details.module').then( m => m.AccountDetailsPageModule)
     },
@@ -341,10 +338,7 @@ const routes: Routes = [
       path: 'admin-leaderbord', loadChildren: './pages/admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',
       canActivate: [AuthguardGuard, AdminGuard]
     },
-<<<<<<< HEAD
-=======
     
->>>>>>> a6f1af728b8675387cbba6dad103cc49fad3d5a6
   ]},
   {
     path: 'register',
@@ -358,28 +352,27 @@ const routes: Routes = [
     path: 'accounts',
     loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
   },
-<<<<<<< HEAD
-    { path: "*", redirectTo: 'tabs/events' },
-=======
-
->>>>>>> a6f1af728b8675387cbba6dad103cc49fad3d5a6
+  {
+    path: 'coming-soon',
+    loadChildren: () => import('./pages/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
+  },
   {
     path: 'acct-page',
     loadChildren: () => import('./pages/acct-page/acct-page.module').then( m => m.AcctPagePageModule)
   },
 
-<<<<<<< HEAD
-=======
   {
     path: '**', pathMatch: 'full',
     loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
+
+
   
   { path: "*", redirectTo: 'tabs/events' },
+ 
 
   
 
->>>>>>> a6f1af728b8675387cbba6dad103cc49fad3d5a6
 
 ];
 
