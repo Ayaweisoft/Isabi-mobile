@@ -16,7 +16,8 @@ import { MerchantGuard } from './merchant.guard';
 import { AdminnavigationComponent } from './components/adminnavigation/adminnavigation.component';
 import { ForgetpasswordComponent } from './pages/forgetpassword/forgetpassword.component';
 import { AdminGuard } from './auth/admin.guard';
-import { AccountComponent } from './pages/account/account.component';
+// import { AccountComponent } from './pages/account/account.component';
+// import { AccountsPage } from './pages/accounts/accounts.page';
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -68,7 +69,6 @@ import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
 @NgModule({
   declarations: [
-    AccountComponent,
     AdminEventComponent, 
     AdminnavigationComponent, 
     AppComponent, 

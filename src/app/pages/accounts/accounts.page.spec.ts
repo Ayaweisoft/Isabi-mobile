@@ -1,22 +1,25 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
 
-import { AccountsPage } from './accounts.page';
+import { AccountComponent } from './account.component';
 
-describe('AccountsPage', () => {
-  let component: AccountsPage;
-  let fixture: ComponentFixture<AccountsPage>;
+describe('AccountComponent', () => {
+  let component: AccountComponent;
+  let fixture: ComponentFixture<AccountComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountsPage ],
-      imports: [IonicModule.forRoot()]
-    }).compileComponents();
+      declarations: [ AccountComponent ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+    })
+    .compileComponents();
+  }));
 
-    fixture = TestBed.createComponent(AccountsPage);
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }));
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

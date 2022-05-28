@@ -180,7 +180,7 @@ const routes2: Routes = [
   {
     
     path: 'web-event-ticket/:id', component: WebTicketComponent
-  },
+  }
 
 
 ];
@@ -225,6 +225,10 @@ const routes: Routes = [
     },
     {
       path: 'account', component: AccountComponent, canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'accounts',
+      loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
     },
     {
       path: 'account-details',
@@ -343,11 +347,8 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
-  {
-    path: 'accounts',
-    loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
-  },
     { path: "*", redirectTo: 'tabs/events' },
+
   
 
 

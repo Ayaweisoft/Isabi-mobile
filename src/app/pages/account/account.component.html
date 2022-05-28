@@ -1,20 +1,51 @@
 <ion-content>
   <div class="top-section">
-    <div class="top-row">
-      <div class="back-button" [routerLink]="[ '/tabs/settings' ]">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.9999 11H6.41394L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13H20.9999V11Z" fill="#F5FAF5"/>
-        </svg>            
+    <div class="head-section question-head-section">
+      <div class="header">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <profile-photo [className]="'profile-header'"></profile-photo>
       </div>
-      <h2>Accounts</h2>
-      <span>Save</span>
     </div>
-    <div class="profile-section"> 
-      <div class="profile-pic"></div>
-    </div>
+
   </div>
+
   <div class="main-section">
-    too
+    <div class="container">
+      <div class="price-div">
+        <h6>General Balance</h6>
+        <div class="price">#10,000</div>
+      </div>
+      <div class="price-div">
+        <h6>Total General Bonus</h6>
+        <div class="price">#50,000</div>
+      </div>
+      <div class="btn-section">
+        <button class="container-btn">Deposit</button>
+        <button class="container-btn">Cashout</button>
+      </div>
+      <div class="promo-section">
+        <span class="promo-claim">Claim promo code</span>
+        <div class="flex">
+          <input class="promo-input" type="text" value="BRYAI1234">
+          <button class="promo-btn">Claim</button>
+        </div>
+        
+      </div>
+    </div>
+    <div class="transaction-section">
+      <h4 class="transaction-header">Recent Transactions</h4>
+      <table class="transaction-table">
+        <tr class="transaction-table-row">
+          <th>Amount</th>
+          <th>Method</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Stats</th>
+        </tr>
+      </table>
+    </div>
   </div>
 
 <div *ngIf="loading" class=" ">
