@@ -92,6 +92,7 @@ export class ProfilePage implements OnInit {
         // this.loading = false;
         this.userService.loadProfilePicture();
         this.userService.loadUsername();
+        this.userService.loadFullname();
         this.getMyProfile();
       },
       err => {

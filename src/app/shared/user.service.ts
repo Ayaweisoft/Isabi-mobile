@@ -19,6 +19,7 @@ export class UserService {
   username: any;
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
+  full_name = new BehaviorSubject<any>('');
   rank = new BehaviorSubject<any>('');
   totalReferredCount = new BehaviorSubject<any>(0);
   networkDisconnet = false;
@@ -320,6 +321,22 @@ constructor(private http: HttpClient,
       .subscribe(value => {
         this.setUsername(value['username'])
         console.log('Update username ',this.user_name.getValue())
+      })
+    }
+
+    setFullname(name: string){
+      this.full_name.next(name)
+    }
+
+    getFullname(): BehaviorSubject<any> {
+      return this.full_name;
+    }
+
+    loadFullname(){
+      this.http.get(environment.apiBaseUrl + '/get-full-name')
+      .subscribe(value => {
+        this.setFullname(value['fullname'])
+        console.log('Update username ',this.full_name.getValue())
       })
     }
 

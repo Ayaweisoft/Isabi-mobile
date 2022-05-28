@@ -34,6 +34,10 @@ main{
 	width: 100%;
 	height: 30%;
 
+  @media screen and (min-width: 900px){
+    height: 35%;
+  } 
+
   h2{
     padding: 0;
     margin: 0;
@@ -57,8 +61,8 @@ main{
       height: fit-content;
       font-size: 1.5rem;
     }
-
   }
+
   .bottom-row{
     display: flex;
     justify-content: space-between;
@@ -110,10 +114,7 @@ main{
       width: 1.5rem;
       
     }
-  }
-  
-
-  
+  } 
 }
 
 .top{
@@ -181,7 +182,7 @@ h2{
     }
 
     .log-out{
-      height: 50px;
+      height: 3.2rem;
       width: 90%;
       background-color: #efefef;
       color: #ff3d3d;
@@ -193,6 +194,8 @@ h2{
 
       @media screen and (min-width: 900px){
         width: 55%;
+        height: 3.2rem;
+        padding: 0.55rem;
       } 
     }
 }

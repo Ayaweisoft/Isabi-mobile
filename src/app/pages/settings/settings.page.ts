@@ -75,21 +75,13 @@ export class SettingsPage implements OnInit {
 
   getMyProfile() {
     this.loading = true;
-    this.userService.getUserProfile().subscribe(
-      res => {      
-        this.myProfile = res;
-        this.image = res.image_url;
-        this.fullname = res.fullname;
-        this.username = res.username;
-        console.log(this.myProfile);
-        this.userRecordNotAvalible = false;
-        this.loading = false;
-      },
-      err => {
-        this.loading = false;
-        this.userRecordNotAvalible = true;
-      }
-    );
+    this.userService.loadFullname();
+    this.userService.getUsername().subscribe(name => this.username = name);
+    this.userService.getFullname().subscribe(name => this.fullname = name);
+    // this.model.name = this.userService.getUsername()
+    console.log('username; ' + this.username);
+    this.userService.getProfilePicture().subscribe(pic => this.image = pic);
+    this.loading = false;
   }
 
 
