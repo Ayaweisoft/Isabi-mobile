@@ -35,6 +35,8 @@ export class PlaydemoPage implements OnInit {
   wrongAns: any = 0;
   disableClick: boolean = false;
   low_balance = false;
+  gameCategory: any;
+  showModal: boolean = false;
   option1 = "none";
   option2 = "none";
   option3 = "none";
@@ -51,6 +53,7 @@ export class PlaydemoPage implements OnInit {
 
   GameTimeMinute: any = 0;
   GameTimeSeconds: any = 0;
+  currentGameAmount: any;
 
   constructor(
     private userService: UserService,
@@ -182,19 +185,94 @@ export class PlaydemoPage implements OnInit {
     this.playByCategory($event);
   }
 
+  setCategory(category: any){
+    this.gameCategory = category;
+    this.showModal = true;
+  }
+
   playByCategory(category) {
     this.loadingGame = true;
     this.playCategory = this.userService
       .playByCategory(category.toLowerCase())
       .subscribe((res) => {
-        this.loadingGame = false;
-        this.startGame = true;
+        // this.loadingGame = false;
+        // this.startGame = true;
         this.gameQuestions = res["questions"];
         // console.log(this.gameQuestions);
         this.lastQuestion = this.gameQuestions.length - 1;
         this.currentQuestion = this.gameQuestions[this.runningQuestion];
-        this.startTimer();
+        // this.startTimer();
       }); 
+  }
+
+  playWithBalance(){
+    this.showModal = false;
+    this.playByCategory(this.gameCategory);
+    this.loadBalanceSub =  this.accountService.loadBalanceForCalculation().subscribe(
+      res => {
+        const UserBalance = res['balance'];
+        if (UserBalance <  this.currentGameAmount){
+          this.low_balance = true;
+          setTimeout(() => {
+            this.low_balance = false;
+          }, 7000);
+          // this.logicService.presentAlert('Game Alert','Insuficient funds');
+        } else {
+          this.loadingGame = true;
+        this.deductSub =  this.accountService.deductGameAmountFromAccountDemo().subscribe(
+            (res) => {
+              console.log('PAY RES',res)
+              this.accountService.loadMyBalance();
+              this.startGame = true;
+              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+              this.startTimer();
+              this.loadingGame = false;
+
+            },
+            error => {console.log('ERROR', error); }
+          );
+        }
+      },  
+      err => {
+        console.error(err);
+        this.loadingGame = false;
+      }
+    );
+  }
+
+  playWithBonus(){
+    this.showModal = false;
+    this.playByCategory(this.gameCategory);
+    
+    this.loadBalanceSub =  this.accountService.loadBonusForCalculation().subscribe(
+      res => {
+        const UserBonus = res['bonus'];
+        if (UserBonus <  this.currentGameAmount){
+          this.low_balance = true;
+          setTimeout(() => {
+            this.low_balance = false;
+          }, 7000);
+        } else {
+          this.loadingGame = true;
+        this.deductSub =  this.accountService.deductGameAmountFromBonusDemo().subscribe(
+            (res) => {
+              console.log('PAY RES',res)
+              this.accountService.loadMyBonus();
+              this.startGame = true;
+              this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+              this.startTimer();
+              this.loadingGame = false;
+
+            },
+            error => {console.log('ERROR', error); }
+          );
+        }
+      },
+      err => {
+        console.error(err);
+        this.loadingGame = false;
+      }
+    );
   }
 
   gameisOver() {

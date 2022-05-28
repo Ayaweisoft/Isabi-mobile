@@ -114,6 +114,13 @@ getAccountBonus(): BehaviorSubject<any> {
     return this.http.get(environment.apiBaseUrl + "/deduct-game-bonus");
   }
 
+  deductGameAmountFromAccountDemo() {
+    return this.http.get(environment.apiBaseUrl + "/deduct-game-amount-demo");
+  } 
+  deductGameAmountFromBonusDemo() { 
+    return this.http.get(environment.apiBaseUrl + "/deduct-game-bonus-demo");
+  }
+
 
   myTransaction() {
     return this.http.get(environment.apiBaseUrl + "/get-my-transaction");

@@ -29,8 +29,8 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     correctQuestion  = 0;
     wrongQuestion = 0;
     timerTicker : any;
-     runningQuestion  = 0;
-     timeMinute: any = 0;
+    runningQuestion  = 0;
+    timeMinute: any = 0;
     timeSeconds: any = 0;
     loadingGame = false;
     correctAns: any = 0;
@@ -141,12 +141,11 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   getRemoteAmount(){
-    console.log('getting remote amount')
+    console.log('getting remote amount');
     this.loadingGame =  true;
     this.gameService.getGameAmount().subscribe(res => {
       if(res.data?.amount){
         this.behaviorService.setGameAmount(res.data?.amount);
-
       }
       this.loadingGame = false;
     }, err => {
@@ -179,6 +178,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.correctAns = 0;
     this.wrongAns = 0;
   }
+
   ngOnDestroy() {
     // this.gameQuestions.unsubscribe();
     this.QuestionSub = '';
@@ -197,12 +197,15 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   getColor1(){
     this.btnColor1 = 'light';
   }
+
   getColor2(){
     this.btnColor2 = 'light';
   }
+
   getColor3(){
     this.btnColor3 = 'light';
   }
+
   getColor4(){
     this.btnColor4 = 'light';
   }
@@ -267,7 +270,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
           // this.logicService.presentAlert('Game Alert','Insuficient funds');
         } else {
           this.loadingGame = true;
-        this.deductSub =  this.accountService.deductGameAmountFromAccount().subscribe(
+        this.deductSub =  this.accountService.deductGameAmountFromAccountDemo().subscribe(
             (res) => {
               console.log('PAY RES',res)
               this.accountService.loadMyBalance();
@@ -359,6 +362,9 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.deductSub = '';
         this.timeSeconds = 0;
         this.timeMinute = 0;
+        this.correctAns = 0;
+        this.wrongAns = 0;
+        console.log("corect: ", this.correctAns, "wrong: ", this.wrongAns)
         clearInterval(this.timerTicker);
       }
     );
@@ -456,61 +462,62 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   startTimer() {
-    // COUNTDOWN IN SECONDS
-   // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
-   let counter = 240;
-   // Start if not past end date
-   if (counter > 0) {
-     this.timerTicker = setInterval(() => {
-       // Stop if passed end time
-       counter--;
-       if (counter == 0 || this.gameOver) {
-         clearInterval(this.timerTicker);
-         this.gameisOver();
-         counter = 0;
-        
-       }
- 
-       let secs = counter;
-       const mins  = Math.floor(secs / 60); // 1 min = 60 secs
-       secs -= mins * 60;
-       this.timeMinute = mins;
-       this.timeSeconds = secs;
+      // COUNTDOWN IN SECONDS
+    // EXAMPLE - 5 MINS = 5 X 60 = 300 SECS
+    let counter = 240;
+    // Start if not past end date
+    if (counter > 0) {
+      this.timerTicker = setInterval(() => {
+        // Stop if passed end time
+        counter--;
+        if (counter == 0 || this.gameOver) {
+          clearInterval(this.timerTicker);
+          this.gameisOver();
+          counter = 0;
+          
+        }
+  
+        let secs = counter;
+        const mins  = Math.floor(secs / 60); // 1 min = 60 secs
+        secs -= mins * 60;
+        this.timeMinute = mins;
+        this.timeSeconds = secs;
 
-       if (this.gameOver){
-         clearInterval(this.timerTicker);
-       }else{
-       }
- 
-     }, 1000);
-   }
- }
+        if (this.gameOver){
+          clearInterval(this.timerTicker);
+        }else{
+        }
+  
+      }, 1000);
+    }
+  }
 
- gameOverToleaderboard(){
-   this.gameOver = undefined;
-   this.correctAns = 0;
-   this.wrongAns = 0;
-   this.router.navigate(['/leaderboard']);
- }
+  gameOverToleaderboard(){
+    this.gameOver = undefined;
+    this.correctAns = 0;
+    this.wrongAns = 0;
+    this.router.navigate(['/leaderboard']);
+  }
 
- gameOverToRecords(){
-   this.gameOver = undefined;
-   this.correctAns = 0;
-   this.wrongAns = 0;
-   this.router.navigate(['/myrecord']);
- }
+  gameOverToRecords(){
+    this.gameOver = undefined;
+    this.correctAns = 0;
+    this.wrongAns = 0;
+    console.log("corect: ", this.correctAns, "wrong: ", this.wrongAns)
+    this.router.navigate(['/myrecord']);
+  }
 
- async presentCongratsModal(minutes, seconds, correctQuestion) {
-   const modal = await this.modalController.create({
-   component: CongratsComponent,
-   componentProps: {minutes, seconds, correctQuestion }
-   });
- 
-   await modal.present();
-   const data = await modal.onDidDismiss();
-  //  this.router.navigate(['/tabs/gamesection']);
- 
- }
+  async presentCongratsModal(minutes, seconds, correctQuestion) {
+    const modal = await this.modalController.create({
+    component: CongratsComponent,
+    componentProps: {minutes, seconds, correctQuestion }
+    });
+  
+    await modal.present();
+    const data = await modal.onDidDismiss();
+    //  this.router.navigate(['/tabs/gamesection']);
+  
+  }
 
   async presentFailedModal(minutes, seconds, correctQuestion) {
     console.log('QSTTT',correctQuestion);

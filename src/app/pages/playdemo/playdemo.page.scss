@@ -123,6 +123,56 @@
 		display: flex;
 		flex-direction: column;
 
+		.game-modal{
+			position: absolute;
+			padding: 2rem;
+			transform: translate(-50%, -50%);
+			left: 50%;
+			top: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: fit-content;
+			flex-direction: column;
+			box-shadow: -3px 3px 16px 1px #0000001a;
+			background: #f9fff9;
+			gap: 1rem;
+			z-index: 200;
+			border-radius: 1.5rem;
+	
+			.game-modal-heading{
+				font-size: 1.4rem;
+				font-weight: 600;
+			}
+	
+			.game-modal-desc{
+				font-size: 1.2rem;
+				font-weight: 400;
+			}
+	
+			.game-modal-options{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				gap: 1rem;
+	
+				.game-modal-button{
+					padding: 0.5rem 0.8rem;
+					background: #348A40;
+					border-radius: 0.5rem;
+					font-size: 1.3rem;
+					font-weight: 500;
+					border: 1px solid transparent;
+				}
+
+				.game-modal-button:hover{
+					background: transparent;
+					border: 1px solid #348A40;
+					
+				}
+			}
+		}
+
 		.category-section{
 			background-color: #fafafa;
 			z-index: 100;

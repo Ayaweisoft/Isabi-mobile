@@ -75,6 +75,15 @@
     </div>
 
     <div class="category-container" *ngIf="!loadingGame  && !startGame">
+      <div class="game-modal" *ngIf="!loadingGame  && !startGame" [hidden]="!showModal">
+        <div class="game-modal-heading">Game Notice!!!</div>
+        <div class="game-modal-desc">Select Fund Account</div>
+        <div class="game-modal-options">
+          <div class="game-modal-button game-modal-button--balance" (click)="playWithBalance()">Balance</div>
+          <div class="game-modal-button game-modal-button--bonus" (click)="playWithBonus()">Bonus</div>
+        </div>
+      </div>
+
       <div class="head-section">
         <div class="header">
           <ion-buttons slot="start">
@@ -88,7 +97,7 @@
       <div class="category-section">
         <h2>PLAY DEMO</h2>
         <div class="game-category-section">
-          <div class="game-category-card" *ngFor="let item of allCategory" (click)="playByCategory(item.name)">
+          <div class="game-category-card" *ngFor="let item of allCategory" (click)="setCategory(item.name)">
             <div class="game-category-card-logo">
               <img [src]="item.logo" alt="plus icon">
             </div>

@@ -9,5 +9,4 @@ export class MinutesToSecondsPipe implements PipeTransform {
 
     return people * 60;
   }
-
 }

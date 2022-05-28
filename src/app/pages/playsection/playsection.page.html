@@ -100,7 +100,7 @@
         <div class="game-category-section">
           <div class="game-category-card" *ngFor="let item of allCategory" (click)="setCategory(item.name)">
             <div class="game-category-card-logo">
-              <!-- <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon"> -->
+              <img [src]="item.logo" alt="plus icon">
             </div>
             <div class="game-category-card-desc">
               <div class="game-category-card-name">

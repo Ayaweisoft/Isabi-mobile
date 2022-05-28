@@ -183,7 +183,7 @@
               </ion-menu-toggle>
             </div>
           </div>
-          <div class="section admin-section">
+          <div class="section admin-section" *ngIf="userService.getRole() == 'ADMIN'">
             <span class="heading">Admin</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">

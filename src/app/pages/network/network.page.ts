@@ -12,13 +12,16 @@ export class NetworkPage implements OnInit {
   segment= 'direct';
   showCard: boolean = true;
   loading: boolean = true;
+  user_rank: string = 'Entry';
   username: string = '';
   referredlv1: any = [];
   referredlv2: any = [];
+  image: any = [];
   myProfile: any;
   referralCode: string = '';
   totalReferredCount: number = 0;
   refBonus_claim: boolean = false;
+  locked: boolean = true;
 
   model = {
     referralBonus: 0
@@ -63,25 +66,40 @@ export class NetworkPage implements OnInit {
   ]
 
   constructor(private userService: UserService,
-              private accountSerice: AccountService
+    private accountSerice: AccountService
   ) {
     this.getMyProfile();
+    // this.userService.getProfilePicture().subscribe(pic => this.image = pic);
   }
 
   ngOnInit() {
     this.getMyProfile();
   }
 
+  ionViewWillEnter(){
+    this.getMyProfile();
+  }
+
   getMyProfile() {
     // this.username = this.userService.getUsername()
+    this.userService.loadUsername();
+    this.userService.loadRank();
+    this.userService.loadTotalReferrredCount();
+
     this.userService.getUsername().subscribe(name => this.username = name);
+    console.log('username: ' + this.username);
+    this.userService.getRank().subscribe(rank => this.user_rank = rank);
+    console.log('user rank: ' + this.user_rank);
+    this.userService.getTotalReferredCount().subscribe(tot => this.totalReferredCount = tot);
+    console.log('total count: ' + this.totalReferredCount);
+
     this.userService.getUserProfile().subscribe(
       res => {
         this.loading = false;
         this.myProfile = res;
         this.referredlv1 = res.referredlv1;
         this.referredlv2 = res.referredlv2;
-        this.totalReferredCount = res.totalReferredCount;
+        // this.totalReferredCount = res.totalReferredCount;
         this.referralCode = res.referralCode;
         this.model.referralBonus = res.referralBonus;
        
@@ -95,8 +113,6 @@ export class NetworkPage implements OnInit {
     );
   }
 
-  
-
   claimReferralBonus(bonus: number){
     this.refBonus_claim = true;
     console.log('bonus: ', bonus);
@@ -107,6 +123,16 @@ export class NetworkPage implements OnInit {
   }
 
   toggleCard(){
+    // if(this.showCard){
+
+    // }
+    for(let rank of this.rank){
+      rank.isAttained = true;
+      if(rank.name == this.user_rank){
+        rank.isAttained = true;
+        break;
+      }
+    }
     this.showCard = !this.showCard;
   }
 

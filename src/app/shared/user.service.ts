@@ -19,9 +19,9 @@ export class UserService {
   username: any;
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
+  rank = new BehaviorSubject<any>('');
+  totalReferredCount = new BehaviorSubject<any>(0);
   networkDisconnet = false;
-
-
   
 noAuthHeader = {headers: new HttpHeaders({NoAuth: 'True'})};
 AuthHeader = {headers: new HttpHeaders().set('Authorization',
@@ -103,7 +103,7 @@ constructor(private http: HttpClient,
     postQuestion(question){
       return this.http.post(environment.apiBaseUrl + `/post-question`, question);
     }
-  
+    
     getAllQuestions(){
       return this.http.get(environment.apiBaseUrl + '/get-all-questions');
     }
@@ -211,12 +211,14 @@ constructor(private http: HttpClient,
        return this.http.post(environment.apiBaseUrl + '/reset-password', credentials);
      }
   
-     postQuestionRecord( record){
+      postQuestionRecord( record){
        return this.http.post(environment.apiBaseUrl +'/post-game-record', record);
      }
+
      searchQuestion(words){
        return this.http.post(environment.apiBaseUrl + '/search-question', words);
      }
+
      getGameRecord(){
        return this.http.get(environment.apiBaseUrl + '/get-game-record');
      }
@@ -317,7 +319,39 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-user-name')
       .subscribe(value => {
         this.setUsername(value['username'])
-        console.log('Update username ',this.profilePic.getValue())
+        console.log('Update username ',this.user_name.getValue())
+      })
+    }
+
+    setTotalReferredCount(totalReferredCount: number){
+      this.totalReferredCount.next(totalReferredCount)
+    }
+
+    getTotalReferredCount(): BehaviorSubject<any> {
+      return this.totalReferredCount;
+    }
+
+    loadTotalReferrredCount(){
+      this.http.get(environment.apiBaseUrl + '/get-user-totalReferredCount')
+      .subscribe(value => {
+        this.setTotalReferredCount(value['totalReferredCount'])
+        console.log('Update TotalReferralCount ', this.totalReferredCount.getValue())
+      })
+    }
+
+    setRank(rank: string){
+      this.rank.next(rank)
+    }
+
+    getRank(): BehaviorSubject<any> {
+      return this.rank;
+    }
+
+    loadRank(){
+      this.http.get(environment.apiBaseUrl + '/get-user-rank')
+      .subscribe(value => {
+        this.setRank(value['rank'])
+        console.log('Update rank ', this.rank.getValue())
       })
     }
   
@@ -367,11 +401,5 @@ constructor(private http: HttpClient,
       localStorage.removeItem('appUser');
       this.router.navigateByUrl('/login');
      }
-
-
-
-
-    
-  
-   
+ 
 }
