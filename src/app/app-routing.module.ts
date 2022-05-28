@@ -334,6 +334,7 @@ const routes: Routes = [
       path: 'admin-leaderbord', loadChildren: './pages/admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',
       canActivate: [AuthguardGuard, AdminGuard]
     },
+    
   ]},
   {
     path: 'register',
@@ -347,10 +348,18 @@ const routes: Routes = [
     path: 'accounts',
     loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
   },
-    { path: "*", redirectTo: 'tabs/events' },  {
+
+  {
     path: 'acct-page',
     loadChildren: () => import('./pages/acct-page/acct-page.module').then( m => m.AcctPagePageModule)
   },
+
+  {
+    path: '**', pathMatch: 'full',
+    loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
+  },
+  
+  { path: "*", redirectTo: 'tabs/events' },
 
   
 
