@@ -23,8 +23,6 @@ export class SocketService {
 //   emit(eventName: string, data: any){
 //     this.socket.emit(eventName, data);
 //   }
- 
-
 }
 
 
