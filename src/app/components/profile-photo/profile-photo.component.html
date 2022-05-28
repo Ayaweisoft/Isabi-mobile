@@ -2,5 +2,5 @@
   <div class="profile-pic">
     <img [src]="image" alt="">
   </div>
-  <p class="profile-name">{{username}}</p>
+  <p class="profile-name">{{ userNameVisible === true ? username : ''}}</p>
 </div>
