@@ -3,6 +3,7 @@ import { AccountService } from 'src/app/shared/account.service';
 import { UserService } from 'src/app/shared/user.service';
 
 
+
 @Component({
   selector: 'app-network',
   templateUrl: './network.page.html',
@@ -78,6 +79,13 @@ export class NetworkPage implements OnInit {
 
   ionViewWillEnter(){
     this.getMyProfile();
+  }
+
+  copyToClipboard(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0,0);
+  
   }
 
   getMyProfile() {

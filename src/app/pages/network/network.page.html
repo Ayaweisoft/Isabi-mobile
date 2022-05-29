@@ -45,8 +45,9 @@
         </div>
         <div class="network-link">
           <div class="network-link-bar">
-            <div class="network-link-input">wwww.localhost:8100/api/register/{{referralCode}}</div>
-            <div class="network-link-button">Copy</div>
+            <!-- <div class="network-link-input" #userinput>wwww.localhost:8100/api/register/{{referralCode}}</div> -->
+            <input class="network-link-input" #userinput value="wwww.localhost:8100/api/register/{{referralCode}}">
+            <div class="network-link-button" (click)="copyToClipboard(userinput)">Copy</div>
           </div>
           <div class="network-link-text">copy invite link</div>
         </div>
