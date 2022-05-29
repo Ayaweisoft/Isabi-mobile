@@ -34,6 +34,7 @@ export class AccountNewPage implements OnInit {
   loading: boolean;
   bonus: any;
   balance: any;
+  transaction: any;
 
   customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: '',
   merchantCode: this.transService.merchant_code, payItemID: this.transService.pay_item_id}
@@ -51,6 +52,7 @@ export class AccountNewPage implements OnInit {
              ) {  
                 this.accountService.loadMyBalance();
                 console.log('REF2', this.reference);
+                this.getTransaction();
 
 }
 
@@ -76,10 +78,12 @@ ngOnInit() {
   this.accountService.getAccountBonus().subscribe(bal => {
     this.bonus = bal;
   })
+  this.getTransaction();
 }
 
 ionViewDidEnter() {
-  this.generateReference()
+  this.generateReference();
+  this.getTransaction();
 }
 
 
@@ -94,6 +98,7 @@ ngOnDestroy() {
 }
 
 paymentCallback(response: any): void {
+  this.showPaymentButtons = false;
   console.log("RESULT", response);
   if(response.resp == "00"){
     this.generateReference();
@@ -128,7 +133,6 @@ paymentCallback(response: any): void {
 
 }
 
-
 closedPaymentModal(): void {
   this.generateReference();
   console.log('payment is closed');
@@ -137,15 +141,11 @@ closedPaymentModal(): void {
  
 }
 
-
-
 generateReference() {
   let date = new Date();
   this.reference = date.getTime().toString();
   
 }
-
-
 
 submitProCode(promo){
   this.loading = true;
@@ -173,108 +173,19 @@ showNotiAlert(header, sub, msg){
   }).then((alert) =>  alert.present() );
 }
 
-
-
-
-
-
 paymentCancel(){
   this.showPaymentButtons = false;
   this.generateReference();
   // this.amountInput = null;
 }
 
-
-
-// paymentDone(process: any) {
-//   this.showPaymentButtons = false;
-//   process.username = this.appUsername;
-//   process.amount = this.model.amount;
-
-//   this.paymentDoneSub = this.userService.postTransaction(process).subscribe(
-//     res => {
-//      this.accountService.loadMyBalance();
-      
-//      this.generateReference()
-//     },
-//     err => {
-//      this.generateReference()
-//      this.accountService.loadMyBalance();
-//     }
-//   );
-//   console.log( process);
-//  }
-
-
  profileSection(){
   this.router.navigate(['/tabs/profile']);
 }
 
  payNow(){
-  console.log('pay now is clicked..', this.reference);
-  
+  console.log('pay now is clicked..', this.reference); 
 }
-
-// mobileTransfer(){
-//   console.log(this.model.amount.valueOf());
-//   this.showAlert();
-// }
-
-
-// async showAlert() {
-//   const alert = await this.alertController.create({
-//     header: 'MOBILE TRANSFER',
-//     message: `Add this id (${this.accountService.user_id})
-//     to your mobile transfer info. <br> after a successful transfer click OK.
-//              <p><h6 class=" font-weight-bold">Account Number: 3585745013</h6></p>
-//              <p><h6  class="font-weight-bold">Bank : FCMB </h6></p>
-//              <p><h6  class=" fiont-weight-bold">Account Name : Ayaweisoft </h6></p>
-//              <p> <h4 class=" fiont-weight-bold"> Amount : ₦ ${this.model.amount}</h4></p>`,
-//     buttons: [
-//       {
-//         text: 'Cancel',
-//         role: 'cancel',
-//         cssClass: 'secondary', 
-//         handler: () => {
-//          this.showPaymentButtons = false;
-//          this.generateRef();
-//         }
-//       }, {
-//         text: 'Okay',
-//         handler: () => {
-//          this.showPaymentButtons = false;
-//          const process = { username : this.appUsername , amount: this.model.amount, status : 'processing',
-//           trxref: this.reference, account_id: this.accountService.user_id, transaction : ' manual transfer'};
-
-//          process.username = this.appUsername;
-//          console.log('Confirm Okay', process);
-//          this.userService.postManualTrans(process).subscribe(
-//             res => {
-//               console.log(res);
-//               this.presentSucess();
-//             },
-//             err => {
-//               console.log(err); 
-//             }
-//           );
-//         }
-//       }
-//     ]
-//   });
-
-//   await alert.present();
-// }
-
-// async presentSucess() {
-//   this.showPaymentButtons = false;
-//   const toast = await this.toastController.create({
-//     message: 'Your account will be updated shortly.',
-//     position: 'middle',
-//     duration: 4000
-//   });
-//   toast.present(); 
-// }
-
 
 async enterAmountInput() {
   const alert = await this.alertController.create({
@@ -313,36 +224,7 @@ async enterAmountInput() {
 
 }
 
-// async presentAmountInput() {
-//   const alert = await this.alertController.create({
-//     header: 'ENTER AMOUNT',
-//     inputs: [ {
-//         name: 'amount',
-//         type: 'text',
-//         placeholder: 'example 2000'
-//       }],
-//     buttons: [ {
-//         text: 'Cancel',
-//         role: 'cancel',
-//         cssClass: 'secondary',
-//         handler: (blah) => {
-//           console.log('Confirm Cancel: blah');
-//         }
-//       }, {
-//         text: 'Okay',
-//         handler: (value) => {
-//           console.log('Confirm Okay', value);
-//           this.model.amount = value.amount;
-//           this.payNow();
-//         }
-//       }
-//     ]
-//   });
 
-//   await alert.present();
-// }
-
-// cashout
 async enterCashoutAmount() {
   const alert = await this.alertController.create({
     header: 'ENTER CASHOUT',
@@ -396,8 +278,6 @@ async enterCashoutAmount() {
   await alert.present();
 }
 
-
-
 async cashoutSuccess() {
   const alert = await this.alertController.create({
     header: 'CASHOUT SUCCESSFUL',
@@ -417,4 +297,22 @@ async cashoutSuccess() {
 
   await alert.present();
 }
+
+getTransaction(){
+  this.loading = true;
+  this.accountService.myTransaction().subscribe(
+    res => {
+      this.loading = false;
+      this.transaction = res['transaction'];
+      console.log('transaction result: ', res);
+
+      console.log('transaction: ', this.transaction); 
+    },
+    err => {
+      this.loading = false;
+      console.log(err);
+    }
+  );
+}
 } 
+
