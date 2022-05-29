@@ -136,15 +136,11 @@ closedPaymentModal(): void {
  
 }
 
-
-
 generateReference() {
   let date = new Date();
   this.reference = date.getTime().toString();
   
 }
-
-
 
 submitProCode(promo){
   this.loading = true;
@@ -172,18 +168,11 @@ showNotiAlert(header, sub, msg){
   }).then((alert) =>  alert.present() );
 }
 
-
-
-
-
-
 paymentCancel(){
   this.showPaymentButtons = false;
   this.generateReference();
   // this.amountInput = null;
 }
-
-
 
 // paymentDone(process: any) {
 //   this.showPaymentButtons = false;

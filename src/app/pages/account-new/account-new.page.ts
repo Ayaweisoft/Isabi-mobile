@@ -32,7 +32,7 @@ export class AccountNewPage implements OnInit {
   @Input() lastName: string;
   @Input() middleInitial: string; 
   loading: boolean;
-
+  bonus: any;
   balance: any;
 
   customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: '',
@@ -72,6 +72,9 @@ ngOnInit() {
 
   this.accountService.getAccountBalance().subscribe(bal => {
     this.balance = bal;
+  })
+  this.accountService.getAccountBonus().subscribe(bal => {
+    this.bonus = bal;
   })
 }
 

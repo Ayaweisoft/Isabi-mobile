@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { AccountNewPageRoutingModule } from './account-new-routing.module';
+import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
 
 import { AccountNewPage } from './account-new.page';
 import {ProfilePhotoComponent} from '../../components/profile-photo/profile-photo.component'
@@ -14,7 +15,8 @@ import {ProfilePhotoComponent} from '../../components/profile-photo/profile-phot
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountNewPageRoutingModule
+    AccountNewPageRoutingModule,
+    NgInterswitchModule,
   ],
   declarations: [AccountNewPage, ProfilePhotoComponent]
 })
