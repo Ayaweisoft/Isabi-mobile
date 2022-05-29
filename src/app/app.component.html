@@ -147,6 +147,7 @@
               </ion-menu-toggle>
             </div>
           </div>
+
           <div class="section account-section">
             <span class="heading">Account</span>
             <div class="heading-section">
@@ -172,6 +173,26 @@
               </ion-menu-toggle>
             </div>
           </div>
+          
+          <div class="section account-section">
+            <span class="heading">Socials</span>
+            <div class="heading-section">
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo">
+                  <div class="logo"></div>
+                  <span class="name"><a href="https://wa.link/geq34w">Chat</a> </span>
+                </div>
+              </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'"ss [routerLink]="['/tabs/transaction']"
+                routerLinkActive="router-link-active">
+                  <div class="logo"></div>
+                  <span class="name">Share</span>
+                </div>
+              </ion-menu-toggle>
+            </div>
+          </div>
+
           <div class="section logout-section">
             <span class="heading">Logout</span>
             <div class="heading-section">
