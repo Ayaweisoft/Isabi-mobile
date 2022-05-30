@@ -27,8 +27,8 @@
         <div class="price">{{bonus | currency:'₦'}}</div>
       </div>
       <div class="btn-section">
-        <button class="container-btn" (click)="enterAmountInput()">Deposit</button>
-        <button class="container-btn" (click)="enterCashoutAmount()">Cashout</button>
+        <button class="container-btn" (click)="enterAmountInput()" *ngIf="!showPaymentButtons">Deposit</button>
+        <button class="container-btn" (click)="enterCashoutAmount()" *ngIf="!showPaymentButtons">Cashout</button>
       </div>
 
       <div class="payment-card" *ngIf="showPaymentButtons">
