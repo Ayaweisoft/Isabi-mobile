@@ -31,7 +31,9 @@ export class RegisterPage implements OnInit {
               email:'',
               username: '',
               conf_password:'',
-              referrer: ''
+              referrer: '',
+              nationality: '',
+              birthday: ""
             };
 
   ngOnInit() {
