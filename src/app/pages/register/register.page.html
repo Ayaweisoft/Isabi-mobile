@@ -45,7 +45,7 @@
             <div class="inputBox">
               <span class="text">referrer</span>
               <input type="text" required="false" #referrer="ngModel" name="referrer"
-                [(ngModel)]="model.referrer" ngControl="title">
+                [(ngModel)]="model.referrer" ngControl="title" value="">
             </div>
             <input class="signin-btn" type="submit" value="Sign up" [disabled]="!signUpForm.valid && password.value == true">
           </div>
