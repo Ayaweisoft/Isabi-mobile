@@ -22,7 +22,11 @@ export class AppComponent {
   showSplash = true;
   @ViewChild('nav', {static: false}) nav: NavController;
   balance : any;
+  image: any;
+  username: String;
+  bonus: any;
   authenticate = false;
+  loading: boolean = true;
   public appPages = [
     {
       title: 'PLAY DEMO',
@@ -119,18 +123,48 @@ export class AppComponent {
 
   }
 
+  reloadBonus(){
+    this.accountService.loadMyBonus();
+    // this.bal.nativeElement.classList.add('rubberBand');
+    setTimeout(()=>{
+      // this.bal.nativeElement.classList.remove('rubberBand');
+    },2000);
+
+  }
+
+
+  ngOnInit(){
+    // this.getProfilePic();
+    this.userService.getUsername().subscribe(name => this.username = name);
+  }
+  ionViewWillEnter(){
+    // this.getProfilePic();
+    this.userService.getUsername().subscribe(name => this.username = name);
+  }
+
+
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+      this.reloadBalance();
       this.accountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
-        this.reloadBalance();
+      this.reloadBonus();
+      this.accountService.getAccountBonus().subscribe(bon =>  this.bonus =  bon);
+      console.log(this.bonus);
+      
         // this.localNotifications.on('trigger').subscribe( res => {
         //   console.log('alert Trigger 2', res );
         //   let msg = res.data ? res.data.mydata : '';
         //   this.showAlert(res.title, res.text);
         // });
-    
+      this.userService.loadProfilePicture();
+      this.userService.getProfilePicture().subscribe(pic => this.image = pic);
+      // this.getProfilePic();
+      this.userService.loadUsername();
+      this.userService.getUsername().subscribe(name => this.username = name);
+      
       
       this.statusBar.show();
       // this.splashScreen.hide();
@@ -155,5 +189,18 @@ export class AppComponent {
     });
     await alert.present();
   }
+
+  // getProfilePic() {
+  //   this.userService.getProfilePic().subscribe(
+  //     res => {
+  //       this.loading = false;
+  //       this.image = res.image_url;
+  //       console.log(this.image);
+  //     },
+  //     err => {
+  //       this.loading = false;
+  //     }
+  //   )
+  // }
 
 }

@@ -1,8 +1,9 @@
 <div class="timer-section">
   <span class="h">COUNTDOWN TO GAME</span>
-  <div class="row">
+  <div *ngIf="notLive" class="row">
     <div class="time">
       <div class="circle-loader">
+        <div class="circle-back" style="--pgPercentage: {{gameService.timeDays/7 * -100 + 100}}"></div>
         <div class="days circle" id="day">
           {{gameService.timeDays}}
         </div>
@@ -11,6 +12,7 @@
     </div>
     <div class="time">
       <div class="circle-loader">
+        <div class="circle-back" style="--pgPercentage: {{gameService.timeHours/24 * -100 + 100}}"></div>
         <div class="hours circle" id="hour">
           {{gameService.timeHours}}
         </div>
@@ -19,6 +21,7 @@
     </div>
     <div class="time">
       <div class="circle-loader">
+        <div class="circle-back" style="--pgPercentage: {{gameService.timeMinute/60 * -100 + 100}}"></div>
         <div class="minutes circle" id="minute">
           {{gameService.timeMinute}}
         </div>
@@ -27,6 +30,7 @@
     </div>
     <div class="time">
       <div class="circle-loader">
+        <div class="circle-back" style="--pgPercentage: {{gameService.timeSeconds/60 * -100 + 100}}"></div>
         <div class="seconds circle" id="second">
           {{gameService.timeSeconds}}
         </div>
@@ -34,4 +38,5 @@
       <small>SECONDS</small>
     </div>
   </div>
+  <p class="userCount">100 users online</p>
 </div>

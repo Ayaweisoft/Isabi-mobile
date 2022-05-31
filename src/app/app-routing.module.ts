@@ -195,73 +195,83 @@ const routes: Routes = [
     path: 'tabs', component: TabsComponent,
     children: [
      
-      {
-        path: 'events', loadChildren: './pages//events/events.module#EventsPageModule',
-        canActivate: [AuthguardGuard]
-      },
-      
+    {
+      path: 'events', loadChildren: './pages//events/events.module#EventsPageModule',
+      canActivate: [AuthguardGuard]
+    },
+    
+    {
+      path: 'gamesection',
+      component: GamesectionComponent, canActivate: [AuthguardGuard, GameGuard]
+    },
+    {
+      path: 'game-not-live',
+      component: NotLiveComponent, canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'playdemo',
+      loadChildren: './pages/playdemo/playdemo.module#PlaydemoPageModule', canActivate: [AuthguardGuard]
+    },
 
-      {
-        path: 'gamesection',
-        component: GamesectionComponent, canActivate: [AuthguardGuard, GameGuard]
-      },
-      {
-        path: 'game-not-live',
-        component: NotLiveComponent, canActivate: [AuthguardGuard]
-      },
-      {
-        path: 'playdemo',
-        loadChildren: './pages/playdemo/playdemo.module#PlaydemoPageModule', canActivate: [AuthguardGuard]
-      },
 
-  
-      {
-        path: 'not-live', component: NotLiveComponent, canActivate: [AuthguardGuard]
-      },
+    {
+      path: 'not-live', component: NotLiveComponent, canActivate: [AuthguardGuard]
+    },
+    
+    {
+      path: 'leaderboard',
+      loadChildren: './pages/leaderboard/leaderboard.module#LeaderboardPageModule',
       
-      {
-        path: 'leaderboard',
-        loadChildren: './pages/leaderboard/leaderboard.module#LeaderboardPageModule',
-        
-      },
-      {
-        path: 'account', component: AccountComponent, canActivate: [AuthguardGuard]
-      },
-   
+    },
+    {
+      path: 'account', component: AccountComponent, canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'account-new',
+      loadChildren: () => import('./pages/account-new/account-new.module').then( m => m.AccountNewPageModule)
+    },
+    {
+      path: 'account-details',
+      loadChildren: () => import('./pages/account-details/account-details.module').then( m => m.AccountDetailsPageModule)
+    },
 
-      {
-        path: 'manage-event', component: ManageEventComponent,
-        canActivate: [AuthguardGuard, AdminGuard]
-      },
-  
-      {
-        path: 'admin-event', component: AdminEventComponent,
-        canActivate: [AuthguardGuard, AdminGuard]
-      },
-  
-     
-      {
-        path: 'profile',
-        loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthguardGuard]
-      },
-      {
-        path: 'settings',
-        loadChildren: './pages/settings/settings.module#SettingsPageModule', canActivate: [AuthguardGuard]
-      },
-      {
-        path: 'privacy-policy',
-        loadChildren: './pages/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule', canActivate: [AuthguardGuard]
-      },
-      {
-        path: 'myrecord',
-        loadChildren: './pages/myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
-      },
-      
- 
+    {
+      path: 'manage-event', component: ManageEventComponent,
+      canActivate: [AuthguardGuard, AdminGuard]
+    },
+
+    {
+      path: 'admin-event', component: AdminEventComponent,
+      canActivate: [AuthguardGuard, AdminGuard]
+    },
+
+    
+    {
+      path: 'profile',
+      loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'settings',
+      loadChildren: './pages/settings/settings.module#SettingsPageModule', canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'privacy-policy',
+      loadChildren: './pages/privacy-policy/privacy-policy.module#PrivacyPolicyPageModule', canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'myrecord',
+      loadChildren: './pages/myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
+    },
+
     {
       path: 'playsection',
       loadChildren: './pages/playsection/playsection.module#PlaysectionPageModule',
-      canActivate: [AuthguardGuard, GameGuard]
+      canActivate: [AuthguardGuard]
+    },
+
+    {
+      path: 'network',
+      loadChildren: () => import('./pages/network/network.module').then( m => m.NetworkPageModule)
     },
 
     {
@@ -328,16 +338,42 @@ const routes: Routes = [
       path: 'admin-leaderbord', loadChildren: './pages/admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',
       canActivate: [AuthguardGuard, AdminGuard]
     },
+    
   ]},
   {
-    path: 'register',
+    path: 'register/:id',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
-    // { path: "*", redirectTo: 'tabs/events' }
+  {
+    path: 'accounts',
+    loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
+  },
+  {
+    path: 'coming-soon',
+    loadChildren: () => import('./pages/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
+  },
+  {
+    path: 'acct-page',
+    loadChildren: () => import('./pages/acct-page/acct-page.module').then( m => m.AcctPagePageModule)
+  },
+
+  {
+    path: '**', pathMatch: 'full',
+    loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
+  },
+
+
+  
+  { path: "*", redirectTo: 'tabs/events' },
+ 
+
+  
+
+
 ];
 
 const routes3: Routes = [

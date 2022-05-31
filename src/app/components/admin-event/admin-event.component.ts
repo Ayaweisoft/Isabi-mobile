@@ -90,9 +90,9 @@ uploadImageToFireBase(image) {
       this.fireService.uploadFile(image).then((success) => {
           const imageRef = success.ref.fullPath;
           this.fireService.downloadItem(imageRef).subscribe(imageUrl => {
-              this.image = imageUrl;
-              this.eventModel.image_url = imageUrl;
-              this.loading = false;
+            this.image = imageUrl;
+            this.eventModel.image_url = imageUrl;
+            this.loading = false;
           });
       });
   } catch (error) {

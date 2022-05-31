@@ -1,0 +1,40 @@
+.main-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    max-height: 100vh;
+    
+    .error-illustration{
+        svg{
+            transform: scale(0.8);
+        }
+    }
+
+    .error-desc{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        .error-text{
+            font-size: 1.3rem;
+            font-weight: 500; 
+        }
+
+        .error-button{
+            padding: 0.59rem 1rem;
+            background: #348A40;
+            border: 1px solid transparent;
+            color: #fff;
+            border-radius: 0.4rem;
+            
+            &:hover{
+                background: transparent;
+                border: 1px solid #348A40;
+                color: #000;
+            }					
+        }
+    }
+}

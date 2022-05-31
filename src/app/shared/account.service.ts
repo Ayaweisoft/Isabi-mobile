@@ -12,6 +12,7 @@ export class AccountService {
   public appUser: any;
   // public accountBalance = null;
   accountSubject =  new BehaviorSubject<number>(0);
+  accountBonus = new BehaviorSubject<number>(0);
   leaderboard$: Observable<any>;
   leaderboardGameSection$: Observable<any>;
   appUsername: any;
@@ -35,7 +36,6 @@ export class AccountService {
     this.http
       .get(environment.apiBaseUrl + "/get-account-balance")
       .subscribe(value => {
-
         this.setAccountBalance(value["balance"])
         console.log('NEW Balance ',this.accountSubject.getValue() )
         this.getLeaderboard();
@@ -44,14 +44,33 @@ export class AccountService {
       });
   }
 
+  loadMyBonus(){
+    this.http.get(environment.apiBaseUrl + "/get-account-bonus")
+    .subscribe(value => {
+      this.setAccountBonus(value["bonus"])
+      console.log('NEW Bonus ',this.accountBonus.getValue())
+    })
+  }
+
+  claimReferralBonus(referralBonus: number) {
+    return this.http.post(environment.apiBaseUrl + "/claim-referral-bonus", referralBonus);
+  }
 
   setAccountBalance(balance: number) {
     this.accountSubject.next(balance);
-}
+  }
+
+  setAccountBonus(bonus: number){
+    this.accountBonus.next(bonus);
+  }
 
 
 getAccountBalance(): BehaviorSubject<any> {
     return this.accountSubject;
+}
+
+getAccountBonus(): BehaviorSubject<any> {
+  return this.accountBonus;
 }
 
   getLeaderboard() {
@@ -83,9 +102,25 @@ getAccountBalance(): BehaviorSubject<any> {
     return this.http.get(environment.apiBaseUrl + "/get-account-balance");
   }
 
+  loadBonusForCalculation() {
+    this.loadMyBonus();
+    return this.http.get(environment.apiBaseUrl + "/get-account-bonus");
+  }
+
   deductGameAmountFromAccount() {
     return this.http.get(environment.apiBaseUrl + "/deduct-game-amount");
   }
+  deductGameAmountFromBonus() {
+    return this.http.get(environment.apiBaseUrl + "/deduct-game-bonus");
+  }
+
+  deductGameAmountFromAccountDemo() {
+    return this.http.get(environment.apiBaseUrl + "/deduct-game-amount-demo");
+  } 
+  deductGameAmountFromBonusDemo() { 
+    return this.http.get(environment.apiBaseUrl + "/deduct-game-bonus-demo");
+  }
+
 
   myTransaction() {
     return this.http.get(environment.apiBaseUrl + "/get-my-transaction");

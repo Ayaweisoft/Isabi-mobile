@@ -1,0 +1,30 @@
+.profile-header{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 1.7rem;
+    padding: 0.3rem;
+
+    .profile-pic{
+        height: 40px;
+        width: 40px;
+        border: 4px solid #3B9C48;
+        border-radius: 50%;
+        overflow: hidden;
+    
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    .profile-name {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: #CAEDCF;
+        margin: 0;
+    }
+}

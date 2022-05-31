@@ -31,7 +31,7 @@ export class NotLiveComponent implements OnInit {
   safeVideo: any;
   loading = false;
   gameTime : any;
-  slideCounter =  0;
+  // slideCounter =  0;
 
   
 
@@ -70,7 +70,7 @@ export class NotLiveComponent implements OnInit {
     this.getYoutubeLink();
     // this.doMagic();
     this.gameService.getGameTip(); 
-    this.autoSlide();
+    // this.autoSlide();
   }
 
 
@@ -85,19 +85,16 @@ export class NotLiveComponent implements OnInit {
  
 
 
-async autoSlide() {
-   setInterval(()=> {
-      this.gameService.slideCounter = this.gameService.gameTipArray.length;
-      this.gameService.slideCounter --;
-      this.mySlider.slideNext(3000, true);
-      console.log('slide to prev', this.gameService.slideCounter);
+// async autoSlide() {
+//    setInterval(()=> {
+//       this.gameService.slideCounter = this.gameService.gameTipArray.length;
+//       this.gameService.slideCounter --;
+//       this.mySlider.slideNext(3000, true);
+//       console.log('slide to prev', this.gameService.slideCounter);
    
    
-   },9000)
-
-
-
-}
+//    },9000)
+// }
 
 
 
@@ -138,15 +135,15 @@ async autoSlide() {
     });
   }
 
-  clickSlidetoNext() {
-    console.log('slide to next')
-    this.mySlider.slideNext();
-  }
+  // clickSlidetoNext() {
+  //   console.log('slide to next')
+  //   this.mySlider.slideNext();
+  // }
 
-  clickSlidePrevious() {
-    console.log('slide to previous');
-    this.mySlider.slidePrev();
-  }
+  // clickSlidePrevious() {
+  //   console.log('slide to previous');
+  //   this.mySlider.slidePrev();
+  // }
 
 
   async getYoutubeLink() {
