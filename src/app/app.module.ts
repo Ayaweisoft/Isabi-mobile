@@ -24,7 +24,8 @@ import { RouteReuseStrategy } from '@angular/router';
 // import {MatIconModule} from '@angular/material/icon';
 
 import { SplashComponent } from './components/splash/splash.component';
-// import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+// import { environment } from 'src/environments/environment';
 // import { Socket } from 'ngx-socket-io';
 // const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
 // const config: SocketIoConfig = { 
@@ -65,6 +66,10 @@ import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
 import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
+const config: SocketIoConfig = { url: environment.socketsUrl, options: {
+  path: "/live/",
+} };
+
 
 @NgModule({
   declarations: [
@@ -95,7 +100,7 @@ import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
     SafeResourceUrlPipe, 
     PrivacyPolicyPage,
     SplashComponent,
-    MinutesToSecondsPipe
+    MinutesToSecondsPipe,
   ],
   entryComponents: [InsideEventAddUserComponent, VoteNowComponent
   ],
@@ -106,7 +111,7 @@ import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
     NgInterswitchModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    // SocketIoModule.forRoot(config),
+    SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
     

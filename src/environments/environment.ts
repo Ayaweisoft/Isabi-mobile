@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
 apiBaseUrl:  'http://localhost:8000/api',
-// 192.168.137.247
+socketsUrl:  'http://localhost:8000/',
 // webVotingUrl:  'http://localhost:8100/',
 webVotingUrl:  'https://i-sabi.app/',
 versionCode: 5.2,

@@ -1,5 +1,6 @@
 import { IonSlides, AlertController } from '@ionic/angular';
 import { EventService } from '../../shared/event.service';
+import { SocketService } from '../../services/socket.service';
 import { GameServiceService } from '../../shared/game-service.service';
 import { UserService } from '../../shared/user.service';
 import { Router } from '@angular/router';
@@ -7,7 +8,7 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { AccountService } from '../../shared/account.service';
 import { environment } from 'src/environments/environment';
 import { LogicService } from '../../services/logic.service';
-import { SocketService } from '../../socket.service';
+// import { SocketService } from '../../socket.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ loading = false;
 webLink = environment.webVotingUrl;
 slideCounter =  0;
 socket: any;
-
+userCount: number = 0;
 opts = {
   slidePerView: 1,
   spaceBetween: 20
@@ -33,23 +34,28 @@ opts = {
 onlineUsers = 0;
 
   constructor(private router: Router,
-              private eventService: EventService,
-              public  userService: UserService,
-              public gameService: GameServiceService,
-              private accountService: AccountService,
-              private logicService: LogicService,
+              private EventService: EventService,
+              public  UserService: UserService,
+              public GameService: GameServiceService,
+              private AccountService: AccountService,
+              private LogicService: LogicService,
               public SocketService: SocketService,
-              public alertController: AlertController) {
+              public AlertController: AlertController) {
   }
 
   ngOnInit() { 
     this.getAllevent();
-    this.gameService.getGameTip();  
-    this.gameService.getAdminDate();
+    this.GameService.getGameTip();  
+    this.GameService.getAdminDate();
+    this.SocketService.connect();
     // this.appUser = localStorage.getItem('appUser');
     //this.initializeTimer(); 
-    console.log("day", this.gameService.timeDays);
-    // this.SocketService.fetchOnlineUsers(this.onlineUsers)
+    console.log("day", this.GameService.timeDays);
+    // this.SocketService.userConnected();
+    this.SocketService.fetchOnlineUsers().subscribe(data => {
+      this.userCount = data;
+      });
+  
     // this.socket = io.io('localhost:8000');
     // this.socket.on('new-msg', (msg: any) => {
     //   console.log('sock msg: ' + msg);
@@ -64,7 +70,7 @@ onlineUsers = 0;
   }
 
   getAllevent(){
-    this.eventService.getAllEvent().subscribe(
+    this.EventService.getAllEvent().subscribe(
       res => {
         console.log(res);
         this.allEvent = res['event'];
@@ -73,7 +79,7 @@ onlineUsers = 0;
       },
       err => {
         this.loading = false;
-        this.userService.longToast(err.error.msg);
+        this.UserService.longToast(err.error.msg);
         console.log('error getting event', err);
       }
     );
@@ -91,7 +97,7 @@ onlineUsers = 0;
     inputElement.select();
     document.execCommand('copy');
     inputElement.setSelectionRange(0, 0);
-    this.logicService.presentToast('Text copied!' );
+    this.LogicService.presentToast('Text copied!' );
   }
 
   insideEvent(event){
@@ -112,7 +118,7 @@ onlineUsers = 0;
   }
 
   async handleDelete(event) {
-    const alert = await this.alertController.create({
+    const alert = await this.AlertController.create({
       header: 'Confirm!',
       message: `Delete <strong>${event.aboutEvent} </strong>!!!`,
       buttons: [
@@ -127,15 +133,15 @@ onlineUsers = 0;
           text: 'Okay',
           handler: () => {
             this.loading = true;
-            this.eventService.deleteEvent(event._id).subscribe(
+            this.EventService.deleteEvent(event._id).subscribe(
               res => {
                 this.loading = false;
-                this.userService.generalToast(res['msg'], 2000);
+                this.UserService.generalToast(res['msg'], 2000);
                 this.getAllevent();
               },
               err => {
                 this.loading = false;
-                this.userService.generalAlert(err.error.msg);
+                this.UserService.generalAlert(err.error.msg);
               }
             );
           }

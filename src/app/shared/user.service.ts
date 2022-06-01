@@ -17,6 +17,7 @@ export class UserService {
   token: any;
   accountBalance: any;
   username: any;
+  userID: string | null;
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
   full_name = new BehaviorSubject<any>('');

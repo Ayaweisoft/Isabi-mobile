@@ -1,5 +1,5 @@
 import { AccountComponent } from './pages/account/account.component';
-
+import { SocketService } from './services/socket.service';
 import { AccountService } from './shared/account.service';
 import { UserService } from './shared/user.service';
 import { Component, ViewChild, ElementRef, OnDestroy } from '@angular/core';
@@ -89,6 +89,7 @@ export class AppComponent {
     // {title:'Admin dashboard', url:'/admin-dash'},
 
   ];
+  userCount: number;
 
   constructor(
     private platform: Platform,
@@ -96,8 +97,9 @@ export class AppComponent {
     private alertCtrl: AlertController,
     private splashScreen: SplashScreen,
     private ModalController: ModalController,
-    public userService: UserService,
-    public accountService: AccountService,
+    public UserService: UserService,
+    public AccountService: AccountService,
+    public SocketService: SocketService
   ) {
     // this.presentSplash();
     this.initializeApp();
@@ -115,7 +117,7 @@ export class AppComponent {
 
 
   reloadBalance(){
-    this.accountService.loadMyBalance();
+    this.AccountService.loadMyBalance();
     // this.bal.nativeElement.classList.add('rubberBand');
     setTimeout(()=>{
       // this.bal.nativeElement.classList.remove('rubberBand');
@@ -124,7 +126,7 @@ export class AppComponent {
   }
 
   reloadBonus(){
-    this.accountService.loadMyBonus();
+    this.AccountService.loadMyBonus();
     // this.bal.nativeElement.classList.add('rubberBand');
     setTimeout(()=>{
       // this.bal.nativeElement.classList.remove('rubberBand');
@@ -135,11 +137,15 @@ export class AppComponent {
 
   ngOnInit(){
     // this.getProfilePic();
-    this.userService.getUsername().subscribe(name => this.username = name);
+    this.UserService.getUsername().subscribe(name => this.username = name);
+    const userID = this.UserService.getAuthId()
+
+    this.SocketService.userConnected(userID);
+  
   }
   ionViewWillEnter(){
     // this.getProfilePic();
-    this.userService.getUsername().subscribe(name => this.username = name);
+    this.UserService.getUsername().subscribe(name => this.username = name);
   }
 
 
@@ -149,9 +155,9 @@ export class AppComponent {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       this.reloadBalance();
-      this.accountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
+      this.AccountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
       this.reloadBonus();
-      this.accountService.getAccountBonus().subscribe(bon =>  this.bonus =  bon);
+      this.AccountService.getAccountBonus().subscribe(bon =>  this.bonus =  bon);
       console.log(this.bonus);
       
         // this.localNotifications.on('trigger').subscribe( res => {
@@ -159,11 +165,11 @@ export class AppComponent {
         //   let msg = res.data ? res.data.mydata : '';
         //   this.showAlert(res.title, res.text);
         // });
-      this.userService.loadProfilePicture();
-      this.userService.getProfilePicture().subscribe(pic => this.image = pic);
+      this.UserService.loadProfilePicture();
+      this.UserService.getProfilePicture().subscribe(pic => this.image = pic);
       // this.getProfilePic();
-      this.userService.loadUsername();
-      this.userService.getUsername().subscribe(name => this.username = name);
+      this.UserService.loadUsername();
+      this.UserService.getUsername().subscribe(name => this.username = name);
       
       
       this.statusBar.show();
@@ -191,7 +197,7 @@ export class AppComponent {
   }
 
   // getProfilePic() {
-  //   this.userService.getProfilePic().subscribe(
+  //   this.UserService.getProfilePic().subscribe(
   //     res => {
   //       this.loading = false;
   //       this.image = res.image_url;
