@@ -73,7 +73,8 @@
             <span class="heading">Events</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" >
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/coming-soon']"
+                routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/fluent_vote-24-regular.svg" alt="">
                   </div>
@@ -81,7 +82,8 @@
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/coming-soon']"
+                routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/icon-park-outline_ticket.svg" alt="">
                   </div>
@@ -89,7 +91,7 @@
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/events']"
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/coming-soon']"
                 routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/carbon_event-schedule.svg" alt="">
@@ -103,7 +105,7 @@
             <span class="heading">Settings</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/setting']"
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/settings']"
                 routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/ep_setting.svg" alt="">
@@ -121,11 +123,12 @@
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/account-details']"
+                routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/ic_outline-account-balance.svg" alt="">
                   </div>
-                  <span class="name">Account Info</span>
+                  <span class="name">Account Details</span>
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
@@ -138,7 +141,8 @@
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo">
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/coming-soon']"
+                routerLinkActive="router-link-active">
                   <div class="logo">
                     <img src="../../assets/figma/mdi_theme-light-dark.svg" alt="">
                   </div>
@@ -152,7 +156,7 @@
             <span class="heading">Account</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/account-new']"
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/tabs/accounts']"
                 routerLinkActive="router-link-active">
                   <div class="logo"></div>
                   <span class="name">Account</span>
@@ -165,16 +169,10 @@
                   <span class="name">Transaction</span>
                 </div>
               </ion-menu-toggle>
-              <ion-menu-toggle auto-hide="false">
-                <div class="Demo">
-                  <div class="logo"></div>
-                  <span class="name">Account</span>
-                </div>
-              </ion-menu-toggle>
             </div>
           </div>
           
-          <div class="section account-section">
+          <div class="section social-section">
             <span class="heading">Socials</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
@@ -184,7 +182,7 @@
                 </div>
               </ion-menu-toggle>
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" [routerDirection]="'root'"ss [routerLink]="['/tabs/transaction']"
+                <div class="Demo" [routerDirection]="'root'" [routerLink]="['/coming-soon']"
                 routerLinkActive="router-link-active">
                   <div class="logo"></div>
                   <span class="name">Share</span>

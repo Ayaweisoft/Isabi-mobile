@@ -118,5 +118,5 @@ export class LeaderboardPage implements OnInit {
       console.log(this.leaderBoard)
       this.loading = false;
     });
-  }  
+  }
 }

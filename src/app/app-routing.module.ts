@@ -230,6 +230,10 @@ const routes: Routes = [
       path: 'account-details',
       loadChildren: () => import('./pages/account-details/account-details.module').then( m => m.AccountDetailsPageModule)
     },
+    {
+      path: 'accounts',
+      loadChildren: () => import('./pages/account-new/account-new.module').then( m => m.AccountNewPageModule)
+    },
 
     {
       path: 'manage-event', component: ManageEventComponent,
@@ -348,13 +352,13 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'accounts',
-    loadChildren: () => import('./pages/accounts/accounts.module').then( m => m.AccountsPageModule)
+    path: 'coming-soon',
+    loadChildren: () => import('./pages/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
   },
     { path: "*", redirectTo: 'tabs/events' },
   {
-    path: 'acct-page',
-    loadChildren: () => import('./pages/acct-page/acct-page.module').then( m => m.AcctPagePageModule)
+    path: '**',
+    loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
 
   
