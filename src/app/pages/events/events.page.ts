@@ -40,6 +40,7 @@ onlineUsers = 0;
               private logicService: LogicService,
               public SocketService: SocketService,
               public alertController: AlertController) {
+                this.gameService.getGameTip();
   }
 
   ngOnInit() { 

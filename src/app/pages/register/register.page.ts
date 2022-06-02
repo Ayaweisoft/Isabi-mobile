@@ -14,9 +14,12 @@ import { ActivatedRoute } from '@angular/router';
 export class RegisterPage implements OnInit {
   loading: boolean;
   id: any;
-  referralCode: any;
+  isReferralCode: boolean = false;
+  // referralCode: any;
   phoneRegex =  /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
-
+  ref = {
+    referralCode: '',
+  }
 
   constructor(public userService: UserService,
              private logicService: LogicService,
@@ -44,6 +47,12 @@ export class RegisterPage implements OnInit {
  
     this.activatedRoute.paramMap.subscribe(params => { 
         this.id = params.get('id');
+        if(this.id){
+          this.ref.referralCode = this.id;
+          this.isReferralCode = true;
+          this.model.referrer = this.id;
+          console.log(this.ref.referralCode);
+        }
         
     });
   }
@@ -55,15 +64,16 @@ export class RegisterPage implements OnInit {
     this.userService.registerUser(this.model).subscribe( 
       response => {
         this.loading = false;
-        let message = "Registraion successful!";
+        let message = "Registration successful!";
         this.logicService.presentSucess('success','registration successful', 'continue'); 
         this.router.navigate(['/login']);
       },
       error => {
         this.loading = false;
-        console.log(error);
+        // console.log(error);
         let message = error.error;
         this.gameService.presentToast(message);
+        console.log('error: ', error)
         
       }
     );

@@ -124,7 +124,7 @@
 		flex-direction: column;
 
 		.game-modal{
-			position: absolute;
+			position: fixed;
 			padding: 2rem;
 			transform: translate(-50%, -50%);
 			left: 50%;
@@ -139,6 +139,13 @@
 			gap: 1rem;
 			z-index: 200;
 			border-radius: 1.5rem;
+
+			.cancel{
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0.5rem 0.5rem 0 0;
+			}
 	
 			.game-modal-heading{
 				font-size: 1.4rem;

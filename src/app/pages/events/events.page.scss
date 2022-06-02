@@ -223,7 +223,7 @@
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
     .loading-card {
-      background-color: #eef7ee;
+      background-color: #c2c2c2;
       border-radius: 10px;
       box-shadow: -1px 1px 6px -3px #00000040;
       display: flex;
@@ -237,16 +237,19 @@
       .loading-top {
         display: flex;
         gap: 15px;
-		.loading-pic,
+
+		    .loading-pic,
         .loading-name,
         .loading-details,
         .loading-type {
-          background: #f1f1f1;
-		  height: 15px;
+          background: #c2c2c2;
+		      height: 15px;
         }
+
         .loading-pics {
           flex: 2;
         }
+        
         .loading-pic {
           height: 104px;
           width: 114px;

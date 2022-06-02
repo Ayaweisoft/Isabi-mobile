@@ -1,68 +1,10 @@
 $border-radius-medium: 10px;
 
-ion-content {
-	--background: var(--ion-color-primary-contrast);
-
-	.logo {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-top: 3rem;
-		margin-bottom: 2rem;
-	}
-
-	form {
-		min-height: 250px;
-	}
-
-	.utility {
-		margin-bottom: 1.2rem;
-	}
-
-	.text-input {
-		border: 1px solid var(--ion-color-primary);
-		border-radius: 35px;
-	}
-
-	.forgot-password {
-		color: var(--ion-color-primary);
-		font-size: 0.8rem;
-		margin-bottom: 2rem;
-	}
-
-	.signup-block {
-		margin-top: 3rem;
-	}
-
-	.login ion-label {
-		cursor: pointer;
-	}
-
-	.social-icons {
-		display: flex;
-		justify-content: space-evenly;
-
-		img {
-			height: 30px;
-			width: 30px;
-		}
-	}
-}
-
-// loading
-.toast-container {
-	position: fixed;
-	display: flex;
-	justify-content: center;
-	top: auto;
-	margin-bottom: 80px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 999;
-}
-
 // new styles above
+
+ion-content{
+	--background-color: #f2f2f2;
+}
 .main-content{
 	height: 100%;
 	width: 100%;
@@ -70,8 +12,9 @@ ion-content {
 	@media (min-width: 1024px) {
 		display: flex;
 		padding: 0;
-		// display: none;
-	  }
+		width: 100%;
+		justify-content: flex-end;
+	}
 }
 
 .illustration{
@@ -84,28 +27,21 @@ ion-content {
 	position: relative;
 	background-image: url("../../../assets/figma/signup_img.svg");
     background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  	background-size: contain;
+  	background-position: center;
 	background-color: white;
 	width: 100%;
 	height: 40%;
 	@media screen and (min-width: 1024px) {
 		height: 100%;
+		position: fixed;
+		z-index: 5;
+		left: 0;
+		top: 0;
+		width: 45%;
+		z-index: 105;
 	}
-	// z-index: -1;
 }
-
-// .top-section::before{
-// 	content: "";
-// 	position: absolute;
-// 	height: 100%;
-// 	width: 100%;
-// 	// z-index: -1;
-// 	left: 0;
-// 	bottom: 0;
-// 	background-color: #348A40;
-// }
-
 
 h2{
 	z-index: 100;
@@ -152,11 +88,21 @@ p{
 	border-top-right-radius: 30px;
 	margin-top: -30px;
 	z-index: 100;
+
+	@media screen and (min-width: 1024px) {
+		height: fit-content;
+		width: 54%;
+		padding-top: 3.5rem;
+		border-radius: 0px;
+		z-index: 100;
+		justify-content: center;
+	}
+
 }
 
 .input-section {
 	width: 80%;
-	margin-top: 30px;
+	margin-top: 15px;
 }
 
 form{

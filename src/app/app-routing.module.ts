@@ -341,6 +341,10 @@ const routes: Routes = [
     
   ]},
   {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
     path: 'register/:id',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },

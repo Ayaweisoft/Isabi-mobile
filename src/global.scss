@@ -48,7 +48,7 @@ p{
 }
 
 ion-content{
-	--background: #fafafa;
+	--background-color: #fafafa;
 }
 
 .main-content{
@@ -103,6 +103,13 @@ ion-content{
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+button{
+	transition: all 0.5s cubic-bezier(0.19, 0.66, 0.48, 0.97);;
+	&:hover{
+		transform: translateY(-2px);
+	}
 }
 
 .modal-fullscreen {
@@ -243,7 +250,7 @@ ion-content{
 }
 
 .info {
-	text-decoration: underline rgb(255, 254, 254);
+	text-decoration: underline rgb(255, 254, 254); 
 }
 
 //   loading
