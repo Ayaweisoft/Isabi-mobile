@@ -1,3 +1,4 @@
+import { BehavourService } from './../../services/behavour.service';
 import { DemoQuestionsService } from "../../shared/demo-questions.service";
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { UserService } from "../../shared/user.service";
@@ -54,17 +55,20 @@ export class PlaydemoPage implements OnInit {
   GameTimeMinute: any = 0;
   GameTimeSeconds: any = 0;
   currentGameAmount: any;
+  currentDemoAmount: number = 20;
 
   constructor(
     private userService: UserService,
     private gameService: GameServiceService,
     public accountService: AccountService,
+    private behaviorService: BehavourService,
     private alertController: AlertController,
     private modalController: ModalController,
     private demoQuestionsService: DemoQuestionsService,
     // private nativeAudio: NativeAudio,
     private router: Router
   ) {
+    
     // setTimeout(()=> {
     //   this.info.nativeElement.classList.remove('infinite');
     // }, 12000);
@@ -112,7 +116,15 @@ export class PlaydemoPage implements OnInit {
     },
   ];
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.behaviorService.getGameAmount().subscribe(amount => {
+      //console.log('see AMount', amount)
+      this.currentGameAmount =  amount;
+      if(amount === null){
+        this.getRemoteAmount();
+      }
+    })
+  }
 
   ionViewWillEnter() {
     this.gameService.getAdminDate();
@@ -173,6 +185,19 @@ export class PlaydemoPage implements OnInit {
     this.btnColor4 = "light";
   }
 
+  getRemoteAmount(){
+    console.log('getting remote amount');
+    this.loadingGame =  true;
+    this.gameService.getGameAmount().subscribe(res => {
+      if(res.data?.amount){
+        this.behaviorService.setGameAmount(res.data?.amount);
+      }
+      this.loadingGame = false;
+    }, err => {
+      this.loadingGame = false;
+    })
+  }
+
   getQuestionForGame() {
     this.lastQuestion = 0;
     this.runningQuestion = 0;
@@ -211,7 +236,7 @@ export class PlaydemoPage implements OnInit {
     this.loadBalanceSub =  this.accountService.loadBalanceForCalculation().subscribe(
       res => {
         const UserBalance = res['balance'];
-        if (UserBalance <  this.currentGameAmount){
+        if (UserBalance <  this.currentDemoAmount){
           this.low_balance = true;
           setTimeout(() => {
             this.low_balance = false;
@@ -247,7 +272,7 @@ export class PlaydemoPage implements OnInit {
     this.loadBalanceSub =  this.accountService.loadBonusForCalculation().subscribe(
       res => {
         const UserBonus = res['bonus'];
-        if (UserBonus <  this.currentGameAmount){
+        if (UserBonus <  this.currentDemoAmount){
           this.low_balance = true;
           setTimeout(() => {
             this.low_balance = false;

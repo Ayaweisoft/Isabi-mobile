@@ -46,13 +46,8 @@
         <div class="network-link">
           <div class="network-link-bar">
             <!-- <div class="network-link-input" #userinput>wwww.localhost:8100/api/register/{{referralCode}}</div> -->
-<<<<<<< HEAD
             <input class="network-link-input" #userinput value="http://localhost:8100/register/{{referralCode}}" readonly>
             <button class="network-link-button" (click)="copyToClipboard(userinput)">Copy</button>
-=======
-            <input class="network-link-input" #userinput value="wwww.localhost:8100/api/register/{{referralCode}}" disabled>
-            <div class="network-link-button" (click)="copyToClipboard(userinput)">Copy</div>
->>>>>>> 041dc1a3c1e2dde79d96c89c917af4e7b280158c
           </div>
           <div class="network-link-text">copy invite link</div>
         </div>
@@ -71,7 +66,7 @@
             <div class="network-earning-heading">Referral Earning</div>
             <div class="network-earning-box">
               <div class="network-earning-input">Amount: {{model.referralBonus | currency:'₦'}}</div>
-              <button class="network-earning-button" (click)="claimReferralBonus(this.model)">Claim</button>
+              <button class="network-earning-button" (click)="claimReferralBonus(this.model.referralBonus)">Claim</button>
             </div>
           </div>
           <div class="network-earning">

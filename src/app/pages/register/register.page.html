@@ -18,7 +18,7 @@
             <div class="inputBox">
               <span class="text">Username</span>
               <input type="text" required="true" #username="ngModel" placeholder="Username" name="username"
-                [(ngModel)]="model.username" type="text" ngControl="title">
+                [(ngModel)]="model.username" type="text" ngControl="title" autocomplete="off">
             </div>
             <div class="inputBox">
               <span class="text">Email Address</span>
@@ -299,8 +299,7 @@
             </div>
             <div class="inputBox">
               <span class="text">referrer</span>
-              <input type="text" required="false" #referrer="ngModel" name="referrer"
-                [(ngModel)]="model.referrer" ngControl="title" value="">
+              <input type="text" name="referrer" #referrer="ngModel" id="referrer" [(ngModel)]="model.referrer"  placeholder="{{ ref?.referralCode }}" [disabled]="isReferralCode">
             </div>
             <input class="signin-btn" type="submit" value="Sign up" [disabled]="!signUpForm.valid && password.value == true">
           </div>
