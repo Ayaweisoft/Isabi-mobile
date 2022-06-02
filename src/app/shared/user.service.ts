@@ -251,8 +251,9 @@ constructor(private http: HttpClient,
       let role = payLoad['role'];
       return role;
      } catch (error) {
-       
+        console.log('I failed')
      }
+
      }
 
      checkForAdmin(){
