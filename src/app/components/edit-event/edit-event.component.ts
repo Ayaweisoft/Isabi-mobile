@@ -18,9 +18,13 @@ image: any;
 
 eventModel = {
   _id: '',
-  eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '',bankName:'',
-  costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: '',
-  eventOwner:'', venue:null, startDate:null,  businessSharingRatio:null, endDate:null, startTime:null
+  eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '',
+   aboutEvent: '',bankName:'',
+  costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', 
+  accountNumber: '', accountName: '',
+  eventOwner:'', venue:null, startDate:null,  businessSharingRatio:null, endDate:null,
+   startTime:null, pay_item_id:'', merchant_code: ''
+
 }
   loading: boolean;
 
@@ -39,7 +43,8 @@ eventModel = {
         sharingRatio_company: this.event?.voting_properties?.sharingRatio_company, accountNumber: this.event?.voting_properties?.accountNumber,
          accountName: this.event?.voting_properties?.accountName ,startTime:this.event?.startTime ,endDate:this.event?.endDate,
       eventOwner: this.event?.eventOwner, venue:this.event?.venue, startDate:this.event?.startDate,
-      businessSharingRatio:this.event?.businessSharingRatio
+      businessSharingRatio:this.event?.businessSharingRatio, merchant_code:this.event.merchant_code,
+      pay_item_id: this.event.pay_item_id
     }
 
   }
@@ -53,7 +58,6 @@ eventModel = {
     console.log(this.eventModel)
     this.loading = true;
     this.eventService.updateEvent(this.eventModel).subscribe(response=> {
-      console.log(response)
       this.modalController.dismiss(response, "exist");
       this.loading = false;
     }, err=> {

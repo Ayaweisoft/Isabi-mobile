@@ -27,7 +27,8 @@ image: any;
   eventModel = {
     eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '',bankname:'',
     costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: '',
-    eventOwner:'', venue:null, startDate:null, time:null, businessSharingRatio:null, endDate:null, startTime:null
+    eventOwner:'', venue:null, startDate:null, time:null, businessSharingRatio:null, endDate:null, startTime:null,
+    pay_item_id:'', merchant_code: ''
   }
   ngOnInit() {
 
@@ -64,7 +65,8 @@ image: any;
       contactNumber: '', aboutEvent: '',bankname:'',
       costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '', 
        sharingRatio_company: '', accountNumber: '', accountName: '',eventOwner:'',
-       venue:null, startDate:null, time:null,businessSharingRatio:null, endDate: null, startTime: null
+       venue:null, startDate:null, time:null,businessSharingRatio:null, endDate: null, startTime: null,
+       pay_item_id:'', merchant_code:''
     }
   }
 

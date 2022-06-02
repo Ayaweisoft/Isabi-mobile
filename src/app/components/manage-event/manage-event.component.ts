@@ -35,7 +35,6 @@ async editEvent(event) {
   const data = await modal.onDidDismiss();
   console.log(data)
   if(data.role === 'exist'){
-    console.log(data?.data)
     event = data.data;
     this.allEvent =  this.allEvent.map((eve)=> {
       if(eve._id === data.data._id){
