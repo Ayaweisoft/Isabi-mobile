@@ -30,8 +30,8 @@
 <ion-content class="main-content">
 
   <div class="head-section">
-    <countdown-timer ></countdown-timer>
-    <p>{{userCount}} users online</p>
+    <countdown-timer [userCount]="userCount"></countdown-timer>
+    <p>{{userCount}} {{userCount > 1 ? 'users' : 'user'}} online</p>
     <clue-tips></clue-tips>
   </div>
 

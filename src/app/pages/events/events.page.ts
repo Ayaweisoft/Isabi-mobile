@@ -61,6 +61,18 @@ onlineUsers = 0;
     //   console.log('sock msg: ' + msg);
     // })
     console.log('number of users online: ' + this.onlineUsers)
+    const userID = this.UserService.getAuthId()
+    console.log("E enter events")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
   }
  
   parseText(text){
