@@ -1,4 +1,3 @@
-
 import { BehaviorSubject, Observable } from "rxjs";
 import { AccountService } from 'src/app/shared/account.service';
 import { Injectable } from '@angular/core';
@@ -95,11 +94,16 @@ constructor(private http: HttpClient,
     }
 
     // password reset
-    confirmNumber(number){
-      return this.http.get(environment.apiBaseUrl + `/confirm-user-number${number}`, this.noAuthHeader);
+    resetPassword(email){
+      return this.http.post(environment.apiBaseUrl + `/reset-password`, email, this.noAuthHeader);
     }
-    confirmOTP(otp) {
-      return this.http.get(environment.apiBaseUrl + `/confirm-user-otp${otp}`, this.noAuthHeader);
+
+    validateResetToken(resetToken) {
+      return this.http.post(environment.apiBaseUrl + `/validate-reset-token`, resetToken, this.noAuthHeader);
+    }
+
+    newPassword(model) {
+      return this.http.post(environment.apiBaseUrl + `/new-password`, model, this.noAuthHeader);
     }
   
     postQuestion(question){
@@ -208,11 +212,6 @@ constructor(private http: HttpClient,
   
    
 
-
-     resetPassword(credentials){
-       return this.http.post(environment.apiBaseUrl + '/reset-password', credentials);
-     }
-  
       postQuestionRecord( record){
        return this.http.post(environment.apiBaseUrl +'/post-game-record', record);
      }
@@ -338,7 +337,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-full-name')
       .subscribe(value => {
         this.setFullname(value['fullname'])
-        console.log('Update username ',this.full_name.getValue())
+        console.log('Update username ',this.full_name.getValue());
       })
     }
 

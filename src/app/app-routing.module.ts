@@ -171,9 +171,6 @@ const routes2: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'forgetpassword', component: ForgetpasswordComponent
-  },
-  {
     
     path: 'web-voting/:id', component: WebVotingComponent
   },
@@ -350,6 +347,12 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
+  },
+  {
+    path: 'forgetpassword', component: ForgetpasswordComponent
+  },
+  {
+    path: 'reset/:token', component: ForgetpasswordComponent
   },
   {
     path: 'coming-soon',
