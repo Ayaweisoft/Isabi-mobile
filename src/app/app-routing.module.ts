@@ -363,6 +363,10 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
+  {
+    path: 'confirm-email',
+    loadChildren: () => import('./confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
+  },
 
   
 
