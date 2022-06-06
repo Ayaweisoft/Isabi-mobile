@@ -37,8 +37,7 @@ export class AccountDetailsPage implements OnInit {
     name: '',
     accountName: '',
     bank: '',
-    accountNumber: '',
-    nationality: '',
+    accountNumber: ''
   }
 
   setNationality = {
