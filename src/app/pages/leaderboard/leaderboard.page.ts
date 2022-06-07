@@ -112,9 +112,7 @@ export class LeaderboardPage implements OnInit {
     this.accountServive.getLeaderboard().subscribe(val => {
       this.leaderBoard = val["document"];
       this.leaderBoard = this.leaderBoard.map(player => {
-        if (!player.time) {
-            player.time = 0;
-        }
+        player.time =  !player.time ? 0 : player.time;
         if (player.time > 60) {
           
           player.time = `${Math.floor(player.time / 60)} mins ${Math.floor(player.time % 60)} secs`
