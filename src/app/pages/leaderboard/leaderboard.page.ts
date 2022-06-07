@@ -111,6 +111,18 @@ export class LeaderboardPage implements OnInit {
     this.loading = true;
     this.accountServive.getLeaderboard().subscribe(val => {
       this.leaderBoard = val["document"];
+      this.leaderBoard = this.leaderBoard.map(player => {
+        if (!player.time) {
+            player.time = 0;
+        }
+        if (player.time > 60) {
+          
+          player.time = `${Math.floor(player.time / 60)} mins ${Math.floor(player.time % 60)} secs`
+        } else {
+          player.time = player.time + " secs"
+        }
+        return player;
+      })
       this.firstPerson = this.leaderBoard[0];
       this.secondPerson = this.leaderBoard[1];
       this.thirdPerson = this.leaderBoard[2];
