@@ -288,10 +288,10 @@
     margin: auto;
     margin-top: 10px;
     display: flex;
-    gap: 20px;
     justify-items: center;
     flex-direction: column;
-    align-items: centers;
+    align-items: center;
+    gap: 20px;
     width: 100%;
     @media screen and (min-width: 768px) {
       display: grid;
@@ -299,29 +299,39 @@
     }
   }
   .event-card {
+    width: 93%;
     background-color: #eef7ee;
     border-radius: 10px;
     box-shadow: -1px 1px 6px -3px #00000040;
     display: flex;
-    gap: 10px;
-    margin: 0 auto;
-    width: 93%;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 20px;
+    // min-height: 200px;
+    // margin: 0 auto;
     padding: 16px;
+    padding-right: 25px;
+    
+    
+    
 
     .event-top {
-      display: flex;
-      gap: 15px;
+      // display: flex;
+      // gap: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 10px;
+      // justify-content: space-between;
+
       .event-pics {
-        flex: 2;
+        
+        // flex: 2;
       }
       .event-pic {
-        height: 104px;
-        width: 114px;
+        // height: 104px;
+        // width: 114px;
       }
       .event-desc {
-        flex: 3;
+        // flex: 3;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -347,27 +357,47 @@
       }
     }
 
-    .event-bottom{
-			display: flex;
-			justify-content: space-around;
-			align-items: center;
-			gap: 3px;
+    .event-bottom {
+			display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 10px;
+      // justify-content: space-between;
+			// align-items: center;
+			// gap: 10px;
+
 			.event-icons{
 				background-color: transparent;
-				border: 1px solid rgb(202, 199, 199);
+				// border: 1px solid rgb(202, 199, 199);
 				height: 40px;
-				border-radius: 5px;
-				flex: 4;
+        font-weight: 700;
+        display: flex;
+        // flex-direction: column;
+        // align-items: center;
+				// border-radius: 5px;
+        
+        .event-votes {
+          display: block;
+          font-size: 1.2rem;
+          color: goldenrod;
+        }
 			}
 
-			.event-button{
-				display: grid;
-				place-items: center;
-				border-radius: 5px;
-				border: 1px solid rgb(202, 199, 199);
-				background-color: transparent;
-				height: 40px;
-				flex: 1;
+      .event-button {
+        width: 100%;
+        padding: 5px;
+        color: #fff;
+        font-weight: 700;
+        background-color: #348a40;
+        border-radius: 5px;
+
+			// .event-button{
+			// 	display: grid;
+			// 	place-items: center;
+			// 	border-radius: 5px;
+			// 	border: 1px solid rgb(202, 199, 199);
+			// 	background-color: transparent;
+      //   background-color: red;
+			// 	height: 40px;
 
 				ion-icon{
 					border: none;
