@@ -24,7 +24,7 @@
           </ion-segment-button>
         </ion-segment>
 
-        <div class="ticket-segment" *ngIf="segment === 'ticket'">
+        <div class="ticket-segment" *ngIf="segment === 'ticket' && !loading">
           <div class="ticket-card" *ngFor="let item of ticketList">
             <div class="ticket-card-top">
               <div class="ticket-card-top-delete">
@@ -87,7 +87,7 @@
         <div class="paid-segment">
           
         </div>
-       
+<!--        
         <ion-content *ngIf="segment === 'ticket'">             
           <ion-grid *ngFor="let item of ticketList">
             <ion-row>
@@ -187,11 +187,27 @@
               </ion-row>
             </ion-grid>
           </ion-list>
-        </ion-content>
+        </ion-content> -->
 
       </div>
     </div>
   </div>
+
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+
 </ion-content>
 
 <!-- Segment with anchors -->
