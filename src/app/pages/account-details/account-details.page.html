@@ -40,11 +40,6 @@
             <input type="text" #accountNumber="ngModel" name="accountNumber" id="accountNumber" [(ngModel)]="model.accountNumber" value="{{ myProfile?.acount_number }}"> 
             <span class="text">Account Number</span>
           </div>
-          <div class="inputBox">
-            <input #nationality="ngModel" name="nationality" [(ngModel)]="model.nationality"
-            type="text" required value="{{ myProfile?.nationality }}">
-            <span class="text">Nationality</span>
-          </div>
         </div>
         <div class="buttons">
           <button class="submit-btn" type="submit">Save</button>
@@ -105,7 +100,7 @@
           <button class="submit-btn" type="submit">Verify</button>
         </div>
       </form>
-      <p>Didn’t recieve email? resend</p>
+      <p>Didn't recieve email? resend</p>
     </div>
      
     <div *ngIf="loading" class=" ">
