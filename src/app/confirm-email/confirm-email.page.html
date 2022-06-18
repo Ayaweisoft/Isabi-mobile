@@ -1,9 +1,56 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>confirm-email</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <div class="main-content">
+    <div class="illustration"></div>
+    <div class="main-section">
+      <h2>Reset Password</h2>
+      <div class="input-section confirm-email-form">
+          <form class="form" class="form" #loginForm="ngForm" name="form" (submit)="submitEmail(loginForm)">
+            <div class="inputs">
+              <div class="inputBox">
+                <span class="text">Email Address</span>
+                <input type="email" required="true"
+                #email="ngModel"
+                name="email"
+                clearInput
+                [(ngModel)]="model.email"
+                autocomplete="off">
+              </div>
+              <input class="signin-btn btn" type="submit" value="Confirm Email">
+            </div>
+          </form>
+      </div>
+      <div class="input-section reset-password-form" *ngIf="isResetToken">
+        <form class="form" class="form" #loginForm="ngForm" name="form" (submit)="resetPassword(loginForm)">
+          <div class="inputs">
+            <div class="inputBox">
+              <span class="text">New Password</span>
+              <input type="password" required="true"
+              #password="ngModel"
+              name="password"
+              clearInput
+              [(ngModel)]="passModel.password"
+              autocomplete="off">
+            </div>
+            <div class="inputBox">
+              <span class="text">Confirm Password</span>
+              <input type="password" required="true"
+              #conf_password="ngModel"
+              name="conf_password"
+              clearInput
+              [(ngModel)]="passModel.conf_password"
+              autocomplete="off">
+            </div>
+            <input class="signin-btn btn" type="submit" value="Reset Password">
+          </div>
+        </form>
+    </div>
+      <div class="redirect">
+        <a class="text forgot-password" [routerLink]="['/register']">Register
+        </a> or
+        <a class="text forgot-password" [routerLink]="['/login']">Login
+        </a>
+      </div>  
+    </div>
+    
+  </div>
 </ion-content>

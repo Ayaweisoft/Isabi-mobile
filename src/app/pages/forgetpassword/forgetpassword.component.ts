@@ -66,13 +66,15 @@ export class ForgetpasswordComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(params => { 
       this.tokenModel.resetToken = params.get('token');
       if(this.tokenModel.resetToken){
+        this.isResetToken = true;
         this.userService.validateResetToken(this.tokenModel).subscribe(
           res => {
-            this.isResetToken = true;
+            // this.isResetToken = true;
             this.passModel.resetToken = this.tokenModel.resetToken;
             console.log('token: ', res)
           },
           err => {
+            this.isResetToken = false;
             console.log(err);
           }
         )
