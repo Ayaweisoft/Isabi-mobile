@@ -80,19 +80,22 @@
           <div class="event-desc">
             <h3>{{item.eventName}}</h3>
             <p>{{parseText(item.aboutEvent)}}</p>
+            <div class="stars"></div>
             <p>type: {{item.type}}</p>
           </div>
         </div>
         <div class="event-bottom">
           <div class="event-icons">
+            <p> <span class='event-votes'>186</span>voted</p>
           </div>
-          <div class="event-button">
+          <div class="event-button-div">
+            <button class="event-button" (click)="insideEvent(item)">Buy ticket</button>
             <!-- <div class="event-button" (click)="insideEvent(item)">
               <img src="../../assets/figma/Group 31 (1).svg" alt="plus icon">
             </div> -->
-            <button class="event-button" (click)="insideEvent(item)">
+            <!-- <button class="event-button" (click)="insideEvent(item)">
               <ion-icon name="arrow-forward"></ion-icon>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>

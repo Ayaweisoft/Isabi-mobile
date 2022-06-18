@@ -1,4 +1,4 @@
-<ion-content>
+<ion-content >
     <div class="top-section">
       <img [src]="image" alt="" class="top-section-cover-img">
       <div class="top-row">
@@ -48,6 +48,10 @@
           <div class="inputBox">
             <input type="date" name="dateOfBirth" #dateOfBirth="ngModel" id="dateOfBirth" [(ngModel)]="model.dateOfBirth" value="{{ myProfile?.dateOfBirth }}">
             <span class="text">Date Of Birth</span>
+            <!-- <ion-item>
+              <ion-label>Date Of Birth</ion-label>
+              <ion-datetime placeholder="Choose Date"></ion-datetime>
+          </ion-item> -->
           </div>
         </div>
         <div class="buttons">
