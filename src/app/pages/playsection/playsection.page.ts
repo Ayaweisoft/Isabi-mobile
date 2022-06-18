@@ -143,6 +143,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   getRemoteAmount(){
     console.log('getting remote amount');
     this.loadingGame =  true;
+    this.gameService.getAdminDate();
     this.gameService.getGameAmount().subscribe(res => {
       if(res.data?.amount){
         this.behaviorService.setGameAmount(res.data?.amount);
