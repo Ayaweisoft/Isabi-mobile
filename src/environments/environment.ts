@@ -9,7 +9,7 @@ socketsUrl:  'https://i-sabi-server.herokuapp.com//',
 // webVotingUrl:  'http://localhost:8100/',
 webVotingUrl:  'https://i-sabi.app/',
 versionCode: 5.2,
-apiBaseUrl: 'https://i-sabi-server.herokuapp.com/api',
+apiBaseUrl: 'https://i-sabi-dev-server.herokuapp.com/api',
 firebaseConfig : {
   apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
   authDomain: "i-sabi-bd851.firebaseapp.com", 

@@ -366,7 +366,11 @@ const routes: Routes = [
   {
     path: 'confirm-email',
     loadChildren: () => import('./pages/confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
+  },  {
+    path: 'faq',
+    loadChildren: () => import('./pages/faq/faq.module').then( m => m.FaqPageModule)
   },
+
 
   
 
