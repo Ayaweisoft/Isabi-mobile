@@ -17,7 +17,13 @@
           <label for={{content.id}} class="accordion__btn">{{content.question}}</label>
           <input type="checkbox" name="" class="acct" id={{content.id}}>
           <div class="accordion__text">
-            {{content.answer}}
+            <div class="avail" *ngIf="content.answer !== 'null'">
+              {{content.answer}}
+            </div>
+            <empty-component
+              *ngIf="content.answer === 'null'"
+              [text]="'No info yet'"
+            ></empty-component>
           </div>
         </div>
       </div>
