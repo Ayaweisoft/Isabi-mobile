@@ -1,9 +1,27 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar>
     <ion-title>faq</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
 <ion-content>
+  <header>
+    <h1>FAQ</h1>
+    <h3>Hello, <br>How can we help you</h3>
+  </header>
+  <main>
+    <div class="section">
+      <div class="accordion" *ngFor="let data of accordion">
+        <h4>{{data.section}}</h4>
+        <div class="accordion__section" *ngFor="let content of data.content">
+          <label for={{content.id}} class="accordion__btn">{{content.question}}</label>
+          <input type="checkbox" name="" class="acct" id={{content.id}}>
+          <div class="accordion__text">
+            {{content.answer}}
+          </div>
+        </div>
+      </div>
 
+    </div>
+  </main>
 </ion-content>
