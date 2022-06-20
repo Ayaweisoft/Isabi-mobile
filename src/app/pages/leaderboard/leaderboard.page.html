@@ -77,9 +77,10 @@
             <div class="name">{{ leader.user }}</div>
           </div>
           <div class="end">
-            <div class="score">{{ leader.seconds }} secs</div>
+            <div class="score">{{ leader.minutes }}:{{ leader.seconds }} secs</div>
           </div>
         </div>
+        <button (click)="getMoreLeader()">See more</button>
       </div>
     </div>
   </div>
