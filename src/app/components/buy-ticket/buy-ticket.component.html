@@ -5,8 +5,9 @@
     </button>
   </ion-button>
 </ion-header>
-<ion-content>
 
+<ion-content>
+<!-- 
   <ion-card>
   <ion-card-title>{{ticket.ticketType}} </ion-card-title>
 
@@ -58,15 +59,58 @@
   </ion-item>
 </ion-list>
 
+</form> -->
 
 
-</form>
 <!-- <p class="font-weight-bold text-center">
    {{properties.purchase * properties.cost | currency:'₦'}} </p> -->
    <!-- [disabled]="data.positive < 1" -->
-   <div class="ion-text-center">
+   <!-- <div class="ion-text-center">
 <ion-button [disabled]="!ticketForm.valid " (click)="finalize()" color="success" >finalize</ion-button>
    </div>
 </ion-card-content>
-</ion-card>
-  </ion-content>
+</ion-card> -->
+
+<div class="modal-new">
+  <div class="head">
+    <div  class="event-image">
+      <img class="image" [src]="ticket.imageUrl">
+    </div>
+    <div class="ticket-details">
+      <div class="title">{{ticket.ticketType}} Ticket</div>
+      <div class="price">Price: {{ticket.amount | currency:'₦'}}</div>
+      <div class="quantity">
+        <span class="quantity_head">select amount of ticket</span>
+        <div class="quantity__change">
+          <button class="quantity__btn" (click)="remove()"><ion-icon name="remove"></ion-icon></button>
+          <input type="number" name="purchase" [(ngModel)]="data.quantity">
+          <button class="quantity__btn" (click)="add()"><ion-icon name="add"></ion-icon></button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="main">
+    <h3 class="head">Please provide your details</h3>
+    <form [formGroup]="ticketForm" (ngSubmit)="finalize()" (keyup.enter)="ticketForm.valid && finalize()">
+
+      <!-- <ion-label position="floating"> <small class="text-danger">*</small>name </ion-label> -->
+      <input type="text" formControlName="name"
+      placeholder="Enter full name">
+      
+      <!-- <ion-label position="floating"> <small class="text-danger">*</small>email </ion-label> -->
+      <input type="email" formControlName="email"
+      placeholder="Enter Email address">
+
+      <!-- <ion-label position="floating"> <small class="text-danger">*</small>phone </ion-label> -->
+      <input type="tel" formControlName="phone" placeholder="Enter Phone number">
+
+      <div class="div-btn">
+        <button class="btn-submit" (click)="finalize()">Purchase tickets</button>
+      </div>
+      
+    </form>
+
+  </div>
+</div>
+</ion-content>

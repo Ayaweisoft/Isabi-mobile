@@ -4,7 +4,7 @@
 	width: 100%;
 	background-color: #fafafa;
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 
     .ticket-container{	
 		height: fit-content;
@@ -51,11 +51,7 @@
                 align-items: center;
                 gap: 20px;
                 width: 80%;
-                @media screen and (min-width: 768px) {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-                  }
-                
+
                 .ticket-card{
                     display: flex;
                     flex-direction: column;
@@ -72,9 +68,9 @@
                         padding: 10px;
                         justify-content: space-between;
 
-                        // .ticket-card-top-delete{
+                        .ticket-card-top-delete{
 
-                        // }
+                        }
 
                         .ticket-card-top-title{
                             font-weight: 600;

@@ -93,6 +93,23 @@ constructor(private http: HttpClient,
       return this.http.post(environment.apiBaseUrl + '/register' , user, this.noAuthHeader);
     }
 
+    confirmEmail(email){
+      return this.http.post(environment.apiBaseUrl + `/confirm-email`, email, this.noAuthHeader);
+    }
+
+    validateOtp(emailOtp: any){
+      return this.http.post(environment.apiBaseUrl + `/validate-otp`, emailOtp, this.noAuthHeader);
+    }
+
+    validateAccountOtp(accountOtp: any){
+      return this.http.post(environment.apiBaseUrl + `/validate-account-otp`, accountOtp);
+    }
+
+    sendAccountOtp(){
+      return this.http.get(environment.apiBaseUrl + `/send-account-otp`);
+    }
+
+
     // password reset
     resetPassword(email){
       return this.http.post(environment.apiBaseUrl + `/reset-password`, email, this.noAuthHeader);

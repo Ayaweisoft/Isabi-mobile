@@ -335,6 +335,10 @@ const routes: Routes = [
       path: 'admin-leaderbord', loadChildren: './pages/admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',
       canActivate: [AuthguardGuard, AdminGuard]
     },
+    {
+      path: 'faq',
+      loadChildren: () => import('./pages/faq/faq.module').then( m => m.FaqPageModule)
+    },
   ]},
   {
     path: 'register',
@@ -368,7 +372,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
   },
 
-  
 
 
 ];

@@ -137,12 +137,20 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.getRemoteAmount();
       }
     })
+    this.gameLiveStatusString = this.gameService.getGameLiveStatus();
+    console.log('Game Status' + this.gameLiveStatusString)
+    if(this.gameLiveStatusString === 'true'){ 
+      this.gameLiveStatus = true;
+    } else {
+      this.gameLiveStatus = false;
+    }
 
   }
 
   getRemoteAmount(){
     console.log('getting remote amount');
     this.loadingGame =  true;
+    this.gameService.getAdminDate();
     this.gameService.getGameAmount().subscribe(res => {
       if(res.data?.amount){
         this.behaviorService.setGameAmount(res.data?.amount);
@@ -233,27 +241,29 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   setCategory(category: any){
-    this.gameCategory = category;
-    this.showModal = true;
+    if(this.gameLiveStatus){
+      console.log('game status: ', this.gameLiveStatus)
+      this.gameCategory = category;
+      this.showModal = true;
+    } else {
+      console.log('game status: ', this.gameLiveStatus)
+      this.logicService.presentAlert('Game Alert!!!','Game is not live yet');
+    } 
   }
 
   playByCategory(category){
-    if(this.gameLiveStatus){
-      // this.loadingGame = true;
-      this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
-        res => {
-          // this.loadingGame = false;
-          // this.startGame = true;
-          this.gameQuestions = res['questions'];
-          // console.log(this.gameQuestions);
-          this.lastQuestion =  this.gameQuestions.length - 1;
-          this.currentQuestion  = this.gameQuestions[this.runningQuestion];
-          // this.startQuestion();
-        }
-      );
-    } else {
-      this.logicService.presentAlert('Game Alert!!!','Game is not live yet');
-    }     
+    // this.loadingGame = true;
+    this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
+      res => {
+        // this.loadingGame = false;
+        // this.startGame = true;
+        this.gameQuestions = res['questions'];
+        // console.log(this.gameQuestions);
+        this.lastQuestion =  this.gameQuestions.length - 1;
+        this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+        // this.startQuestion();
+      }
+    );    
   }
 
   playWithBalance(){

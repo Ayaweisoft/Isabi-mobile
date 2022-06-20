@@ -76,6 +76,10 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/register']);
   }
 
+  verify() {
+    this.router.navigate(['/confirm-email/email']);
+  }
+
 
   async presentAlertConfirm(msg) {
     const alert = await this.alertController.create({

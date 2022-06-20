@@ -22,10 +22,14 @@ export class NetworkPage implements OnInit {
   referralCode: string = '';
   totalReferredCount: number = 0;
   refBonus_claim: boolean = false;
+  rankBal_claim: boolean = false;
+  compBal_claim: boolean = false;
   locked: boolean = true;
 
   model = {
-    referralBonus: 0
+    referralBonus: 0,
+    compesationalBalance: 0,
+    rankingBalance: 0
   }
 
   rank = [
@@ -110,6 +114,8 @@ export class NetworkPage implements OnInit {
         // this.totalReferredCount = res.totalReferredCount;
         this.referralCode = res.referralCode;
         this.model.referralBonus = res.referralBonus;
+        this.model.compesationalBalance = res.compesationalBalance;
+        this.model.rankingBalance = res.rankingBalance;
        
         console.log(this.myProfile);
         // this.userRecordNotAvalible = false;
@@ -126,6 +132,24 @@ export class NetworkPage implements OnInit {
     console.log('bonus: ', bonus);
     this.accountSerice.claimReferralBonus(bonus).subscribe(data => {
       this.accountSerice.loadMyBonus();
+      console.log("data: " + data)
+    });
+  }
+
+  claimRankingBalance(balance: number){
+    this.rankBal_claim = true;
+    console.log('bal: ', balance);
+    this.accountSerice.claimRankingBalance(balance).subscribe(data => {
+      this.accountSerice.loadMyBalance();
+      console.log("data: " + data)
+    });
+  }
+
+  claimCompesationalBalance(balance: number){
+    this.compBal_claim = true;
+    console.log('bal: ', balance);
+    this.accountSerice.claimCompensationalBalance(balance).subscribe(data => {
+      this.accountSerice.loadMyBalance();
       console.log("data: " + data)
     });
   }
