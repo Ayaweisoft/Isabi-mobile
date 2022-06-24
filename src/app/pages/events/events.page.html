@@ -9,10 +9,9 @@
 <ion-content class="main-content">
   <div class="head-section">
     <countdown-timer [userCount]="userCount"></countdown-timer>
-    <p>{{userCount}} {{userCount > 1 ? 'users' : 'user'}} online</p>
+    <!-- <p>{{userCount}} {{userCount > 1 ? 'users' : 'user'}} online</p> -->
     <clue-tips></clue-tips>
   </div>
-
   <div class="curved-section event-section">
     <h2>Events</h2>
     <!-- <div class="search">
@@ -80,4 +79,12 @@
       <p>No events found...</p>
     </div>
   </div>
+  <div class="welcome-modal-content" *ngIf="isFirst">
+    <about-popup></about-popup>
+  </div>
 </ion-content>
+<!-- <ion-content class="welcome-modal" *ngIf="firstLogin">
+  <div class="welcome-modal-content">
+    <about-popup></about-popup>
+  </div>
+</ion-content> -->

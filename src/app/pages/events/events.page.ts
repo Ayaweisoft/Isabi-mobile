@@ -21,6 +21,7 @@ export class EventsPage implements OnInit {
   displayedEvents = [];
   loadingCards = [0, 0, 0];
   loading = false;
+  isFirst: boolean = false;
   webLink = environment.webVotingUrl;
   slideCounter = 0;
   socket: any;
@@ -31,6 +32,7 @@ export class EventsPage implements OnInit {
   };
 
   onlineUsers = 0;
+  firstLogin: boolean = true;
 
   constructor(
     private router: Router,
@@ -47,6 +49,7 @@ export class EventsPage implements OnInit {
     this.getAllevent();
     this.GameService.getGameTip();
     this.GameService.getAdminDate();
+    this.UserService.checkIsFirst().subscribe(isFirst => this.isFirst = isFirst);
     this.SocketService.connect();
     // this.appUser = localStorage.getItem('appUser');
     //this.initializeTimer();
@@ -94,7 +97,7 @@ export class EventsPage implements OnInit {
         this.loading = false;
       },
       (err) => {
-        // this.loading = false;
+        this.loading = false;
         this.UserService.longToast(err.error.msg);
         console.log("error getting event", err);
       }
