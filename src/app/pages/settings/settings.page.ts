@@ -58,6 +58,10 @@ export class SettingsPage implements OnInit {
       name: "About",
       url: '/tabs/setting'
     },
+    {
+      name: "Faq",
+      url: '/tabs/faq'
+    },
 
   ]
 
