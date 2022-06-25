@@ -14,6 +14,7 @@ export class LeaderboardPage implements OnInit {
   @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
   leaderBoard: any = [];
   loading: boolean;
+  sLoading: boolean;
   topThree: any;
   thirdPerson: any;
   secondPerson: any;
@@ -130,14 +131,15 @@ export class LeaderboardPage implements OnInit {
     },
     err => {
       this.presentFailNetwork();
+      console.log('error: ', err)
       this.loading = false;
     }
     );
   }
   getMoreLeader() {
-    this.loading = true;
+    this.sLoading = true;
     this.accountServive.getLeaderboard().subscribe(val => {
-      this.leaderBoard.push(val['leaders']);
+      this.leaderBoard = this.leaderBoard.concat(val['leaders']);
       console.log('leader: ', this.leaderBoard)
       
       // this.leaderBoard = this.leaderBoard.map(player => {
@@ -150,7 +152,7 @@ export class LeaderboardPage implements OnInit {
       // })
       console.log('getting leaderboard')
       console.log(this.leaderBoard)
-      this.loading = false;
+      this.sLoading = false;
     });
   }
 

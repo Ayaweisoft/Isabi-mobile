@@ -1,3 +1,4 @@
+import { GameServiceService } from 'src/app/shared/game-service.service';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -7,7 +8,9 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 @Input() label : string;
-  constructor() { }
+  constructor(
+    gameService: GameServiceService
+  ) { }
 
   ngOnInit() {}
 

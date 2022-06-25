@@ -211,12 +211,6 @@ this.generatedTicketId = shortpass
     await alert.present();
   }
 
-
-
-
-
-
-
 async addTicket() {
   const modal = await this.modalController.create({
   component: InsideTicketAddTicketComponent,
