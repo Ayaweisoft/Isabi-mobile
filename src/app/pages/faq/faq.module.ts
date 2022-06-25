@@ -8,6 +8,8 @@ import { FaqPageRoutingModule } from './faq-routing.module';
 
 import { FaqPage } from './faq.page';
 
+import { EmptyComponentComponent } from 'src/app/components/empty-component/empty-component.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,6 @@ import { FaqPage } from './faq.page';
     IonicModule,
     FaqPageRoutingModule
   ],
-  declarations: [FaqPage]
+  declarations: [FaqPage, EmptyComponentComponent]
 })
 export class FaqPageModule {}
