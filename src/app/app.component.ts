@@ -139,12 +139,34 @@ export class AppComponent {
   ngOnInit(){
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
-    
+       const userID = this.UserService.getAuthId()
+    console.log("E nginit")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
   }
   ionViewWillEnter(){
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
-    
+       const userID = this.UserService.getAuthId()
+    console.log("E ion enter")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
   }
 
 

@@ -68,6 +68,7 @@ import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
 const config: SocketIoConfig = { url: environment.socketsUrl, options: {
   path: "/live/",
+  query: {id: "id"}
 } };
 
 
