@@ -59,6 +59,11 @@ export class AccountDetailsPage implements OnInit {
 
   
   ngOnInit() {
+    
+  }
+
+  ionViewWillEnter(){
+    this.getProfilePic();
     this.userService.sendAccountOtp().subscribe(
       res => {
         console.log("message: ", res);
@@ -67,12 +72,12 @@ export class AccountDetailsPage implements OnInit {
         console.error("error: ", err.error.message)
       }
     )
-  }
-
-  ionViewWillEnter(){
-    this.getProfilePic();
     console.log('username; ' + this.userService.getUsername());
     this.userService.getUsername().subscribe(name => this.model.name = name);
+  }
+
+  ionViewWillLeave(){
+    this.showAccount = false;
   }
 
   async presentFailNetwork() {

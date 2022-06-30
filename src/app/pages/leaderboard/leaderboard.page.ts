@@ -138,7 +138,9 @@ export class LeaderboardPage implements OnInit {
   }
   getMoreLeader() {
     this.sLoading = true;
-    this.accountServive.getLeaderboard().subscribe(val => {
+    const limit = 20;
+    const skip = this.leaderBoard.length;
+    this.accountServive.getMoreLeaderboard(limit, skip).subscribe(val => {
       this.leaderBoard = this.leaderBoard.concat(val['leaders']);
       console.log('leader: ', this.leaderBoard)
       

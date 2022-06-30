@@ -53,7 +53,7 @@ this.generatedTicketId = shortpass
   ionViewDidEnter() {
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-      console.log('seee id ', this.eventId)
+      console.log('seee id ', this.eventId);
      
     });
     this.getAllTicket();
