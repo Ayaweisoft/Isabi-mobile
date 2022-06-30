@@ -9,26 +9,16 @@
 <ion-content class="main-content">
   <div class="head-section">
     <countdown-timer [userCount]="userCount"></countdown-timer>
-    <p>{{userCount}} {{userCount > 1 ? 'users' : 'user'}} online</p>
+    <!-- <p>{{userCount}} {{userCount > 1 ? 'users' : 'user'}} online</p> -->
     <clue-tips></clue-tips>
   </div>
-
   <div class="curved-section event-section">
     <h2>Events</h2>
-    <!-- <div class="search">
-      <div class="search_button">
-        <img class="search-icon" src="../../assets/figma/akar-icons_search.svg" alt="search">
-      </div>
-      <input type="search" (input)="filterEvents($event.target.value)" placeholder="Find an event...">
-      <div class="search_button">
-        <img class="filter-icon" src="../../assets/figma/bi_filter.svg" alt="filter">
-      </div>
-    </div> -->
     <searchbar
       [allItems]="allEvent"
       (displayedItems)="getChildData($event)"
     ></searchbar>
-    <!-- *ngIf="" -->
+
     <!-- loader -->
     <div *ngIf="loading" class="loading">
       <div *ngFor="let card of loadingCards" class="loading-card">
@@ -48,7 +38,7 @@
         </div>
       </div>
     </div>
-    <div class="event-cards">
+    <div class="event-cards" *ngIf="!loading">
       <div class="event-card" *ngFor="let item of displayedEvents">
         <div class="event-top">
           <div class="event-pics">
@@ -79,5 +69,8 @@
     <div class="noEvents" class="!loading" *ngIf="!displayedEvents.length > 0">
       <p>No events found...</p>
     </div>
+  </div>
+  <div class="welcome-modal-content" *ngIf="isFirst">
+    <about-popup></about-popup>
   </div>
 </ion-content>

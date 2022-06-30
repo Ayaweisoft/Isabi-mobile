@@ -73,19 +73,37 @@ main{
       width: var(--size);
       margin-block-end: auto;
       background: #efefef77;
+	  margin-bottom: 2rem;
 
 	  .profile-pic-cta{
 		  height: 100%;
 		  width: 100%;
 		  border-radius: 50%;
-		  overflow: hidden;
+		//   overflow: hidden;
 		  border: 4px solid #3B9C48;
+		  position: relative;
 
 		  img {
 			height: 100%;
 			width: 100%;
 			object-fit: cover;
+			border-radius: 50%;
 		  }
+		  .select-img {
+            position: absolute;
+			width: 25px;
+			height: 25px;
+			border-radius: 50%;
+            z-index: 1000;
+            bottom: 0;
+            right: 0;
+			transform: translateX(20%);
+			background-color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		
+        }
 	  }
     }
   }
@@ -210,6 +228,7 @@ form{
 		
 		.cancel-btn{
 			color: red;
+			background-color: #efefef;
 		}
 	}
 	

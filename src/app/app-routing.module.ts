@@ -363,16 +363,16 @@ const routes: Routes = [
     loadChildren: () => import('./pages/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
   },
     { path: "*", redirectTo: 'tabs/events' },
-  {
-    path: '**',
-    loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
-  },
-  {
-    path: 'confirm-email',
-    loadChildren: () => import('./pages/confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
-  },
-
-
+    {
+      path: 'confirm-email',
+      loadChildren: () => import('./pages/confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
+    },
+    {
+      path: '**',
+      loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
+    },
+    
+    
 
 ];
 

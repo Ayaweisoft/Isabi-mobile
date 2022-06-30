@@ -80,7 +80,7 @@
             <div class="score">{{ leader.minutes }}:{{ leader.seconds }} secs</div>
           </div>
         </div>
-        <button (click)="getMoreLeader()">See more</button>
+        <button (click)="getMoreLeader()">{{ sLoading ? 'loading...' : 'See more' }}</button>
       </div>
     </div>
   </div>

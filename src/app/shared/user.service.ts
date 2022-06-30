@@ -20,6 +20,7 @@ export class UserService {
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
   full_name = new BehaviorSubject<any>('');
+  is_first = new BehaviorSubject<any>('');
   rank = new BehaviorSubject<any>('');
   totalReferredCount = new BehaviorSubject<any>(0);
   networkDisconnet = false;
@@ -340,6 +341,26 @@ constructor(private http: HttpClient,
         this.setUsername(value['username'])
         console.log('Update username ',this.user_name.getValue())
       })
+    }
+
+    loadIsFirst(){
+      this.http.get(environment.apiBaseUrl + '/check-is-first')
+      .subscribe(value => {
+        this.setIsFirst(value['isFirst'])
+        console.log('isFirst ', this.is_first.getValue())
+      })
+    }
+
+    setIsFirst(name: string){
+      this.is_first.next(name)
+    }
+
+    checkIsFirst(): BehaviorSubject<any> {
+      return this.is_first;
+    }
+
+    toggleIsFirst(){
+      return this.http.get(environment.apiBaseUrl + '/toggle-is-first');
     }
 
     setFullname(name: string){

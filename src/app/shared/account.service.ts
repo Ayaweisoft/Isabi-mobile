@@ -89,7 +89,10 @@ export class AccountService {
   }
 
   getLeaderboard() {
-    return this.http.get(environment.apiBaseUrl + "/get-weekly-leaderboard/0/0");
+    return this.http.get(environment.apiBaseUrl + "/get-weekly-leaderboard");
+  }
+  getMoreLeaderboard(limit, skip) {
+    return this.http.get(environment.apiBaseUrl + `/get-weekly-leaderboard/?limit=${limit}&skip=${skip}`);
   }
 
   getWinners() {
