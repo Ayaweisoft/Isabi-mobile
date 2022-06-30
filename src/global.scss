@@ -106,10 +106,18 @@ ion-content{
 }
 
 button{
-	transition: all 0.5s cubic-bezier(0.19, 0.66, 0.48, 0.97);;
+	transition: all 0.5s cubic-bezier(0.19, 0.66, 0.48, 0.97);
+	outline: none;
 	&:hover{
 		transform: translateY(-2px);
 	}
+}
+
+.btn{
+	outline: none;
+}
+input{
+	outline: none;
 }
 
 .modal-fullscreen {
@@ -143,7 +151,7 @@ button{
     flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    padding: 10px;
+    padding: 10px 10px 50px;
 	position: relative;
 	
 	

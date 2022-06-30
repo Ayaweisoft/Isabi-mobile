@@ -63,10 +63,12 @@ export class RegisterPage implements OnInit {
     this.loading = true; 
     this.userService.registerUser(this.model).subscribe( 
       response => {
+        
+
         this.loading = false;
         let message = "Registration successful!";
         this.logicService.presentSucess('success','registration successful', 'continue'); 
-        this.router.navigate(['/login']);
+        this.router.navigate(['/confirm-email']);
       },
       error => {
         this.loading = false;

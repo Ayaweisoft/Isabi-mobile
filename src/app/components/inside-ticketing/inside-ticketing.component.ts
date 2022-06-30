@@ -19,7 +19,7 @@ export class InsideTicketingComponent implements OnInit {
   @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
   eventId: any;
   eventRefresher: any;
-  loading: boolean;
+  loading: boolean = true;
   ticketList : Ticket[] =  [];
   myTicketList : Ticket[] = [];
   segment= 'ticket';
@@ -53,7 +53,7 @@ this.generatedTicketId = shortpass
   ionViewDidEnter() {
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-      console.log('seee id ', this.eventId)
+      console.log('seee id ', this.eventId);
      
     });
     this.getAllTicket();
@@ -102,6 +102,7 @@ this.generatedTicketId = shortpass
   
 
   getAllTicket(){
+    this.loading = true;
     this.eventService.getTicketByEventId(this.eventId).subscribe(
       res => {
         try {
@@ -109,9 +110,9 @@ this.generatedTicketId = shortpass
         } catch (error) {
           
         }
-        this.loading = false;
        console.log(res);
        this.ticketList = res['ticketList'];
+       this.loading = false;
       },
       err => {
         try {
@@ -209,12 +210,6 @@ this.generatedTicketId = shortpass
 
     await alert.present();
   }
-
-
-
-
-
-
 
 async addTicket() {
   const modal = await this.modalController.create({

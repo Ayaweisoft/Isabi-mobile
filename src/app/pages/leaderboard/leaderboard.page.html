@@ -30,7 +30,7 @@
           </div>
           <div class="name">
             <div class="person-name">{{leaderBoard[1]?.user}}</div>
-            <div class="record">{{leaderBoard[1]?.seconds}} secs</div>
+            <div class="record">{{leaderBoard[1]?.time}}</div>
           </div>   
         </div>
         <div class="first-position position">
@@ -54,7 +54,7 @@
           </div>
           <div class="name">
             <div class="person-name">{{leaderBoard[0]?.user}}</div>
-            <div class="record">{{leaderBoard[0]?.seconds}} secs</div>
+            <div class="record">{{leaderBoard[0]?.time}}</div>
           </div>
         </div>
         <div class="third-position position">
@@ -65,7 +65,7 @@
           </div>
           <div class="name">
             <div class="person-name">{{leaderBoard[2]?.user}}</div>
-            <div class="record">{{leaderBoard[2]?.seconds}} secs</div>
+            <div class="record">{{leaderBoard[2]?.time}}</div>
           </div>
         </div>
       </div>
@@ -77,9 +77,10 @@
             <div class="name">{{ leader.user }}</div>
           </div>
           <div class="end">
-            <div class="score">{{ leader.seconds }} secs</div>
+            <div class="score">{{ leader.minutes }}:{{ leader.seconds }} secs</div>
           </div>
         </div>
+        <button (click)="getMoreLeader()">{{ sLoading ? 'loading...' : 'See more' }}</button>
       </div>
     </div>
   </div>

@@ -4,7 +4,7 @@
 	width: 100%;
 	background-color: #fafafa;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 
     .ticket-container{	
 		height: fit-content;
@@ -47,15 +47,18 @@
                 position: relative;
                 display: flex;
                 flex-direction: column;
-                justify-content: center;
-                align-items: center;
                 gap: 20px;
                 width: 80%;
-
+                @media screen and (min-width: 600px) {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                    // justify-content: center;
+                  }
+                
                 .ticket-card{
                     display: flex;
                     flex-direction: column;
-                    justify-content: center;
+                    // justify-content: center;
                     align-items: center;
                     padding: 5px;
                     border-radius: 10px;
@@ -68,9 +71,9 @@
                         padding: 10px;
                         justify-content: space-between;
 
-                        .ticket-card-top-delete{
+                        // .ticket-card-top-delete{
 
-                        }
+                        // }
 
                         .ticket-card-top-title{
                             font-weight: 600;
@@ -91,14 +94,24 @@
                     }
 
                     .ticket-card-pic{
-                        display: grid;
-                        place-items: center;
-
-                        img{
-                            width: 80%;
-                            
+                        // display: grid;
+                        // place-items: center;
+                        padding: 0.5rem;
+						border-radius: 0.3rem;
+						width: 100%;
+						height: 14rem;
+						overflow: hidden;
+                        @media screen and (min-width: 1000px) {
+                            height: 16rem;
+                        }
+						
+                        img{				
+                            width: 100%;
+							height: 100%;
+                            object-fit: cover;  
                         }
                     }
+
 
                     .ticket-card-bottom{
                         display: flex;

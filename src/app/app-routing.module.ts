@@ -171,9 +171,6 @@ const routes2: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
-    path: 'forgetpassword', component: ForgetpasswordComponent
-  },
-  {
     
     path: 'web-voting/:id', component: WebVotingComponent
   },
@@ -338,6 +335,10 @@ const routes: Routes = [
       path: 'admin-leaderbord', loadChildren: './pages/admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',
       canActivate: [AuthguardGuard, AdminGuard]
     },
+    {
+      path: 'faq',
+      loadChildren: () => import('./pages/faq/faq.module').then( m => m.FaqPageModule)
+    },
   ]},
   {
     path: 'register',
@@ -352,17 +353,26 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
   },
   {
+    path: 'forgetpassword', component: ForgetpasswordComponent
+  },
+  {
+    path: 'reset/:token', component: ForgetpasswordComponent
+  },
+  {
     path: 'coming-soon',
     loadChildren: () => import('./pages/coming-soon/coming-soon.module').then( m => m.ComingSoonPageModule)
   },
     { path: "*", redirectTo: 'tabs/events' },
-  {
-    path: '**',
-    loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
-  },
-
-  
-
+    {
+      path: 'confirm-email',
+      loadChildren: () => import('./pages/confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
+    },
+    {
+      path: '**',
+      loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
+    },
+    
+    
 
 ];
 

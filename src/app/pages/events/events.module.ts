@@ -12,6 +12,7 @@ import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.componen
 import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
 // import { HeaderComponent } from 'src/app/components/header/header.component';
 import {ProfilePhotoComponent} from '../../components/profile-photo/profile-photo.component'
+import { AboutPopupComponent } from 'src/app/components/about-popup/about-popup.component';
 // import { apiBaseUrl } from '../../environments/'
 const routes: Routes = [
   {
@@ -29,7 +30,7 @@ const routes: Routes = [
     // SocketIoModule.forRoot(config)
   ],
   // declarations: [EventsPage, HeaderComponent, CountdownTimerComponent, ClueTipsComponent]
-  declarations: [EventsPage, CountdownTimerComponent, ClueTipsComponent, SearchbarComponent, ProfilePhotoComponent]
+  declarations: [EventsPage, CountdownTimerComponent, ClueTipsComponent, SearchbarComponent, ProfilePhotoComponent, AboutPopupComponent]
 })
 export class EventsPageModule {}
    

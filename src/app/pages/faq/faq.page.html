@@ -1,0 +1,47 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>faq</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <header>
+    <div class="back-button" [routerLink]="[ '/tabs/events' ]">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M20.9999 11H6.41394L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13H20.9999V11Z"
+          fill="#000000"
+        />
+      </svg>
+    </div>
+    <h1>FAQ</h1>
+    <h3>Hello, <br>How can we help you</h3>
+  </header>
+  <main>
+    <div class="section">
+      <div class="accordion" *ngFor="let data of accordion">
+        <h4>{{data.section}}</h4>
+        <div class="accordion__section" *ngFor="let content of data.content">
+          <label for={{content.id}} class="accordion__btn">{{content.question}}</label>
+          <input type="checkbox" name="" class="acct" id={{content.id}}>
+          <div class="accordion__text">
+            <div class="avail" *ngIf="content.answer !== 'null'">
+              {{content.answer}}
+            </div>
+            <empty-component
+              *ngIf="content.answer === 'null'"
+              [text]="'No info yet'"
+            ></empty-component>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</ion-content>

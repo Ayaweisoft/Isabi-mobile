@@ -5,6 +5,7 @@ import { AccountService } from '../../shared/account.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { LogicService } from 'src/app/services/logic.service';
 import { NgForm } from '@angular/forms';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-account-details',
@@ -16,6 +17,7 @@ export class AccountDetailsPage implements OnInit {
   myProfile: any;
   userRecordNotAvalible: boolean = false;
   image: any;
+  showAccount: boolean= false;
   username: any;
   
   loading :boolean = true;
@@ -26,7 +28,6 @@ export class AccountDetailsPage implements OnInit {
                 private logicService: LogicService,
                 public toastController: ToastController,
                 public accountService: AccountService) {
-                  this.getMyProfile();
                   this.getProfilePic();
                   console.log('username; ' + userService.getUsername())
                   userService.getUsername().subscribe(name => this.model.name = name);
@@ -37,8 +38,11 @@ export class AccountDetailsPage implements OnInit {
     name: '',
     accountName: '',
     bank: '',
-    accountNumber: '',
-    nationality: '',
+    accountNumber: ''
+  }
+
+  otpModel = {
+    accountOtp: ''
   }
 
   setNationality = {
@@ -55,13 +59,25 @@ export class AccountDetailsPage implements OnInit {
 
   
   ngOnInit() {
+    
   }
 
   ionViewWillEnter(){
-    this.getMyProfile();
     this.getProfilePic();
+    this.userService.sendAccountOtp().subscribe(
+      res => {
+        console.log("message: ", res);
+      },
+      err => {
+        console.error("error: ", err.error.message)
+      }
+    )
     console.log('username; ' + this.userService.getUsername());
     this.userService.getUsername().subscribe(name => this.model.name = name);
+  }
+
+  ionViewWillLeave(){
+    this.showAccount = false;
   }
 
   async presentFailNetwork() {
@@ -97,10 +113,10 @@ export class AccountDetailsPage implements OnInit {
         this.userService.getUsername().subscribe(name => this.model.name = name);
         this.userService.getUserProfile().subscribe(
           res => {
-            this.loading = false;
             this.myProfile = res;
             
-            console.log(this.myProfile);
+            console.log('profile: ', this.myProfile);
+            this.loading = false;
             this.userRecordNotAvalible = false;
           },
           err => {
@@ -164,6 +180,25 @@ export class AccountDetailsPage implements OnInit {
           console.log(error);
           this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
       }
+    }
+
+    validateOtp(){
+      this.loading = true;
+      console.log(this.otpModel)
+      this.userService.validateAccountOtp(this.otpModel).subscribe(
+        res => {
+          this.loading = false;
+          this.showAccount = true;
+          this.logicService.presentAlert('Otp Validation', 'User Validation Successful');
+          console.log(res);
+          this.getMyProfile();
+
+        },
+        err => {
+          this.loading = false;
+          this.logicService.presentAlert('Otp Validation', `Otp Validation Failed: ${err.error.message}`);
+        }
+      )
     }
 
 

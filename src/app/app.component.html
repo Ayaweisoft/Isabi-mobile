@@ -188,6 +188,13 @@
                   <span class="name">Share</span>
                 </div>
               </ion-menu-toggle>
+              <ion-menu-toggle auto-hide="false">
+                <div class="Demo" [routerDirection]="'root'"ss [routerLink]="['/tabs/faq']"
+                routerLinkActive="router-link-active">
+                  <div class="logo"></div>
+                  <span class="name">Faq</span>
+                </div>
+              </ion-menu-toggle>
             </div>
           </div>
 
@@ -195,7 +202,7 @@
             <span class="heading">Logout</span>
             <div class="heading-section">
               <ion-menu-toggle auto-hide="false">
-                <div class="Demo" (click)="userService.logout()">
+                <div class="Demo" (click)="UserService.logout()">
                   <div class="logo"></div>
                   <span class="name">Logout</span>
                 </div>
@@ -217,6 +224,11 @@
         </div>
       </div> 
 
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+
+</ion-app>
 
 
       <!-- <ion-list color="light" class="drawer-list">
@@ -261,9 +273,3 @@
           </ion-item>
         </ion-menu-toggle>
       </ion-list> -->
-
-    </ion-content>
-  </ion-menu>
-  <ion-router-outlet id="main-content"></ion-router-outlet>
-
-</ion-app>
