@@ -53,7 +53,7 @@
         </div>
         <div class="event-bottom">
           <div class="event-icons">
-            <p><span class="event-votes">186</span>{{item.type == "VOTING" ? "voted" : "sold"}}</p>
+            <p><span class="event-votes">{{item.totalCount}}</span>{{item.type == "VOTING" ? "voted" : "sold"}}</p>
           </div>
           <div class="event-button-div">
             <button class="event-button" (click)="insideEvent(item)">

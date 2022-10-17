@@ -385,7 +385,8 @@
         // border-radius: 5px;
 
         .event-votes {
-          display: block;
+          display: grid;
+          place-items: center;
           font-size: 1rem;
           font-weight: 600;
           color: goldenrod;
