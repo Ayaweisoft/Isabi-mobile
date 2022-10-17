@@ -53,11 +53,11 @@
         </div>
         <div class="event-bottom">
           <div class="event-icons">
-            <p><span class="event-votes">186</span>voted</p>
+            <p><span class="event-votes">186</span>{{item.type == "VOTING" ? "voted" : "sold"}}</p>
           </div>
           <div class="event-button-div">
             <button class="event-button" (click)="insideEvent(item)">
-              Buy ticket
+              {{item.type == "VOTING" ? "Vote Now" : "Buy Ticket"}}
             </button>
           </div>
         </div>
