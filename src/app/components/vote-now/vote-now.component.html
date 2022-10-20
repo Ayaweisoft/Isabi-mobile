@@ -5,6 +5,42 @@
     </button>
   </ion-button>
 </ion-header>
+
+<ion-content class="cover">
+  <div class="modal-wrapper">
+    <div class="modal-new">
+      <div class="top">
+        <span>Balance {{balance | currency:'₦'}}</span>
+        <span>Cost per vote: {{properties.cost | currency:'₦'}}</span>
+      </div>
+      <div class="cost-balance">
+        <span class="cost">00{{properties.my_code}}</span>
+        <span class="balance">{{properties.nickname}} </span>
+      </div>
+      <div class="main">
+        <img class="image" width="250" height="250" [src]="properties.image_url">
+        <h3 class="name">{{properties.fullname}}</h3>
+        <div class="quantity__change">
+          <button class="quantity__btn" (click)="remove()"><ion-icon name="remove"></ion-icon></button>
+          <input #purchase type="text" name="purchase" [(ngModel)]="properties.purchase">
+          <button class="quantity__btn" (click)="add()"><ion-icon name="add"></ion-icon></button>
+        </div>
+        <span class="total">{{properties.purchase * properties.cost | currency:'₦'}}</span>
+        <div class="div-btn">
+          <button class="btn-submit" [disabled]="properties.purchase < 1" (click)="finalize()">Vote</button>
+        </div>
+      </div>
+    </div>
+      
+  </div>
+
+<!-- <ion-header>
+  <ion-button color="light" (click)="closeModal()">
+    <button>
+      <ion-icon color="danger" name="close"></ion-icon>
+    </button>
+  </ion-button>
+</ion-header>
 <ion-content>
 
   <ion-card color="success" class="ion-padding ion-margin-top ion-text-center">
@@ -49,7 +85,7 @@
       <ion-button [disabled]="properties.purchase < 1" (click)="finalize()" color="light" [disabled]="">finalize
       </ion-button>
     </ion-card-content>
-  </ion-card>
+  </ion-card> -->
 
 
   <!-- loader -->
