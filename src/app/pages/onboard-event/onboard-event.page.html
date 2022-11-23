@@ -14,17 +14,19 @@
         <form action="" method="post">
           <div>
             <h3 class="section-title">Event Details</h3>
-            <input type="text" name="name" id="name" placeholder="Enter Name">
-            <input type="text" name="location" id="location" placeholder="Enter Location">
-            <input type="text" name="type" id="type" placeholder="Enter Type">
-            <div class="date-time">
-              <div class="date">
-                <input type="text" name="date" id="date" placeholder="Date" onfocus="(this.type='date')">
-                <img class="timed" src="../../../assets/figma/calender.svg" alt="">
-              </div>
-              <div class="time">
-                <input type="text" name="time" id="time" placeholder="Time" onfocus="(this.type='time')">
-                <img class="timed" src="../../../assets/figma/clock.svg" alt="">
+            <div class="grid">
+              <input type="text" name="name" id="name" placeholder="Enter Name">
+              <input type="text" name="location" id="location" placeholder="Enter Location">
+              <input type="text" name="type" id="type" placeholder="Enter Type">
+              <div class="date-time">
+                <div class="date">
+                  <input type="text" name="date" id="date" placeholder="Date" onfocus="(this.type='date')">
+                  <img class="timed" src="../../../assets/figma/calender.svg" alt="">
+                </div>
+                <div class="time">
+                  <input type="text" name="time" id="time" placeholder="Time" onfocus="(this.type='time')">
+                  <img class="timed" src="../../../assets/figma/clock.svg" alt="">
+                </div>
               </div>
             </div>
             <textarea name="description" id="description" cols="30" rows="3" placeholder="Event Description"></textarea>
@@ -47,13 +49,17 @@
           </div>
           <div>
             <h3 class="section-title">Event Owner Details</h3>
-            <input type="email" name="email" id="email" placeholder="Email">
-            <input type="tel" name="phone" id="phone" placeholder="Contact Number">
+            <div class="grid">
+              <input type="email" name="email" id="email" placeholder="Email">
+              <input type="tel" name="phone" id="phone" placeholder="Contact Number">
+            </div>
           </div>
           <div>
             <h3 class="section-title">Account Details</h3>
-            <input type="text" name="bank" id="bank" placeholder="Enter Bank">
-            <input type="number" name="acct_number" id="acct_number" placeholder="Account Number">
+            <div class="grid">
+              <input type="text" name="bank" id="bank" placeholder="Enter Bank">
+              <input type="number" name="acct_number" id="acct_number" placeholder="Account Number">
+            </div>
           </div>
 
           <div class="btn-div">
