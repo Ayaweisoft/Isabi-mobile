@@ -57,7 +57,6 @@ import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/i
 import { FirebaseService } from './services/firebase.service';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-ticket/inside-ticket-add-ticket.component';
-import { ManageEventComponent } from './components/manage-event/manage-event.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
 import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
@@ -95,7 +94,6 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     ImageCustomSpinnerComponent,
     InsideTicketingComponent,
     InsideTicketAddTicketComponent,
-    ManageEventComponent,
     TicketItemComponent,
     WebTicketComponent,
     SafeResourceUrlPipe, 

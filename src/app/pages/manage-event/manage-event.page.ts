@@ -4,16 +4,17 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { EventService } from 'src/app/shared/event.service';
 import { GameServiceService } from 'src/app/shared/game-service.service';
 import { UserService } from 'src/app/shared/user.service';
-import { EditEventComponent } from '../edit-event/edit-event.component';
+import { EditEventComponent } from '../../components/edit-event/edit-event.component';
 
 @Component({
   selector: 'app-manage-event',
-  templateUrl: './manage-event.component.html',
-  styleUrls: ['./manage-event.component.scss'],
+  templateUrl: './manage-event.page.html',
+  styleUrls: ['./manage-event.page.scss'],
 })
-export class ManageEventComponent implements OnInit {
+export class ManageEventPage implements OnInit {
   allEvent = [];
   loading = true;
+  isApproved = false;
     constructor(private router: Router, private gameService: GameServiceService, 
                 private eventService: EventService, public  userService: UserService,
                 private modalController: ModalController,
@@ -50,21 +51,43 @@ async editEvent(event) {
   
   
     getAllevent(){
-        this.eventService.getAllEventAdmin().subscribe(
-          res => {
-            console.log(res);
-            this.allEvent = res['event'];
-            this.loading = false;
-          },
-          err => {
-            this.loading = false;
-            this.userService.longToast(err.error.msg)
-            
-  
-            console.log('error getting event', err);
-          }
-        );
+      this.eventService.getAllEventAdmin().subscribe(
+        res => {
+          console.log(res);
+          this.allEvent = res['event'];
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.userService.longToast(err.error.msg)
+          
+          console.log('error getting event', err);
+        }
+      );
     }
+
+    loadPendingEvent(){
+      console.log("pending event")
+      this.isApproved = false;
+    }
+
+    loadApprovedEvent(){
+      console.log("approved event");
+      this.isApproved = true;
+    }
+
+    viewDetails(event){
+      this.router.navigate(['/tabs//manage-event/details', event._id]);
+    }
+
+    parseText(text: any, length: number) {
+      text =
+        text.length > length
+          ? text.substring(0, length - 3) + "..."
+          : text.substring(0, text.length - 3) + "...";
+      return text;
+    }
+  
   
     // insideEvent(event){
   

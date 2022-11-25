@@ -16,7 +16,6 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/router';
 import { WebVotingComponent } from './pages/web-voting/web-voting.component';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
-import { ManageEventComponent } from './components/manage-event/manage-event.component';
 import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { LeaderboardPage } from './pages/leaderboard/leaderboard.page';
 
@@ -46,10 +45,6 @@ const routes2: Routes = [
       {
         path: 'events', loadChildren: './pages/events/events.module#EventsPageModule',
         canActivate: [AuthguardGuard]
-      },
-      {
-        path: 'manage-event', component: ManageEventComponent,
-        canActivate: [AuthguardGuard, AdminGuard]
       },
 
       {
@@ -232,9 +227,20 @@ const routes: Routes = [
       loadChildren: () => import('./pages/account-new/account-new.module').then( m => m.AccountNewPageModule)
     },
 
+    // {
+    //   path: 'manage-event', component: ManageEventComponent,
+    //   canActivate: [AuthguardGuard, AdminGuard]
+    // },
+
     {
-      path: 'manage-event', component: ManageEventComponent,
+      path: 'manage-event',
+      loadChildren: () => import('./pages/manage-event/manage-event.module').then( m => m.ManageEventPageModule),
       canActivate: [AuthguardGuard, AdminGuard]
+    },
+
+    {
+      path: 'accounts',
+      loadChildren: () => import('./pages/account-new/account-new.module').then( m => m.AccountNewPageModule)
     },
 
     {
