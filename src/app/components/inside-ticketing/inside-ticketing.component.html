@@ -83,6 +83,11 @@
               </ion-col>
             </ion-row>
           </ion-grid> -->
+          <ion-fab *ngIf="userService.getRole() == 'ADMIN'" (click)="addTicket()" vertical="top" horizontal="end" slot="fixed">
+            <ion-fab-button color="success">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
         </div>
 
         <div class="paid-segment" *ngIf="segment === 'paid'">

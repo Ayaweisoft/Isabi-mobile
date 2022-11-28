@@ -17,6 +17,7 @@ import { PreloadAllModules, RouterModule, Routes, CanActivate } from '@angular/r
 import { WebVotingComponent } from './pages/web-voting/web-voting.component';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
+import { OnboardEventPage } from './pages/onboard-event/onboard-event.page';
 import { LeaderboardPage } from './pages/leaderboard/leaderboard.page';
 
 const routes2: Routes = [
@@ -214,6 +215,11 @@ const routes: Routes = [
       path: 'leaderboard',
       loadChildren: './pages/leaderboard/leaderboard.module#LeaderboardPageModule',
       
+    },
+    {
+      path: 'onboard-event',
+      loadChildren: './pages/onboard-event/onboard-event.module#OnboardEventPageModule',
+      // canActivate: [AuthguardGuard]
     },
     {
       path: 'account', component: AccountComponent, canActivate: [AuthguardGuard]
