@@ -1,0 +1,134 @@
+<!-- <ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
+    </div>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="main-content">
+    <div class="event-container">
+
+      <!-- head section -->
+      <div class="head-section event-head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <profile-photo [className]="'profile-header'"></profile-photo>
+        </div>
+      </div>
+
+      <div class="event-section">  
+        <!-- <h2 class="voting-title">Voting</h2> -->
+        <!-- <searchbar [allItems]="contestant" (displayedItems)="getChildData($event)"></searchbar>  -->
+        <div class="event-segment">
+          <div class="event-pic">
+            <img [src]="event?.image_url">
+          </div>
+          <div class="event-details">
+            <div class="event-detail">
+              <span>Event Name:</span>
+              <span class="event-name">{{ event?.eventName }}</span>
+            </div>
+            <div class="event-detail">
+              <span>Event Location:</span>
+              <span class="event-name">{{ event?.address }}</span>
+            </div>
+            <div class="event-detail">
+              <span>Event Type:</span>
+              <span class="event-name">{{ event?.eventType }}</span>
+            </div>
+            <div class="event-detail">
+              <span>Event Date:</span>
+              <span class="event-name">{{ event?.date }}</span>
+            </div>
+            <div class="event-detail">
+              <span>Event description:</span>
+              <span class="event-name">{{ event.description }}</span>
+            </div>
+          </div>
+          <div class="event-owner-details">
+
+          </div>
+          <div class="account-details">
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <ion-card color="success" class="p-1" *ngFor="let item of allEvent">
+          <img [src]="item.image_url">
+
+          <div class="ion-text-center">
+            <ion-title mode="md" class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
+            <ion-text>{{item.aboutEvent}} </ion-text>
+            <div *ngIf="item?.startDate">{{item?.startDate |date}} to {{item?.endDate|date}} </div> <br>
+            <small class="text-center">{{item?.startTime }} </small> <br>
+
+            <small class="text-center">{{item.type}} </small>
+
+            <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="handleDelete(item)" name="trash">
+            </ion-icon>
+          </div>
+
+          <ion-item color="dark">
+            <ion-label>Live</ion-label>
+
+            <ion-toggle class="p-1" [checked]="item.active" color="success" (ionChange)="changeStatus($event,item._id)">
+            </ion-toggle>
+            <ion-button (click)="editEvent(item)" color="light">
+              edit
+            </ion-button>
+
+          </ion-item>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content> -->
