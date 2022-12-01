@@ -11,7 +11,7 @@
         </div>
       </div>
       <div class="onboard-event-section">
-        <form [formGroup]="onboardingForm">
+        <form action="" method="post">
           <div>
             <h3 class="section-title">Event Details</h3>
             <div class="grid">
@@ -36,18 +36,17 @@
             <label for="cover-photo" class="cover-photo">
               <img src="../../../assets/figma/add.svg" alt="">
             </label>
-            <input type="file" name="cover-photo" id="cover-photo" (change)="addImagesFirebase($event)">
+            <input type="file" name="cover_photo" id="cover_photo" (change)="addImagesFirebase($event)">
           </div>
           <div>
             <h3 class="section-title">Add Tickets</h3>
             <div class="tickets">
-              <button class="cover-photo ticket" (click)="addTicket($event)">
+              <button class="cover-photo ticket" (click)="addTicket()">
                 <img src="../../../assets/figma/add.svg" alt="">
               </button>
               <!-- <input type="file" name="ticket" id="ticket" placeholder="Enter Name"> -->
             </div>
           </div>
-          
           <div>
             <h3 class="section-title">Event Owner Details</h3>
             <div class="grid">
@@ -59,12 +58,12 @@
             <h3 class="section-title">Account Details</h3>
             <div class="grid">
               <input type="text" name="bank" id="bank" placeholder="Enter Bank" formControlName="bank">
-              <input type="number" name="acct_number" id="acct_number" placeholder="Account Number" formControlName="account_number">
+              <input type="number" name="account_number" id="account_number" placeholder="Account Number" formControlName="account_number">
             </div>
           </div>
 
           <div class="btn-div">
-            <button class="btn-submit" (click)="finalize($event)">Save Event Details</button>
+            <button class="btn-submit" (click)="finalize()">Save Event Details</button>
           </div>
         </form>
       </div>

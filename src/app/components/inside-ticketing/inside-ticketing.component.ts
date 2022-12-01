@@ -227,7 +227,6 @@ export class InsideTicketingComponent implements OnInit {
     console.log(data)
     if (data?.data?.data) {
       this.ticketList.push(data?.data?.data);
-
     }
 
   }

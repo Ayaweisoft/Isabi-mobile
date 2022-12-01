@@ -19,6 +19,7 @@ import { AdminGuard } from './auth/admin.guard';
 import { AccountComponent } from './pages/account/account.component';
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 // import {MatIconModule} from '@angular/material/icon';
@@ -57,6 +58,7 @@ import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/i
 import { FirebaseService } from './services/firebase.service';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-ticket/inside-ticket-add-ticket.component';
+import { AddTicketComponent } from './components/add-ticket/add-ticket.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
 import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
@@ -94,6 +96,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     ImageCustomSpinnerComponent,
     InsideTicketingComponent,
     InsideTicketAddTicketComponent,
+    AddTicketComponent,
     TicketItemComponent,
     WebTicketComponent,
     SafeResourceUrlPipe, 
@@ -105,6 +108,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgInterswitchModule,
