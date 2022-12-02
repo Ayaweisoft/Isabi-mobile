@@ -25,6 +25,11 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
     return this.http.get(environment.apiBaseUrl +'/get-all-event-admin');
   }
 
+  getEventById(id: any){
+    console.log('service: ', id);
+    return this.http.get(environment.apiBaseUrl +`/v2/get-event-by-id/${id}`);
+  }
+
   checkTicketIdIfExist(ticketId, eventId){
     return this.http.get(environment.apiBaseUrl+ `/v2/check-ticket-id/${ticketId}/${eventId}`)
 

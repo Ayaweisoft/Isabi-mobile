@@ -47,13 +47,20 @@ p{
 	font-family: 'Open Sans', sans-serif;
 }
 
+ion-content{
+	--background-color: #fafafa;
+}
 
 .main-content{
 	font-family: 'Open Sans', sans-serif;
-	background-color: #f2f2f2;
+	background-color: #fafafa;
 	height: fit-content;
 	min-height: 100%;
-}	
+}
+
+.inner-scroll{
+	background: #fafafa;
+}
 
 .header{
 	height: 55px;
@@ -65,9 +72,9 @@ p{
 	align-items: center;
 
 	ion-menu-button{
-		height: 30px;
-		width: 30px;
-		color: #f2f5f2
+		height: 2rem;
+		width: 2rem;
+		color: #fff;
 	}
 
 	.logo{
@@ -79,6 +86,16 @@ p{
 
 }
 
+.top-section-cover-img{
+	position: absolute;
+	opacity: 0.22;
+	top: 0;
+	z-index: 0;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
 .content {
 	background-color: #348A40;
 	height: 100%;
@@ -86,6 +103,21 @@ p{
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+button{
+	transition: all 0.5s cubic-bezier(0.19, 0.66, 0.48, 0.97);
+	outline: none;
+	&:hover{
+		transform: translateY(-2px);
+	}
+}
+
+.btn{
+	outline: none;
+}
+input{
+	outline: none;
 }
 
 .modal-fullscreen {
@@ -119,7 +151,7 @@ p{
     flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    padding: 10px;
+    padding: 10px 10px 50px;
 	position: relative;
 	
 	
@@ -226,7 +258,7 @@ p{
 }
 
 .info {
-	text-decoration: underline rgb(255, 254, 254);
+	text-decoration: underline rgb(255, 254, 254); 
 }
 
 //   loading

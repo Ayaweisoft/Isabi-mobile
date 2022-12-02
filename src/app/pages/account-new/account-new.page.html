@@ -1,0 +1,113 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>account-new</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="top-section">
+    <div class="head-section question-head-section">
+      <div class="header">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <profile-photo
+          [className]="'profile-header'"
+          [userNameVisible]="false"
+        ></profile-photo>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-section">
+    <div class="container">
+      <div class="price-div">
+        <h6>General Balance</h6>
+        <div class="price">{{balance | currency:'₦'}}</div>
+      </div>
+      <div class="price-div">
+        <h6>Total General Bonus</h6>
+        <div class="price">{{bonus | currency:'₦'}}</div>
+      </div>
+      <div class="btn-section">
+        <button
+          class="container-btn"
+          (click)="enterAmountInput()"
+          *ngIf="!showPaymentButtons"
+        >
+          Deposit
+        </button>
+        <button
+          class="container-btn"
+          (click)="enterCashoutAmount()"
+          *ngIf="!showPaymentButtons"
+        >
+          Cashout
+        </button>
+      </div>
+
+      <div class="payment-card" *ngIf="showPaymentButtons">
+        <div class="payment-card-head">I want to pay</div>
+        <div class="payment-card-body">
+          <div class="payment-card-body-text">
+            Banks transafer/ Cards / ussd
+          </div>
+          <ng-interswitch
+            [merchantCode]="customerDetails.merchantCode"
+            [payItemID]="customerDetails.payItemID"
+            [amount]="model.amount"
+            [transactionReference]=" reference"
+            [customerEmail]="customerDetails.email"
+            [paymentMode]="'LIVE'"
+            [customerName]="customerDetails.name"
+            (paymentCallback)="paymentCallback($event)"
+            [class]="'btn btn-danger'"
+            >PAY NOW</ng-interswitch
+          >
+        </div>
+      </div>
+
+      <div class="promo-section">
+        <span class="promo-claim">Claim promo code</span>
+        <div class="flex">
+          <input class="promo-input" #promo />
+          <button
+            class="promo-btn"
+            [disabled]="loading"
+            [disabled]="!promo.value"
+            (click)="submitProCode(promo.value)"
+          >
+            Claim
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="transaction-section">
+      <h4 class="transaction-header">Recent Transactions</h4>
+      <table class="transaction-table">
+        <tr class="transaction-table-row">
+          <th>Amount</th>
+          <th>Method</th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Stats</th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="">
+    <div class="toast-container">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content>

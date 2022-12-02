@@ -1,117 +1,107 @@
-import { IonSlides, AlertController } from '@ionic/angular';
-import { EventService } from '../../shared/event.service';
-import { GameServiceService } from '../../shared/game-service.service';
-import { UserService } from '../../shared/user.service';
-import { Router } from '@angular/router';
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { AccountService } from '../../shared/account.service';
-import { environment } from 'src/environments/environment';
-import { LogicService } from '../../services/logic.service';
+import { IonSlides, AlertController } from "@ionic/angular";
+import { EventService } from "../../shared/event.service";
+import { SocketService } from "../../services/socket.service";
+import { GameServiceService } from "../../shared/game-service.service";
+import { UserService } from "../../shared/user.service";
+import { Router } from "@angular/router";
+import { Component, ViewChild, OnInit } from "@angular/core";
+import { AccountService } from "../../shared/account.service";
+import { environment } from "src/environments/environment";
+import { LogicService } from "../../services/logic.service";
+// import { SocketService } from '../../socket.service';
 
 @Component({
-  selector: 'app-events',
-  templateUrl: './events.page.html',
-  styleUrls: ['./events.page.scss'],
+  selector: "app-events",
+  templateUrl: "./events.page.html",
+  styleUrls: ["./events.page.scss"],
 })
 export class EventsPage implements OnInit {
-@ViewChild('mySlider', {static : false}) mySlider: IonSlides;
-allEvent = [];
-displayedEvents = [];
-shadowEvents = [0,0,0];
-loading = true;
-webLink = environment.webVotingUrl;
-slideCounter =  0;
+  @ViewChild("mySlider", { static: false }) mySlider: IonSlides;
+  allEvent = [];
+  displayedEvents = [];
+  loadingCards = [0, 0, 0];
+  loading = false;
+  isFirst: boolean = false;
+  webLink = environment.webVotingUrl;
+  slideCounter = 0;
+  socket: any;
+  userCount: number = 0;
+  opts = {
+    slidePerView: 1,
+    spaceBetween: 20,
+  };
 
-opts = {
-  slidePerView: 1,
-  spaceBetween: 20
-}
+  onlineUsers = 0;
+  firstLogin: boolean = true;
 
-  constructor(private router: Router,
-              private eventService: EventService,
-              public  userService: UserService,
-              public gameService: GameServiceService,
-              private accountService: AccountService,
-              private logicService: LogicService,
-              public alertController: AlertController) {
-               }
+  constructor(
+    private router: Router,
+    private EventService: EventService,
+    public UserService: UserService,
+    public GameService: GameServiceService,
+    private AccountService: AccountService,
+    private LogicService: LogicService,
+    public SocketService: SocketService,
+    public AlertController: AlertController
+  ) {}
 
-  ngOnInit() { 
+  ngOnInit() {
     this.getAllevent();
-    this.gameService.getGameTip();
-    this.gameService.getAdminDate();
+    this.GameService.getGameTip();
+    this.GameService.getAdminDate();
+    this.UserService.checkIsFirst().subscribe(isFirst => this.isFirst = isFirst);
+    this.SocketService.connect();
+    // this.appUser = localStorage.getItem('appUser');
     //this.initializeTimer();
-    console.log("day", this.gameService.timeDays);
-    this.autoSlide();
+    console.log("day", this.GameService.timeDays);
+    // this.SocketService.userConnected();
+    this.SocketService.fetchOnlineUsers().subscribe((data) => {
+      this.userCount = data;
+    });
 
+    // this.socket = io.io('localhost:8000');
+    // this.socket.on('new-msg', (msg: any) => {
+    //   console.log('sock msg: ' + msg);
+    // })
+    console.log("number of users online: " + this.onlineUsers);
+    const userID = this.UserService.getAuthId();
+    console.log("E enter events");
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe((users) => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe((user) => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
   }
 
-async initializeTimer(){
-  let day = document.querySelector(".day-loader");
-  let hour = document.querySelector(".hour-loader");
-  let minute = document.querySelector(".minute-loader");
-  let second = document.querySelector(".second-loader");
+  parseText(text) {
+    let length = 55;
+    text =
+      text.length > length
+        ? text.substring(0, length - 3) + "..."
+        : text.substring(0, text.length - 3) + "...";
+    return text;
+  }
 
-  let dayValue = 0;
-  let hourValue = 0;
-  let minuteValue = 0;
-  let secondValue = 0;
-
-  let dayEndValue = 60 * 60 * 24;
-  let hourEndValue = 60 * 60;
-  let minuteEndValue = 60;
-  let secondEndValue = 60;
-  // let progressEndValue = 60 * 60;
-  let speed = 1000;
-
-  
-
-  let dayprogress = setInterval(() => {
-      dayValue++;
-     
-      (day as HTMLElement).style.background = `conic-gradient(
-          #4d5bf9 ${dayValue * 0.1}deg,
-          #cadcff ${dayValue * 0.1}deg
-      )`
-      if(dayValue == dayEndValue){
-          dayValue = 0;
+  getAllevent() {
+    this.loading = true;
+    this.EventService.getAllEvent().subscribe(
+      (res) => {
+        console.log(res);
+        this.allEvent = res["event"];
+        this.displayedEvents = this.allEvent;
+        this.loading = false;
+      },
+      (err) => {
+        this.loading = false;
+        this.UserService.longToast(err.error.msg);
+        console.log("error getting event", err);
       }
-  }, speed)
-
-  let hourprogress = setInterval(() => {
-    hourValue++;
-   
-    (hour as HTMLElement).style.background = `conic-gradient(
-        #4d5bf9 ${hourValue * 0.1}deg,
-        #cadcff ${hourValue * 0.1}deg
-    )`
-    if(hourValue == hourEndValue){
-        hourValue = 0;
-    }
-}, speed)
-
-let minuteprogress = setInterval(() => {
-      minuteValue++;
-     
-      (day as HTMLElement).style.background = `conic-gradient(
-          #4d5bf9 ${minuteValue * 6}deg,
-          #cadcff ${minuteValue * 6}deg
-      )`
-      if(minuteValue == minuteEndValue){
-          minuteValue = 0;
-      }
-  }, speed)
-
-  let secondprogress = setInterval(() => {
-      secondValue++;
-     
-      (day as HTMLElement).style.background = `conic-gradient
-          #cadcff ${secondValue * 6}deg,
-          #4d5bf9 ${secondValue * 6}deg,
-      )`
-      if(secondValue == secondEndValue){
-          secondValue = 0;
-      }
+<<<<<<< HEAD
   }, speed)
 }
 
@@ -160,72 +150,75 @@ clickSlidePrevious() {
           console.log('error getting event', err);
         }
       );
+=======
+    );
+>>>>>>> 191abea70e56097cccb456083c08f608755d27a7
   }
-  filterEvents(value, list = this.allEvent){
-    let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
-    this.displayedEvents = newEvents
-    console.log("ÿoooooo")
+  // filterEvents(value, list = this.allEvent){
+  //   let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
+  //   this.displayedEvents = newEvents
+  //   console.log("ÿoooooo")
+  // }
+  getChildData(data) {
+    this.displayedEvents = data;
   }
-  copyInputMessage(inputElement){
+
+  copyInputMessage(inputElement) {
     inputElement.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     inputElement.setSelectionRange(0, 0);
-    this.logicService.presentToast('Text copied!' );
+    this.LogicService.presentToast("Text copied!");
   }
 
-
-  insideEvent(event){
+  insideEvent(event) {
     switch (event.type) {
-      case 'VOTING':
+      case "VOTING":
         this.router.navigate([`/tabs/inside-event`, event._id]);
         break;
-      case 'TICKETING':
+      case "TICKETING":
         this.router.navigate([`/tabs/inside-ticketing`, event._id]);
         break;
-      case 'FORM-SALES':
+      case "FORM-SALES":
         this.router.navigate([`/tabs/form-sales`, event._id]);
         break;
-    
+
       default:
         break;
     }
-    
-  
   }
 
-
-async handleDelete(event) {
-  const alert = await this.alertController.create({
-    header: 'Confirm!',
-    message: `Delete <strong>${event.aboutEvent} </strong>!!!`,
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'secondary',
-        handler: () => {
-          console.log('Confirm Cancel: blah');
-        }
-      }, {
-        text: 'Okay',
-        handler: () => {
-          this.loading = true;
-          this.eventService.deleteEvent(event._id).subscribe(
-            res => {
-              this.loading = false;
-              this.userService.generalToast(res['msg'], 2000);
-              this.getAllevent();
-            },
-            err => {
-              this.loading = false;
-              this.userService.generalAlert(err.error.msg);
-            }
-          );
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}
+  async handleDelete(event) {
+    const alert = await this.AlertController.create({
+      header: "Confirm!",
+      message: `Delete <strong>${event.aboutEvent} </strong>!!!`,
+      buttons: [
+        {
+          text: "Cancel",
+          role: "cancel",
+          cssClass: "secondary",
+          handler: () => {
+            console.log("Confirm Cancel: blah");
+          },
+        },
+        {
+          text: "Okay",
+          handler: () => {
+            this.loading = true;
+            this.EventService.deleteEvent(event._id).subscribe(
+              (res) => {
+                this.loading = false;
+                this.UserService.generalToast(res["msg"], 2000);
+                this.getAllevent();
+              },
+              (err) => {
+                this.loading = false;
+                this.UserService.generalAlert(err.error.msg);
+              }
+            );
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
 }

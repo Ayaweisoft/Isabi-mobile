@@ -1,0 +1,57 @@
+ion-content{
+	--background-color: #f2f2f2;
+}
+
+.main-content{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+
+h2{
+	z-index: 100;
+	font-weight: bold;
+	color: #000000;
+	margin: 0;
+	padding: 0;
+	font-size: 1.5rem;
+	text-align: center;
+}
+
+p{
+	text-align: center;
+	font-size: 1rem;
+	margin: 0;
+	font-weight: 500;
+}
+
+.email-card{	
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    width: 90%;
+    background-color: #f2f2f2;
+    padding: 2rem 1rem;
+	gap: 1rem;
+	border-radius: 20px;
+
+	@media screen and (min-width: 600px){
+		width: 60%;
+	}
+
+}
+.btn{
+	color: #f2f5f2;
+	background: #348A40;
+	height: 40px;
+	border: none;
+	width: 100%;
+	font-size: 14px;
+	font-weight: normal;
+	border-radius: 10px;
+}

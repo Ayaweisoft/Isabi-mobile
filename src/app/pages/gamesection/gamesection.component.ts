@@ -67,7 +67,6 @@ export class GamesectionComponent implements OnInit {
     this.appUser = localStorage.getItem('appUser');
    await this.gameService.getAdminDate();
    await this.loadBalance(); 
-                this.autoSlide();
  
   }
 
@@ -78,44 +77,6 @@ export class GamesectionComponent implements OnInit {
   ionViewWillLeave(){
   //  this.checkingInterval
   }
-
- 
-
-
-
-
-
-async autoSlide() {
-  setInterval(()=> {
-     this.gameService.slideCounter = this.gameService.gameTipArray.length;
-     this.gameService.slideCounter --;
-     this.mySlider.slideNext(3000, true);
-  
-  
-  },9000)
-}
-
-
-
-
-
-
-  
-
-
-  clickSlidetoNext() {
-    console.log('slide to next')
-    this.mySlider.slideNext();
-  }
-
-  clickSlidePrevious() {
-    console.log('slide to previous');
-    this.mySlider.slidePrev();
-  }
-
-
-
-
 
   loadBalance() {
     this.accountService.loadMyBalance();

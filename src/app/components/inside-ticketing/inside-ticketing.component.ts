@@ -8,6 +8,7 @@ import { EventService } from 'src/app/shared/event.service';
 import { UserService } from 'src/app/shared/user.service';
 import { BuyTicketComponent } from '../buy-ticket/buy-ticket.component';
 import { InsideTicketAddTicketComponent } from '../inside-ticket-add-ticket/inside-ticket-add-ticket.component';
+import { SearchbarComponent } from '../searchbar/searchbar.component';
 
 @Component({
   selector: 'app-inside-ticketing',
@@ -15,16 +16,16 @@ import { InsideTicketAddTicketComponent } from '../inside-ticket-add-ticket/insi
   styleUrls: ['./inside-ticketing.component.scss'],
 })
 export class InsideTicketingComponent implements OnInit {
-  @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
+  @ViewChild('refresherRef', { static: false }) refresherRef: IonRefresher;
   eventId: any;
   eventRefresher: any;
-  loading: boolean;
-  ticketList : Ticket[] =  [];
-  myTicketList : Ticket[] = [];
-  segment= 'ticket';
+  loading: boolean = true;
+  ticketList: Ticket[] = [];
+  myTicketList: Ticket[] = [];
+  segment = 'ticket';
   generatedTicketId: string;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(private route: ActivatedRoute,
     private eventService: EventService,
     public userService: UserService,
     private alertController: AlertController,
@@ -32,35 +33,35 @@ export class InsideTicketingComponent implements OnInit {
     private modalController: ModalController) { }
 
   ngOnInit() {
-  this.randomString(6);
+    this.randomString(6);
   }
 
   randomString(len) {
     var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var shortpass =  [...Array(len)].reduce(a=>a+p[~~(Math.random()*p.length)],'');
-console.log('POP ', shortpass)
-this.generatedTicketId = shortpass
-     this.eventService.checkTicketIdIfExist(shortpass, this.eventId).subscribe(res => {
-       console.log(res);
-       this.randomString(6)
-     }, err => {
-       console.log(err);
-     });
-     return
-}
+    var shortpass = [...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], '');
+    console.log('POP ', shortpass)
+    this.generatedTicketId = shortpass
+    this.eventService.checkTicketIdIfExist(shortpass, this.eventId).subscribe(res => {
+      console.log(res);
+      this.randomString(6)
+    }, err => {
+      console.log(err);
+    });
+    return
+  }
 
   ionViewDidEnter() {
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-      console.log('seee id ', this.eventId)
-     
+      console.log('seee id ', this.eventId);
+
     });
     this.getAllTicket();
     this.findMyTicket();
   }
 
 
-  segmentChanged(ev){
+  segmentChanged(ev) {
     console.log(ev)
     this.segment = ev.detail.value;
   }
@@ -68,55 +69,58 @@ this.generatedTicketId = shortpass
   async buyNow(ticket: Ticket) {
     ticket.eventId = this.eventId;
     const modal = await this.modalController.create({
-    component: BuyTicketComponent,
-    
-    componentProps: { ticket }
+      component: BuyTicketComponent,
+
+      componentProps: { ticket }
     });
-  
+
     await modal.present();
-  
-    const data = await modal.onDidDismiss();
-    console.log(data.data.data)
-   if(data.data.data){
-    this.myTicketList.push(data.data.data)
-  this.findMyTicket();
-   }
-  
+
+    await modal.onDidDismiss().then(data => {
+      this.getAllTicket();
+      console.log(data.data.data)
+      if (data.data.data) {
+        this.myTicketList.push(data.data.data)
+        this.findMyTicket();
+      } 
+    });
+
   }
 
-  async deleteTicket(id){
-   var result =  await this.logicService.alertDialog('delete ticket','If confirm, record cannot be recovered.');
-   if(result){
-     this.ticketList = this.ticketList.filter((item)=> item._id != id);
-     this.eventService.deleteTicket(id).subscribe(res=> {
-       console.log(res)
-     })
-   }
+  async deleteTicket(id) {
+    var result = await this.logicService.alertDialog('delete ticket', 'If confirm, record cannot be recovered.');
+    if (result) {
+      this.ticketList = this.ticketList.filter((item) => item._id != id);
+      this.eventService.deleteTicket(id).subscribe(res => {
+        console.log(res)
+      })
+    }
   }
 
 
-  doRefresh(ev){
+  doRefresh(ev) {
     this.getAllTicket();
   }
-  
 
-  getAllTicket(){
+
+  getAllTicket() {
+    this.loading = true;
     this.eventService.getTicketByEventId(this.eventId).subscribe(
       res => {
         try {
           this.refresherRef.complete();
         } catch (error) {
-          
+
         }
+        console.log(res);
+        this.ticketList = res['ticketList'];
         this.loading = false;
-       console.log(res);
-       this.ticketList = res['ticketList'];
       },
       err => {
         try {
           this.refresherRef.complete();
         } catch (error) {
-          
+
         }
         this.loading = false;
         this.logicService.presentToast(err.error.msg);
@@ -124,7 +128,7 @@ this.generatedTicketId = shortpass
     );
   }
 
-  findMyTicket(){
+  findMyTicket() {
     this.eventService.findMyTicket(this.eventId, this.userService.getEmail()).subscribe(myList => {
       console.log('OBSSS ', myList);
       this.myTicketList = myList['ticketList'];
@@ -155,7 +159,7 @@ this.generatedTicketId = shortpass
         {
           name: 'slot',
           type: 'number',
-          value:1,
+          value: 1,
           placeholder: 'slot'
         },
       ],
@@ -171,35 +175,37 @@ this.generatedTicketId = shortpass
           text: 'Confirm',
           handler: (data) => {
             console.log('Confirm Ok', data);
-            if(!data?.email || !data.phone || !data?.name || !data?.slot){
+            if (!data?.email || !data.phone || !data?.name || !data?.slot) {
               return this.logicService.presentToast('one or more field is required!')
             }
 
-            if(data.slot === 0){
+            if (data.slot === 0) {
               return this.logicService.presentToast('slot must be greater tha zero')
             }
-            var  remainingTicket = ticket?.numberOfTicket - parseInt(data.slot);
+            var remainingTicket = ticket?.numberOfTicket - parseInt(data.slot);
             console.log('remain ', remainingTicket)
-          if( remainingTicket < 1 ){
-            return this.logicService.presentToast('You have requested more than your slot')
-          }
+            if (remainingTicket < 1) {
+              return this.logicService.presentToast('You have requested more than your slot')
+            }
 
-          this.loading = true;
-         var newTicket = { name: data.name, amount: ticket.amount, ticketDBId: ticket._id,
-          ticketId: this.generatedTicketId, email: data.email, numberOfTicket: data.slot,
-           phone: data.phone, imageUrl: ticket.imageUrl}
-      
-          this.eventService.shareTicket(newTicket).subscribe(response => {
-            console.log(response);
-            this.findMyTicket();
-            this.randomString(6);
-            this.logicService.presentSucess('Shared successful', `you have successfully shared ${newTicket?.numberOfTicket} `+
-            `ticket(s)  to ${newTicket?.email}`,'close');
-            this.loading = false;
-          }, err => {
-            this.loading = false;
-            console.log(err);
-          })
+            this.loading = true;
+            var newTicket = {
+              name: data.name, amount: ticket.amount, ticketDBId: ticket._id,
+              ticketId: this.generatedTicketId, email: data.email, numberOfTicket: data.slot,
+              phone: data.phone, imageUrl: ticket.imageUrl
+            }
+
+            this.eventService.shareTicket(newTicket).subscribe(response => {
+              console.log(response);
+              this.findMyTicket();
+              this.randomString(6);
+              this.logicService.presentSucess('Shared successful', `you have successfully shared ${newTicket?.numberOfTicket} ` +
+                `ticket(s)  to ${newTicket?.email}`, 'close');
+              this.loading = false;
+            }, err => {
+              this.loading = false;
+              console.log(err);
+            })
 
           }
         }
@@ -209,38 +215,32 @@ this.generatedTicketId = shortpass
     await alert.present();
   }
 
+  async addTicket() {
+    const modal = await this.modalController.create({
+      component: InsideTicketAddTicketComponent,
+      componentProps: { eventId: this.eventId, }
+    });
 
+    await modal.present();
 
+    const data = await modal.onDidDismiss();
+    console.log(data)
+    if (data?.data?.data) {
+      this.ticketList.push(data?.data?.data);
 
-
-
-
-async addTicket() {
-  const modal = await this.modalController.create({
-  component: InsideTicketAddTicketComponent,
-  componentProps: { eventId: this.eventId,  }
-  });
-
-  await modal.present();
-
-  const data = await modal.onDidDismiss();
-  console.log(data)
-  if(data?.data?.data){
-  this.ticketList.push(data?.data?.data);
+    }
 
   }
 
-}
+  confirmMessage(ticket) {
+    console.log('confirm  ticket ', ticket)
+    ticket.status = 'VALID';
+    this.eventService.confirmTicketId(ticket._id).subscribe(data => {
 
-confirmMessage(ticket){
-  console.log('confirm  ticket ', ticket)
-  ticket.status = 'VALID';
-  this.eventService.confirmTicketId(ticket._id).subscribe(data => {
-    
-  }, err => {
-    ticket.status = 'UNALLOTED';
-    this.logicService.presentToast('error updating ticket status');
-  });
-}
+    }, err => {
+      ticket.status = 'UNALLOTED';
+      this.logicService.presentToast('error updating ticket status');
+    });
+  }
 
 }

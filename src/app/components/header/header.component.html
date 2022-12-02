@@ -1,11 +1,33 @@
-<ion-header>
-  <ion-toolbar>
+<div class="header">
 
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <div class="row d-flex justify-content-center">
-      <img class="rounded-top" src="../../../assets/icon/Logoicon.png">
-    </div>
-  </ion-toolbar>
-</ion-header>
+    <div class="timer_small" >
+      <div class="days">
+        <p>
+          {{gameService.timeDays}}
+        </p>
+        <p>DAYS</p>
+      </div>
+      <div class="hours">
+        <p>{{gameService.timeHours}}</p>
+        <p>HOURS</p>
+      </div>
+      <div class="minutes">
+        <p>{{gameService.timeMinute}}</p>
+        <p>MINUTES</p>
+      </div>
+      <div class="seconds">
+        <p>{{gameService.timeSeconds}}</p>
+        <p>SECONDS</p>
+      </div>
+  </div>
+  <div class="header_end" slot="end">
+    <div class="user_info">John Doe</div>
+  <div class="logo" >
+    
+  </div>
+  </div>
+</div>
+

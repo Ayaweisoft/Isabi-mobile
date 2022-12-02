@@ -1,3 +1,4 @@
+import { LogicService } from 'src/app/services/logic.service';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 import { AccountService } from '../../shared/account.service';
@@ -5,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { ToastController, AlertController } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
+import { GameServiceService } from 'src/app/shared/game-service.service';
 
 @Component({
   selector: 'app-forgetpassword',
@@ -24,7 +27,8 @@ export class ForgetpasswordComponent implements OnInit {
   phoneFromServer : any;
   loading: boolean = false;
   allowReset : boolean = false;
-
+  isResetToken: boolean = false;
+  resetToken: any = '';
   // noAuthHeader = headers: new HttpHeaders({NoAuth: 'True'});
 
 
@@ -33,7 +37,10 @@ export class ForgetpasswordComponent implements OnInit {
  
   constructor(private accountService: AccountService,
               private http: HttpClient,
+              private gameService: GameServiceService,
+              private activatedRoute: ActivatedRoute,
               public alertController: AlertController,
+              private logicService: LogicService,
               private router : Router,
               public toastController: ToastController,
               private userService: UserService) { 
@@ -42,134 +49,67 @@ export class ForgetpasswordComponent implements OnInit {
  
 
   model = {
-    number:'',
-    userOtpConfirm : '',
-    newPassword : '',
-    confirmPassword : ''
+    email:'',
+  }
+
+  tokenModel = {
+    resetToken: ''
+  }
+
+  passModel = {
+    password: '',
+    conf_password: '',
+    resetToken: ''
   }
 
   ngOnInit() {
-
+    this.activatedRoute.paramMap.subscribe(params => { 
+      this.tokenModel.resetToken = params.get('token');
+      if(this.tokenModel.resetToken){
+        this.isResetToken = true;
+        this.userService.validateResetToken(this.tokenModel).subscribe(
+          res => {
+            // this.isResetToken = true;
+            this.passModel.resetToken = this.tokenModel.resetToken;
+            console.log('token: ', res)
+          },
+          err => {
+            this.isResetToken = false;
+            console.log(err);
+          }
+        )
+      }    
+  });
   }
 
 
-  submitNumber(form: NgForm) {
+  submitEmail(form: NgForm) {
     this.loading = true;
-    this.userService.confirmNumber(this.model.number).subscribe(
+    this.userService.resetPassword(this.model).subscribe(
       res => {
-        this.loading = false;
-        this.showPasswordInput();
-        this.otpFromServer = res['otp'];
-        this.phoneFromServer = res['phone'];
-
-
-        console.log(this.otpFromServer);
-        console.log(this.phoneFromServer);
-        this.showNumberForm = false;
-        this.showOTPInput = true;
+        console.log("recovery email sent: ", res);
+        this.logicService.presentSucess('success','check your email for futher instruction', 'continue'); 
       },
       err => {
-        this.loading = false; 
-        this.noUserFound();
         console.log(err.error);
-      }
+      }  
     );
   }
 
-  // alert input for reset password
-  async showPasswordInput() {
-    const alert = await this.alertController.create({
-      header: 'ENTER OTP SENT TO YOU',
-      inputs: [
-        {
-          name: 'otp',
-          type: 'number',
-          placeholder: 'enter otp'
-        }],
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('password reset cancel');
-         
-          } 
-        }, {
-          text: 'Confirm',
-          handler: (data) => {
-            this.allowResetpasswordIfTrue(data.otp);
-            console.log(' clecked ok.....', data.otp);
-
-                 }
+  resetPassword(form: NgForm){
+    if(this.passModel.password == this.passModel.conf_password){
+      this.loading = true;
+      this.userService.newPassword(this.passModel).subscribe(
+        res => {
+          console.log(res)
+          this.router.navigate(['/login']);
+        },
+        err => {
+          console.log(err.error);
         }
-      ]
-    });
-
-    await alert.present();
+      )
+    } else{
+      this.gameService.presentToast('Passwords do not match');
+    }
   }
-
-
-  allowResetpasswordIfTrue(userOtp){
-      if(userOtp === this.otpFromServer){
-        console.log('UNLUCK PASSWORD API');
-        this.allowReset = true;
-      }else{
-        let msg = 'The supplied OTP is invalid';
-        this.presentToast(msg);
-        this.showNumberForm = true;
-        console.log('otp is not correct..');
-      }
-  } 
-
-
-
-
-  async noUserFound() {
-    const toast = await this.toastController.create({
-      message: `User with 0${this.model.number} not found`,
-      position : 'middle',
-      duration: 3000
-    });
-    toast.present();
-  }
-
-  submitNewPassword(password) {
-    console.log(this.model.newPassword);
-    console.log(this.model.confirmPassword);
-    if(this.model.newPassword === this.model.confirmPassword){
-     console.log('user can submit password');
-
-     this.userService.resetPassword(this.model).subscribe(
-      response => {
-        console.log(response);
-        this.router.navigate(['/login']);
-        let msg = 'Successful!!! you can login with your new password'
-        this.presentToast(msg);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-
-   }else{
-    console.log('password not match');
-    let msg = 'password not match';
-    this.presentToast(msg);
-
-   }
-  }
-
-
-  async presentToast(msg) {
-    const toast = await this.toastController.create({
-      message: msg,
-      position : 'middle',
-      duration: 2000
-    });
-    toast.present();
-  }
-
-
 }

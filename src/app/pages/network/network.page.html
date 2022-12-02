@@ -1,0 +1,223 @@
+<ion-content>
+  <div class="main-content">
+    <div class="network-container">
+      <!-- head section -->
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <profile-photo [className]="'profile-header'"></profile-photo>
+        </div>
+      </div>
+
+      <div class="network-section">
+        <div class="network-level">
+          <div class="network-level-username">@{{ username }}</div>
+          <div class="network-level-box">
+            <div class="network-level-status">
+              <div class="network-level-name">{{ user_rank }}</div>
+              <div class="network-level-status-bar"></div>
+            </div>
+            <div class="network-level-cta" (click)="toggleCard()">
+              <svg
+                width="13"
+                height="6"
+                viewBox="0 0 13 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  opacity="0.6"
+                  d="M6.26599 6L12.0917 0.75H0.4403L6.26599 6Z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="network-levels-card" [hidden]="showCard">
+            <div class="network-level-card" *ngFor="let data of rank">
+              <div class="network-level-icon"></div>
+              <div class="network-level-texts">
+                <div class="network-level-name">{{ data.name }}</div>
+                <div class="network-level-number">{{ data.range }}</div>
+              </div>
+              <div class="network-level-lock" [hidden]="data.isAttained">
+                <svg
+                  width="13"
+                  height="13"
+                  viewBox="0 0 13 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M9.75 5.82259C9.52792 5.82259 9.34375 5.63842 9.34375 5.41634V4.33301C9.34375 2.62676 8.86167 1.48926 6.5 1.48926C4.13833 1.48926 3.65625 2.62676 3.65625 4.33301V5.41634C3.65625 5.63842 3.47208 5.82259 3.25 5.82259C3.02792 5.82259 2.84375 5.63842 2.84375 5.41634V4.33301C2.84375 2.76217 3.22292 0.676758 6.5 0.676758C9.77708 0.676758 10.1563 2.76217 10.1563 4.33301V5.41634C10.1563 5.63842 9.97208 5.82259 9.75 5.82259Z"
+                    fill="#292D32"
+                  />
+                  <path
+                    d="M6.50065 10.4271C5.53107 10.4271 4.74023 9.63625 4.74023 8.66667C4.74023 7.69708 5.53107 6.90625 6.50065 6.90625C7.47023 6.90625 8.26107 7.69708 8.26107 8.66667C8.26107 9.63625 7.47023 10.4271 6.50065 10.4271ZM6.50065 7.71875C5.98065 7.71875 5.55273 8.14667 5.55273 8.66667C5.55273 9.18667 5.98065 9.61458 6.50065 9.61458C7.02065 9.61458 7.44857 9.18667 7.44857 8.66667C7.44857 8.14667 7.02065 7.71875 6.50065 7.71875Z"
+                    fill="#292D32"
+                  />
+                  <path
+                    d="M9.20898 12.3232H3.79232C1.40357 12.3232 0.677734 11.5974 0.677734 9.20866V8.12533C0.677734 5.73658 1.40357 5.01074 3.79232 5.01074H9.20898C11.5977 5.01074 12.3236 5.73658 12.3236 8.12533V9.20866C12.3236 11.5974 11.5977 12.3232 9.20898 12.3232ZM3.79232 5.82324C1.85315 5.82324 1.49023 6.19158 1.49023 8.12533V9.20866C1.49023 11.1424 1.85315 11.5107 3.79232 11.5107H9.20898C11.1482 11.5107 11.5111 11.1424 11.5111 9.20866V8.12533C11.5111 6.19158 11.1482 5.82324 9.20898 5.82324H3.79232Z"
+                    fill="#292D32"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="network-link">
+          <div class="network-link-bar">
+            <!-- <div class="network-link-input" #userinput>wwww.localhost:8100/api/register/{{referralCode}}</div> -->
+            <input
+              class="network-link-input"
+              #userinput
+              value="http://i-sabi.app/register/{{referralCode}}"
+              readonly
+            />
+            <button
+              class="network-link-button"
+              (click)="copyToClipboard(userinput)"
+            >
+              Copy
+            </button>
+          </div>
+          <div class="network-link-text">copy invite link</div>
+        </div>
+        <div class="network-earnings">
+          <div
+            [ngClass]="{
+            'network-earning--claimed' : rankBal_claim,
+            'network-earning' :  !rankBal_claim
+          }"
+            *ngIf="model.rankingBalance > 0"
+          >
+            <div class="network-earning-heading">Rank Earning</div>
+            <div class="network-earning-box">
+              <div class="network-earning-input">
+                Amount: {{model.rankingBalance | currency:'₦'}}
+              </div>
+              <button
+                class="network-earning-button"
+                (click)="claimRankingBalance(this.model.rankingBalance)"
+              >
+                Claim
+              </button>
+            </div>
+          </div>
+          <div
+            [ngClass]="{
+            'network-earning--claimed' : refBonus_claim,
+            'network-earning' :  !refBonus_claim
+          }"
+            *ngIf="model.referralBonus > 0"
+          >
+            <div class="network-earning-heading">Referral Earning</div>
+            <div class="network-earning-box">
+              <div class="network-earning-input">
+                Amount: {{model.referralBonus | currency:'₦'}}
+              </div>
+              <button
+                class="network-earning-button"
+                (click)="claimReferralBonus(this.model.referralBonus)"
+              >
+                Claim
+              </button>
+            </div>
+          </div>
+          <div
+            [ngClass]="{
+            'network-earning--claimed' : compBal_claim,
+            'network-earning' :  !compBal_claim
+          }"
+            *ngIf="model.compesationalBalance > 0"
+          >
+            <div class="network-earning-heading">Compesational Earnings</div>
+            <div class="network-earning-box">
+              <div class="network-earning-input">
+                Amount: {{model.compesationalBalance | currency:'₦'}}
+              </div>
+              <button
+                class="network-earning-button"
+                (click)="claimCompesationalBalance(this.model.compesationalBalance)"
+              >
+                Claim
+              </button>
+            </div>
+          </div>
+          <empty-component
+            *ngIf="[model.rankingBalance, model.referralBonus, model.compesationalBalance].includes(0)"
+            [text]="'You have no earning to claim'"
+          ></empty-component>
+        </div>
+        <div class="network-referrals">
+          <div class="network-referrals-heading">
+            My Network: {{ totalReferredCount }}
+          </div>
+          <div class="network-referral-tab">
+            <ion-segment (ionChange)="segmentChanged($event)" [value]="segment">
+              <ion-segment-button
+                value="direct"
+                class="network-referral-direct"
+              >
+                <ion-label>Direct Referral</ion-label>
+              </ion-segment-button>
+              <ion-segment-button
+                value="indirect"
+                class="network-referral-indirect"
+              >
+                <ion-label>Indirect Referral</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </div>
+          <div class="network-referral-tab-card" *ngIf="segment === 'direct'">
+            <div class="network-referral-tab-card-heading">Level 1</div>
+            <div
+              class="network-referral-tab-card-users"
+              *ngIf="referredlv1.length > 0"
+            >
+              <div
+                class="network-referral-tab-card-user"
+                *ngFor="let data of referredlv1"
+              >
+                <div class="network-referral-tab-card-user-name">
+                  {{data.username}}
+                </div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+            <empty-component
+              *ngIf="referredlv1.length === 0"
+              [text]="'You have no referrals'"
+            ></empty-component>
+          </div>
+          <div class="network-referral-tab-card" *ngIf="segment === 'indirect'">
+            <div class="network-referral-tab-card-heading">Level 2</div>
+            <div
+              class="network-referral-tab-card-users"
+              *ngIf="referredlv2.length > 0"
+            >
+              <div
+                class="network-referral-tab-card-user"
+                *ngFor="let data of referredlv2"
+              >
+                <div class="network-referral-tab-card-user-name">
+                  {{data.username}}
+                </div>
+                <div class="network-referral-tab-card-user-progress"></div>
+              </div>
+            </div>
+            <empty-component
+              *ngIf="referredlv1.length === 0"
+              [text]="'You have no referrals'"
+            ></empty-component>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- loader -->
+    <loading-spinner *ngIf="loading"></loading-spinner>
+  </div>
+</ion-content>

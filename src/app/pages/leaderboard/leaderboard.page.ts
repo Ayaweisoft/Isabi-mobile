@@ -14,6 +14,7 @@ export class LeaderboardPage implements OnInit {
   @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
   leaderBoard: any = [];
   loading: boolean;
+  sLoading: boolean;
   topThree: any;
   thirdPerson: any;
   secondPerson: any;
@@ -104,18 +105,58 @@ export class LeaderboardPage implements OnInit {
     console.log('Begin async operation');
     await this.getLeaderBoard();
     this.refresherRef.complete();
-   
+  
   }
 
   getLeaderBoard() {
     this.loading = true;
     this.accountServive.getLeaderboard().subscribe(val => {
-      this.leaderBoard = val["document"];
+      this.leaderBoard = val['leaders'];
+      console.log('leader: ', this.leaderBoard)
+      // this.leaderBoard = this.leaderBoard.map(player => {
+      //   player.time =  !player.time ? 0 : player.time;
+      //   if (player.time > 60) { 
+      //     player.time = `${Math.floor(player.time / 60)} mins ${Math.floor(player.time % 60)} secs`
+      //   } else {
+      //     player.time = player.time + " secs"
+      //   }
+      //   return player;
+      // })
       this.firstPerson = this.leaderBoard[0];
       this.secondPerson = this.leaderBoard[1];
       this.thirdPerson = this.leaderBoard[2];
       console.log('getting leaderboard')
+      console.log(this.leaderBoard)
       this.loading = false;
+    },
+    err => {
+      this.presentFailNetwork();
+      console.log('error: ', err)
+      this.loading = false;
+    }
+    );
+  }
+  getMoreLeader() {
+    this.sLoading = true;
+    const limit = 20;
+    const skip = this.leaderBoard.length;
+    this.accountServive.getMoreLeaderboard(limit, skip).subscribe(val => {
+      this.leaderBoard = this.leaderBoard.concat(val['leaders']);
+      console.log('leader: ', this.leaderBoard)
+      
+      // this.leaderBoard = this.leaderBoard.map(player => {
+      //   player.time =  !player.time ? 0 : player.time;
+      //   if (player.time > 60) {
+
+      //     player.time = `${Math.floor(player.time / 60)} mins ${Math.floor(player.time % 60)} secs`
+      //   }
+      //   return player;
+      // })
+      console.log('getting leaderboard')
+      console.log(this.leaderBoard)
+      this.sLoading = false;
     });
   }
+
+
 }

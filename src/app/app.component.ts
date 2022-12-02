@@ -1,5 +1,5 @@
 import { AccountComponent } from './pages/account/account.component';
-
+import { SocketService } from './services/socket.service';
 import { AccountService } from './shared/account.service';
 import { UserService } from './shared/user.service';
 import { Component, ViewChild, ElementRef, OnDestroy } from '@angular/core';
@@ -22,7 +22,12 @@ export class AppComponent {
   showSplash = true;
   @ViewChild('nav', {static: false}) nav: NavController;
   balance : any;
+  image: any;
+  username: String;
+  bonus: any;
+  userCount: number;
   authenticate = false;
+  loading: boolean = true;
   public appPages = [
     {
       title: 'PLAY DEMO',
@@ -85,6 +90,7 @@ export class AppComponent {
     // {title:'Admin dashboard', url:'/admin-dash'},
 
   ];
+  
 
   constructor(
     private platform: Platform,
@@ -92,8 +98,9 @@ export class AppComponent {
     private alertCtrl: AlertController,
     private splashScreen: SplashScreen,
     private ModalController: ModalController,
-    public userService: UserService,
-    public accountService: AccountService,
+    public UserService: UserService,
+    public AccountService: AccountService,
+    public SocketService: SocketService
   ) {
     // this.presentSplash();
     this.initializeApp();
@@ -111,7 +118,7 @@ export class AppComponent {
 
 
   reloadBalance(){
-    this.accountService.loadMyBalance();
+    this.AccountService.loadMyBalance();
     // this.bal.nativeElement.classList.add('rubberBand');
     setTimeout(()=>{
       // this.bal.nativeElement.classList.remove('rubberBand');
@@ -119,18 +126,84 @@ export class AppComponent {
 
   }
 
+  reloadBonus(){
+    this.AccountService.loadMyBonus();
+    // this.bal.nativeElement.classList.add('rubberBand');
+    setTimeout(()=>{
+      // this.bal.nativeElement.classList.remove('rubberBand');
+    },2000);
+
+  }
+
+
+  ngOnInit(){
+    // this.getProfilePic();
+    this.UserService.getUsername().subscribe(name => this.username = name);
+       const userID = this.UserService.getAuthId()
+    console.log("E nginit")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
+  }
+  ionViewWillEnter(){
+    // this.getProfilePic();
+    this.UserService.getUsername().subscribe(name => this.username = name);
+       const userID = this.UserService.getAuthId()
+    console.log("E ion enter")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
+  }
+
+
+
   initializeApp() {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.accountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
-        this.reloadBalance();
+      this.reloadBalance();
+      this.AccountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
+      this.reloadBonus();
+      this.AccountService.getAccountBonus().subscribe(bon =>  this.bonus =  bon);
+      console.log(this.bonus);
+      
+      const userID = this.UserService.getAuthId()
+    console.log("E init")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
         // this.localNotifications.on('trigger').subscribe( res => {
         //   console.log('alert Trigger 2', res );
         //   let msg = res.data ? res.data.mydata : '';
         //   this.showAlert(res.title, res.text);
         // });
-    
+      this.UserService.loadProfilePicture();
+      this.UserService.getProfilePicture().subscribe(pic => this.image = pic);
+      // this.getProfilePic();
+      this.UserService.loadUsername();
+      this.UserService.getUsername().subscribe(name => this.username = name);
+      
       
       this.statusBar.show();
       // this.splashScreen.hide();
@@ -155,5 +228,18 @@ export class AppComponent {
     });
     await alert.present();
   }
+
+  // getProfilePic() {
+  //   this.UserService.getProfilePic().subscribe(
+  //     res => {
+  //       this.loading = false;
+  //       this.image = res.image_url;
+  //       console.log(this.image);
+  //     },
+  //     err => {
+  //       this.loading = false;
+  //     }
+  //   )
+  // }
 
 }

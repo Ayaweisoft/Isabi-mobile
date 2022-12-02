@@ -1,5 +1,4 @@
-
-import { Observable, observable } from 'rxjs';
+import { BehaviorSubject, Observable } from "rxjs";
 import { AccountService } from 'src/app/shared/account.service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -17,9 +16,14 @@ export class UserService {
   token: any;
   accountBalance: any;
   username: any;
+  userID: string | null;
+  profilePic = new BehaviorSubject<any>('');
+  user_name = new BehaviorSubject<any>('');
+  full_name = new BehaviorSubject<any>('');
+  is_first = new BehaviorSubject<any>('');
+  rank = new BehaviorSubject<any>('');
+  totalReferredCount = new BehaviorSubject<any>(0);
   networkDisconnet = false;
-
-
   
 noAuthHeader = {headers: new HttpHeaders({NoAuth: 'True'})};
 AuthHeader = {headers: new HttpHeaders().set('Authorization',
@@ -90,18 +94,40 @@ constructor(private http: HttpClient,
       return this.http.post(environment.apiBaseUrl + '/register' , user, this.noAuthHeader);
     }
 
-    // password reset
-    confirmNumber(number){
-      return this.http.get(environment.apiBaseUrl + `/confirm-user-number${number}`, this.noAuthHeader);
+    confirmEmail(email){
+      return this.http.post(environment.apiBaseUrl + `/confirm-email`, email, this.noAuthHeader);
     }
-    confirmOTP(otp) {
-      return this.http.get(environment.apiBaseUrl + `/confirm-user-otp${otp}`, this.noAuthHeader);
+
+    validateOtp(emailOtp: any){
+      return this.http.post(environment.apiBaseUrl + `/validate-otp`, emailOtp, this.noAuthHeader);
+    }
+
+    validateAccountOtp(accountOtp: any){
+      return this.http.post(environment.apiBaseUrl + `/validate-account-otp`, accountOtp);
+    }
+
+    sendAccountOtp(){
+      return this.http.get(environment.apiBaseUrl + `/send-account-otp`);
+    }
+
+
+    // password reset
+    resetPassword(email){
+      return this.http.post(environment.apiBaseUrl + `/reset-password`, email, this.noAuthHeader);
+    }
+
+    validateResetToken(resetToken) {
+      return this.http.post(environment.apiBaseUrl + `/validate-reset-token`, resetToken, this.noAuthHeader);
+    }
+
+    newPassword(model) {
+      return this.http.post(environment.apiBaseUrl + `/new-password`, model, this.noAuthHeader);
     }
   
     postQuestion(question){
       return this.http.post(environment.apiBaseUrl + `/post-question`, question);
     }
-  
+    
     getAllQuestions(){
       return this.http.get(environment.apiBaseUrl + '/get-all-questions');
     }
@@ -170,11 +196,27 @@ constructor(private http: HttpClient,
     }
   
     saveUserProfile(credentials){
-      return this.http.post(environment.apiBaseUrl + '/save-user-profile',credentials);
+      return this.http.post(environment.apiBaseUrl + '/save-user-profile', credentials);
+    }
+
+    getProfilePic(): Observable<any> {
+      return this.http.get(environment.apiBaseUrl + '/get-profile-pic');
+    }
+
+    updateProfilePic(credentials){
+      return this.http.post(environment.apiBaseUrl + '/update-profile-pic',credentials);
+    }
+
+    // getUsername(): Observable<any> {
+    //   return this.http.get(environment.apiBaseUrl + '/get-profile-name');
+    // }
+
+    updateUserProfile(credentials){
+      return this.http.post(environment.apiBaseUrl + '/update-user-profile',credentials);
     }
 
     getUserProfile(): Observable<any> {
-      return this.http.get(environment.apiBaseUrl + '/get-user-profile');
+      return this.http.get(environment.apiBaseUrl + `/get-user-profile`);
     }
   
     getRandomQuestionsForGame(){
@@ -188,17 +230,14 @@ constructor(private http: HttpClient,
   
    
 
-
-     resetPassword(credentials){
-       return this.http.post(environment.apiBaseUrl + '/reset-password', credentials);
-     }
-  
-     postQuestionRecord( record){
+      postQuestionRecord( record){
        return this.http.post(environment.apiBaseUrl +'/post-game-record', record);
      }
+
      searchQuestion(words){
        return this.http.post(environment.apiBaseUrl + '/search-question', words);
      }
+
      getGameRecord(){
        return this.http.get(environment.apiBaseUrl + '/get-game-record');
      }
@@ -219,6 +258,8 @@ constructor(private http: HttpClient,
       }
      
      }
+
+    
    
 
      getRole(){
@@ -227,8 +268,9 @@ constructor(private http: HttpClient,
       let role = payLoad['role'];
       return role;
      } catch (error) {
-       
+        console.log('I failed')
      }
+
      }
 
      checkForAdmin(){
@@ -245,12 +287,14 @@ constructor(private http: HttpClient,
      }
      
      }
-   
-     getUsername(){
+     
+     getUserName(){
       try {
         let payLoad = jwtDecode(this.getToken());
-      let role = payLoad['username'];
-      return role;
+      let username = payLoad['username'];
+      console.log('getting username: ', payLoad['username'])
+      console.log('payload: ', payLoad);
+      return username;
       } catch (error) {
         
       }
@@ -266,12 +310,115 @@ constructor(private http: HttpClient,
         
       }
      }
+
+    setProfilePicture(pic: any){
+      this.profilePic.next(pic);
+    }
+
+    getProfilePicture(): BehaviorSubject<any> {
+      return this.profilePic;
+    }
+
+    loadProfilePicture(){
+      this.http.get(environment.apiBaseUrl + '/get-profile-pic')
+      .subscribe(value => {
+        this.setProfilePicture(value['image_url'])
+        console.log('Update Image ',this.profilePic.getValue())
+      })
+    }
+
+    setUsername(name: string){
+      this.user_name.next(name)
+    }
+
+    getUsername(): BehaviorSubject<any> {
+      return this.user_name;
+    }
+
+    loadUsername(){
+      this.http.get(environment.apiBaseUrl + '/get-user-name')
+      .subscribe(value => {
+        this.setUsername(value['username'])
+        console.log('Update username ',this.user_name.getValue())
+      })
+    }
+
+    loadIsFirst(){
+      this.http.get(environment.apiBaseUrl + '/check-is-first')
+      .subscribe(value => {
+        this.setIsFirst(value['isFirst'])
+        console.log('isFirst ', this.is_first.getValue())
+      })
+    }
+
+    setIsFirst(name: string){
+      this.is_first.next(name)
+    }
+
+    checkIsFirst(): BehaviorSubject<any> {
+      return this.is_first;
+    }
+
+    toggleIsFirst(){
+      return this.http.get(environment.apiBaseUrl + '/toggle-is-first');
+    }
+
+    setFullname(name: string){
+      this.full_name.next(name)
+    }
+
+    getFullname(): BehaviorSubject<any> {
+      return this.full_name;
+    }
+
+    loadFullname(){
+      this.http.get(environment.apiBaseUrl + '/get-full-name')
+      .subscribe(value => {
+        this.setFullname(value['fullname'])
+        console.log('Update username ',this.full_name.getValue());
+      })
+    }
+
+    setTotalReferredCount(totalReferredCount: number){
+      this.totalReferredCount.next(totalReferredCount)
+    }
+
+    getTotalReferredCount(): BehaviorSubject<any> {
+      return this.totalReferredCount;
+    }
+
+    loadTotalReferrredCount(){
+      this.http.get(environment.apiBaseUrl + '/get-user-totalReferredCount')
+      .subscribe(value => {
+        this.setTotalReferredCount(value['totalReferredCount'])
+        console.log('Update TotalReferralCount ', this.totalReferredCount.getValue())
+      })
+    }
+
+    setRank(rank: string){
+      this.rank.next(rank)
+    }
+
+    getRank(): BehaviorSubject<any> {
+      return this.rank;
+    }
+
+    loadRank(){
+      this.http.get(environment.apiBaseUrl + '/get-user-rank')
+      .subscribe(value => {
+        this.setRank(value['rank'])
+        console.log('Update rank ', this.rank.getValue())
+      })
+    }
   
    
      setToken(token: string) {
       localStorage.setItem('token', token);
-   
      }
+    //  setUsername(username: string) {
+    //   localStorage.setItem('username', username);
+    //  }
+
      deleteToken() {
        window.localStorage.removeItem('token');
      }
@@ -305,14 +452,10 @@ constructor(private http: HttpClient,
       this.token = '';
       this.username = '';
       this.accountBalance = '';
+      this.profilePic.next('');
+      this.user_name.next('');
       localStorage.removeItem('appUser');
       this.router.navigateByUrl('/login');
      }
-
-
-
-
-    
-  
-   
+ 
 }

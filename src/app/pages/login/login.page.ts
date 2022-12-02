@@ -25,7 +25,9 @@ export class LoginPage implements OnInit {
               public alertController: AlertController,
               public toastController: ToastController,
               public gameService: GameServiceService,
-              private router: Router, public userService: UserService) { 
+              private router: Router,
+              public userService: UserService,
+              public accountService: AccountService) { 
     }
 
     model = {
@@ -50,12 +52,16 @@ export class LoginPage implements OnInit {
     this.loading = true;
     this.userService.login(this.model).subscribe(response => {
       this.userService.setToken(response['token']);
-      this.userService.loadBalance();
+      // this.userService.setUsername(response.doc['username']);
+      // this.userService.loadBalance();
+      this.userService.loadProfilePicture();
+      this.accountService.loadMyBonus();
+      this.accountService.loadMyBalance();
+      this.userService.loadUsername();
+      this.userService.loadIsFirst();
 
       this.loading = false;
-      this.router.navigate(['/']);
-   
-        
+      this.router.navigate(['/']);      
     }, err => {
       this.loading = false;
         this.gameService.presentToast(err.error.message);
@@ -70,7 +76,6 @@ export class LoginPage implements OnInit {
   register() {
     this.router.navigate(['/register']);
   }
-
 
   async presentAlertConfirm(msg) {
     const alert = await this.alertController.create({

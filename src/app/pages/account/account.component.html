@@ -19,7 +19,7 @@
         <!-- grid content -->
 
 
-
+        
         <div>
           <ion-card class="text-center">
             <ion-card-header color="success" class="font-weight-bold text-white"> PAYMENT</ion-card-header>
@@ -48,7 +48,6 @@
                 </div>
               </ion-row>
 
-
               <div *ngIf="showPaymentButtons">
                 <ion-chip *ngIf="showPaymentButtons">
                   <h5 class="text-center font-weight-bold">I want to pay ₦ {{model.actual}} </h5>
@@ -60,15 +59,6 @@
                   <small class="text-center text-white"> Banks transafer/ Cards / ussd</small>
                   <ion-row>
                     <ion-col class="d-flex justify-content-center">
-
-                      <!-- public_key="FLWPUBK_TEST-32c34a10b25063883487eb99f916159a-X" [amount]='model.amount' currency='NGN' -->
-
-                      <!-- <flutterwave-make-payment public_key="FLWPUBK-b804fc96c1eb9fa18b814b41a86cfb45-X"
-                        [amount]='model.amount' currency='NGN' payment_options="card" text="PAY NOW"
-                        [customer]="customerDetails" [customizations]="customizations" [tx_ref]="reference"
-                        (callback)="makePaymentCallback($event)" (close)="closedPaymentModal()">
-                        <img src="../../../assets/banks/visa.gif">
-                      </flutterwave-make-payment> -->
 
                       <ng-interswitch
                        [merchantCode]="customerDetails.merchantCode" 
@@ -82,6 +72,7 @@
                         [class]="'btn btn-danger'">PAY NOW</ng-interswitch>
 
                     </ion-col>
+                    #
 
 
                   </ion-row>
@@ -101,11 +92,11 @@
               </ion-item>
               <div class="ion-text-center">
                 <ion-button [disabled]="loading" color="success" [disabled]="!promo.value"
-                  (click)="submitProCode(promo.value)">
+                (click)="submitProCode(promo.value)">
                   <div *ngIf="!loading">submit </div>
                   <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
                 </ion-button>
-              </div>
+              </div> 
             </ion-col>
           </ion-row>
         </ion-card>

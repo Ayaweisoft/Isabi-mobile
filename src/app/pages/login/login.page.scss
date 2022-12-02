@@ -1,71 +1,5 @@
-ion-content {
-	// --background: url('/assets/img/bg.png1');
-	// --background-repeat: no-repeat;
-	// --background-size: contain;
-
-	.logo {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		margin-top: 3rem;
-		margin-bottom: 2rem;
-	}
-
-	form {
-		min-height: 250px;
-	}
-
-	.utility {
-		margin-bottom: 1.2rem;
-	}
-
-	.text-input {
-		border: 1px solid var(--ion-color-primary);
-		border-radius: 35px;
-	}
-
-	.forgot-password {
-		color: var(--ion-color-primary);
-		text-align: right;
-		margin-bottom: 35px;
-	}
-
-	.login ion-button {
-		--background: var(--ion-color-primary);
-	}
-
-	.sign-up {
-		text-align: center;
-		font-size: 0.9rem;
-		margin-top: 2rem;
-
-		ion-label {
-			cursor: pointer;
-		}
-	}
-
-	.social-icons {
-		display: flex;
-		justify-content: space-evenly;
-
-		img {
-			height: 30px;
-			width: 30px;
-		}
-	}
-}
-
-// loading
-.toast-container {
-	position: fixed;
-	display: flex;
-	justify-content: center;
-	top: auto;
-	margin-bottom: 80px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	z-index: 999;
+ion-content{
+	--background-color: #f2f2f2;
 }
 
 .main-content{
@@ -74,8 +8,9 @@ ion-content {
 	@media (min-width: 1024px) {
 		display: flex;
 		padding: 0;
-		// display: none;
-	  }
+		width: 100%;
+		justify-content: flex-end;
+	}
 }
 
 .illustration{
@@ -86,25 +21,23 @@ ion-content {
 	padding: 15px;
 	padding-top: 20px;
 	position: relative;
-	// background-image: url("./a-l-ya631mqQ7Ng-unsplash.jpg");
-  //   background-repeat: no-repeat;
-  //   background-size: cover;
+	background-image: url("../../../assets/figma/login_img.svg");
+    background-repeat: no-repeat;
+  	background-size: contain;
+  	background-position: center;
 	background-color: white;
 	width: 100%;
 	height: 40%;
-	// z-index: -1;
+	@media screen and (min-width: 1024px) {
+		height: 100%;
+		position: fixed;
+		z-index: 5;
+		left: 0;
+		top: 0;
+		width: 45%;
+		z-index: 105;
+	}
 }
-
-// .top-section::before{
-// 	content: "";
-// 	position: absolute;
-// 	height: 100%;
-// 	width: 100%;
-// 	// z-index: -1;
-// 	left: 0;
-// 	bottom: 0;
-// 	background-color: #348A40;
-// }
 
 
 h2{
@@ -159,15 +92,18 @@ p{
 
 
 	@media (min-width: 1024px) {
-		// display: none;
 		height: 100%;
+		width: 54%;
+		padding-top: 3.5rem;
+		border-radius: 0px;
+		z-index: 100;
 		justify-content: center;
-	  }
+	}
 }
 
 .input-section{
 	width: 80%;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 
