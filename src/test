@@ -1,8 +1,21 @@
+<!-- <ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
+    </div>
+  </ion-toolbar>
+</ion-header> -->
+
 <ion-content>
   <div class="main-content">
-    <div class="onboard-event-container">
+    <div class="event-container">
+
       <!-- head section -->
-      <div class="head-section">
+      <div class="head-section event-head-section">
         <div class="header">
           <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
@@ -10,66 +23,312 @@
           <profile-photo [className]="'profile-header'"></profile-photo>
         </div>
       </div>
-      <div class="onboard-event-section">
-        <form action="" method="post">
-          <div>
-            <h3 class="section-title">Event Details</h3>
-            <div class="grid">
-              <input type="text" name="name" id="name" placeholder="Enter Name" formControlName="name">
-              <input type="text" name="location" id="location" placeholder="Enter Location" formControlName="location">
-              <input type="text" name="type" id="type" placeholder="Enter Type" formControlName="type">
-              <div class="date-time">
-                <div class="date">
-                  <input type="text" name="date" id="date" placeholder="Date" onfocus="(this.type='date')" formControlName="date">
-                  <img class="timed" src="../../../assets/figma/calender.svg" alt="">
-                </div>
-                <div class="time">
-                  <input type="text" name="time" id="time" placeholder="Time" onfocus="(this.type='time')" formControlName="time">
-                  <img class="timed" src="../../../assets/figma/clock.svg" alt="">
-                </div>
-              </div>
-            </div>
-            <textarea name="description" id="description" cols="30" rows="3" placeholder="Event Description" formControlName="description"></textarea>
-          </div>
-          <div>
-            <h3 class="section-title">Add Cover Photo</h3>
-            <label for="cover-photo" class="cover-photo">
-              <img src="../../../assets/figma/add.svg" alt="">
-            </label>
-            <input type="file" name="cover_photo" id="cover_photo" (change)="addImagesFirebase($event)">
-          </div>
-          <div>
-            <h3 class="section-title">Add Tickets</h3>
-            <div class="tickets">
-              <button class="cover-photo ticket" (click)="addTicket()">
-                <img src="../../../assets/figma/add.svg" alt="">
-              </button>
-              <!-- <input type="file" name="ticket" id="ticket" placeholder="Enter Name"> -->
-            </div>
-          </div>
-          <div>
-            <h3 class="section-title">Event Owner Details</h3>
-            <div class="grid">
-              <input type="email" name="email" id="email" placeholder="Email" formControlName="email">
-              <input type="tel" name="phone" id="phone" placeholder="Contact Number" formControlName="phone">
-            </div>
-          </div>
-          <div>
-            <h3 class="section-title">Account Details</h3>
-            <div class="grid">
-              <input type="text" name="bank" id="bank" placeholder="Enter Bank" formControlName="bank">
-              <input type="number" name="account_number" id="account_number" placeholder="Account Number" formControlName="account_number">
-            </div>
-          </div>
 
-          <div class="btn-div">
-            <button class="btn-submit" (click)="finalize()">Save Event Details</button>
+      <div class="event-section">  
+        <!-- <h2 class="voting-title">Voting</h2> -->
+        <!-- <searchbar [allItems]="contestant" (displayedItems)="getChildData($event)"></searchbar>  -->
+        <div class="event-segment">
+          <div class="event-pic">
+            <img [src]="event?.image_url" class="event-img">
           </div>
-        </form>
+          <table>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Event Name:</span></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Event Location:</span></th>
+                <td><span class="event-detail-name">{{ event?.address }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Event Type:</span></th>
+                <td><span class="event-detail-name">{{ event?.eventType }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Event Date:</span></th>
+                <td><span class="event-detail-name">{{ event?.date }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+              <th><span class="event-detail-title">startTime:</span></th>
+              <th><span class="event-detail-name">{{ event?.time }}</span></th>
+            </tr>
+            <tr class="event-detail">
+              <th><span class="event-detail-title">Event description:</span></th>
+              <td><span class="event-detail-name">{{ event.description }}</span></td>
+            </tr>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Email:</span></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Contact Number:</span></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><span>Account Number:</span></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><span class="event-detail-title">Account Number:</span></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th><h3 class="event-title">Company Ratio:</h3></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+            <tr class="event-detail">
+                <th class="event-title"><h3>Business Ratio:</h3></th>
+                <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+            </tr>
+          </table>
+          
+        </div>
+
       </div>
     </div>
 
-    <!-- loader -->
-    <loading-spinner *ngIf="loading"></loading-spinner>
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
   </div>
 </ion-content>
+
+<!-- <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <ion-card color="success" class="p-1" *ngFor="let item of allEvent">
+          <img [src]="item.image_url">
+
+          <div class="ion-text-center">
+            <ion-title mode="md" class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
+            <ion-text>{{item.aboutEvent}} </ion-text>
+            <div *ngIf="item?.startDate">{{item?.startDate |date}} to {{item?.endDate|date}} </div> <br>
+            <small class="text-center">{{item?.startTime }} </small> <br>
+
+            <small class="text-center">{{item.type}} </small>
+
+            <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="handleDelete(item)" name="trash">
+            </ion-icon>
+          </div>
+
+          <ion-item color="dark">
+            <ion-label>Live</ion-label>
+
+            <ion-toggle class="p-1" [checked]="item.active" color="success" (ionChange)="changeStatus($event,item._id)">
+            </ion-toggle>
+            <ion-button (click)="editEvent(item)" color="light">
+              edit
+            </ion-button>
+
+          </ion-item>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content> -->
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="assets/img/ISABI LOGO GREEN.png">
+    </div>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content>
+  <div class="main-content">
+    <div class="event-container">
+
+      <!-- head section -->
+      <div class="head-section event-head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <profile-photo [className]="'profile-header'"></profile-photo>
+        </div>
+      </div>
+
+      <div class="event-section">  
+        <!-- <h2 class="voting-title">Voting</h2> -->
+        <!-- <searchbar [allItems]="contestant" (displayedItems)="getChildData($event)"></searchbar>  -->
+        <div class="event-segment">
+          <div class="event-pic">
+            <img [src]="event?.image_url" class="event-img">
+          </div>
+          <div class="event-details">
+            <h3 class="event-title">Event Details:</h3>
+            <table>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Event Name:</span></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Event Location:</span></th>
+                  <td><span class="event-detail-name">{{ event?.address }}</span></td> 
+              </tr>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Event Type:</span></th>
+                  <td><span class="event-detail-name">{{ event?.eventType }}</span></td> 
+              </tr>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Event Date:</span></th>
+                  <td><span class="event-detail-name">{{ event?.date }}</span></td> 
+              </tr>
+              <tr class="event-detail">
+                <th><span class="event-detail-title">startTime:</span></th>
+                <th><span class="event-detail-name">{{ event?.time }}</span></th>
+              </tr>
+              <tr class="event-detail">
+                <th><span class="event-detail-title">Event description:</span></th>
+                <td><span class="event-detail-name">{{ event.description }}</span></td>
+              </tr>
+            </table>
+          </div>
+          <div class="event-owner-details">
+            <h3 class="event-title">Event Owner Details:</h3>
+            <table>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Email:</span></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Contact Number:</span></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+            </table>
+          </div>
+          <div class="account-details">
+            <h3 class="event-title">Account Details:</h3>
+            <table>
+              <tr class="event-detail">
+                  <th><span>Account Number:</span></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+              <tr class="event-detail">
+                  <th><span class="event-detail-title">Account Number:</span></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+            </table>
+          </div>
+          <div class="account-details">
+            <table>
+              <tr class="event-detail">
+                  <th><h3 class="event-title">Company Ratio:</h3></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+            </table>
+            <table>
+              <tr class="event-detail">
+                  <th  class="event-title"><h3>Business Ratio:</h3></th>
+                  <td><span class="event-detail-name">{{ event?.eventName }}</span></td> 
+              </tr>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div *ngIf="loading" class=" ">
+      <div class="toast-container ">
+        <div class="lds-roller">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<!-- <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size-xs="12" size-sm="12" size-md="8" offset-md="2" size-lg="6" offset-lg="3">
+        <ion-card color="success" class="p-1" *ngFor="let item of allEvent">
+          <img [src]="item.image_url">
+
+          <div class="ion-text-center">
+            <ion-title mode="md" class="text-uppercase font-weight-bold">{{item.eventName}}</ion-title>
+            <ion-text>{{item.aboutEvent}} </ion-text>
+            <div *ngIf="item?.startDate">{{item?.startDate |date}} to {{item?.endDate|date}} </div> <br>
+            <small class="text-center">{{item?.startTime }} </small> <br>
+
+            <small class="text-center">{{item.type}} </small>
+
+            <ion-icon *ngIf="userService.getRole() == 'ADMIN'" (click)="handleDelete(item)" name="trash">
+            </ion-icon>
+          </div>
+
+          <ion-item color="dark">
+            <ion-label>Live</ion-label>
+
+            <ion-toggle class="p-1" [checked]="item.active" color="success" (ionChange)="changeStatus($event,item._id)">
+            </ion-toggle>
+            <ion-button (click)="editEvent(item)" color="light">
+              edit
+            </ion-button>
+
+          </ion-item>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container ">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</ion-content> -->

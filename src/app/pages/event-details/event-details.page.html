@@ -29,35 +29,71 @@
         <!-- <searchbar [allItems]="contestant" (displayedItems)="getChildData($event)"></searchbar>  -->
         <div class="event-segment">
           <div class="event-pic">
-            <img [src]="event?.image_url">
+            <img [src]="event?.image_url" class="event-img">
           </div>
-          <div class="event-details">
+          <div class="event-details event-sect">
+            <h3 class="event-title">Event Details:</h3>
             <div class="event-detail">
-              <span>Event Name:</span>
-              <span class="event-name">{{ event?.eventName }}</span>
+              <span class="event-detail-title">Event Name:</span>
+              <span class="event-detail-name">{{ event?.eventName }}</span>
             </div>
             <div class="event-detail">
-              <span>Event Location:</span>
-              <span class="event-name">{{ event?.address }}</span>
+              <span class="event-detail-title">Event Location:</span>
+              <span class="event-detail-name">{{ event?.address }}</span>
             </div>
             <div class="event-detail">
-              <span>Event Type:</span>
-              <span class="event-name">{{ event?.eventType }}</span>
+              <span class="event-detail-title">Event Type:</span>
+              <span class="event-detail-name">{{ event?.type }}</span>
             </div>
             <div class="event-detail">
-              <span>Event Date:</span>
-              <span class="event-name">{{ event?.date }}</span>
+              <span class="event-detail-title">Event Date:</span>
+              <span class="event-detail-name">{{ event?.startDate }}</span>
             </div>
             <div class="event-detail">
-              <span>Event description:</span>
-              <span class="event-name">{{ event.description }}</span>
+              <span class="event-detail-title">startTime:</span>
+              <span class="event-detail-name">{{ event?.startTime }}</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-title">Event description:</span>
+              <span class="event-detail-name">{{ event?.aboutEvent }}</span>
             </div>
           </div>
-          <div class="event-owner-details">
-
+          <div class="event-owner-details event-sect">
+            <h3 class="event-title">Event Owner Details:</h3>
+            <div class="event-detail">
+              <span class="event-detail-title">Email:</span>
+              <span class="event-detail-name">{{ event?.eventOwner }}</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-title">Contact Number:</span>
+              <span class="event-detail-name">{{ event?.contactNumber }}</span>
+            </div>
           </div>
-          <div class="account-details">
-
+          <div class="account-details event-sect">
+            <h3 class="event-title">Account Details:</h3>
+            <div class="event-detail">
+              <span class="event-detail-title">Account Bank:</span>
+              <span class="event-detail-name">{{ event?.voting_properties.bankName }}</span>
+            </div>
+            <div class="event-detail">
+              <span class="event-detail-title">Account Number:</span>
+              <span class="event-detail-name">{{ event?.voting_properties.accountNumber }}</span>
+            </div>
+          </div>
+          <div class="event-sect ratios">
+            <div class="event-detail">
+              <h3 class="event-detail-title event-title">Company Ratio:</h3>
+              <span class="event-detail-name">{{ event?.voting_properties.sharingRatio_isabi }}%</span>
+            </div>
+          </div>
+          <div class="event-sect ratios">
+            <div class="event-detail">
+              <h3 class="event-detail-title event-title">Business Ratio:</h3>
+              <span class="event-detail-name">{{ event?.voting_properties.businessSharingRatio }}%</span>
+            </div>
+          </div>
+          <div class="btn-div">
+            <button class="btn-submit" (click)="finalize($event)">Approve Event</button>
           </div>
         </div>
 

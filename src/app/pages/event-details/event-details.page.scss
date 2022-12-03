@@ -53,25 +53,101 @@
 
             .event-segment{
                 position: relative;
-                display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: center;
-				// grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
+                // display: flex;
+				// flex-direction: column;
+				// justify-content: center;
+				// align-items: center;
+                // gap: 20px;
 				padding: 0 1rem;
                 width: 100%;
+                padding-bottom: 1rem;
 
-                @media screen and (max-width: 768px){
-                        // grid-template-columns: repeat(1, 1fr);
+                @media screen and (min-width: 700px){
+                    width: 70%;
+                    margin-inline: auto;
+                    border-right: 2px solid #348a40;
+                    border-left: 2px solid #348a40;
+                    padding-inline: 5rem;
+                    // margin-bottom: 1rem;
                 }
+                @media screen and (min-width: 1000px){
+                    width: 50%;
+                }
+
+                .event-pic {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 1rem;
+
+                    .event-img {
+                        width: 10rem;
+                        height: 8rem;
+                        object-fit: cover;
+                        object-position: center;
+                    }
+                }
+
+                .event-sect {
+                    color: #828282;
+                    margin-bottom: 1.5rem;
+
+                    .event-title {
+                        font-size: 1rem;
+                        font-weight: 900;
+                        color: #000;
+                        margin: 0;
+                        margin-bottom: 0.75rem;
+                    }
+
+                    .event-detail {
+                        font-size: 0.75rem;
+                        margin-bottom: 0.5rem;
+                        display: flex;
+                        align-items: flex-start;
+
+
+                        .event-detail-title {
+                            font-weight: 700;
+                            margin-right: 0.75rem;
+                            width: 7.5rem;
+                            overflow: hidden;
+                        }
+                        .event-detail-name {
+                            width: 62%;
+                        }
+                    }
+                }
+                .ratios {
+                    margin-bottom: 0;
+
+                    .event-detail-title {
+                        margin: 0;
+                    }
+                    .event-detail-name {
+                        color: black;
+                        font-weight: 700;
+                    }
+                }
+
+                .btn-div{
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 2rem;
+                    
+                    .btn-submit {
+                      width: 80%;
+                      padding: .7rem;
+                      font-weight: 600;
+                      border-radius: 5px;
+                      outline: none;
+                      text-align: center;
+                      background-color: #348A40;
+                    }
+                }
+                
             }
-            
         }
 	}
 }
-
 //media query desktop
-
-
-
