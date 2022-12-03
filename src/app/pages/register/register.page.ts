@@ -22,26 +22,26 @@ export class RegisterPage implements OnInit {
   }
 
   constructor(public userService: UserService,
-             private logicService: LogicService,
-              public gameService: GameServiceService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) {
-                if(this.userService.networkDisconnet){
-                  // this.presentFailNetwork();
-              }
-            }
+    private logicService: LogicService,
+    public gameService: GameServiceService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
+      if(this.userService.networkDisconnet){
+        // this.presentFailNetwork();
+    }
+  }
 
-            model = {
-              number: '',
-              fullname: '',
-              password: '',
-              email:'',
-              username: '',
-              conf_password:'',
-              referrer: '',
-              nationality: '',
-              birthday: ""
-            };
+  model = {
+    number: '',
+    fullname: '',
+    password: '',
+    email:'',
+    username: '',
+    conf_password:'',
+    referrer: '',
+    nationality: '',
+    birthday: ""
+  };
 
   ngOnInit() {
  

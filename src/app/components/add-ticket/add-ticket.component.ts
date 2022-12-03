@@ -84,7 +84,7 @@ export class AddTicketComponent implements OnInit {
   
     submitForm(){
         console.log(this.ticketForm.value)
-        // this.modalController.dismiss({data: this.ticketForm.value});
+        this.modalController.dismiss({data: this.ticketForm.value});
     }
 
 }
