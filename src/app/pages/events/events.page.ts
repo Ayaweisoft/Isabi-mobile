@@ -101,58 +101,7 @@ export class EventsPage implements OnInit {
         this.UserService.longToast(err.error.msg);
         console.log("error getting event", err);
       }
-<<<<<<< HEAD
-  }, speed)
-}
-
-  async autoSlide() {
-    setInterval(()=> {
-       this.gameService.slideCounter = this.gameService.gameTipArray.length;
-       this.gameService.slideCounter --;
-       this.mySlider.slideNext(3000, true);
-       //console.log('slide to prev', this.gameService.slideCounter);
-    
-    
-    },9000)
-
- }
-
- parseText(text){
-  let length =  55;
-  text = text.length > length ? text.substring(0, length - 3) + '...' : text.substring(0, text.length - 3) + '...';
-  return text;
-}
-  
- clickSlidetoNext() {
-  console.log('slide to next')
-  this.mySlider.slideNext();
-}
-
-clickSlidePrevious() {
-  console.log('slide to previous');
-  this.mySlider.slidePrev();
-}
-
-
-  getAllevent(){
-      this.eventService.getAllEvent().subscribe(
-        res => {
-          console.log(res);
-          this.allEvent = res['event'];
-          this.displayedEvents = this.allEvent;
-          this.loading = false;
-        },
-        err => {
-          this.loading = false;
-          this.userService.longToast(err.error.msg)
-          
-
-          console.log('error getting event', err);
-        }
-      );
-=======
     );
->>>>>>> 191abea70e56097cccb456083c08f608755d27a7
   }
   // filterEvents(value, list = this.allEvent){
   //   let newEvents = list.filter(item => item.eventName.toUpperCase().includes(value.toUpperCase()) || item.aboutEvent.toUpperCase().includes(value.toUpperCase()));
