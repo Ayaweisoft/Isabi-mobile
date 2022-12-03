@@ -26,7 +26,7 @@
                 ></ion-progress-bar>
                 <div class="ion-text-center">
                   <div class="cover-photo">
-                    <button  *ngIf="!image"
+                    <button *ngIf="!image"
                       onclick="document.getElementById('single-image').click();"
                     >
                       <i class="fas fa-image fa-5x lat"></i>
@@ -52,7 +52,7 @@
               <!-- end image -->
 
 
-          <div class="control-group">
+        <div class="control-group">
             <input type="text" class="form-control"  formControlName="ticketType"
             placeholder="Ticket type" required="required"/>
             <div *ngFor="let validation of validationMessages.ticketType">

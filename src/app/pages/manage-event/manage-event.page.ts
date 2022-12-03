@@ -77,7 +77,7 @@ async editEvent(event) {
     }
 
     viewDetails(event){
-      this.router.navigate(['/tabs//manage-event/details', event._id]);
+      this.router.navigate(['/tabs/manage-event/details', event._id]);
     }
 
     parseText(text: any, length: number) {
