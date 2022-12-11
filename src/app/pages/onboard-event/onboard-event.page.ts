@@ -20,16 +20,19 @@ export class OnboardEventPage implements OnInit {
   loading: boolean = false;
   photo: String = '';
   onboardingForm: {
-    name: '',
-    location: '',
-    type: '',
-    date: '',
-    time: '',
-    description: '',
-    cover_photo: '',
+    eventOwnerUsername: '',
+    eventOwner: '',
+    companyName: '',
+    eventName: '',
+    eventLocation: '',
+    eventType: '',
+    startDate: '',
+    startTime: '',
+    aboutEvent: '',
+    image_url: '',
     tickets: '',
-    email: '',
-    phone: '',
+    eventOwnerEmail: '',
+    contactNumber: '',
     bank: '',
     account_number: '',
     ticketList: object[],
@@ -37,10 +40,10 @@ export class OnboardEventPage implements OnInit {
 
   // validationMessages = {
   //   ticketType: [
-  //       {type: 'required', message: 'Ticket type is required.'},
+  //       {eventType: 'required', message: 'Ticket eventType is required.'},
   //   ],
   //   amount: [
-  //       {type: 'required', message: 'amount is required.'},
+  //       {eventType: 'required', message: 'amount is required.'},
   //   ],
   // };
 
@@ -52,16 +55,19 @@ export class OnboardEventPage implements OnInit {
     private fireService:FirebaseService,
     private logicService: LogicService) { 
       this.onboardingForm = {
-          name: '',
-          location: '',
-          type: '',
-          date: '',
-          time: '',
-          description: '',
-          cover_photo: '',
+          eventOwnerUsername: '',
+          eventOwner: '',
+          companyName: '',
+          eventName: '',
+          eventLocation: '',
+          eventType: '',
+          startDate: '',
+          startTime: '',
+          aboutEvent: '',
+          image_url: '',
           tickets: '',
-          email: '',
-          phone: '',
+          eventOwnerEmail: '',
+          contactNumber: '',
           bank: '',
           account_number: '',
           ticketList: [],
@@ -90,7 +96,7 @@ export class OnboardEventPage implements OnInit {
               const imageRef = success.ref.fullPath;
               this.fireService.downloadItem(imageRef).subscribe(imageUrl => {
                   this.photo = imageUrl;
-                  this.onboardingForm.cover_photo = imageUrl
+                  this.onboardingForm.image_url = imageUrl
                   this.loading = false;
               });
           });
@@ -119,8 +125,16 @@ export class OnboardEventPage implements OnInit {
 
   finalize(event: Event) {
     event.preventDefault();
-    console.log('heree')
-    console.log(this.onboardingForm)
+    console.log('fired', this.onboardingForm)
+    this.loading = true;
+    this.userService.submitEvent(this.onboardingForm).subscribe(response => {
+      this.loading = false;
+      console.log('onboarded event', response);
+      // this.router.navigate(['/']);     
+    }, err => {
+      this.loading = false;
+        console.log('failed to onboard event', err.error.message);
+    });
   }
 }
 

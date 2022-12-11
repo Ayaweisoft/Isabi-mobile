@@ -15,35 +15,35 @@
           <div>
             <h3 class="section-title">Event Details</h3>
             <div class="grid">
-              <input type="text" name="name" [(ngModel)]="onboardingForm.name" id="name" placeholder="Enter Name">
-              <input type="text" name="location" [(ngModel)]="onboardingForm.location" id="location" placeholder="Enter Location">
-              <input type="text" name="type" [(ngModel)]="onboardingForm.type" id="type" placeholder="Enter Type">
+              <input type="text" name="eventName" [(ngModel)]="onboardingForm.eventName" id="eventName" placeholder="Enter Name">
+              <input type="text" name="eventLocation" [(ngModel)]="onboardingForm.eventLocation" id="eventLocation" placeholder="Enter Location">
+              <input type="text" name="eventType" [(ngModel)]="onboardingForm.eventType" id="eventType" placeholder="Enter Type">
               <div class="date-time">
                 <div class="date">
-                  <input type="text" name="date" [(ngModel)]="onboardingForm.date" id="date" placeholder="Date" onfocus="(this.type='date')">
+                  <input type="text" name="startDate" [(ngModel)]="onboardingForm.startDate" id="startDate" placeholder="Date" onfocus="(this.type='date')">
                   <img class="timed" src="../../../assets/figma/calender.svg" alt="">
                 </div>
                 <div class="time">
-                  <input type="text" name="time" [(ngModel)]="onboardingForm.time" id="time" placeholder="Time" onfocus="(this.type='time')">
+                  <input type="text" name="startTime" [(ngModel)]="onboardingForm.startTime" id="startTime" placeholder="Time" onfocus="(this.type='time')">
                   <img class="timed" src="../../../assets/figma/clock.svg" alt="">
                 </div>
               </div>
             </div>
-            <textarea name="description" [(ngModel)]="onboardingForm.description" id="description" cols="30" rows="3" placeholder="Event Description"></textarea>
+            <textarea name="aboutEvent" [(ngModel)]="onboardingForm.aboutEvent" id="aboutEvent" cols="30" rows="3" placeholder="Event Description"></textarea>
           </div>
           <div>
             <h3 class="section-title">Add Cover Photo</h3>
-            <label *ngIf="!photo" for="cover-photo" class="cover-photo">
+            <label *ngIf="!photo" for="image_url" class="cover-photo">
               <img src="../../../assets/figma/add.svg" alt="">
             </label>
-            <img class="cover_img" *ngIf="photo" [src]="photo" alt=""  onclick="document.getElementById('cover-photo').click();">
-            <input type="file" name="cover-photo" id="cover-photo" (change)="addImagesFirebase($event)">
+            <img class="cover_img" *ngIf="photo" [src]="photo" alt=""  onclick="document.getElementById('image_url').click();">
+            <input type="file" name="image_url" id="image_url" (change)="addImagesFirebase($event)">
           </div>
           <div>
             <h3 class="section-title">Add Tickets</h3>
             <div class="tickets">
               <div *ngFor="let ticket of onboardingForm.ticketList">
-                <img class="ticket_img" [src]="ticket.imageUrl" alt="">
+                <img class="ticket_img" [src]="ticket.image_url" alt="">
               </div>
               <button class="cover-photo ticket" (click)="addTicket($event)">
                 <img src="../../../assets/figma/add.svg" alt="">
@@ -54,8 +54,10 @@
           <div>
             <h3 class="section-title">Event Owner Details</h3>
             <div class="grid">
-              <input type="email" name="email" [(ngModel)]="onboardingForm.email" id="email" placeholder="Email">
-              <input type="tel" name="phone" [(ngModel)]="onboardingForm.phone" id="phone" placeholder="Contact Number">
+              <input type="text" name="eventOwner" [(ngModel)]="onboardingForm.eventOwner" id="eventOwner" placeholder="Full Name">
+              <input type="text" name="eventOwnerUsername" [(ngModel)]="onboardingForm.eventOwnerUsername" id="eventOwnerUsername" placeholder="Username">
+              <input type="email" name="eventOwnerEmail" [(ngModel)]="onboardingForm.eventOwnerEmail" id="eventOwnerEmail" placeholder="Email">
+              <input type="tel" name="contactNumber" [(ngModel)]="onboardingForm.contactNumber" id="contactNumber" placeholder="Contact Number">
             </div>
           </div>
           <div>

@@ -123,6 +123,10 @@ constructor(private http: HttpClient,
     newPassword(model) {
       return this.http.post(environment.apiBaseUrl + `/new-password`, model, this.noAuthHeader);
     }
+
+    submitEvent(event){
+      return this.http.post(environment.apiBaseUrl + `/submit-event`, event);
+    }
   
     postQuestion(question){
       return this.http.post(environment.apiBaseUrl + `/post-question`, question);

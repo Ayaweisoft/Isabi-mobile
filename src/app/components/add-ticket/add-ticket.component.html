@@ -53,11 +53,11 @@
   
   
             <div class="control-group">
-              <input type="text" class="form-control" formControlName="ticketType"
+              <input type="text" class="form-control" formControlName="ticket_type"
               placeholder="Ticket type" required="required"/>
-              <div *ngFor="let validation of validationMessages.ticketType">
-                <small class="text-danger"  *ngIf="ticketForm.get('ticketType').hasError(validation.type)
-                && (ticketForm.get('ticketType').dirty || ticketForm.get('ticketType').touched)">  {{ validation.message }} </small>
+              <div *ngFor="let validation of validationMessages.ticket_type">
+                <small class="text-danger"  *ngIf="ticketForm.get('ticket_type').hasError(validation.type)
+                && (ticketForm.get('ticket_type').dirty || ticketForm.get('ticket_type').touched)">  {{ validation.message }} </small>
               </div>
               <p class="help-block text-danger"></p>    
           </div>

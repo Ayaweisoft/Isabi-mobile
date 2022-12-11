@@ -17,7 +17,7 @@ export class AddTicketComponent implements OnInit {
         ticketForm: FormGroup;
 
     validationMessages = {
-        ticketType: [
+        ticket_type: [
             {type: 'required', message: 'Ticket type is required.'},
         ],
         amount: [
@@ -28,9 +28,9 @@ export class AddTicketComponent implements OnInit {
     constructor(private modalController: ModalController, private fireService:FirebaseService,
         private formBuilder: FormBuilder, private logicService: LogicService, private eventService: EventService) { 
         this.ticketForm = this.formBuilder.group({
-            imageUrl: new FormControl('', Validators.compose([
+            image_url: new FormControl('', Validators.compose([
             ])),
-            ticketType: new FormControl('', Validators.compose([
+            ticket_type: new FormControl('', Validators.compose([
                 Validators.required,
             ])),
             amount: new FormControl(null, Validators.required),
@@ -71,7 +71,7 @@ export class AddTicketComponent implements OnInit {
                 const imageRef = success.ref.fullPath;
                 this.fireService.downloadItem(imageRef).subscribe(imageUrl => {
                     this.image = imageUrl;
-                    this.ticketForm.get('imageUrl').setValue(imageUrl)
+                    this.ticketForm.get('image_url').setValue(imageUrl)
                     this.loading = false;
                 });
             });
