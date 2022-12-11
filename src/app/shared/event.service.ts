@@ -24,10 +24,19 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
   getAllEventAdmin(){
     return this.http.get(environment.apiBaseUrl +'/get-all-event-admin');
   }
+  getAllApprovedEventAdmin(){
+    return this.http.get(environment.apiBaseUrl +'/get-all-event-admin');
+  }
+  getAllPendingEventAdmin(){
+    return this.http.get(environment.apiBaseUrl +'/get-all-event-admin');
+  }
 
   getEventById(id: any){
     console.log('service: ', id);
     return this.http.get(environment.apiBaseUrl +`/v2/get-event-by-id/${id}`);
+  }
+  approveEvent(id: any){
+    return this.http.get(environment.apiBaseUrl +`/approve-event/${id}`);
   }
 
   checkTicketIdIfExist(ticketId, eventId){

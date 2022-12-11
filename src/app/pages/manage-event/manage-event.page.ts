@@ -21,7 +21,7 @@ export class ManageEventPage implements OnInit {
                 public alertController: AlertController) { }
   
     ngOnInit() { 
-      this.getAllevent();
+      this.loadApprovedEvents();
     }
 
 
@@ -59,21 +59,44 @@ async editEvent(event) {
         },
         err => {
           this.loading = false;
-          this.userService.longToast(err.error.msg)
-          
+          this.userService.generalAlert(err.error.msg)
           console.log('error getting event', err);
         }
       );
     }
 
-    loadPendingEvent(){
+    loadPendingEvents(){
       console.log("pending event")
       this.isApproved = false;
+      this.eventService.getAllPendingEventAdmin().subscribe(
+        res => {
+          console.log(res);
+          this.allEvent = res['event'];
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.userService.generalAlert(err.error.msg)
+          console.log('error getting PENDING events', err);
+        }
+      );
     }
 
-    loadApprovedEvent(){
+    loadApprovedEvents(){
       console.log("approved event");
       this.isApproved = true;
+      this.eventService.getAllApprovedEventAdmin().subscribe(
+        res => {
+          console.log(res);
+          this.allEvent = res['event'];
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.userService.generalAlert(err.error.msg)
+          console.log('error getting APPROVED events', err);
+        }
+      );
     }
 
     viewDetails(event){
@@ -130,7 +153,7 @@ async editEvent(event) {
               res => {
                 this.loading = false;
                 this.userService.generalToast(res['msg'], 2000);
-                this.getAllevent();
+                this.loadApprovedEvents();
               },
               err => {
                 this.loading = false;

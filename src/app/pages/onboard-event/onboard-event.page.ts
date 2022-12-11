@@ -129,11 +129,12 @@ export class OnboardEventPage implements OnInit {
     this.loading = true;
     this.userService.submitEvent(this.onboardingForm).subscribe(response => {
       this.loading = false;
-      console.log('onboarded event', response);
+      this.userService.generalAlert(response)
       // this.router.navigate(['/']);     
     }, err => {
       this.loading = false;
-        console.log('failed to onboard event', err.error.message);
+      this.userService.generalAlert(err.error.msg)
+      console.log('failed to onboard event', err.error.msg);
     });
   }
 }

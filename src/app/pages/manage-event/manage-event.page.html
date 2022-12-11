@@ -28,8 +28,8 @@
         <!-- <h2 class="voting-title">Voting</h2> -->
         <!-- <searchbar [allItems]="c  ontestant" (displayedItems)="getChildData($event)"></searchbar>  -->
         <div class="nav">
-          <button class="nav-option pending-event" [ngClass]="{active: !isApproved}" (click)="loadPendingEvent()">Pending</button>
-          <button class="nav-option approved-event" [ngClass]="{active: isApproved}" (click)="loadApprovedEvent()">Approved</button>
+          <button class="nav-option pending-event" [ngClass]="{active: !isApproved}" (click)="loadPendingEvents()">Pending</button>
+          <button class="nav-option approved-event" [ngClass]="{active: isApproved}" (click)="loadApprovedEvents()">Approved</button>
         </div>
         <div class="event-segment">
           <div class="event-card" *ngFor="let item of allEvent">

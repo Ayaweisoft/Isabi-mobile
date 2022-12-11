@@ -95,63 +95,7 @@ async editEvent(event) {
           : text.substring(0, text.length - 3) + "...";
       return text;
     }
-  
-  
-    // insideEvent(event){
-  
-    //   switch (event.type) {
-    //     case 'VOTING':
-    //       this.router.navigate([`/tabs/inside-event`, event._id]);
-    //       break;
-    //     case 'TICKETING':
-    //       this.router.navigate([`/tabs/inside-ticketing`, event._id]);
-    //       break;
-    //     case 'FORM-SALES':
-    //       this.router.navigate([`/tabs/form-sales`, event._id]);
-    //       break;
-      
-    //     default:
-    //       break;
-    //   }
-      
-    
-    // }
-  
-  
-  // async handleDelete(event) {
-  //   const alert = await this.alertController.create({
-  //     header: 'Confirm!',
-  //     message: `Delete <strong>${event.aboutEvent} </strong>!!!`,
-  //     buttons: [
-  //       {
-  //         text: 'Cancel',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         handler: () => {
-  //           console.log('Confirm Cancel: blah');
-  //         }
-  //       }, {
-  //         text: 'Okay',
-  //         handler: () => {
-  //           this.loading = true;
-  //           this.eventService.deleteEvent(event._id).subscribe(
-  //             res => {
-  //               this.loading = false;
-  //               this.userService.generalToast(res['msg'], 2000);
-  //               this.getAllevent();
-  //             },
-  //             err => {
-  //               this.loading = false;
-  //               this.userService.generalAlert(err.error.msg);
-  //             }
-  //           );
-  //         }
-  //       }
-  //     ]
-  //   });
-  
-  //   await alert.present();
-  // }
+
   
   changeStatus(event, id){
    var selectedEvent =   this.allEvent.filter((item) => item._id === id);
@@ -161,7 +105,18 @@ async editEvent(event) {
    this.eventService.updateEventStatus(data).subscribe(res => {
     console.log(res)
    });
+  }
 
+  approveEvent(event: Event) {
+    event.preventDefault();
+    this.loading = true;
+    this.eventService.approveEvent(this.id).subscribe(response => {
+      this.loading = false;
+      console.log('event approved', response);   
+    }, err => {
+      this.loading = false;
+        console.log('failed to approve event', err.error.message);
+    });
   }
   
   }
