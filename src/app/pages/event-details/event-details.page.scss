@@ -133,7 +133,7 @@
                 .btn-div{
                     display: flex;
                     justify-content: center;
-                    margin-top: 2rem;
+                    // margin-top: 2rem;
                     
                     .btn-submit {
                       width: 80%;
@@ -144,6 +144,15 @@
                       text-align: center;
                       background-color: #348A40;
                     }
+                }
+                .btn-div-accept{
+                    margin-top: 2rem;
+                }
+                .btn-div-reject{
+                    margin-top: 1rem;
+                    .btn-submit {
+                        background-color: red;
+                      }
                 }
                 
             }

@@ -92,8 +92,11 @@
               <span class="event-detail-name">{{ event?.voting_properties.businessSharingRatio }}%</span>
             </div>
           </div>
-          <div class="btn-div">
+          <div class="btn-div btn-div-accept">
             <button class="btn-submit" (click)="approveEvent($event)">Approve Event</button>
+          </div>
+          <div class="btn-div btn-div-reject">
+            <button class="btn-submit" (click)="rejectEvent($event)">Reject Event</button>
           </div>
         </div>
 

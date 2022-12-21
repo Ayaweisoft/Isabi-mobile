@@ -18,7 +18,8 @@ export class ManageEventPage implements OnInit {
     constructor(private router: Router, private gameService: GameServiceService, 
                 private eventService: EventService, public  userService: UserService,
                 private modalController: ModalController,
-                public alertController: AlertController) { }
+                public alertController: AlertController,
+                ) { }
   
     ngOnInit() { 
       this.loadApprovedEvents();
@@ -105,9 +106,9 @@ async editEvent(event) {
 
     parseText(text: any, length: number) {
       text =
-        text.length > length
+        text?.length > length
           ? text.substring(0, length - 3) + "..."
-          : text.substring(0, text.length - 3) + "...";
+          : text.substring(0, text?.length - 3) + "...";
       return text;
     }
   

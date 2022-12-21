@@ -112,10 +112,29 @@ async editEvent(event) {
     this.loading = true;
     this.eventService.approveEvent(this.id).subscribe(response => {
       this.loading = false;
-      console.log('event approved', response);   
+      // console.log('event approved', response);   
+      this.userService.generalAlert(response['msg'])
+      this.router.navigate(['/tabs/manage-event']);  
     }, err => {
       this.loading = false;
-        console.log('failed to approve event', err.error.message);
+      this.userService.generalAlert(err.error.message)
+        // console.log('failed to approve event', err.error.message);
+    });
+  }
+
+  rejectEvent(event: Event) {
+    event.preventDefault();
+    this.loading = true;
+    this.eventService.rejectEvent(this.id).subscribe(response => {
+      this.loading = false;
+      // console.log('event rejected', response); 
+      this.userService.generalAlert(response['msg'])
+      this.router.navigate(['/tabs/manage-event']);  
+    }, err => {
+      this.loading = false;
+      this.userService.generalAlert(err.error.msg)
+      this.userService.generalAlert(err.error.message)
+        // console.log('failed to rejected event', err.error.message);
     });
   }
   

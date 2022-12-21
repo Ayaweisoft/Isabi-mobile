@@ -125,10 +125,10 @@ export class OnboardEventPage implements OnInit {
 
   finalize(event: Event) {
     event.preventDefault();
-    console.log('fired', this.onboardingForm)
     this.loading = true;
     this.userService.submitEvent(this.onboardingForm).subscribe(response => {
       this.loading = false;
+      console.log('fired', this.onboardingForm, response)
       this.userService.generalAlert(response)
       // this.router.navigate(['/']);     
     }, err => {
