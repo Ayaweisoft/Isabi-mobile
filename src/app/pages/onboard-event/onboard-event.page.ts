@@ -16,7 +16,7 @@ import { LogicService } from 'src/app/services/logic.service';
 })
 
 export class OnboardEventPage implements OnInit {
-  ticketList = [];
+  tickets = [];
   loading: boolean = false;
   photo: String = '';
   onboardingForm: {
@@ -30,12 +30,16 @@ export class OnboardEventPage implements OnInit {
     startTime: '',
     aboutEvent: '',
     image_url: '',
-    tickets: '',
     eventOwnerEmail: '',
     contactNumber: '',
     bank: '',
     account_number: '',
-    ticketList: object[],
+    newUser: Boolean,
+    tickets:{
+      "image_url": string,
+      "ticket_type": string,
+      "amount": number,
+  }[],
   };
 
   // validationMessages = {
@@ -65,12 +69,12 @@ export class OnboardEventPage implements OnInit {
           startTime: '',
           aboutEvent: '',
           image_url: '',
-          tickets: '',
           eventOwnerEmail: '',
           contactNumber: '',
           bank: '',
           account_number: '',
-          ticketList: [],
+          newUser: true,
+          tickets: [],
           // eventId: new FormControl('', Validators.required)
           };
       }
@@ -119,23 +123,39 @@ export class OnboardEventPage implements OnInit {
     const data = await modal.onDidDismiss();
     console.log(data)
     if (data?.data?.data) {
-      this.onboardingForm.ticketList.push(data?.data?.data);
+      this.onboardingForm.tickets.push(data?.data?.data);
     }
   }
+  async removeTicket(event, ticket_type) {
+    event.preventDefault();
+    // console.log(event.target.value, ticket_type)
+    // console.log(this.onboardingForm.tickets)
+    this.onboardingForm.tickets = this.onboardingForm.tickets.filter((ticket, index) => ticket.ticket_type != ticket_type);
+  }
+
+  setNewUserTrue(){
+    this.onboardingForm.newUser = true;
+  }
+  
+  setNewUserFalse(){
+    this.onboardingForm.newUser = false;
+  }
+
 
   finalize(event: Event) {
     event.preventDefault();
+    console.log('fired', this.onboardingForm)
     this.loading = true;
     this.userService.submitEvent(this.onboardingForm).subscribe(response => {
       this.loading = false;
-      console.log('fired', this.onboardingForm, response)
       this.userService.generalAlert(response)
-      // this.router.navigate(['/']);     
     }, err => {
       this.loading = false;
+      console.log('fired', this.onboardingForm)
       this.userService.generalAlert(err.error.msg)
       console.log('failed to onboard event', err.error.msg);
     });
   }
 }
+// this.router.navigate(['/']);     
 

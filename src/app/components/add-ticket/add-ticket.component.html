@@ -14,7 +14,7 @@
         <ion-col  sizeLg="8" offsetLg="2"  sizeMd="8" offsetMd="2"  sizeSm="12">
   
         
-          <form  [formGroup]="ticketForm" #signUp  novalidate="novalidate">
+          <form  [formGroup]="ticketForm" #signUp (submit)="submitForm()" ngNativeValidate>
   
   
   
@@ -31,7 +31,7 @@
                       >
                         <i class="fas fa-image fa-5x lat"></i>
                       </button>
-                      <input
+                      <input required
                         id="single-image"
                         accept="image/*"
                         #singleImage
@@ -53,7 +53,7 @@
   
   
             <div class="control-group">
-              <input type="text" class="form-control" formControlName="ticket_type"
+              <input required type="text" class="form-control" formControlName="ticket_type"
               placeholder="Ticket type" required="required"/>
               <div *ngFor="let validation of validationMessages.ticket_type">
                 <small class="text-danger"  *ngIf="ticketForm.get('ticket_type').hasError(validation.type)
@@ -64,7 +64,7 @@
   
   
             <div class="control-group">
-                <input type="number" class="form-control" placeholder="Amount" required="required"
+                <input required type="number" class="form-control" placeholder="Amount" required="required"
                  formControlName="amount"/>
                  <div *ngFor="let validation of validationMessages.amount">
                   <small class="text-danger"  *ngIf="ticketForm.get('amount').hasError(validation.type)
@@ -76,7 +76,7 @@
   
   
               <div class="text-center">
-                  <ion-button  type="submit"(click)="submitForm()">Submit</ion-button>
+                  <ion-button  type="submit">Submit</ion-button>
               </div>
               <br>
           </form>
