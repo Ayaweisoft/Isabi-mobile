@@ -52,6 +52,10 @@
               <div *ngFor="let ticket of onboardingForm.tickets">
                 <div class="ticket_img-div">
                   <img class="ticket_img" [src]="ticket.image_url" alt="">
+                  <div class="ticket_data">
+                    <span>{{ticket.ticket_type}}</span>
+                    <span>{{ticket.amount}}</span>
+                  </div>
                   <span class="remove-ticket" (click)="removeTicket($event, ticket.ticket_type)" value="ticket.ticket_type">
                     <img src="../../../assets/figma/close.svg" alt="">
                   </span>
