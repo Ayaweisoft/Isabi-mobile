@@ -21,7 +21,7 @@
               <select name="eventType" id="eventType" placeholder="Select Event Type" required [(ngModel)]="onboardingForm.eventType">
                 <option value="" disabled selected style="color: gray;">Select Event Type</option>
                 <option value="TICKETING">TICKETING</option>
-                <option value="FORM SALES">FORM SALES</option>
+                <option value="FORM-SALES">FORM SALES</option>
                 <option value="VOTING">VOTING</option>
               </select>
               <div class="date-time">
@@ -68,8 +68,8 @@
             <div class="event-owner-head">
                 <h3 class="section-title">Event Owner Details</h3>
                 <div class="nav">
-                  <button class="nav-option pending-event" [ngClass]="{active: !onboardingForm.newUser}" (click)="setNewUserFalse()">Old User</button>
-                  <button class="nav-option approved-event" [ngClass]="{active: onboardingForm.newUser}" (click)="setNewUserTrue()">New User</button>
+                  <button type="button" class="nav-option pending-event" [ngClass]="{active: !onboardingForm.newUser}" (click)="setNewUserFalse()">Old User</button>
+                  <button type="button" class="nav-option approved-event" [ngClass]="{active: onboardingForm.newUser}" (click)="setNewUserTrue()">New User</button>
                 </div>
                 <!-- <div class="new-user">
                   <div>

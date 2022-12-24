@@ -144,16 +144,34 @@ export class OnboardEventPage implements OnInit {
 
   finalize(event: Event) {
     event.preventDefault();
-    console.log('fired', this.onboardingForm)
     this.loading = true;
     this.userService.submitEvent(this.onboardingForm).subscribe(response => {
       this.loading = false;
-      this.userService.generalAlert(response)
+      console.log('fired2', response)
+      this.userService.generalAlert("Event submitted Successfully")
+      this.onboardingForm = {
+        eventOwnerUsername: '',
+        eventOwner: '',
+        companyName: '',
+        eventName: '',
+        eventLocation: '',
+        eventType: '',
+        startDate: '',
+        startTime: '',
+        aboutEvent: '',
+        image_url: '',
+        eventOwnerEmail: '',
+        contactNumber: '',
+        bank: '',
+        account_number: '',
+        newUser: true,
+        tickets: [],
+        };
     }, err => {
       this.loading = false;
-      console.log('fired', this.onboardingForm)
-      this.userService.generalAlert(err.error.msg)
-      console.log('failed to onboard event', err.error.msg);
+      // console.log('fired', err)
+      this.userService.generalAlert(err.error.message)
+      console.log('failed to onboard event', err.error.message);
     });
   }
 }
