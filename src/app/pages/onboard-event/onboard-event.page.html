@@ -75,16 +75,6 @@
                   <button type="button" class="nav-option pending-event" [ngClass]="{active: !onboardingForm.newUser}" (click)="setNewUserFalse()">Old User</button>
                   <button type="button" class="nav-option approved-event" [ngClass]="{active: onboardingForm.newUser}" (click)="setNewUserTrue()">New User</button>
                 </div>
-                <!-- <div class="new-user">
-                  <div>
-                    <label for="new-user">New user</label>
-                    <input required type="radio" name="new-user" id="new-user" value="true"  [(ngModel)]="onboardingForm.newUser">
-                  </div>
-                  <div>
-                    <label for="old-user">Old User</label>
-                    <input required type="radio" name="new-user" id="old-user" value="false"  [(ngModel)]="onboardingForm.newUser">
-                  </div>
-                </div> -->
             </div>
             <div class="grid" *ngIf="onboardingForm.newUser">
               <input required type="text" name="eventOwner" [(ngModel)]="onboardingForm.eventOwner" id="eventOwner" placeholder="Full Name">
@@ -99,13 +89,14 @@
           <div>
             <h3 class="section-title">Account Details</h3>
             <div class="grid">
-              <input required type="text" name="bank" [(ngModel)]="onboardingForm.bank" id="bank" placeholder="Enter Bank">
-              <input required type="number" name="account_number" [(ngModel)]="onboardingForm.account_number" id="account_number" placeholder="Account Number">
+              <input required type="text" name="account_name" [(ngModel)]="onboardingForm.accountName" id="account_name" placeholder="Account Name">
+              <input required type="number" name="account_number" [(ngModel)]="onboardingForm.accountNumber" id="account_number" placeholder="Account Number">
+              <input required type="text" name="bank" [(ngModel)]="onboardingForm.bankname" id="bank" placeholder="Enter Bank">
             </div>
           </div>
 
           <div class="btn-div">
-            <button type="submit" class="btn-submit">Save Event Details</button>
+            <button type="submit" class="btn-submit">Submit Event</button>
           </div>
         </form>
       </div>

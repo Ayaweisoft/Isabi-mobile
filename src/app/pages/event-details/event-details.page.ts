@@ -64,8 +64,8 @@ async editEvent(event) {
     console.log('id: ', id);
     this.eventService.getEventById(id).subscribe(
       res => {
-        console.log(res);
-        this.event = res['event'];
+        console.log("log: ", res['eventData']);
+        this.event = res['eventData'];
         this.loading = false;
       },
       err => {

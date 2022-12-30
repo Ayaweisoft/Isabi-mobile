@@ -39,7 +39,7 @@
             </div>
             <div class="event-detail">
               <span class="event-detail-title">Event Location:</span>
-              <span class="event-detail-name">{{ event?.address }}</span>
+              <span class="event-detail-name">{{ event?.venue }}</span>
             </div>
             <div class="event-detail">
               <span class="event-detail-title">Event Type:</span>
@@ -73,23 +73,23 @@
             <h3 class="event-title">Account Details:</h3>
             <div class="event-detail">
               <span class="event-detail-title">Account Bank:</span>
-              <span class="event-detail-name">{{ event?.voting_properties.bankName }}</span>
+              <span class="event-detail-name">{{ event?.voting_properties?.bankName }}</span>
             </div>
             <div class="event-detail">
               <span class="event-detail-title">Account Number:</span>
-              <span class="event-detail-name">{{ event?.voting_properties.accountNumber }}</span>
+              <span class="event-detail-name">{{ event?.voting_properties?.accountNumber }}</span>
             </div>
           </div>
           <div class="event-sect ratios">
             <div class="event-detail">
               <h3 class="event-detail-title event-title">Company Ratio:</h3>
-              <span class="event-detail-name">{{ event?.voting_properties.sharingRatio_isabi }}%</span>
+              <span class="event-detail-name">70%</span>
             </div>
           </div>
           <div class="event-sect ratios">
             <div class="event-detail">
               <h3 class="event-detail-title event-title">Business Ratio:</h3>
-              <span class="event-detail-name">{{ event?.voting_properties.businessSharingRatio }}%</span>
+              <span class="event-detail-name">30%</span>
             </div>
           </div>
           <div class="btn-div btn-div-accept">

@@ -71,7 +71,6 @@ async editEvent(event) {
       this.isApproved = false;
       this.eventService.getAllPendingEventAdmin().subscribe(
         res => {
-          console.log(res);
           this.allEvent = res['event'];
           this.loading = false;
         },

@@ -96,6 +96,13 @@
 					border-radius: 10px;
 					background-color: #EEF7EE;
 					align-items: center;
+					position: relative;
+
+					.delete-icon{
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
 
                     .event-card-pic{
 						border-radius: 0.5rem;
