@@ -47,6 +47,7 @@ export class ConfirmEmailPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
+      console.log('params: ', params)
       this.model.emailOtp = params.get('id');
       console.log('otp: ', this.model.emailOtp);
       if(this.model.emailOtp){

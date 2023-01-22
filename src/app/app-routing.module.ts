@@ -376,7 +376,7 @@ const routes: Routes = [
   },
     { path: "*", redirectTo: 'tabs/events' },
     {
-      path: 'confirm-email',
+      path: 'confirm-email/:id',
       loadChildren: () => import('./pages/confirm-email/confirm-email.module').then( m => m.ConfirmEmailPageModule)
     },
     {
