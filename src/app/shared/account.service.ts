@@ -51,6 +51,14 @@ export class AccountService {
       });
   }
 
+  getBanks() {
+    return this.http.get(environment.apiBaseUrl + "/get-banks");
+  }
+
+  resolveAccount(account: any) {
+    return this.http.post(environment.apiBaseUrl + "/resolve-account", account);
+  }
+
   claimReferralBonus(referralBonus: number) {
     return this.http.post(
       environment.apiBaseUrl + "/claim-referral-bonus",

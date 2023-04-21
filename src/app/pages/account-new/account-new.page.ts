@@ -137,8 +137,6 @@ closedPaymentModal(): void {
   this.generateReference();
   console.log('payment is closed');
   this.model.amount = null;
-
- 
 }
 
 generateReference() {
@@ -206,7 +204,8 @@ async enterAmountInput() {
           console.log('cancel amount input');
           this.generateReference()
         }
-      }, {
+      }, 
+      {
         text: 'Confirm',
         cssClass : 'success',
         handler: (val) => {
@@ -255,8 +254,6 @@ async enterCashoutAmount() {
            let  msg = "cashout must be greater that 500!";
             this.gameSevice.presentToast(msg);
           }else{
-
-       
           this.accountService.cashout(this.model).subscribe(
           res => {
 
