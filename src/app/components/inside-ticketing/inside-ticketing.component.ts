@@ -16,8 +16,9 @@ import { SearchbarComponent } from '../searchbar/searchbar.component';
   styleUrls: ['./inside-ticketing.component.scss'],
 })
 export class InsideTicketingComponent implements OnInit {
-  @ViewChild('refresherRef', { static: false }) refresherRef: IonRefresher;
+  @ViewChild('refresherRef',   { static: false }) refresherRef: IonRefresher;
   eventId: any;
+  event: any;
   eventRefresher: any;
   loading: boolean = true;
   ticketList: Ticket[] = [];
@@ -53,12 +54,11 @@ export class InsideTicketingComponent implements OnInit {
   ionViewDidEnter() {
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-      console.log('seee id ', this.eventId);
 
     });
     this.getAllTicket();
     this.findMyTicket();
-  }
+  } 
 
 
   segmentChanged(ev) {
@@ -114,6 +114,8 @@ export class InsideTicketingComponent implements OnInit {
         }
         console.log(res);
         this.ticketList = res['ticketList'];
+        this.event = res['event'];
+        console.log('event: ', this.event);
         this.loading = false;
       },
       err => {
