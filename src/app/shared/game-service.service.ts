@@ -123,6 +123,17 @@ export class GameServiceService  {
     return this.http.get(environment.apiBaseUrl + `/submit-admin-date${date}`);
   }
 
+  createCategory(data) {
+    return this.http.post(environment.apiBaseUrl + `/add-category`, data);
+  }
+
+  getCategories() {
+    return this.http.get(environment.apiBaseUrl + `/get-categories`);
+  }
+  deleteCategory(id) {
+    return this.http.delete(environment.apiBaseUrl + `/delete-category${id}`);
+  }
+
   setYoutubeDate(link) {
     return this.http.post(environment.apiBaseUrl + `/submit-youtube-link`, link);
   }
