@@ -105,14 +105,14 @@
           </div>
           <button class="game-category-card" *ngFor="let item of allCategory" (click)="setCategory(item.name)">
             <div class="game-category-card-logo">
-              <img [src]="item.logo" alt="plus icon">
+              <img [src]="item.icon" alt="plus icon">
             </div>
             <div class="game-category-card-desc">
               <div class="game-category-card-name">
                 {{ item.name }}
               </div>
               <div class="game-category-card-participant">
-                {{ item.participant }} participants
+                150 participants
               </div>
             </div>
             <div class="game-category-card-arrow">
@@ -121,8 +121,8 @@
           </button>
         </div>
       </div>
-      <div *ngIf="low_balance" class=" ">
-        <div class="toast-container mb-5">
+      <div *ngIf="low_balance" class="">
+        <div class="mb-5 toast-container">
           <ion-chip>
             <!-- <ion-icon name="hand" color="danger"></ion-icon> -->
             <ion-label class="font-weight-bold text-danger"> YOUR ACCOUNT IS LOW! CLICK HERE </ion-label> <br>

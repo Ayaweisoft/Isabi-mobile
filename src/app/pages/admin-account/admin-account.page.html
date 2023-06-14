@@ -57,7 +57,7 @@
          <ion-button type="submit"> <ion-icon name="checkmark" size="large"></ion-icon> </ion-button>
         </form>
 
-         <!-- <p class="text-white text-center font-weight-bold">jan 5, 2019 06:00:00</p> -->
+         <!-- <p class="text-center text-white font-weight-bold">jan 5, 2019 06:00:00</p> -->
          <ion-button size="large" [disabled]="!setdate.value"
           (click)="activateDate()">ACTIVATE </ion-button>
     </div>
@@ -104,7 +104,7 @@
           </ion-card>
         </div>
 
-        <!--  proo code -->
+        <!--  promo code -->
         <div *ngIf="segment === 'promo_code'">
 
           <ion-grid fixed>
@@ -147,8 +147,28 @@
         </div>
         <!-- end promo code -->
          
-      <div *ngIf=" segment ==='game_category'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
-        <form #category name="category" (submit)="addCategory(category)">
+      <!-- game category -->
+      <div *ngIf=" segment ==='game_category'" class="p-5 game-categories" style="background-color: darkgreen; border: 3px black;">
+        <div class="game-category-section" *ngIf="categories.length > 0">
+          <div class="game-category" *ngFor="let item of categories">
+            <div class="game-category-content">
+              <div class="game-category-logo">
+                <img [src]="item.icon" alt="icon">
+              </div>
+              <div class="game-category-desc">
+                <div class="game-category-name">
+                  {{ item.name }}
+                </div>
+              </div>
+            </div>
+            <ion-icon class="game-category-delete" (click)="deleteCategory(item)"  name="trash-outline"></ion-icon>
+          </div>
+        </div>
+        <div class="game-category-section-empty" *ngIf="categories.length == 0">
+          <p>No Categories Found</p>
+        </div>
+
+        <form #category name="category" class="form" (submit)="addCategory(category)">
           <ion-item>
               <ion-label  class="ml-3"  
               position="floating">Enter category name</ion-label>
@@ -166,28 +186,13 @@
           </ion-item>
           <ion-button type="submit">Submit</ion-button>
         </form>
-        <div class="game-category-section">
-          <div class="game-category" *ngFor="let item of categories">
-            <div class="game-category-content">
-              <div class="game-category-logo">
-                <img [src]="item.icon" alt="icon">
-              </div>
-              <div class="game-category-desc">
-                <div class="game-category-name">
-                  {{ item.name }}
-                </div>
-              </div>
-            </div>
-              <ion-icon class="game-category-delete" (click)="deleteCategory(item)"  name="trash-outline"></ion-icon>
-          </div>
-        </div>
       </div>
        
 
-    <!-- <div *ngIf="loading" class="fixed left-0 top-0 w-full h-full">
+    <!-- <div *ngIf="loading" class="fixed top-0 left-0 w-full h-full">
       <ion-spinner slot="middle"></ion-spinner>
       <ion-progress-bar type="indeterminate"></ion-progress-bar>
-      <p class="p-5 bg-dark text-white">loading </p>
+      <p class="p-5 text-white bg-dark">loading </p>
     </div> -->
     <loading-spinner *ngIf="loading"></loading-spinner>
 

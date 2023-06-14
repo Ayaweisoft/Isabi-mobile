@@ -78,7 +78,6 @@ export class AdminAccountPage implements OnInit {
     this.loading = true;
     this.gameService.getCategories().subscribe(
       (res : { categories: any}) => {
-        console.log('res', res);
         this.categories = res?.categories;
         this.loading = false;
       },

@@ -1,3 +1,4 @@
+import { GameServiceService } from 'src/app/shared/game-service.service';
 import { ForgetpasswordComponent } from '../forgetpassword/forgetpassword.component';
 import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 import { AccountComponent } from '../account/account.component';
@@ -14,13 +15,15 @@ import { NgForm } from '@angular/forms';
 export class AdminUploadPage implements OnInit {
   public catType: any[];
   loading: boolean;
+  allCategory: any;
 
 
 
   constructor(private userService: UserService,
               public toastController: ToastController,
               public popoverController: PopoverController,
-              public alertController: AlertController) { }
+              public alertController: AlertController,
+              public gameService: GameServiceService ) { }
 
               
   questionModel = {
@@ -41,6 +44,21 @@ export class AdminUploadPage implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+    this.getCategories();
+  }
+
+  getCategories() {
+    console.log('get categories');
+    this.loading = true;
+    this.gameService.getCategories().subscribe(
+      (res : { categories: any}) => {
+        this.allCategory = res?.categories;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    );
   }
 
   async presentNavigation() {
