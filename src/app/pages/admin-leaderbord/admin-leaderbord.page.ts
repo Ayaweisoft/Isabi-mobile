@@ -10,6 +10,7 @@ import { AdminnavigationComponent } from '../../components/adminnavigation/admin
 })
 export class AdminLeaderbordPage implements OnInit {
   leaderBoard: any;
+  leaderBoardCount: number;
   loading: boolean = false;
   segment = 'leaderboard';
 
@@ -21,6 +22,7 @@ export class AdminLeaderbordPage implements OnInit {
 
   ngOnInit() {
     this.getLeaderBoard();
+    this.getLeaderCount();
   }
 
   async presentNavigation() {
@@ -36,12 +38,40 @@ export class AdminLeaderbordPage implements OnInit {
     this.segment = $event.detail.value;
   }
 
+  changeCount($event){
+    console.log('change count event...', this.leaderBoardCount);
+    this.loading = true;
+    this.accountServive.updateLeaderboardCount({count: this.leaderBoardCount}).subscribe((val: number)=> {
+      console.log('count updated', val);
+      this.presentSuccessToast();
+      this.leaderBoardCount= null;
+      this.loading = false;
+    }, err => {
+      this.loading = false;
+      // this.userService.generalAlert(err.error.msg);
+    })
+  }
+
   getLeaderBoard(){
     this.loading = true;
     this.accountServive.getLeaderboard().subscribe((val)=> {
-      this.leaderBoard = val['document'];
+      this.leaderBoard = val['leaders'];
       this.loading = false;
       console.log('leader', this.leaderBoard);
+    }, err => {
+      this.loading = false;
+      // this.userService.generalAlert(err.error.msg);
+    })
+  }
+  getLeaderCount(){
+    this.loading = true;
+    this.accountServive.getLeaderboardCount().subscribe((val: number)=> {
+      this.leaderBoardCount = val;
+      this.loading = false;
+      console.log('leaderboard', this.leaderBoardCount);
+    }, err => {
+      this.loading = false;
+      // this.userService.generalAlert(err.error.msg);
     })
   }
 
@@ -93,7 +123,7 @@ export class AdminLeaderbordPage implements OnInit {
 
   async presentSuccessToast() {
     const toast = await this.toastController.create({
-      message: 'Record deleted sucessfully!!',
+      message: 'Updated!!',
       position: 'middle',
       duration: 3000
     });

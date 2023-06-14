@@ -99,6 +99,15 @@ export class AccountService {
   getLeaderboard() {
     return this.http.get(environment.apiBaseUrl + "/get-weekly-leaderboard");
   }
+
+  getLeaderboardCount() {
+    return this.http.get(environment.apiBaseUrl + "/get-leaderboard-count");
+  }
+
+  updateLeaderboardCount(data) {
+    return this.http.post(environment.apiBaseUrl + "/update-leaderboard-count", data);
+  }
+
   getMoreLeaderboard(limit, skip) {
     return this.http.get(environment.apiBaseUrl + `/get-weekly-leaderboard/?limit=${limit}&skip=${skip}`);
   }
