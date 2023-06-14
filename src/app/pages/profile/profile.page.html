@@ -93,12 +93,11 @@
         </div>
         <div class="inputBox">
           <input
+            type="email"
             #email="ngModel"
             name="email"
-            position="floating"
+            id="email"
             [(ngModel)]="model.email"
-            type="email"
-            required
             [pattern]="emailRegex"
             value="{{ myProfile?.email }}"
           />

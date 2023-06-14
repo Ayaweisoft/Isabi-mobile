@@ -157,6 +157,51 @@ ion-content{
 		}
 	}
 
+	.withdrawal-pin{
+		padding: 2rem;
+		border-radius: 1rem;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		box-shadow: -3px 3px 16px 1px #0000001a;
+		background: #f9fff9;
+
+		.form{
+			display: flex;
+			flex-direction: column;
+			gap: 0.6rem;
+		}
+
+		p{
+			font-weight: 400;
+			font-size: 1.2rem;
+			color: #000;
+		}
+
+		.input{
+			position: relative;
+			.show-pin{
+				position: absolute;
+				right: 0;
+				top: 0;
+			}
+		}
+
+		input{
+			padding: 0.5em;
+			outline: none;
+		}
+
+		button{
+			padding: 0.3rem 0.5rem;
+			background-color: #348A40;
+			color: white;
+			width: 50%;
+		}
+		
+	}
+
 	
 	.transaction-section {
     .transaction-header{

@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { shareReplay } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,8 +49,8 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
 
   }
 
-  savePurchaseTicket(ticket){
-    return this.http.post(environment.apiBaseUrl +'/v2/save-purchased-ticket', ticket);
+  savePurchaseTicket(ticket: any){
+    return this.http.post(environment.apiBaseUrl +'/v2/save-purchased-ticket', ticket).pipe(shareReplay(1))
   }
 
   findMyTicket(eventId, email){

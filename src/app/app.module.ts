@@ -65,6 +65,7 @@ import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
+// import { NgOtpInputModule } from 'ng-otp-input';
 import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
 const config: SocketIoConfig = { url: environment.socketsUrl, options: {
@@ -117,6 +118,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
+    // NgOtpInputModule
     
   ],
   schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],

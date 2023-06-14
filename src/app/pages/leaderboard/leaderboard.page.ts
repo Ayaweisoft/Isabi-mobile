@@ -20,71 +20,12 @@ export class LeaderboardPage implements OnInit {
   secondPerson: any;
   firstPerson: any;
 
-  public leaders = [
-    {
-      name: "John Doe1",
-      score: '150'
-    },
-    {
-      name: "John Doe2",
-      score: '150'
-    },
-    {
-      name: "John Doe3",
-      score: '150'
-    },
-    {
-      name: "John Doe4",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    },
-    {
-      name: "John Doe",
-      score: '150'
-    }
-  ]
-
   constructor(
     public menu: MenuController,
     private userService: UserService,
     private router: Router,
     public toastController: ToastController,
-    public accountServive: AccountService
+    public accountService: AccountService
   ) {
     this.getLeaderBoard();
   }
@@ -110,7 +51,7 @@ export class LeaderboardPage implements OnInit {
 
   getLeaderBoard() {
     this.loading = true;
-    this.accountServive.getLeaderboard().subscribe(val => {
+    this.accountService.getLeaderboard().subscribe(val => {
       this.leaderBoard = val['leaders'];
       console.log('leader: ', this.leaderBoard)
       // this.leaderBoard = this.leaderBoard.map(player => {
@@ -140,7 +81,7 @@ export class LeaderboardPage implements OnInit {
     this.sLoading = true;
     const limit = 20;
     const skip = this.leaderBoard.length;
-    this.accountServive.getMoreLeaderboard(limit, skip).subscribe(val => {
+    this.accountService.getMoreLeaderboard(limit, skip).subscribe(val => {
       this.leaderBoard = this.leaderBoard.concat(val['leaders']);
       console.log('leader: ', this.leaderBoard)
       

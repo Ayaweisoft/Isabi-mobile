@@ -29,17 +29,12 @@ export class ProfilePage implements OnInit {
                 public toastController: ToastController,
                 public accountService: AccountService) {
                   this.getMyProfile();
-                  // this.getProfilePic();
                   this.userService.getProfilePicture().subscribe(pic => this.image = pic);
-                  console.log('username; ' + this.model.name)
-                  this.userService.getUsername().subscribe(name => this.model.name = name);
-                  // this.model.name = this.userService.getUsername()
-                  console.log('username; ' + this.model.name);
+                  this.userService.getUsername().subscribe(name => this.model.username = name);
                 }
 
                     
   model = {
-    name: '',
     fullname: '',
     username: '',
     email: '',
@@ -62,10 +57,7 @@ export class ProfilePage implements OnInit {
   
   ngOnInit() {
     this.getMyProfile();
-    this.userService.getUsername().subscribe(name => this.model.name = name);
-    // this.model.name = this.userService.getUsername()
-    console.log('username; ' + this.model.name);
-    // this.getProfilePic()
+    this.userService.getUsername().subscribe(name => this.model.username = name);
     this.userService.getProfilePicture().subscribe(pic => this.image = pic);
     
   }
@@ -75,7 +67,7 @@ export class ProfilePage implements OnInit {
     this.userService.getProfilePicture().subscribe(pic => this.image = pic);
     // this.model.name = this.userService.getUsername()
     this.userService.getUsername().subscribe(name => this.username = name);
-    console.log('username; ' + this.model.name);
+    console.log('username; ' + this.model.username);
   }
 
   async presentFailNetwork() {
@@ -114,9 +106,9 @@ export class ProfilePage implements OnInit {
   //     }
 
       getMyProfile() {
-        this.userService.getUsername().subscribe(name => this.model.name = name);
+        this.userService.getUsername().subscribe(name => this.model.username = name);
         // this.model.name = this.userService.getUsername()
-        console.log('username; ' + this.model.name)
+        console.log('username; ' + this.model.username)
         this.userService.getUserProfile().subscribe(
           res => {
             this.loading = false;

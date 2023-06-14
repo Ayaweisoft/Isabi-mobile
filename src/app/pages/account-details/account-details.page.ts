@@ -38,17 +38,12 @@ export class AccountDetailsPage implements OnInit {
                   userService.getUsername().subscribe(name => this.model.name = name);
                  }
 
-                 
-  bankModel = {
-    accountNumber: '',
-    bankName: '',
-    bankCode: ''
-  }
-
   model = {
     name: '',
     accountName: '',
-    ...this.bankModel,
+    accountNumber: '',
+    bank: '',
+    bankCode: ''
   }
 
   otpModel = {
@@ -97,33 +92,37 @@ export class AccountDetailsPage implements OnInit {
 
   createProfile(form : NgForm){
     this.loading = true;
-      console.log('before saving' + this.model);
-     
-      this.userService.updateUserProfile(this.model).subscribe(res => {
-        this.getMyProfile();
-      },
-      err => {
-        
-        this.loading =false;
-        console.log(err);
-      });
+    let data = {
+      ...this.model,
+      ...this.model
+    }
+    console.log('before saving' + data);
+    
+    this.userService.updateUserProfile(this.model).subscribe(res => {
+      this.getMyProfile();
+    },
+    err => {
+      
+      this.loading =false;
+      console.log(err);
+    });
   }
 
   selectChange(value: any) {
     console.log("bank: ", value);
-    this.bankModel.bankName = value;
+    this.model.bank = value;
 
 
-    this.bankModel.bankCode = this.banks.filter(bank => bank.bank_name === value)[0].nip_bank_code;
-    console.log("bank: ", this.bankModel.bankCode);
+    this.model.bankCode = this.banks.filter(bank => bank.bank_name === value)[0].nip_bank_code;
+    console.log("bank: ", this.model.bankCode);
     this.disableInput = false;
   }
 
   inputChange(value: any) {
     console.log("val: ", value);
     if(value.length === 10){
-      console.log("account: ", this.bankModel)
-      this.bankModel.accountNumber = value;
+      console.log("account: ", this.model)
+      this.model.accountNumber = value;
       console.log("resolving account....");
       this.resolveAccount();
     }
@@ -165,7 +164,7 @@ export class AccountDetailsPage implements OnInit {
 
   resolveAccount() {
     this.nameLoading = true;
-    this.accountService.resolveAccount(this.bankModel).subscribe(
+    this.accountService.resolveAccount(this.model).subscribe(
       res => {
         console.log('res: ', res);
         let result: any = res;

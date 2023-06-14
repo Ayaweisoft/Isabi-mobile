@@ -24,8 +24,8 @@
         </div>
       </div>  
     </div>
-    <!-- <div class="main-section" *ngIf="showAccount"> -->
-    <div class="main-section">
+    <div class="main-section" *ngIf="showAccount">
+    <!-- <div class="main-section"> -->
       <form class="form" id="form"  #profileForm ngForm="profileForm" name="form" 
       (submit)="createProfile(profileForm)">
         <div class="inputs">
@@ -35,14 +35,14 @@
           </div> -->
           <div class="inputBox">
             <!-- <input type="text" #bank="ngModel" name="bank" id="bank" [(ngModel)]="model.bank" value="{{ myProfile?.bank }}"> -->
-            <select id="bank" name="bank" (ngModelChange)="selectChange($event)" [(ngModel)]="bankModel.bankName">
+            <select id="bank" name="bank" (ngModelChange)="selectChange($event)" [(ngModel)]="model.bank">
               <option selected>Select Bank</option>
               <option *ngFor="let option of banks" [value]="option.bank_name">{{option.bank_name}}</option>
             </select>
             <span class="text">Bank</span>
           </div>
           <div class="inputBox">
-            <input type="text" #accountNumber="ngModel" name="accountNumber" id="accountNumber" (ngModelChange)="inputChange($event)" [(ngModel)]="bankModel.accountNumber" value="{{ myProfile?.acount_number }}" [disabled]="disableInput"> 
+            <input type="text" #accountNumber="ngModel" name="accountNumber" id="accountNumber" (ngModelChange)="inputChange($event)" [(ngModel)]="model.accountNumber" value="{{ myProfile?.acount_number }}" [disabled]="disableInput"> 
             <span class="text">Account Number</span>
           </div>
           <div class="account-name" *ngIf="showName">
@@ -50,13 +50,13 @@
           </div>
         </div>
         <div class="buttons">
-          <button class="submit-btn" type="submit">Save</button>
+          <button class="submit-btn" [disabled]="!model.accountName" type="submit">Save</button>
           <button class="cancel-btn" [routerLink]="[ '/tabs/settings' ]">Cancel</button>
         </div>
   
       </form>
     </div>
-    <!-- <div class="otp-section" *ngIf="!showAccount">
+    <div class="otp-section" *ngIf="!showAccount">
       <div class="back-button" [routerLink]="[ '/tabs/settings' ]">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M20.9999 11H6.41394L11.7069 5.70697L10.2929 4.29297L2.58594 12L10.2929 19.707L11.7069 18.293L6.41394 13H20.9999V11Z" fill="#000000"/>
@@ -109,7 +109,7 @@
         </div>
       </form>
       <p>Didn't recieve email? resend</p>
-    </div> -->
+    </div>
      
     <div *ngIf="loading" class=" ">
       <div class="toast-container ">
