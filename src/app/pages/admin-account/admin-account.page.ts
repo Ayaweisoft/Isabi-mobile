@@ -63,7 +63,7 @@ export class AdminAccountPage implements OnInit {
   icon: ''
  }
 
- categories: any;
+ categories: any = [];
 
   ngOnInit() {
     console.log('on it')
