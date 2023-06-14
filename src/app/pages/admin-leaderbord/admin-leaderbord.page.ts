@@ -11,6 +11,7 @@ import { AdminnavigationComponent } from '../../components/adminnavigation/admin
 export class AdminLeaderbordPage implements OnInit {
   leaderBoard: any;
   loading: boolean = false;
+  segment = 'leaderboard';
 
   constructor(  private popoverController: PopoverController,
     public toastController: ToastController,
@@ -19,6 +20,7 @@ export class AdminLeaderbordPage implements OnInit {
      } 
 
   ngOnInit() {
+    this.getLeaderBoard();
   }
 
   async presentNavigation() {
@@ -29,12 +31,17 @@ export class AdminLeaderbordPage implements OnInit {
     return await popover.present(); 
   }
 
+  segmentChanged($event){
+    // console.log('event...', $event);
+    this.segment = $event.detail.value;
+  }
+
   getLeaderBoard(){
     this.loading = true;
     this.accountServive.getLeaderboard().subscribe((val)=> {
       this.leaderBoard = val['document'];
       this.loading = false;
-      console.log(this.leaderBoard);
+      console.log('leader', this.leaderBoard);
     })
   }
 
