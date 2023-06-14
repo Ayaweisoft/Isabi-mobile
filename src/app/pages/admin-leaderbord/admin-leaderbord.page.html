@@ -10,24 +10,48 @@
 </ion-header>
 
 
+<ion-segment scrollable="true" value="leaderboard" (ionChange)="segmentChanged($event)">
+  <ion-segment-button value="leaderboard">
+    <ion-icon name="calendar"></ion-icon>
+    <ion-label>LeaderBoard</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="change_count">
+    <ion-icon name="add-outline"></ion-icon>
+    <ion-label>Count</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+
 
 <ion-content> 
 
-  <ion-card class=" card text-white text-center" *ngFor="let item of leaderBoard; index as i">
-    <!-- <ion-card-header class="text-white"> {{item?.Date | date:'full'}} </ion-card-header> -->
-    <ion-card-content>
+ 
+
+  <div *ngIf=" segment ==='leaderboard'" style="background-color: darkgreen; border: 3px black;" class="p-5">
+    <div class=" card text-white text-center" *ngFor="let item of leaderBoard; index as i">
       <ion-list class="text-dark">
         <ion-row class=" winner lighten-2 p-2" [ngClass]="{'bg-danger': i+1 > 5}">
-        <ion-chip class="position green lighten-2 font-weight-bold"
-                    [ngClass]="{' animated infinite rubberBand': i+1 < 6}"> {{i + 1}} </ion-chip>
-        <p class="font-weight-bold">{{item?.Date | date:'full'}} </p>
-        <p class="font-weight-bold">{{item?.user}} </p>
-        <p> Enlapsed  {{item?.minutes}}: {{item?.seconds}} </p>
+          <!-- <ion-chip class="position green lighten-2 font-weight-bold"
+          [ngClass]="{' animated infinite rubberBand': i+1 < 6}"> {{i + 1}} </ion-chip> -->
+          <p class="font-weight-bold">{{item?.Date | date:'full'}} </p>
+          <p class="font-weight-bold">{{item?.user}} </p>
+          <p> Enlapsed  {{item?.minutes}}: {{item?.seconds}} </p>
         </ion-row>
       </ion-list>
       <ion-button size="small" color="danger" (click)="presentAlertConfirm(item._id)">Delete</ion-button>
-    </ion-card-content>
-  </ion-card>
+    </div>
+  </div>
+  
+  <div *ngIf=" segment ==='change_count'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
+    <form #category name="category" (submit)="addCategory(category)">
+      <ion-item>
+          <ion-label  class="ml-3"  
+          position="floating">Enter Count</ion-label>
+        <ion-input type="number" #categoryname name="categoryname" [(ngModel)]="game_category.name" placeholder="category name"></ion-input>
+      </ion-item>
+      <ion-button type="submit">Submit</ion-button>
+    </form>
+  </div>
 
     <!-- loader -->
     <div  *ngIf="loading">

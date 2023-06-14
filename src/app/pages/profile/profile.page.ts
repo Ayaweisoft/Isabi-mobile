@@ -57,8 +57,6 @@ export class ProfilePage implements OnInit {
     image_url: ''
   }
 
-
-
   
   ngOnInit() {
     this.getMyProfile();
