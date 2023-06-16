@@ -33,6 +33,10 @@
        <ion-label>Caegories</ion-label> 
        <ion-select  (ngModelChange)="selectChange($event)"  [(ngModel)]="model.mlistOptions">
          <ion-select-option *ngFor="let item of allCategory" [value]="item.name">{{item.name}}</ion-select-option>
+         <!-- <ion-select-option value="h">h</ion-select-option>
+         <ion-select-option value="a">a</ion-select-option>
+         <ion-select-option value="d">d</ion-select-option> -->
+
        </ion-select>
      </ion-item>
 

@@ -47,7 +47,7 @@
   <br>
   <ion-badge class="text-center">{{gameService.applicationDate}} </ion-badge>
 
-  <div *ngIf=" segment ==='app_date'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
+  <div *ngIf="segment ==='app_date'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
     <form #dateform name="dateform" (submit)="submitDate(dateform)">
       <ion-item>
         <ion-label class="ml-3" position="floating">enter date in format</ion-label>
@@ -62,7 +62,7 @@
 
 
   <!-- video form -->
-  <div *ngIf=" segment === 'video_link'">
+  <div *ngIf="segment === 'video_link'">
     <form #youtubeform name="youtubeform" (submit)="submityoutubeLink(youtubeform)">
       <ion-item>
         <ion-label class="ml-3" position="floating">enter date in format</ion-label>
@@ -74,7 +74,7 @@
   <!-- end video form -->
 
   <!-- sms section -->
-  <div *ngIf=" segment === 'sms'" style="padding-top: 40px;">
+  <div *ngIf="segment === 'sms'" style="padding-top: 40px;">
     <form #smsform id="smsform" name="youtubeform" (submit)="submitSms(smsform)">
       <ion-item>
         <textarea rows="5" cols="40" placeholder="Enter sms here..." #sms name="sms" [(ngModel)]="model.sms"
@@ -146,7 +146,7 @@
   <!-- end promo code -->
 
   <!-- game category -->
-  <div *ngIf=" segment ==='game_category'" class="game-categories"
+  <div *ngIf="segment ==='game_category'" class="game-categories"
     style="background-color: darkgreen; border: 3px black;">
     <div class="game-category-section" *ngIf="categories.length > 0">
       <div class="game-category" *ngFor="let item of categories">
