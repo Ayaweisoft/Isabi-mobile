@@ -96,8 +96,8 @@ export class AccountService {
     return this.accountBonus;
   }
 
-  getLeaderboard() {
-    return this.http.get(environment.apiBaseUrl + "/get-weekly-leaderboard");
+  getLeaderboard(week: number, year: number) {
+    return this.http.get(environment.apiBaseUrl + `/get-weekly-leaderboard/?week=${week}&year=${year}`);
   }
 
   getLeaderboardCount() {

@@ -89,6 +89,8 @@ constructor(private http: HttpClient,
       await alert.present();
     }
 
+    
+
 
     registerUser( user) {
       return this.http.post(environment.apiBaseUrl + '/register' , user, this.noAuthHeader);
@@ -314,6 +316,13 @@ constructor(private http: HttpClient,
         
       }
      }
+
+     getWeekNumber = (currentdate: any) => {
+      let oneJan: any = new Date(currentdate.getFullYear(), 0, 1);
+      let numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+      let result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+      return result;
+    };
 
     setProfilePicture(pic: any){
       this.profilePic.next(pic);

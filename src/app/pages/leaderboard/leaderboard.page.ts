@@ -51,7 +51,12 @@ export class LeaderboardPage implements OnInit {
 
   getLeaderBoard() {
     this.loading = true;
-    this.accountService.getLeaderboard().subscribe(val => {
+    //generate curent week and year
+    const date = new Date();
+    const week = this.userService.getWeekNumber(date);
+    const year = date.getFullYear();
+
+    this.accountService.getLeaderboard(week, year).subscribe(val => {
       this.leaderBoard = val['leaders'];
       console.log('leader: ', this.leaderBoard)
       // this.leaderBoard = this.leaderBoard.map(player => {
@@ -63,6 +68,16 @@ export class LeaderboardPage implements OnInit {
       //   }
       //   return player;
       // })
+      var playerMinutes;
+      var playerSeconds;
+      this.leaderBoard = this.leaderBoard.map(player => {
+        player.minutes =  !player.time ? 0 : Math.floor(player.time / 60);
+        player.seconds = !player.time ? 0 : Math.floor(player.time % 60);
+        player.time = playerMinutes + " mins " + playerSeconds + " secs";
+        return player;
+      })
+
+      console.log('leader: ', this.leaderBoard)
       this.firstPerson = this.leaderBoard[0];
       this.secondPerson = this.leaderBoard[1];
       this.thirdPerson = this.leaderBoard[2];
