@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable } from "rxjs";
+import { UserService } from "./user.service";
 
 @Injectable({
   providedIn: "root",
@@ -36,11 +37,22 @@ export class AccountService {
       .subscribe((value) => {
         this.setAccountBalance(value["balance"]);
         console.log("NEW Balance ", this.accountSubject.getValue());
-        this.getLeaderboard();
+        //get week and year
+        let date = new Date();
+        let week = this.getWeekNumber(date);
+        let year = date.getFullYear();
+        this.getLeaderboard(week, year);
         this.user_id = localStorage.getItem("user_id");
         this.appUsername = localStorage.getItem("appUser");
       });
   }
+
+  getWeekNumber = (currentdate: any) => {
+    let oneJan: any = new Date(currentdate.getFullYear(), 0, 1);
+    let numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+    let result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+    return result;
+  };
 
   loadMyBonus() {
     this.http

@@ -2,6 +2,7 @@ import { AccountService } from 'src/app/shared/account.service';
 import { Component, OnInit } from '@angular/core';
 import { PopoverController, ToastController, AlertController } from '@ionic/angular';
 import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-admin-leaderbord',
@@ -16,6 +17,7 @@ export class AdminLeaderbordPage implements OnInit {
 
   constructor(  private popoverController: PopoverController,
     public toastController: ToastController,
+    public userService: UserService,
     public accountServive: AccountService, public alertController: AlertController) {
       this.getLeaderBoard();
      } 
@@ -53,8 +55,13 @@ export class AdminLeaderbordPage implements OnInit {
   }
 
   getLeaderBoard(){
+    //get week and year
+    let date = new Date();
+    let week = this.userService.getWeekNumber(date);
+    let year = date.getFullYear();
+
     this.loading = true;
-    this.accountServive.getLeaderboard().subscribe((val)=> {
+    this.accountServive.getLeaderboard(week, year).subscribe((val)=> {
       this.leaderBoard = val['leaders'];
       this.loading = false;
       console.log('leader', this.leaderBoard);
@@ -62,7 +69,7 @@ export class AdminLeaderbordPage implements OnInit {
       this.loading = false;
       // this.userService.generalAlert(err.error.msg);
     })
-  }
+  } 
   getLeaderCount(){
     this.loading = true;
     this.accountServive.getLeaderboardCount().subscribe((val: number)=> {
