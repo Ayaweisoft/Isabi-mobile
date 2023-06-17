@@ -120,8 +120,8 @@ export class AccountService {
     return this.http.post(environment.apiBaseUrl + "/update-leaderboard-count", data);
   }
 
-  getMoreLeaderboard(limit, skip) {
-    return this.http.get(environment.apiBaseUrl + `/get-weekly-leaderboard/?limit=${limit}&skip=${skip}`);
+  getMoreLeaderboard(limit: any, skip: any, week: any, year: any) {
+    return this.http.get(environment.apiBaseUrl + `/get-weekly-leaderboard/?limit=${limit}&skip=${skip}&week=${week}&year=${year}`);
   }
 
   getWinners() {

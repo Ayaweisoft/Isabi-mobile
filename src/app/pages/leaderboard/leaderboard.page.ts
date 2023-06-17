@@ -95,9 +95,23 @@ export class LeaderboardPage implements OnInit {
   getMoreLeader() {
     this.sLoading = true;
     const limit = 20;
+    //generate curent week and year
+    const date = new Date();
+    const week = this.userService.getWeekNumber(date);
+    const year = date.getFullYear();
     const skip = this.leaderBoard.length;
-    this.accountService.getMoreLeaderboard(limit, skip).subscribe(val => {
-      this.leaderBoard = this.leaderBoard.concat(val['leaders']);
+    this.accountService.getMoreLeaderboard(limit, skip, week, year).subscribe(val => {
+      var leaders = val['leaders'];
+      
+      var playerMinutes;
+      var playerSeconds;
+      leaders = leaders.map(player => {
+        player.minutes =  !player.time ? 0 : Math.floor(player.time / 60);
+        player.seconds = !player.time ? 0 : Math.floor(player.time % 60);
+        player.time = playerMinutes + " mins " + playerSeconds + " secs";
+        return player;
+      })
+      this.leaderBoard = this.leaderBoard.concat(leaders);
       console.log('leader: ', this.leaderBoard)
       
       // this.leaderBoard = this.leaderBoard.map(player => {
@@ -108,6 +122,8 @@ export class LeaderboardPage implements OnInit {
       //   }
       //   return player;
       // })
+
+
       console.log('getting leaderboard')
       console.log(this.leaderBoard)
       this.sLoading = false;
