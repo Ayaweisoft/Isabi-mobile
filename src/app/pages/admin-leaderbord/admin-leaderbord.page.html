@@ -30,23 +30,20 @@
   <div *ngIf=" segment ==='leaderboard'" style="background-color: white; border: 3px black; min-height: 75vh;" class="p-5">
     <div class="row d-flex justify-content-center mb-2">
       <span class="font-weight-bold">Current Display Total:</span>
-      <span class="font-weight-bold"> 30</span>
+      <span class="font-weight-bold">{{leaderBoard.length}}</span>
       <!-- <ion-spinner class="spinner" name="crescent"></ion-spinner> -->
 
     </div>
-    <div class=" card text-white text-center" *ngFor="let item of leaderBoard; index as i">
+    <div class=" card text-white text-center" *ngFor="let item of leaderBoard; index as i"  (click)="showLeaderDeatails(item.user_id)">
       <ion-list class="text-dark">
         <ion-row class=" winner lighten-2 p-2 px-4 d-flex justify-content-between">
-          <!-- [ngClass]="{'bg-danger': i+1 > 5}" -->
-          <!-- <ion-chip class="position green lighten-2 font-weight-bold"
-          [ngClass]="{' animated infinite rubberBand': i+1 < 6}"> {{i + 1}} </ion-chip> -->
-          <!-- <p class="font-weight-bold">{{item?.Date | date:'full'}} </p> -->
           <p class="font-weight-bold">{{item?.user}} </p>
-          <p> Enlapsed  {{item?.minutes}}: {{item?.seconds}} </p>
+          <p> Enlapsed:  {{item?.minutes}}:{{item?.seconds}} secs</p>
         </ion-row>
       </ion-list>
       <!-- <ion-button size="small" color="danger" (click)="presentAlertConfirm(item._id)">Delete</ion-button> -->
     </div>
+    <button (click)="getMoreLeader()">{{ sLoading ? 'loading...' : 'See more' }}</button>
   </div>
   
   <div *ngIf=" segment ==='change_count'" style="background-color: white; border: 3px black; min-height: 75vh; " class="p-5 ">

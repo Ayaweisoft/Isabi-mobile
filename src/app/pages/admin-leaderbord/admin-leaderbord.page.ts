@@ -10,15 +10,16 @@ import { UserService } from 'src/app/shared/user.service';
   styleUrls: ['./admin-leaderbord.page.scss'],
 })
 export class AdminLeaderbordPage implements OnInit {
-  leaderBoard: any;
+  leaderBoard: any = [];
   leaderBoardCount: number;
   loading: boolean = false;
+  sLoading: boolean = false
   segment = 'leaderboard';
 
   constructor(  private popoverController: PopoverController,
     public toastController: ToastController,
     public userService: UserService,
-    public accountServive: AccountService, public alertController: AlertController) {
+    public accountService: AccountService, public alertController: AlertController) {
       this.getLeaderBoard();
      } 
 
@@ -36,15 +37,12 @@ export class AdminLeaderbordPage implements OnInit {
   }
 
   segmentChanged($event){
-    // console.log('event...', $event);
     this.segment = $event.detail.value;
   }
 
   changeCount($event){
-    console.log('change count event...', this.leaderBoardCount);
     this.loading = true;
-    this.accountServive.updateLeaderboardCount({count: this.leaderBoardCount}).subscribe((val: number)=> {
-      console.log('count updated', val);
+    this.accountService.updateLeaderboardCount({count: this.leaderBoardCount}).subscribe((val: number)=> {
       this.presentSuccessToast();
       this.leaderBoardCount= null;
       this.loading = false;
@@ -54,28 +52,73 @@ export class AdminLeaderbordPage implements OnInit {
     })
   }
 
-  getLeaderBoard(){
-    //get week and year
-    let date = new Date();
-    let week = this.userService.getWeekNumber(date);
-    let year = date.getFullYear();
-
+  getLeaderBoard() {
     this.loading = true;
-    this.accountServive.getLeaderboard(week, year).subscribe((val)=> {
+    //generate curent week and year
+    const date = new Date();
+    const week = this.userService.getWeekNumber(date);
+    const year = date.getFullYear();
+
+    this.accountService.getLeaderboard(week, year).subscribe(val => {
       this.leaderBoard = val['leaders'];
+
+      var playerMinutes;
+      var playerSeconds;
+      this.leaderBoard = this.leaderBoard.map(player => {
+        player.minutes =  !player.time ? 0 : Math.floor(player.time / 60);
+        player.seconds = !player.time ? 0 : Math.floor(player.time % 60);
+        player.time = playerMinutes + " mins " + playerSeconds + " secs";
+        return player;
+      })
+
       this.loading = false;
-      console.log('leader', this.leaderBoard);
-    }, err => {
+    },
+    err => {
       this.loading = false;
-      // this.userService.generalAlert(err.error.msg);
-    })
-  } 
+    }
+    );
+  }
+
+  getMoreLeader() {
+    this.sLoading = true;
+    const limit = 20;
+    //generate curent week and year
+    const date = new Date();
+    const week = this.userService.getWeekNumber(date);
+    const year = date.getFullYear();
+    const skip = this.leaderBoard.length + 1;
+    this.accountService.getMoreLeaderboard(limit, skip, week, year).subscribe(val => {
+      var leaders = val['leaders'];
+      
+      var playerMinutes;
+      var playerSeconds;
+      leaders = leaders.map(player => {
+        player.minutes =  !player.time ? 0 : Math.floor(player.time / 60);
+        player.seconds = !player.time ? 0 : Math.floor(player.time % 60);
+        player.time = playerMinutes + " mins " + playerSeconds + " secs";
+        return player;
+      })
+      this.leaderBoard = this.leaderBoard.concat(leaders);
+      this.sLoading = false;
+    });
+  }
+
+  showLeaderDeatails(id){
+    // this.loading = true;
+    // this.accountService.getLeaderboardDetails(id).subscribe((val: any)=> {
+    //   this.loading = false;
+    //   this.presentAlertConfirm(val._id);
+    // }, err => {
+    //   this.loading = false;
+    //   // this.userService.generalAlert(err.error.msg);
+    // })
+  }
+
   getLeaderCount(){
     this.loading = true;
-    this.accountServive.getLeaderboardCount().subscribe((val: number)=> {
+    this.accountService.getLeaderboardCount().subscribe((val: number)=> {
       this.leaderBoardCount = val;
       this.loading = false;
-      console.log('leaderboard', this.leaderBoardCount);
     }, err => {
       this.loading = false;
       // this.userService.generalAlert(err.error.msg);
@@ -101,23 +144,19 @@ export class AdminLeaderbordPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Okay',
           handler: (val) => {
             this.loading = true;
-            console.log('Confirm Okay', val.docID);
-            this.accountServive.settleLeader(val.docID).subscribe(
+            this.accountService.settleLeader(val.docID).subscribe(
               res => {
                 this.loading = false;
-                console.log(res);
                 this.presentSuccessToast();
                 this.getLeaderBoard();
               },
               error => {
                 this.loading = false;
-                console.log(error);
               }
             );
           }
