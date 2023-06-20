@@ -324,6 +324,10 @@ constructor(private http: HttpClient,
       return result;
     };
 
+    getUserDetails(id: any){
+      return this.http.get(environment.apiBaseUrl + '/get-user' + id);
+    }
+
     setProfilePicture(pic: any){
       this.profilePic.next(pic);
     }

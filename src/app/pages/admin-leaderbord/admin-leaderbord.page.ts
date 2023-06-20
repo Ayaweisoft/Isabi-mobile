@@ -15,6 +15,9 @@ export class AdminLeaderbordPage implements OnInit {
   loading: boolean = false;
   sLoading: boolean = false
   segment = 'leaderboard';
+  userDetails: any;
+  popLoading: boolean = false;
+  showDetails: boolean = false;
 
   constructor(  private popoverController: PopoverController,
     public toastController: ToastController,
@@ -103,16 +106,28 @@ export class AdminLeaderbordPage implements OnInit {
     });
   }
 
-  showLeaderDeatails(id){
-    // this.loading = true;
-    // this.accountService.getLeaderboardDetails(id).subscribe((val: any)=> {
-    //   this.loading = false;
-    //   this.presentAlertConfirm(val._id);
-    // }, err => {
-    //   this.loading = false;
-    //   // this.userService.generalAlert(err.error.msg);
-    // })
+  showLeaderDetails(id: any){
+    this.showDetails = true;
+    this.getUserDetails(id);
   }
+
+  closeUserDetails(){
+    this.showDetails = false;
+  }
+
+  getUserDetails(id: any){
+    this.popLoading = true;
+    this.userService.getUserDetails(id).subscribe((val: any)=> {
+      this.loading = false;
+      console.log("val: ", val['user']);
+      this.userDetails = val['user'];
+      this.popLoading = false;
+    }, err => {
+      this.popLoading = false;
+      // this.userService.generalAlert(err.error.msg);
+    })
+  }
+
 
   getLeaderCount(){
     this.loading = true;

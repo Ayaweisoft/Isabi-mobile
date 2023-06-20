@@ -34,7 +34,51 @@
       <!-- <ion-spinner class="spinner" name="crescent"></ion-spinner> -->
 
     </div>
-    <div class=" card text-white text-center" *ngFor="let item of leaderBoard; index as i"  (click)="showLeaderDeatails(item.user_id)">
+
+    <div class="popup" *ngIf="showDetails">
+      <div class="popup-background" (click)="closeUserDetails()"></div>
+      <div class="popup-details">
+        <div class="user-img" *ngIf="!popLoading">
+          <img [src]="userDetails?.image_url" alt="">
+        </div>
+        <div class="user-details" *ngIf="!popLoading">
+          <div class="user-field">
+            <span class="user-field-title">Username:</span>
+            <span>{{userDetails?.username}}</span>
+          </div>
+          <div class="user-field">
+            <span class="user-field-title">Name:</span>
+            <span>{{userDetails?.fullname}}</span>
+          </div>
+          <div class="user-field">
+            <span class="user-field-title">Phone:</span>
+            <span>{{userDetails?.phone}}</span>
+          </div>
+          <div class="user-field">
+            <span class="user-field-title">Email:</span>
+            <span>{{userDetails?.email}}</span>
+          </div>
+        </div>
+        <!-- loader -->
+        <div *ngIf="popLoading">
+          <div class="loader">
+            <div class="lds-roller">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+    <div class=" card text-white text-center" *ngFor="let item of leaderBoard; index as i"  (click)="showLeaderDetails(item.user_id)">
       <ion-list class="text-dark">
         <ion-row class=" winner lighten-2 p-2 px-4 d-flex justify-content-between">
           <p class="font-weight-bold">{{item?.user}} </p>
