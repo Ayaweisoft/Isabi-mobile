@@ -84,6 +84,11 @@ const routes2: Routes = [
         loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
         canActivate: [AuthguardGuard]
       },
+      {
+        path: 'utility-bills',
+        loadChildren: './pages/utility-bills/utility-bills.module#UtilityBillsPageModule',
+        canActivate: [AuthguardGuard]
+      },
 
       //  admin routes
       {
@@ -286,6 +291,12 @@ const routes: Routes = [
     {
       path: 'transaction',
       loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
+      canActivate: [AuthguardGuard]
+    },
+
+    {
+      path: 'utility-bills',
+      loadChildren: './pages/utility-bills/utility-bills.module#UtilityBillsPageModule',
       canActivate: [AuthguardGuard]
     },
 

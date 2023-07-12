@@ -1,0 +1,129 @@
+<ion-content>
+  <div class="top-section">
+    <div class="head-section question-head-section">
+      <div class="header">
+        <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <profile-photo
+          [className]="'profile-header'"
+          [userNameVisible]="false"
+        ></profile-photo>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-section">
+    <div class="utility-bills-section">
+      <h4 class="utility-bills-header">Utility Bills</h4>
+      {{selectedUtility}}
+      <div *ngIf="!selectedUtility" class="utility-bills">
+        <label class="utility-bills__item">
+          <h5>Bank Transfer</h5>
+          <!-- <p></p> -->
+          <input
+            type="radio"
+            (change)="onChangeSelectedUtility($event)"
+            name="selected-utility"
+            value="bank"
+          />
+        </label>
+        <label class="utility-bills__item">
+          <h5>Internet</h5>
+          <!-- <p></p> -->
+          <input
+            type="radio"
+            (change)="onChangeSelectedUtility($event)"
+            name="selected-utility"
+            value="internet"
+          />
+        </label>
+        <label class="utility-bills__item">
+          <h5>TV</h5>
+          <!-- <p></p> -->
+          <input
+            type="radio"
+            (change)="onChangeSelectedUtility($event)"
+            name="selected-utility"
+            value="tv"
+          />
+        </label>
+        <label class="utility-bills__item">
+          <h5>Electricity</h5>
+          <!-- <p></p> -->
+          <input
+            type="radio"
+            (change)="onChangeSelectedUtility($event)"
+            name="selected-utility"
+            value="electricity"
+          />
+        </label>
+        <label class="utility-bills__item">
+          <h5>Education</h5>
+          <!-- <p></p> -->
+          <input
+            type="radio"
+            (change)="onChangeSelectedUtility($event)"
+            name="selected-utility"
+            value="education"
+          />
+        </label>
+      </div>
+      <div *ngIf="selectedUtility === 'bank'" class="single_utility">
+        <button
+          (click)="setSelectedUtility(undefined)"
+          class="single_utility__back_link"
+          href=""
+        >
+          Back to utilities
+        </button>
+        <select class="single_utility__select" name="" id="">
+          <option disabled selected value="">Select Bank</option>
+          <option *ngFor="let bank of banks">{{bank.bankName}}</option>
+        </select>
+        <input
+          type="text"
+          class="single_utility__input"
+          placeholder="Enter account number"
+          maxlength="10"
+        />
+        <button class="single_utility__button">Next</button>
+      </div>
+      <div
+        *ngIf="selectedUtility && selectedUtility !== 'bank'"
+        class="single_utility"
+      >
+        <button
+          (click)="setSelectedUtility(undefined)"
+          class="single_utility__back_link"
+          href=""
+        >
+          Back to utilities
+        </button>
+        <select class="single_utility__select" name="" id="">
+          <option disabled selected value="">Select service provider</option>
+        </select>
+        <select class="single_utility__select" name="" id="">
+          <option disabled selected value="">Select package</option>
+        </select>
+        <button class="single_utility__button">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 
+  <div *ngIf="loading" class=" ">
+    <div class="toast-container">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div> -->
+</ion-content>
