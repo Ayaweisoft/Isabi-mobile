@@ -37,6 +37,24 @@ export class UtilityBillsService {
     );
   }
 
+  verifyAccountNumber(bankCode: string, accountNumber: string) {
+    console.log("VERIFYING ACCOUNT NUMBER");
+    return this.http.post(
+      environment.apiBaseUrl + this.servicePrefix + "/banks/verify",
+      {
+        accountNumber,
+        bankCode,
+      }
+    );
+  }
+
+  getDataPlans(network: string) {
+    console.log("GETTING DATA PLANS");
+
+    return this.http.get(
+      environment.apiBaseUrl + this.servicePrefix + "/data/" + network
+    );
+  }
   getWeekNumber = (currentdate: any) => {
     let oneJan: any = new Date(currentdate.getFullYear(), 0, 1);
     let numberOfDays = Math.floor(

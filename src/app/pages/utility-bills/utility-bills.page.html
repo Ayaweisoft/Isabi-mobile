@@ -16,7 +16,6 @@
   <div class="main-section">
     <div class="utility-bills-section">
       <h4 class="utility-bills-header">Utility Bills</h4>
-      {{selectedUtility}}
       <div *ngIf="!selectedUtility" class="utility-bills">
         <label class="utility-bills__item">
           <h5>Bank Transfer</h5>
@@ -77,16 +76,29 @@
         >
           Back to utilities
         </button>
-        <select class="single_utility__select" name="" id="">
+        <select
+          class="single_utility__select"
+          (change)="onChangeSelectedBank($event)"
+          name=""
+          id=""
+        >
           <option disabled selected value="">Select Bank</option>
-          <option *ngFor="let bank of banks">{{bank.bankName}}</option>
+          <option *ngFor="let bank of banks" value="{{bank.bankCode}}">
+            {{bank.bankName}}
+          </option>
         </select>
         <input
           type="text"
           class="single_utility__input"
           placeholder="Enter account number"
           maxlength="10"
+          [(ngModel)]="accountNumber"
+          (input)="onAccountNumberInput($event)"
         />
+        <!-- [(ngModel)]="accountNumber"
+            #accountNumber="ngModel"
+          value="{{ accountNumber }}"
+        -->
         <button class="single_utility__button">Next</button>
       </div>
       <div
@@ -100,11 +112,22 @@
         >
           Back to utilities
         </button>
-        <select class="single_utility__select" name="" id="">
+        <select
+          class="single_utility__select"
+          (change)="onChangeSelectedMobileNetwork($event)"
+          name=""
+          id=""
+        >
           <option disabled selected value="">Select service provider</option>
+          <option *ngFor="let network of networks" value="{{network}}">
+            {{network}}
+          </option>
         </select>
         <select class="single_utility__select" name="" id="">
           <option disabled selected value="">Select package</option>
+          <option *ngFor="let package of packages" value="{{package}}">
+            {{package}}
+          </option>
         </select>
         <button class="single_utility__button">Next</button>
       </div>

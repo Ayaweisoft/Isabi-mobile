@@ -73,8 +73,10 @@ body {
     padding: 1em;
     border-radius: 10px;
   }
-  &__select {
+  &__select,
+  &__input {
     background: #efefef;
+    border: 1px solid #dadada;
   }
   &__button {
     background-color: #348a40;
