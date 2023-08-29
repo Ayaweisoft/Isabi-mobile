@@ -273,6 +273,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
       res => {
         // this.loadingGame = false;
         // this.startGame = true;
+        console.log({res})
         this.gameQuestions = res['questions'];
         // console.log(this.gameQuestions);
         this.lastQuestion =  this.gameQuestions.length - 1;

@@ -25,6 +25,11 @@ export class InsideTicketingComponent implements OnInit {
   myTicketList: Ticket[] = [];
   segment = 'ticket';
   generatedTicketId: string;
+  date: any = new Date();
+  months: string[] = [
+	"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
+	"Nov", "Dec"
+  ]
 
   constructor(private route: ActivatedRoute,
     private eventService: EventService,
@@ -115,6 +120,8 @@ export class InsideTicketingComponent implements OnInit {
         console.log(res);
         this.ticketList = res['ticketList'];
         this.event = res['event'];
+        this.date = new Date(res['event'].startDate)
+  
         console.log('event: ', this.event);
         this.loading = false;
       },

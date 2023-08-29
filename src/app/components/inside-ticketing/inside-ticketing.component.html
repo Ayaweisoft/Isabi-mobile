@@ -71,7 +71,7 @@
                 </svg>                
               </span>
               <p>
-                Dec 26, 2022
+                {{months[date?.getMonth()]}} {{date?.getDate()}}, {{date?.getFullYear()}}
               </p>               
             </div>
             <div class="event-location">
@@ -81,7 +81,7 @@
                 </svg>
               </span>              
               <p>
-                6:00pm - 9:00pm
+                {{event.startTime}}
               </p>               
             </div>
           </div>
@@ -327,7 +327,7 @@
     </div>
   </div>
 
-  <div *ngIf="loading" class=" ">
+  <div *ngIf="loading" class="">
     <div class="toast-container ">
       <div class="lds-roller">
         <div></div>
