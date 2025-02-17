@@ -20,21 +20,21 @@
 
 export const environment = {
   production: false,
-// apiBaseUrl:  'http://localhost:8000/api',
-socketsUrl:  'https://i-sabi-server-dev.herokuapp.com/',
-// webVotingUrl:  'http://localhost:8100/',
-webVotingUrl:  'https://i-sabi.app/',
-versionCode: 5.2,
-apiBaseUrl: 'https://i-sabi-server-dev.herokuapp.com/api',
-firebaseConfig : {
-  apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
-  authDomain: "i-sabi-bd851.firebaseapp.com", 
-  projectId: "i-sabi-bd851",
-  storageBucket: "i-sabi-bd851.appspot.com",
-  messagingSenderId: "689315780305",
-  appId: "1:689315780305:web:0b8e34d8b46966fc0817f0",
-  measurementId: "G-4FT60JQ93C"
-}
+  // apiBaseUrl:  'http://localhost:8000/api',
+  socketsUrl: 'https://i-sabi-server.vercel.app/',
+  // webVotingUrl:  'http://localhost:8100/',
+  webVotingUrl: 'https://i-sabi.app/',
+  versionCode: 5.2,
+  apiBaseUrl: 'https://i-sabi-server.vercel.app/api',
+  firebaseConfig: {
+    apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
+    authDomain: "i-sabi-bd851.firebaseapp.com",
+    projectId: "i-sabi-bd851",
+    storageBucket: "i-sabi-bd851.appspot.com",
+    messagingSenderId: "689315780305",
+    appId: "1:689315780305:web:0b8e34d8b46966fc0817f0",
+    measurementId: "G-4FT60JQ93C"
+  }
 
 };
 
