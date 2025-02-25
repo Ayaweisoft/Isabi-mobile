@@ -28,7 +28,7 @@ import { SplashComponent } from './components/splash/splash.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // import { environment } from 'src/environments/environment';
 // import { Socket } from 'ngx-socket-io';
-// const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
+// const config: SocketIoConfig = { url: 'https://i-sabi-server.onrender.com/api:8000', options: {} };
 // const config: SocketIoConfig = { 
 //   url: 'http://localhost:8000',
 //   options: {} };
