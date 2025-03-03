@@ -5,11 +5,11 @@
 export const environment = {
   production: false,
   // apiBaseUrl:  'http://localhost:8000/api',
-  socketsUrl: 'https://i-sabi-server.vercel.app/',
+  socketsUrl: 'https://i-sabi-server.onrender.com/',
   webVotingUrl: 'http://localhost:8100/',
   // webVotingUrl:  'https://i-sabi.app/',
   versionCode: 5.2,
-  apiBaseUrl: 'https://i-sabi-server.vercel.app/api',
+  apiBaseUrl: 'https://i-sabi-server.onrender.com/api',
   firebaseConfig: {
     apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
     authDomain: "i-sabi-bd851.firebaseapp.com",
