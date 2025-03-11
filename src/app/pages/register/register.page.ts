@@ -22,26 +22,26 @@ export class RegisterPage implements OnInit {
   }
 
   constructor(public userService: UserService,
-             private logicService: LogicService,
-              public gameService: GameServiceService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) {
-                if(this.userService.networkDisconnet){
-                  // this.presentFailNetwork();
-              }
-            }
+    private logicService: LogicService,
+    public gameService: GameServiceService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
+      if(this.userService.networkDisconnet){
+        // this.presentFailNetwork();
+    }
+  }
 
-            model = {
-              number: '',
-              fullname: '',
-              password: '',
-              email:'',
-              username: '',
-              conf_password:'',
-              referrer: '',
-              nationality: '',
-              birthday: ""
-            };
+  model = {
+    number: '',
+    fullname: '',
+    password: '',
+    email:'',
+    username: '',
+    conf_password:'',
+    referrer: '',
+    nationality: '',
+    birthday: ""
+  };
 
   ngOnInit() {
  
@@ -63,10 +63,12 @@ export class RegisterPage implements OnInit {
     this.loading = true; 
     this.userService.registerUser(this.model).subscribe( 
       response => {
+        
+
         this.loading = false;
         let message = "Registration successful!";
         this.logicService.presentSucess('success','registration successful', 'continue'); 
-        this.router.navigate(['/login']);
+        this.router.navigate(['/confirm-email']);
       },
       error => {
         this.loading = false;

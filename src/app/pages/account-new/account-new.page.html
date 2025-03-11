@@ -11,7 +11,10 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <profile-photo [className]="'profile-header'" [userNameVisible]= "false"></profile-photo>
+        <profile-photo
+          [className]="'profile-header'"
+          [userNameVisible]="false"
+        ></profile-photo>
       </div>
     </div>
   </div>
@@ -27,60 +30,55 @@
         <div class="price">{{bonus | currency:'₦'}}</div>
       </div>
       <div class="btn-section">
-        <button class="container-btn" (click)="enterAmountInput()" *ngIf="!showPaymentButtons">Deposit</button>
-        <button class="container-btn" (click)="enterCashoutAmount()" *ngIf="!showPaymentButtons">Cashout</button>
+        <button
+          class="container-btn"
+          (click)="enterAmountInput()"
+          *ngIf="!showPaymentButtons"
+        >
+          Deposit
+        </button>
+        <button
+          class="container-btn"
+          (click)="enterCashoutAmount()"
+          *ngIf="!showPaymentButtons"
+        >
+          Cashout
+        </button>
       </div>
 
       <div class="payment-card" *ngIf="showPaymentButtons">
         <div class="payment-card-head">I want to pay</div>
         <div class="payment-card-body">
-          <div class="payment-card-body-text">Banks transafer/ Cards / ussd</div>
+          <div class="payment-card-body-text">
+            Banks transafer / Cards / ussd
+          </div>
           <ng-interswitch
-               [merchantCode]="customerDetails.merchantCode" 
-               [payItemID]="customerDetails.payItemID"
-                [amount]="model.amount"
-                 [transactionReference]=" reference"
-                 [customerEmail]="customerDetails.email"
-                 [paymentMode]="'LIVE'"
-                [customerName]="customerDetails.name"
-                 (paymentCallback)="paymentCallback($event)"
-                [class]="'btn btn-danger'">PAY NOW</ng-interswitch>
+            [merchantCode]="customerDetails.merchantCode"
+            [payItemID]="customerDetails.payItemID"
+            [amount]="model.amount"
+            [transactionReference]=" reference"
+            [customerEmail]="customerDetails.email"
+            [paymentMode]="'LIVE'"
+            [customerName]="customerDetails.name"
+            (paymentCallback)="paymentCallback($event)"
+            [class]="'btn btn-danger'"
+            >PAY NOW</ng-interswitch
+          >
         </div>
       </div>
-      <!-- <div *ngIf="showPaymentButtons">
-        <ion-chip *ngIf="showPaymentButtons">
-          <h5 class="text-center font-weight-bold">I want to pay ₦ {{model.actual}} </h5>
-        </ion-chip> <br>
 
-        <hr>
-        <ion-card class="green darken-3">
-          <small class="text-center text-white"> Banks transafer/ Cards / ussd</small>
-          <ion-row>
-            <ion-col class="d-flex justify-content-center">
-
-              <ng-interswitch
-               [merchantCode]="customerDetails.merchantCode" 
-               [payItemID]="customerDetails.payItemID"
-                [amount]="model.amount"
-                 [transactionReference]=" reference"
-                 [customerEmail]="customerDetails.email"
-                 [paymentMode]="'LIVE'"
-                [customerName]="customerDetails.name"
-                 (paymentCallback)="paymentCallback($event)"
-                [class]="'btn btn-danger'">PAY NOW</ng-interswitch>
-
-            </ion-col>
-
-
-          </ion-row>
-        </ion-card>
-      </div> -->
       <div class="promo-section">
         <span class="promo-claim">Claim promo code</span>
         <div class="flex">
-          <input class="promo-input" #promo>
-          <button class="promo-btn" [disabled]="loading" [disabled]="!promo.value"
-          (click)="submitProCode(promo.value)">Claim</button>
+          <input class="promo-input" #promo />
+          <button
+            class="promo-btn"
+            [disabled]="loading"
+            [disabled]="!promo.value"
+            (click)="submitProCode(promo.value)"
+          >
+            Claim
+          </button>
         </div>
       </div>
     </div>
@@ -94,14 +92,38 @@
           <th>Date</th>
           <th>Stats</th>
         </tr>
+        
       </table>
+    </div>
+    <div *ngIf="withdrawalPin" class="withdrawal-pin">
+      <p>Enter Pin</p>
+      <!-- <ng-otp-input (onInputChange)="onOtpChange($event)" [config]="{length:5}"></ng-otp-input> -->
+      <div class="form">
+        <div class="input">
+          <input type={{pinType}} name="pin" [(ngModel)]="pinModel.pin" id="pin">
+          <div class="show-pin" (click)="toggleShowPin()">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 3C8.832 3 3 8.832 3 16C3 23.168 8.832 29 16 29C23.168 29 29 23.168 29 16C29 8.832 23.168 3 16 3ZM16 5C22.087 5 27 9.913 27 16C27 22.087 22.087 27 16 27C9.913 27 5 22.087 5 16C5 9.913 9.913 5 16 5ZM12.22 10.78L10.78 12.22L14.564 16L10.782 19.78L12.222 21.22L16 17.437L19.78 21.217L21.22 19.78L17.437 16L21.217 12.22L19.78 10.78L16 14.564L12.22 10.782V10.78Z" fill="#FF0000"/>
+            </svg>          
+          </div>
+        </div>
+        <button (click)="onPinChange()">Submit</button>
+      </div>
     </div>
   </div>
 
-<div *ngIf="loading" class=" ">
-<div class="toast-container ">
-    <div class="lds-roller"><div></div><div></div><div></div><div></div>
-    <div></div><div></div><div></div><div></div></div>
-</div>
-</div>
+  <div *ngIf="loading" class="">
+    <div class="toast-container">
+      <div class="lds-roller">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
 </ion-content>

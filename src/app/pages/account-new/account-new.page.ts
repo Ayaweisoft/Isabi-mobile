@@ -1,6 +1,7 @@
 import { Subscription, Observable } from 'rxjs';
 import { GameServiceService } from '../../shared/game-service.service';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import {MatTableModule} from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/shared/user.service';
 import { AccountService } from 'src/app/shared/account.service';
@@ -21,298 +22,312 @@ import { TransactionService } from 'src/app/services/transaction.service';
 export class AccountNewPage implements OnInit {
   reference: any;
   title: any;
-  scheduled :  any;
-  userEmail: any;  appUsername: any;
+  scheduled: any;
+  userEmail: any; appUsername: any;
   // amountInput: any;
-  paymentDoneSub : any;
+  paymentDoneSub: any;
   // exactAmount: any;
   paymentOptions: any;
-  showPaymentButtons : boolean = false;
+  showPaymentButtons: boolean = false;
   @Input() firstName: string;
   @Input() lastName: string;
-  @Input() middleInitial: string; 
+  @Input() middleInitial: string;
   loading: boolean;
   bonus: any;
   balance: any;
   transaction: any;
-
-  customerDetails = { name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: '',
-  merchantCode: this.transService.merchant_code, payItemID: this.transService.pay_item_id}
+  pinType: string = "password";
+  withdrawalPin: boolean = false;
   
+  pinModel = {
+    pin: ""
+  }
+
+  customerDetails = {
+    name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: '',
+    merchantCode: this.transService.merchant_code, payItemID: this.transService.pay_item_id
+  }
 
   constructor(private router: Router, public userService: UserService,
-              public accountService: AccountService,
-              public gameSevice : GameServiceService,
-              private transService: TransactionService,
-              private platform: Platform,
-              private logicService: LogicService,
-              public alertController: AlertController,
-              public toastController: ToastController,
-              public modalController: ModalController
-             ) {  
-                this.accountService.loadMyBalance();
-                console.log('REF2', this.reference);
-                this.getTransaction();
+    public accountService: AccountService,
+    public gameSevice: GameServiceService,
+    private transService: TransactionService,
+    private platform: Platform,
+    private logicService: LogicService,
+    public alertController: AlertController,
+    public toastController: ToastController,
+    public modalController: ModalController
+  ) {
+    this.accountService.loadMyBalance();
+    console.log('REF2', this.reference);
+    this.getTransaction();
 
-}
+  }
 
-model = {
-  amount: null, 
-  actual: null,
-  cashout: '',
-  username: ''
-};
+  model = {
+    amount: null,
+    actual: null,
+    cashout: '',
+    username: ''
+  };
 
+  ngOnInit() {
 
+    console.log('REF', this.reference);
+    console.log('trans ref',)
+    this.appUsername = localStorage.getItem('appUser');
+    this.model.username = this.appUsername;
 
-ngOnInit() {
+    this.accountService.getAccountBalance().subscribe(bal => {
+      this.balance = bal;
+    })
+    this.accountService.getAccountBonus().subscribe(bal => {
+      this.bonus = bal;
+    })
+    this.getTransaction();
+  }
 
-  console.log('REF', this.reference);
-  console.log('trans ref', )
-  this.appUsername = localStorage.getItem('appUser');
-  this.model.username = this.appUsername;
-
-  this.accountService.getAccountBalance().subscribe(bal => {
-    this.balance = bal;
-  })
-  this.accountService.getAccountBonus().subscribe(bal => {
-    this.bonus = bal;
-  })
-  this.getTransaction();
-}
-
-ionViewDidEnter() {
-  this.generateReference();
-  this.getTransaction();
-}
+  ionViewDidEnter() {
+    this.generateReference();
+    this.getTransaction();
+  }
 
 
-ngOnDestroy() {
-  // this.paymentDoneSub = '';
-  this.model = {
+  ngOnDestroy() {
+    // this.paymentDoneSub = '';
+    this.model = {
       amount: null,
       cashout: '',
       username: '',
-      actual:''
+      actual: ''
     };
-}
-
-paymentCallback(response: any): void {
-  this.showPaymentButtons = false;
-  console.log("RESULT", response);
-  if(response.resp == "00"){
-    this.generateReference();
-    response.date = Date.now();
-    response.account_id  = this.userService.getAuthId();
-    response.ref  = response.retRef;
-    response.username  = this.userService.getUsername();
-    response.user_id  = this.userService.getAuthId();
-    response.transaction  = response.txnref;
-    response.amount  =  this.model.actual;
-    console.log('final response ', response);
-    this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
-      res => {
-        console.log('new balance',res);
-        this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
-       this.accountService.loadMyBalance();
-        
-    
-       this.generateReference();
-      },
-      err => {
-       this.generateReference()
-       this.accountService.loadMyBalance();
-      }
-    );
-
- 
-  }else{
-    console.log('data')
-    this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
   }
 
-}
+  onPinChange(){
+    console.log("pin: ", this.pinModel.pin)
+  }
 
-closedPaymentModal(): void {
-  this.generateReference();
-  console.log('payment is closed');
-  this.model.amount = null;
+  paymentCallback(response: any): void {
+    this.showPaymentButtons = false;
+    console.log("RESULT", response);
+    if (response.resp == "00") {
+      this.generateReference();
+      response.date = Date.now();
+      response.account_id = this.userService.getAuthId();
+      response.ref = response.retRef;
+      response.username = this.userService.getUsername();
+      response.user_id = this.userService.getAuthId();
+      response.transaction = response.txnref;
+      response.amount = this.model.actual;
+      console.log('final response ', response);
+      this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
+        res => {
+          console.log('new balance', res);
+          this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
+          this.accountService.loadMyBalance();
 
- 
-}
 
-generateReference() {
-  let date = new Date();
-  this.reference = date.getTime().toString();
-  
-}
-
-submitProCode(promo){
-  this.loading = true;
-  console.log(promo)
- let data = {promoCode : promo}
-  this.accountService.activatePromo(data).subscribe(data => {
-    console.log(data);
-    this.loading = false;
-    this.logicService.presentAlert('success', 'your account has been credited');
-    this.accountService.loadMyBalance();
-  }, err => {
-    this.loading = false;
-    this.logicService.presentAlert('not fount', err.error.message);
-    console.log(err);
-  })
-
-}
-
-showNotiAlert(header, sub, msg){
-  this.alertController.create({
-    header: header,
-    subHeader : sub,
-    message : msg,
-    buttons : ['ok']
-  }).then((alert) =>  alert.present() );
-}
-
-paymentCancel(){
-  this.showPaymentButtons = false;
-  this.generateReference();
-  // this.amountInput = null;
-}
-
- profileSection(){
-  this.router.navigate(['/tabs/profile']);
-}
-
- payNow(){
-  console.log('pay now is clicked..', this.reference); 
-}
-
-async enterAmountInput() {
-  const alert = await this.alertController.create({
-    header: 'ENTER AMOUNT',
-    inputs: [
-      {
-        name: 'amount',
-        type: 'text',
-        placeholder: 'Enter amount'
-      }],
- 
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'danger',
-        handler: (blah) => {
-          console.log('cancel amount input');
+          this.generateReference();
+        },
+        err => {
           this.generateReference()
+          this.accountService.loadMyBalance();
         }
-      }, {
-        text: 'Confirm',
-        cssClass : 'success',
-        handler: (val) => {
-          console.log(val.amount)
-          console.log(typeof(val.amount))
-          this.showPaymentButtons = true;
-          this.model.amount = val.amount+'00'
-          this.model.actual = val.amount
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-
-}
+      );
 
 
-async enterCashoutAmount() {
-  const alert = await this.alertController.create({
-    header: 'ENTER CASHOUT',
-    inputs: [
-      {
-        name: 'amount',
-        type: 'text',
-        placeholder: 'Enter amount'
-      }],
- 
-    buttons: [
-      {
-        text: 'Cancel',
-        role: 'cancel',
-        cssClass: 'danger',
-        handler: (blah) => {
-          console.log('cashout is canceled');
-        
-        }
-      }, {
-        text: 'Confirm',
-        cssClass : 'success',
-        handler: (val) => {
-          this.model.cashout = val.amount;
-          const userCashout = parseInt(this.model.cashout);
-
-          if ( userCashout < 500){
-           let  msg = "cashout must be greater that 500!";
-            this.gameSevice.presentToast(msg);
-          }else{
-
-       
-          this.accountService.cashout(this.model).subscribe(
-          res => {
-
-            console.log(res);
-            this.accountService.loadMyBalance();
-            this.cashoutSuccess();
-          },
-          err => {
-            console.log(err);
-            this.gameSevice.presentToast(err.error.message);
-          }
-        );
-      }
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}
-
-async cashoutSuccess() {
-  const alert = await this.alertController.create({
-    header: 'CASHOUT SUCCESSFUL',
-    message : `your cashout of ₦${this.model.cashout} was successful`,
-   
- 
-    buttons: [
-     {
-        text: 'Ok',
-        cssClass : 'success',
-        handler: () => {
-          console.log('ok');
-        }
-      }
-    ]
-  });
-
-  await alert.present();
-}
-
-getTransaction(){
-  this.loading = true;
-  this.accountService.myTransaction().subscribe(
-    res => {
-      this.loading = false;
-      this.transaction = res['transaction'];
-      console.log('transaction result: ', res);
-
-      console.log('transaction: ', this.transaction); 
-    },
-    err => {
-      this.loading = false;
-      console.log(err);
+    } else {
+      console.log('data')
+      this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
     }
-  );
+
+  }
+
+  closedPaymentModal(): void {
+    this.generateReference();
+    console.log('payment is closed');
+    this.model.amount = null;
+  }
+
+  generateReference() {
+    let date = new Date();
+    this.reference = date.getTime().toString();
+  }
+
+  submitProCode(promo) {
+    this.loading = true;
+    console.log(promo)
+    let data = { promoCode: promo }
+    this.accountService.activatePromo(data).subscribe(data => {
+      console.log(data);
+      this.loading = false;
+      this.logicService.presentAlert('success', 'your account has been credited');
+      this.accountService.loadMyBalance();
+    }, err => {
+      this.loading = false;
+      this.logicService.presentAlert('not fount', err.error.message);
+      console.log(err);
+    })
+
+  }
+
+  toggleShowPin(){
+    if(this.pinType === "password"){
+      this.pinType = "number"
+    } else {
+      this.pinType = "password"
+    }
+  }
+
+  showNotiAlert(header, sub, msg) {
+    this.alertController.create({
+      header: header,
+      subHeader: sub,
+      message: msg,
+      buttons: ['ok']
+    }).then((alert) => alert.present());
+  }
+
+  paymentCancel() {
+    this.showPaymentButtons = false;
+    this.generateReference();
+    // this.amountInput = null;
+  }
+
+  profileSection() {
+    this.router.navigate(['/tabs/profile']);
+  }
+
+  payNow() {
+    console.log('pay now is clicked..', this.reference);
+  }
+
+  async enterAmountInput() {
+    const alert = await this.alertController.create({
+      header: 'ENTER AMOUNT',
+      inputs: [
+        {
+          name: 'amount',
+          type: 'text',
+          placeholder: 'Enter amount'
+        }],
+
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'danger',
+          handler: (blah) => {
+            console.log('cancel amount input');
+            this.generateReference()
+          }
+        },
+        {
+          text: 'Confirm',
+          cssClass: 'success',
+          handler: (val) => {
+            console.log(val.amount)
+            console.log(typeof (val.amount))
+            this.showPaymentButtons = true;
+            this.model.amount = val.amount + '00'
+            this.model.actual = val.amount
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
+
+  async enterCashoutAmount() {
+    const alert = await this.alertController.create({
+      header: 'ENTER CASHOUT',
+      inputs: [
+        {
+          name: 'amount',
+          type: 'text',
+          placeholder: 'Enter amount'
+        }],
+
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'danger',
+          handler: (blah) => {
+            console.log('cashout is canceled');
+
+          }
+        }, {
+          text: 'Confirm',
+          cssClass: 'success',
+          handler: (val) => {
+            this.model.cashout = val.amount;
+            const userCashout = parseInt(this.model.cashout);
+
+            if (userCashout < 100) {
+              let msg = "cashout must be greater that 500!";
+              this.gameSevice.presentToast(msg);
+            } else {
+
+              this.accountService.cashout(this.model).subscribe(
+                res => {
+
+                  console.log(res);
+                  this.accountService.loadMyBalance();
+                  this.cashoutSuccess();
+                },
+                err => {
+                  console.log(err);
+                  this.gameSevice.presentToast(err.error.message);
+                }
+              );
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async cashoutSuccess() {
+    const alert = await this.alertController.create({
+      header: 'CASHOUT SUCCESSFUL',
+      message: `your cashout of ₦${this.model.cashout} was successful`,
+
+
+      buttons: [
+        {
+          text: 'Ok',
+          cssClass: 'success',
+          handler: () => {
+            console.log('ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  getTransaction() {
+    this.loading = true;
+    this.accountService.myTransaction().subscribe(
+      res => {
+        this.loading = false;
+        this.transaction = res['transaction'];
+        console.log('transaction result: ', res);
+
+        console.log('transaction: ', this.transaction);
+      },
+      err => {
+        this.loading = false;
+        console.log(err);
+      }
+    );
+  }
 }
-} 
 

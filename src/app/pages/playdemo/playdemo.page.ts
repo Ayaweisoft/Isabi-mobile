@@ -19,6 +19,8 @@ export class PlaydemoPage implements OnInit {
   @ViewChild("correct", { static: false }) correct: ElementRef;
   @ViewChild("wrong", { static: false }) wrong: ElementRef;
   gameQuestions: any[];
+  loading: boolean = false;
+  allCategory: any;
 
   lastQuestion: any;
   currentQuestion: any;
@@ -78,44 +80,6 @@ export class PlaydemoPage implements OnInit {
     filterOptions: [],
   };
 
-  public allCategory = [
-    {
-      name: "Economics",
-      participant: "150",
-      logo: "../../assets/figma/akar-icons_search.svg",
-    },
-    {
-      name: "History",
-      participant: "150",
-      logo: "../../assets/figma/fluent_history-20-filled.svg",
-    },
-    {
-      name: "Movie",
-      participant: "150",
-      logo: "../../assets/figma/bx_movie-play.svg",
-    },
-    {
-      name: "Politics",
-      participant: "150",
-      logo: "../../assets/figma/ic_outline-how-to-vote.svg",
-    },
-    {
-      name: "Science",
-      participant: "150",
-      logo: "../../assets/figma/eos-icons_science-outlined.svg",
-    },
-    {
-      name: "Sport",
-      participant: "150",
-      logo: "../../assets/figma/fluent_sport-basketball-24-regular.svg",
-    },
-    {
-      name: "Tourism",
-      participant: "150",
-      logo: "../../assets/figma/icon-park-outline_tour-bus.svg",
-    },
-  ];
-
   ngOnInit() {
     this.behaviorService.getGameAmount().subscribe(amount => {
       //console.log('see AMount', amount)
@@ -124,6 +88,21 @@ export class PlaydemoPage implements OnInit {
         this.getRemoteAmount();
       }
     })
+    this.getCategories();
+  }
+
+  getCategories() {
+    console.log('get categories');
+    this.loading = true;
+    this.gameService.getCategories().subscribe(
+      (res : { categories: any}) => {
+        this.allCategory = res?.categories;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    );
   }
 
   ionViewWillEnter() {

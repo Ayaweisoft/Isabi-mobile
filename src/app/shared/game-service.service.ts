@@ -77,7 +77,7 @@ export class GameServiceService  {
    this.timeSeconds = s < 10 ? '0' + s.toString() : s;
 
    if (t < 0) {
-    // console.log('GAME IS LIVE....');
+    console.log('GAME IS LIVE....');
     localStorage.setItem( 'GAMELIVE', 'true');
     clearInterval(this.gameTime);
     this.timeDays = '00';
@@ -86,7 +86,7 @@ export class GameServiceService  {
     this.timeSeconds = '00';
     
          } else {
-          //  console.log('GAME NOT LIVE....');
+           console.log('GAME NOT LIVE....');
            localStorage.setItem( 'GAMELIVE', 'false');
          }
   //  console.log('fake pass');
@@ -95,6 +95,7 @@ export class GameServiceService  {
      }
   
   getGameLiveStatus(){
+    console.log('game status', localStorage.getItem('GAMELIVE'));
     return localStorage.getItem('GAMELIVE');
   }
 
@@ -120,6 +121,17 @@ export class GameServiceService  {
 
   setAdminDate(date) {
     return this.http.get(environment.apiBaseUrl + `/submit-admin-date${date}`);
+  }
+
+  createCategory(data) {
+    return this.http.post(environment.apiBaseUrl + `/add-category`, data);
+  }
+
+  getCategories() {
+    return this.http.get(environment.apiBaseUrl + `/get-categories`);
+  }
+  deleteCategory(id) {
+    return this.http.delete(environment.apiBaseUrl + `/delete-category${id}`);
   }
 
   setYoutubeDate(link) {

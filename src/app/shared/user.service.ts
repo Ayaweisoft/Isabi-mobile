@@ -1,4 +1,3 @@
-
 import { BehaviorSubject, Observable } from "rxjs";
 import { AccountService } from 'src/app/shared/account.service';
 import { Injectable } from '@angular/core';
@@ -21,6 +20,7 @@ export class UserService {
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
   full_name = new BehaviorSubject<any>('');
+  is_first = new BehaviorSubject<any>('');
   rank = new BehaviorSubject<any>('');
   totalReferredCount = new BehaviorSubject<any>(0);
   networkDisconnet = false;
@@ -89,17 +89,45 @@ constructor(private http: HttpClient,
       await alert.present();
     }
 
+    
+
 
     registerUser( user) {
       return this.http.post(environment.apiBaseUrl + '/register' , user, this.noAuthHeader);
     }
 
-    // password reset
-    confirmNumber(number){
-      return this.http.get(environment.apiBaseUrl + `/confirm-user-number${number}`, this.noAuthHeader);
+    confirmEmail(email){
+      return this.http.post(environment.apiBaseUrl + `/confirm-email`, email, this.noAuthHeader);
     }
-    confirmOTP(otp) {
-      return this.http.get(environment.apiBaseUrl + `/confirm-user-otp${otp}`, this.noAuthHeader);
+
+    validateOtp(emailOtp: any){
+      return this.http.post(environment.apiBaseUrl + `/validate-otp`, emailOtp, this.noAuthHeader);
+    }
+
+    validateAccountOtp(accountOtp: any){
+      return this.http.post(environment.apiBaseUrl + `/validate-account-otp`, accountOtp);
+    }
+
+    sendAccountOtp(){
+      return this.http.get(environment.apiBaseUrl + `/send-account-otp`);
+    }
+
+
+    // password reset
+    resetPassword(email){
+      return this.http.post(environment.apiBaseUrl + `/reset-password`, email, this.noAuthHeader);
+    }
+
+    validateResetToken(resetToken) {
+      return this.http.post(environment.apiBaseUrl + `/validate-reset-token`, resetToken, this.noAuthHeader);
+    }
+
+    newPassword(model) {
+      return this.http.post(environment.apiBaseUrl + `/new-password`, model, this.noAuthHeader);
+    }
+
+    submitEvent(event){
+      return this.http.post(environment.apiBaseUrl + `/submit-event`, event);
     }
   
     postQuestion(question){
@@ -208,11 +236,6 @@ constructor(private http: HttpClient,
   
    
 
-
-     resetPassword(credentials){
-       return this.http.post(environment.apiBaseUrl + '/reset-password', credentials);
-     }
-  
       postQuestionRecord( record){
        return this.http.post(environment.apiBaseUrl +'/post-game-record', record);
      }
@@ -294,6 +317,17 @@ constructor(private http: HttpClient,
       }
      }
 
+     getWeekNumber = (currentdate: any) => {
+      let oneJan: any = new Date(currentdate.getFullYear(), 0, 1);
+      let numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
+      let result = Math.ceil((currentdate.getDay() + 1 + numberOfDays) / 7);
+      return result;
+    };
+
+    getUserDetails(id: any){
+      return this.http.get(environment.apiBaseUrl + '/get-user' + id);
+    }
+
     setProfilePicture(pic: any){
       this.profilePic.next(pic);
     }
@@ -326,6 +360,26 @@ constructor(private http: HttpClient,
       })
     }
 
+    loadIsFirst(){
+      this.http.get(environment.apiBaseUrl + '/check-is-first')
+      .subscribe(value => {
+        this.setIsFirst(value['isFirst'])
+        console.log('isFirst ', this.is_first.getValue())
+      })
+    }
+
+    setIsFirst(name: string){
+      this.is_first.next(name)
+    }
+
+    checkIsFirst(): BehaviorSubject<any> {
+      return this.is_first;
+    }
+
+    toggleIsFirst(){
+      return this.http.get(environment.apiBaseUrl + '/toggle-is-first');
+    }
+
     setFullname(name: string){
       this.full_name.next(name)
     }
@@ -338,7 +392,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-full-name')
       .subscribe(value => {
         this.setFullname(value['fullname'])
-        console.log('Update username ',this.full_name.getValue())
+        console.log('Update username ',this.full_name.getValue());
       })
     }
 

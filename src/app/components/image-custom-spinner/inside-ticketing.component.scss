@@ -1,0 +1,143 @@
+
+.main-content {
+	height: 100%;
+	width: 100%;
+	background-color: #fafafa;
+	display: flex;
+	flex-direction: column;
+
+    .ticket-container{	
+		height: fit-content;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+
+		.head-section{
+            position: relative;
+            background-color: #348A40;
+            height: fit-content;
+            background-image: url("../../../assets/figma/unsplash_XIIsv6AshJY.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            padding-top: 0;
+            padding-bottom: 20px;
+        }
+        
+        .ticket-head-section{
+            height: 100px;
+        }
+    
+        .ticket-section{
+            background-color: #fafafa;
+            z-index: 100;
+            margin-top: -30px;
+            border-top-right-radius: 30px;
+            border-top-left-radius: 30px;
+            display: flex;
+            width: 100%;
+            gap: 20px;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10px;
+
+            .ticket-segment{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 20px;
+                width: 80%;
+
+                .ticket-card{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 5px;
+                    border-radius: 10px;
+                    background-color: #EEF7EE;
+
+                    .ticket-card-top{
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        padding: 10px;
+                        justify-content: space-between;
+
+                        .ticket-card-top-delete{
+
+                        }
+
+                        .ticket-card-top-title{
+                            font-weight: 600;
+                            font-size: 14px;
+                        }
+
+                        .ticket-card-top-cart{
+                            position: relative;
+
+                            .ticket-purchased{
+                                position: absolute;
+                                top: -8px;
+                                right: -3px;
+                                color: #348a40;
+                                font-weight: 700;
+                            }
+                        }
+                    }
+
+                    .ticket-card-pic{
+                        display: grid;
+                        place-items: center;
+
+                        img{
+                            width: 80%;
+                            
+                        }
+                    }
+
+                    .ticket-card-bottom{
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        margin-top: 10px;
+                        gap: 9px;
+                        margin-bottom: 10px;
+                        width: 100%;
+
+                        .ticket-card-bottom-price{
+                            font-weight: 600;
+                            font-size: 14px;
+                        }
+
+                        .ticket-card-bottom-button{
+                            width: 100%;  
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            button{
+                                width: 60%;
+                                outline: none;
+                                border-radius: 10px;
+                                font-size: 12px;
+                                font-weight: 500;
+                                color: #fff;
+                                height: 30px;
+                                background-color: #348A40;
+                            }
+                            
+                        }
+                    }
+
+                }
+            }
+            
+        }
+	}
+}
+

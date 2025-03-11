@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    
+
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons> <div class="row d-flex justify-content-center">
-      <img class="rounded-top"  src="../../../assets/icon/Logoicon.png">
-    </div> 
+    </ion-buttons>
+    <div class="row d-flex justify-content-center">
+      <img class="rounded-top" src="../../../assets/icon/Logoicon.png">
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -21,138 +22,173 @@
   </ion-segment-button>
   <ion-segment-button value="video_link">
     <ion-icon name="play"></ion-icon>
-        <ion-label>Video link</ion-label>
+    <ion-label>Video link</ion-label>
   </ion-segment-button>
-  <ion-segment-button [routerLink]="['/tabs/admin-event']"  value="create_event">
+  <ion-segment-button [routerLink]="['/tabs/admin-event']" value="create_event">
     <ion-icon name="information-circle"></ion-icon>
-        <ion-label>Event</ion-label>
+    <ion-label>Event</ion-label>
   </ion-segment-button>
   <ion-segment-button value="game_amount">
     <ion-icon name="game-controller"></ion-icon>
-        <ion-label>Amount</ion-label>
+    <ion-label>Amount</ion-label>
   </ion-segment-button>
   <ion-segment-button value="promo_code">
     <ion-icon name="cash"></ion-icon>
-        <ion-label>Promo</ion-label>
+    <ion-label>Promo</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="game_category">
+    <ion-icon name="list-outline"></ion-icon>
+    <ion-label>Game Category</ion-label>
   </ion-segment-button>
 </ion-segment>
 
-<ion-content>
-  <!-- [routerLink]="['/tabs/admin-event']" -->
+<ion-content class="h-full">
 
-    <br>
-    <ion-badge class="text-center">{{gameService.applicationDate}} </ion-badge>
-    
-    <div *ngIf=" segment ==='app_date'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
-      <form #dateform name="dateform" (submit)="submitDate(dateform)">
-        <ion-item>
-            <ion-label  class="ml-3"  
-             position="floating">enter date in format</ion-label>
-          <ion-input #setdate name="setdate" [(ngModel)]="model.date" placeholder="jan 5, 2019 06:00:00"></ion-input>
-         </ion-item>
-         <ion-button type="submit"> <ion-icon name="checkmark" size="large"></ion-icon> </ion-button>
-        </form>
+  <br>
+  <ion-badge class="text-center">{{gameService.applicationDate}} </ion-badge>
 
-         <!-- <p class="text-white text-center font-weight-bold">jan 5, 2019 06:00:00</p> -->
-         <ion-button size="large" [disabled]="!setdate.value"
-          (click)="activateDate()">ACTIVATE </ion-button>
-    </div>
+  <div *ngIf="segment ==='app_date'" style="background-color: darkgreen; border: 3px black;" class="p-5 ">
+    <form #dateform name="dateform" (submit)="submitDate(dateform)">
+      <ion-item>
+        <ion-label class="ml-3" position="floating">enter date in format</ion-label>
+        <ion-input #setdate name="setdate" [(ngModel)]="model.date" placeholder="jan 5, 2019 06:00:00"></ion-input>
+      </ion-item>
+      <ion-button type="submit"> <ion-icon name="checkmark" size="large"></ion-icon> </ion-button>
+    </form>
+
+    <!-- <p class="text-center text-white font-weight-bold">jan 5, 2019 06:00:00</p> -->
+    <ion-button size="large" [disabled]="!setdate.value" (click)="activateDate()">ACTIVATE </ion-button>
+  </div>
 
 
-    <!-- video form -->
-    <div *ngIf=" segment === 'video_link'">
+  <!-- video form -->
+  <div *ngIf="segment === 'video_link'">
     <form #youtubeform name="youtubeform" (submit)="submityoutubeLink(youtubeform)">
       <ion-item>
-          <ion-label  class="ml-3"  
-           position="floating">enter date in format</ion-label>
+        <ion-label class="ml-3" position="floating">enter date in format</ion-label>
         <ion-input #youtubeUrl name="youtubeUrl" [(ngModel)]="model.youtubeUrl" placeholder="https://....."></ion-input>
-       </ion-item>
-       <ion-button type="submit"> submit youtube link </ion-button>
-      </form>
-    </div>
-      <!-- end video form -->
+      </ion-item>
+      <ion-button type="submit"> submit youtube link </ion-button>
+    </form>
+  </div>
+  <!-- end video form -->
 
-      <!-- sms section -->
-      <div *ngIf=" segment === 'sms'" style="padding-top: 40px;">
-        <form #smsform id="smsform" name="youtubeform" (submit)="submitSms(smsform)">
-          <ion-item >
-            <textarea rows="5" cols="40" placeholder="Enter sms here..." #sms name="sms" [(ngModel)]="model.sms" placeholder="Enter sms here" ></textarea>
-           </ion-item>
-           <ion-button type="submit" [disabled]="!sms.value"> SEND</ion-button>
-          </form>
-        </div>
-        <!-- end sms section -->
+  <!-- sms section -->
+  <div *ngIf="segment === 'sms'" style="padding-top: 40px;">
+    <form #smsform id="smsform" name="youtubeform" (submit)="submitSms(smsform)">
+      <ion-item>
+        <textarea rows="5" cols="40" placeholder="Enter sms here..." #sms name="sms" [(ngModel)]="model.sms"
+          placeholder="Enter sms here"></textarea>
+      </ion-item>
+      <ion-button type="submit" [disabled]="!sms.value"> SEND</ion-button>
+    </form>
+  </div>
+  <!-- end sms section -->
 
-        <div *ngIf="segment === 'game_amount'">
+  <div *ngIf="segment === 'game_amount'">
 
-          <h3>Amount : {{currentAmount | currency:'₦'}} </h3>
-          <ion-card color="success"> 
-            <ion-item class="p-5">
-              <ion-label position="floating" >Game session amount</ion-label>
-              <ion-input  [(ngModel)]="amountModel.amount" type="number" ></ion-input>
+    <h3>Amount : {{currentAmount | currency:'₦'}} </h3>
+    <ion-card color="success">
+      <ion-item class="p-5">
+        <ion-label position="floating">Game session amount</ion-label>
+        <ion-input [(ngModel)]="amountModel.amount" type="number"></ion-input>
+      </ion-item>
+
+      <div class="ion-text-center">
+        <ion-button [disabled]="!amountModel.amount" (click)="submitGameAmount()">
+          Submit
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+
+  <!--  promo code -->
+  <div *ngIf="segment === 'promo_code'">
+
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="10" offset="1">
+
+          <ion-card color="success">
+            <ion-item class="p-1">
+              <ion-label position="floating"> amount</ion-label>
+              <ion-input [(ngModel)]="promoCode.amount" type="number"></ion-input>
+            </ion-item>
+            <ion-item class="p-1">
+              <ion-label position="floating"> code</ion-label>
+              <ion-input [(ngModel)]="promoCode.promoCode" type="text"></ion-input>
+            </ion-item>
+            <ion-item class="p-1">
+              <ion-label position="floating"> slot</ion-label>
+              <ion-input [(ngModel)]="promoCode.promoSlot" type="number"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>start </ion-label>
+              <ion-input [(ngModel)]="promoCode.startDate" type="date"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label>end </ion-label>
+              <ion-input [(ngModel)]="promoCode.endDate" type="date"></ion-input>
             </ion-item>
 
             <div class="ion-text-center">
-              <ion-button [disabled]="!amountModel.amount" (click)="submitGameAmount()">
+              <ion-button [disabled]="!promoCode.promoCode" (click)="submitPromo()">
                 Submit
               </ion-button>
             </div>
           </ion-card>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </div>
+  <!-- end promo code -->
+
+  <!-- game category -->
+  <div *ngIf="segment ==='game_category'" class="game-categories"
+    style="background-color: darkgreen; border: 3px black;">
+    <div class="game-category-section" *ngIf="categories.length > 0">
+      <div class="game-category" *ngFor="let item of categories">
+        <div class="game-category-content">
+          <div class="game-category-logo">
+            <img [src]="item.icon" alt="icon">
+          </div>
+          <div class="game-category-desc">
+            <div class="game-category-name">
+              {{ item.name }}
+            </div>
+          </div>
         </div>
+        <ion-icon class="game-category-delete" (click)="deleteCategory(item)" name="trash-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="game-category-section-empty" *ngIf="categories.length == 0">
+      <p>No Categories Found</p>
+    </div>
 
-        <!--  proo code -->
-        <div *ngIf="segment === 'promo_code'">
+    <form #category name="category" class="form" (submit)="addCategory(category)">
+      <ion-item>
+        <ion-label class="ml-3" position="floating">Enter category name</ion-label>
+        <ion-input #categoryname name="categoryname" [(ngModel)]="game_category.name"
+          placeholder="category name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <input id="single-image" accept="image/*" #singleImage (change)="addImagesFirebase($event)" type="file"
+          name="name" />
+      </ion-item>
+      <ion-button type="submit">Submit</ion-button>
+    </form>
+  </div>
 
-          <ion-grid fixed>
-            <ion-row>
-              <ion-col size="10" offset="1">
 
-                <ion-card color="success"> 
-                  <ion-item class="p-1">
-                    <ion-label position="floating" > amount</ion-label>
-                    <ion-input  [(ngModel)]="promoCode.amount" type="number" ></ion-input>
-                  </ion-item>
-                  <ion-item class="p-1">
-                    <ion-label position="floating" > code</ion-label>
-                    <ion-input  [(ngModel)]="promoCode.promoCode" type="text" ></ion-input>
-                  </ion-item>
-                  <ion-item class="p-1">
-                    <ion-label position="floating" > slot</ion-label>
-                    <ion-input  [(ngModel)]="promoCode.promoSlot" type="number" ></ion-input>
-                  </ion-item>
-                  <!-- <ion-item class="p-1">
-                    <ion-label position="floating" > code </ion-label>
-                    <ion-input  [(ngModel)]="promoCode.promoCode" type="number" ></ion-input>
-                 
-                  </ion-item> -->
-                  <ion-item>
-                    <ion-label>start </ion-label>
-                    <ion-input  [(ngModel)]="promoCode.startDate" type="date" ></ion-input>
-                  </ion-item>
-                  <ion-item>
-                    <ion-label>end </ion-label>
-                    <ion-input  [(ngModel)]="promoCode.endDate" type="date" ></ion-input>
-                  </ion-item>
-      
-                  <div class="ion-text-center">
-                    <ion-button [disabled]="!promoCode.promoCode" (click)="submitPromo()">
-                      Submit
-                    </ion-button>
-                  </div>
-                </ion-card>
-
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        
-        </div>
-       
-
-    <div *ngIf="loading">
+  <!-- <div *ngIf="loading" class="fixed top-0 left-0 w-full h-full">
       <ion-spinner slot="middle"></ion-spinner>
       <ion-progress-bar type="indeterminate"></ion-progress-bar>
-      <p class="p-5 bg-dark text-white">loading </p>
-    </div>
+      <p class="p-5 text-white bg-dark">loading </p>
+    </div> -->
+  <loading-spinner *ngIf="loading"></loading-spinner>
+
 
 
 

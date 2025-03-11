@@ -1,3 +1,4 @@
+import { GameServiceService } from 'src/app/shared/game-service.service';
 import { ForgetpasswordComponent } from '../forgetpassword/forgetpassword.component';
 import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 import { AccountComponent } from '../account/account.component';
@@ -14,13 +15,15 @@ import { NgForm } from '@angular/forms';
 export class AdminUploadPage implements OnInit {
   public catType: any[];
   loading: boolean;
+  allCategory: any;
 
 
 
   constructor(private userService: UserService,
               public toastController: ToastController,
               public popoverController: PopoverController,
-              public alertController: AlertController) { }
+              public alertController: AlertController,
+              public gameService: GameServiceService ) { }
 
               
   questionModel = {
@@ -41,6 +44,21 @@ export class AdminUploadPage implements OnInit {
 
   ngOnInit() {
     this.loading = false;
+    this.getCategories();
+  }
+
+  getCategories() {
+    console.log('get categories');
+    this.loading = true;
+    this.gameService.getCategories().subscribe(
+      (res : { categories: any}) => {
+        this.allCategory = res?.categories;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    );
   }
 
   async presentNavigation() {
@@ -56,7 +74,6 @@ export class AdminUploadPage implements OnInit {
   submit(form: NgForm){
     this.loading = true;
     console.log(form.value);
-    console.log(this.questionModel);
     this.questionModel.question = form.value.question;
     this.questionModel.answer = form.value.answer;
     this.questionModel.option1 = form.value.option1;
@@ -64,6 +81,9 @@ export class AdminUploadPage implements OnInit {
     this.questionModel.option3 = form.value.option3;
     this.questionModel.option4 = form.value.option4;
     this.questionModel.tip = form.value.tip;
+    console.log('model: ', this.questionModel);
+    console.log('modelCateg: ', this.questionModel.category);
+
     this.userService.postQuestion(this.questionModel).subscribe(
         response => {
           this.loading = false;
@@ -116,8 +136,8 @@ export class AdminUploadPage implements OnInit {
   }
 
   selectChange( $event) {
+    console.log('event', $event);
     this.questionModel.category = $event;
-      }
-
-
+    console.log('categ', this.questionModel.category);
+  }
 }

@@ -1,3 +1,4 @@
+import { GameServiceService } from 'src/app/shared/game-service.service';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
 import { MenuController, AlertController, PopoverController } from '@ionic/angular';
@@ -20,11 +21,13 @@ export class ManageQuestionsPage implements OnInit {
   allLive_section : boolean = false;
   search_section : boolean = false;
   manage_section : boolean = true;
+  allCategory: any = []; 
 
   constructor(private userService: UserService,
               public menu: MenuController,
               private popoverController: PopoverController,
               public alertController: AlertController,
+              public gameService: GameServiceService,
               private router: Router) {
                 this.getAllQuestions();
                 this.getLiveQuestions();
@@ -53,6 +56,21 @@ export class ManageQuestionsPage implements OnInit {
     this.showContent = true;
     this.showForm = false;
     this.questionsOutPut = 0;
+    this.getCategories()
+  }
+
+  getCategories() {
+    console.log('get categories');
+    this.loading = true;
+    this.gameService.getCategories().subscribe(
+      (res : { categories: any}) => {
+        this.allCategory = res?.categories;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    );
   }
 
   selectChange( $event) {

@@ -19,6 +19,7 @@ import { AdminGuard } from './auth/admin.guard';
 import { AccountComponent } from './pages/account/account.component';
 import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 import { RouteReuseStrategy } from '@angular/router';
 // import { Facebook , FacebookOriginal} from '@ionic-native/facebook';
 // import {MatIconModule} from '@angular/material/icon';
@@ -27,7 +28,7 @@ import { SplashComponent } from './components/splash/splash.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // import { environment } from 'src/environments/environment';
 // import { Socket } from 'ngx-socket-io';
-// const config: SocketIoConfig = { url: 'https://i-sabi.herokuapp.com/api:8000', options: {} };
+// const config: SocketIoConfig = { url: 'https://i-sabi-server.onrender.com/api:8000', options: {} };
 // const config: SocketIoConfig = { 
 //   url: 'http://localhost:8000',
 //   options: {} };
@@ -57,17 +58,19 @@ import { ImageCustomSpinnerComponent } from './components/image-custom-spinner/i
 import { FirebaseService } from './services/firebase.service';
 import { InsideTicketingComponent } from './components/inside-ticketing/inside-ticketing.component';
 import { InsideTicketAddTicketComponent } from './components/inside-ticket-add-ticket/inside-ticket-add-ticket.component';
-import { ManageEventComponent } from './components/manage-event/manage-event.component';
+import { AddTicketComponent } from './components/add-ticket/add-ticket.component';
 import { BuyTicketComponent } from './components/buy-ticket/buy-ticket.component';
 import { TicketItemComponent } from './components/ticket-item/ticket-item.component';
 import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
+// import { NgOtpInputModule } from 'ng-otp-input';
 import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
 
 const config: SocketIoConfig = { url: environment.socketsUrl, options: {
   path: "/live/",
+  query: {id: "id"}
 } };
 
 
@@ -94,7 +97,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     ImageCustomSpinnerComponent,
     InsideTicketingComponent,
     InsideTicketAddTicketComponent,
-    ManageEventComponent,
+    AddTicketComponent,
     TicketItemComponent,
     WebTicketComponent,
     SafeResourceUrlPipe, 
@@ -106,6 +109,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     NgInterswitchModule,
@@ -114,6 +118,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AppRoutingModule,
+    // NgOtpInputModule
     
   ],
   schemas: [ NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA],

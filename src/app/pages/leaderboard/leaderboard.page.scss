@@ -177,6 +177,7 @@ h2 {
       .person-name {
         font-weight: bold;
         font-size: 15px;
+        // text-transform: capitalize;
       }
 
       .record {
@@ -242,5 +243,16 @@ h2 {
       width: 35px;
       background-color: #a7a7a7;
     }
+  }
+
+  button{
+    width: 100%;
+    padding: 5px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.7rem;
+    background-color: #348a40;
+    border-radius: 5px;
+    outline: none;
   }
 }

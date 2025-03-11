@@ -1,0 +1,186 @@
+
+.main-content {
+	height: 100%;
+	width: 100%;
+	background-color: #fafafa;
+	display: flex;
+	flex-direction: column;
+
+    .event-container{	
+		height: fit-content;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+
+		.head-section{
+            position: relative;
+            background-color: #348A40;
+            height: fit-content;
+            background-image: url("../../../assets/figma/unsplash_XIIsv6AshJY.svg");
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            padding-top: 0;
+            padding-bottom: 20px;
+        }
+        
+        .event-head-section{
+            height: 100px;
+        }
+    
+        .event-section{
+            background-color: #fafafa;
+            z-index: 100;
+            margin-top: -30px;
+            border-top-right-radius: 30px;
+            border-top-left-radius: 30px;
+            display: flex;
+            width: 100%;
+            gap: 0.6rem;
+            height: 100%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 10px;
+
+			.event-title{
+				font-weight: 600;
+				font-size: 1.4rem;
+				color: #000;
+				margin: 0;
+			}
+
+			.nav{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				padding: 0.2rem 1.2rem;
+				align-items: center;
+
+				.nav-option{
+					color: #7e7e7e;
+					font-size: 1rem;
+					font-weight: 400;
+					background: transparent;
+					outline: none;
+				
+					&.active{
+						color: black;
+						font-weight: 600;
+					}
+
+					:hover{
+						cursor: pointer;
+					}
+				}
+			}
+
+            .event-segment{
+                position: relative;
+                display: grid;
+				grid-template-columns: repeat(3, 1fr);
+                place-items: center;
+                gap: 20px;
+				padding: 0 1rem;
+                width: 100%;
+                @media screen and (max-width: 768px){
+                        grid-template-columns: repeat(1, 1fr);
+                }
+
+                .event-card{
+                    display: flex;
+					justify-content: flex-start;
+					gap: 1rem;
+					padding: 5px;
+					width: 100%;
+					border-radius: 10px;
+					background-color: #EEF7EE;
+					align-items: center;
+					position: relative;
+
+					.delete-icon{
+						position: absolute;
+						right: 0;
+						top: 0;
+					}
+
+                    .event-card-pic{
+						border-radius: 0.5rem;
+						height: 8rem;
+						width: 100%;
+						overflow: hidden;
+						
+                        img{				
+                            width: 100%;
+							height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+					.event-card-details{
+						display: flex;
+						width: 100%;
+						flex-direction: column;
+						justify-content: center;
+						align-items: flex-start;
+						gap: 0.4rem;
+
+						.event-card-name{
+							font-weight: 600;
+							font-size: 0.75rem;
+							color: #000;
+							line-height: 1.1;
+							margin: 0;
+						}
+
+						ul{
+							margin: 0;
+							padding-left: 1rem;
+
+							li{
+								font-weight: 400;
+								font-size: 0.55rem;
+								color: #000;
+							}
+						}
+						
+						.event-card-company{
+							font-weight: 400;
+							font-size: 0.55rem;
+							color: #000;
+							line-height: 1.1;
+							margin: 0;
+						}
+	
+						.event-card-date{
+							font-weight: 600;
+							font-size: 0.55rem;
+							color: #000;
+							line-height: 1.1;
+							margin: 0;
+						}
+	
+						button{
+							outline: none;
+							padding: 0.35rem 0.7rem;
+							border-radius: 10px;
+							font-size: 0.5rem;
+							font-weight: 500;
+							color: #fff;
+							height: 30px;
+							background-color: #348A40;
+						}
+					}
+
+
+                }
+            }
+            
+        }
+	}
+}
+
+//media query desktop
+
+
+

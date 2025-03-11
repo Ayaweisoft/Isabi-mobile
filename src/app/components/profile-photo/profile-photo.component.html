@@ -1,5 +1,5 @@
 <div class="{{className}}">
-  <div class="profile-pic">
+  <div class="profile-pic" (click)="handleClick()">
     <img [src]="image" alt="">
   </div>
   <p class="profile-name">{{ userNameVisible === true ? username : ''}}</p>

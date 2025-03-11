@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { AccountNewPageRoutingModule } from './account-new-routing.module';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
+// import { NgOtpInputModule } from 'ng-otp-input';
 
 import { AccountNewPage } from './account-new.page';
 import {ProfilePhotoComponent} from '../../components/profile-photo/profile-photo.component'
@@ -17,6 +18,7 @@ import {ProfilePhotoComponent} from '../../components/profile-photo/profile-phot
     IonicModule,
     AccountNewPageRoutingModule,
     NgInterswitchModule,
+    // NgOtpInputModule
   ],
   declarations: [AccountNewPage, ProfilePhotoComponent]
 })

@@ -21,7 +21,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   @ViewChild('correct', {static : false}) correct: ElementRef;
   @ViewChild('wrong', {static : false}) wrong: ElementRef;
   gameQuestions: any [];
-   
+  loading: boolean = false;
     lastQuestion : any;
     currentQuestion: any;
     startGame = false;
@@ -48,6 +48,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     btnColor2 ="success";
     btnColor3 ="success";
     btnColor4 ="success";
+    allCategory: any;
 
 
 
@@ -85,43 +86,43 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
 
-  public allCategory = [
-    {
-      name: "Economics",
-      participant: "150",
-      logo: "../../assets/figma/akar-icons_search.svg",
-    },
-    {
-      name: "History",
-      participant: "150",
-      logo: "../../assets/figma/fluent_history-20-filled.svg",
-    },
-    {
-      name: "Movie",
-      participant: "150",
-      logo: "../../assets/figma/bx_movie-play.svg",
-    },
-    {
-      name: "Politics",
-      participant: "150",
-      logo: "../../assets/figma/ic_outline-how-to-vote.svg",
-    },
-    {
-      name: "Science",
-      participant: "150",
-      logo: "../../assets/figma/eos-icons_science-outlined.svg",
-    },
-    {
-      name: "Sport",
-      participant: "150",
-      logo: "../../assets/figma/fluent_sport-basketball-24-regular.svg",
-    },
-    {
-      name: "Tourism",
-      participant: "150",
-      logo: "../../assets/figma/icon-park-outline_tour-bus.svg",
-    },
-  ];
+  // public allCategory = [
+  //   {
+  //     name: "Economics",
+  //     participant: "150",
+  //     logo: "../../assets/figma/akar-icons_search.svg",
+  //   },
+  //   {
+  //     name: "History",
+  //     participant: "150",
+  //     logo: "../../assets/figma/fluent_history-20-filled.svg",
+  //   },
+  //   {
+  //     name: "Movie",
+  //     participant: "150",
+  //     logo: "../../assets/figma/bx_movie-play.svg",
+  //   },
+  //   {
+  //     name: "Politics",
+  //     participant: "150",
+  //     logo: "../../assets/figma/ic_outline-how-to-vote.svg",
+  //   },
+  //   {
+  //     name: "Science",
+  //     participant: "150",
+  //     logo: "../../assets/figma/eos-icons_science-outlined.svg",
+  //   },
+  //   {
+  //     name: "Sport",
+  //     participant: "150",
+  //     logo: "../../assets/figma/fluent_sport-basketball-24-regular.svg",
+  //   },
+  //   {
+  //     name: "Tourism",
+  //     participant: "150",
+  //     logo: "../../assets/figma/icon-park-outline_tour-bus.svg",
+  //   },
+  // ];
 
   model = {
     filterOptions : [
@@ -137,12 +138,35 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.getRemoteAmount();
       }
     })
+    this.getCategories();
+    this.gameLiveStatusString = this.gameService.getGameLiveStatus();
+    console.log('Game Status' + this.gameLiveStatusString)
+    if(this.gameLiveStatusString === 'true'){ 
+      this.gameLiveStatus = true;
+    } else {
+      this.gameLiveStatus = false;
+    }
 
+  }
+
+  getCategories() {
+    console.log('get categories');
+    this.loading = true;
+    this.gameService.getCategories().subscribe(
+      (res : { categories: any}) => {
+        this.allCategory = res?.categories;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    );
   }
 
   getRemoteAmount(){
     console.log('getting remote amount');
     this.loadingGame =  true;
+    this.gameService.getAdminDate();
     this.gameService.getGameAmount().subscribe(res => {
       if(res.data?.amount){
         this.behaviorService.setGameAmount(res.data?.amount);
@@ -233,27 +257,30 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   setCategory(category: any){
-    this.gameCategory = category;
-    this.showModal = true;
+    if(this.gameLiveStatus){
+      console.log('game status: ', this.gameLiveStatus)
+      this.gameCategory = category;
+      this.showModal = true;
+    } else {
+      console.log('game status: ', this.gameLiveStatus)
+      this.logicService.presentAlert('Game Alert!!!','Game is not live yet');
+    } 
   }
 
   playByCategory(category){
-    if(this.gameLiveStatus){
-      // this.loadingGame = true;
-      this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
-        res => {
-          // this.loadingGame = false;
-          // this.startGame = true;
-          this.gameQuestions = res['questions'];
-          // console.log(this.gameQuestions);
-          this.lastQuestion =  this.gameQuestions.length - 1;
-          this.currentQuestion  = this.gameQuestions[this.runningQuestion];
-          // this.startQuestion();
-        }
-      );
-    } else {
-      this.logicService.presentAlert('Game Alert!!!','Game is not live yet');
-    }     
+    // this.loadingGame = true;
+    this.playCategory =  this.userService.playByCategory(category.toLowerCase()).subscribe(
+      res => {
+        // this.loadingGame = false;
+        // this.startGame = true;
+        console.log({res})
+        this.gameQuestions = res['questions'];
+        // console.log(this.gameQuestions);
+        this.lastQuestion =  this.gameQuestions.length - 1;
+        this.currentQuestion  = this.gameQuestions[this.runningQuestion];
+        // this.startQuestion();
+      }
+    );    
   }
 
   playWithBalance(){

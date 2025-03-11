@@ -25,6 +25,7 @@ export class AppComponent {
   image: any;
   username: String;
   bonus: any;
+  userCount: number;
   authenticate = false;
   loading: boolean = true;
   public appPages = [
@@ -89,7 +90,7 @@ export class AppComponent {
     // {title:'Admin dashboard', url:'/admin-dash'},
 
   ];
-  userCount: number;
+  
 
   constructor(
     private platform: Platform,
@@ -138,14 +139,34 @@ export class AppComponent {
   ngOnInit(){
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
-    const userID = this.UserService.getAuthId()
-
+       const userID = this.UserService.getAuthId()
+    console.log("E nginit")
     this.SocketService.userConnected(userID);
-  
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
   }
   ionViewWillEnter(){
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
+       const userID = this.UserService.getAuthId()
+    console.log("E ion enter")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
   }
 
 
@@ -160,6 +181,18 @@ export class AppComponent {
       this.AccountService.getAccountBonus().subscribe(bon =>  this.bonus =  bon);
       console.log(this.bonus);
       
+      const userID = this.UserService.getAuthId()
+    console.log("E init")
+    this.SocketService.userConnected(userID);
+    this.SocketService.test(userID);
+    this.SocketService.getConnectedUsers().subscribe(users => {
+      this.userCount = users;
+      console.log(this.userCount, "userCount");
+    });
+    this.SocketService.getUserDisconnected().subscribe(user => {
+      this.userCount = user.length;
+      console.log(this.userCount, "userCount");
+    });
         // this.localNotifications.on('trigger').subscribe( res => {
         //   console.log('alert Trigger 2', res );
         //   let msg = res.data ? res.data.mydata : '';

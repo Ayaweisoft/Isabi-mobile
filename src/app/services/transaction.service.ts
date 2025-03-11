@@ -10,7 +10,7 @@ export class TransactionService {
   merchant_code = 'MX46047';
   pay_item_id  = 'Default_Payable_MX46047';
   site_redirect_url  = ''; 
-  // site_redirect_url  = 'https://i-sabi.heroku.com'; 
+  // site_redirect_url  = 'https://i-sabi-server.onrender.com'; 
   txn_ref  = ''; 
   amount  =  undefined;
   currency  =  '566';

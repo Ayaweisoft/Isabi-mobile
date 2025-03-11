@@ -1,5 +1,7 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import { UserService } from '../../shared/user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'profile-photo',
@@ -16,7 +18,7 @@ export class ProfilePhotoComponent implements OnInit {
   loading: boolean = true;
   image: any;
 
-  constructor(public userService: UserService,) {
+  constructor(public userService: UserService, private router: Router) {
     this.userService.loadProfilePicture();
     this.userService.getProfilePicture().subscribe(pic => this.image = pic );
     this.userService.getUsername().subscribe(name => this.username = name);
@@ -30,5 +32,10 @@ export class ProfilePhotoComponent implements OnInit {
   //   this.getProfilePic();
   //   this.username = this.userService.getUsername();
   // }
+
+  handleClick() {
+    //redirect to profile page
+    this.router.navigate(['/tabs/profile']);
+  }
 
 }

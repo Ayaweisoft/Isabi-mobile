@@ -27,15 +27,16 @@
         <!-- select filter -->
         <ion-item  *ngIf="showContent">
           <ion-label>Filter</ion-label>
-          <ion-select interface="popover" (ngModelChange)="selectChange($event)" [(ngModel)]="model.filterOptions">
-            <ion-select-option value="economics">Economics</ion-select-option>
+          <ion-select (ngModelChange)="selectChange($event)" [(ngModel)]="model.filterOptions">
+            <ion-select-option *ngFor="let item of allCategory" [value]="item.name.toLowerCase()">{{item.name}}</ion-select-option>
+            <!-- <ion-select-option value="economics">Economics</ion-select-option>
             <ion-select-option value="sport">Sport</ion-select-option>
             <ion-select-option value="movie">Movie</ion-select-option>
             <ion-select-option value="science">Science</ion-select-option>
             <ion-select-option value="history">History</ion-select-option>
             <ion-select-option value="politics">Politics</ion-select-option>
             <ion-select-option value="arts">Art</ion-select-option>
-            <ion-select-option value="tourism">Tourism</ion-select-option>
+            <ion-select-option value="tourism">Tourism</ion-select-option> -->
           </ion-select>
         </ion-item>
  

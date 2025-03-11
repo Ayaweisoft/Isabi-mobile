@@ -1,0 +1,108 @@
+<ion-content>
+  <div class="main-content">
+    <div class="onboard-event-container">
+      <!-- head section -->
+      <div class="head-section">
+        <div class="header">
+          <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <profile-photo [className]="'profile-header'"></profile-photo>
+        </div>
+      </div>
+      <div class="onboard-event-section">
+        <form (submit)="finalize($event)" ngNativeValidate>
+          <div>
+            <h3 class="section-title">Event Details</h3>
+            <div class="grid">
+              <input required type="text" name="eventName" [(ngModel)]="onboardingForm.eventName" id="eventName" placeholder="Enter Name">
+              <input required type="text" name="eventLocation" [(ngModel)]="onboardingForm.eventLocation" id="eventLocation" placeholder="Enter Location">
+              <!-- <input  type="text" id="eventType" > -->
+              <select name="eventType" id="eventType" placeholder="Select Event Type" required [(ngModel)]="onboardingForm.eventType">
+                <option value="" disabled selected style="color: gray;">Select Event Type</option>
+                <option value="TICKETING">TICKETING</option>
+                <option value="FORM-SALES">FORM SALES</option>
+                <option value="VOTING">VOTING</option>
+              </select>
+              <div class="date-time">
+                <div class="date">
+                  <input required type="text" name="startDate" [(ngModel)]="onboardingForm.startDate" id="startDate" placeholder="Date" onfocus="(this.type='date')">
+                  <img class="timed" src="../../../assets/figma/calender.svg" alt="">
+                </div>
+                <div class="time">
+                  <input required type="text" name="startTime" [(ngModel)]="onboardingForm.startTime" id="startTime" placeholder="Time" onfocus="(this.type='time')">
+                  <img class="timed" src="../../../assets/figma/clock.svg" alt="">
+                </div>
+              </div>
+              <input required type="text" name="companyName" [(ngModel)]="onboardingForm.companyName" id="companyName" placeholder="Enter company Name">
+            </div>
+            <textarea name="aboutEvent" [(ngModel)]="onboardingForm.aboutEvent" id="aboutEvent" cols="30" rows="3" placeholder="Event Description"></textarea>
+          </div>
+          <div>
+            <h3 class="section-title">Add Cover Photo</h3>
+            <label *ngIf="!photo" for="image_url" class="cover-photo">
+              <img src="../../../assets/figma/add.svg" alt="">
+            </label>
+            <img class="cover_img" *ngIf="photo" [src]="photo" alt=""  onclick="document.getElementById('image_url').click();">
+            <input required type="file" name="image_url" id="image_url" (change)="addImagesFirebase($event)">
+          </div>
+          <div>
+            <h3 class="section-title">Add Tickets</h3>
+            <div class="tickets">
+              <div *ngFor="let ticket of onboardingForm.tickets">
+                <div class="ticket_img-div">
+                  <img class="ticket_img" [src]="ticket.image_url" alt="">
+                  <div class="ticket_data">
+                    <span>{{ticket.ticket_type}}</span>
+                    <span>{{ticket.amount}}</span>
+                  </div>
+                  <span class="remove-ticket" (click)="removeTicket($event, ticket.ticket_type)" value="ticket.ticket_type">
+                    <img src="../../../assets/figma/close.svg" alt="">
+                  </span>
+                </div>
+              </div>
+              <button class="cover-photo ticket" (click)="addTicket($event)">
+                <img src="../../../assets/figma/add.svg" alt="">
+  
+              </button>
+            </div>
+          </div>
+          
+          <div>
+            <div class="event-owner-head">
+                <h3 class="section-title">Event Owner Details</h3>
+                <div class="nav">
+                  <button type="button" class="nav-option pending-event" [ngClass]="{active: !onboardingForm.newUser}" (click)="setNewUserFalse()">Old User</button>
+                  <button type="button" class="nav-option approved-event" [ngClass]="{active: onboardingForm.newUser}" (click)="setNewUserTrue()">New User</button>
+                </div>
+            </div>
+            <div class="grid" *ngIf="onboardingForm.newUser">
+              <input required type="text" name="eventOwner" [(ngModel)]="onboardingForm.eventOwner" id="eventOwner" placeholder="Full Name">
+              <input required type="text" name="eventOwnerUsername" [(ngModel)]="onboardingForm.eventOwnerUsername" id="eventOwnerUsername" placeholder="Username">
+              <input required type="email" name="eventOwnerEmail" [(ngModel)]="onboardingForm.eventOwnerEmail" id="eventOwnerEmail" placeholder="Email">
+              <input required type="tel" name="contactNumber" [(ngModel)]="onboardingForm.contactNumber" id="contactNumber" placeholder="Contact Number">
+            </div>
+            <div class="grid" *ngIf="!onboardingForm.newUser">
+              <input required type="text" name="eventOwnerUsername" [(ngModel)]="onboardingForm.eventOwnerUsername" id="eventOwnerUsername" placeholder="Username">
+            </div>
+          </div>
+          <div>
+            <h3 class="section-title">Account Details</h3>
+            <div class="grid">
+              <input required type="text" name="account_name" [(ngModel)]="onboardingForm.accountName" id="account_name" placeholder="Account Name">
+              <input required type="number" name="account_number" [(ngModel)]="onboardingForm.accountNumber" id="account_number" placeholder="Account Number">
+              <input required type="text" name="bank" [(ngModel)]="onboardingForm.bankname" id="bank" placeholder="Enter Bank">
+            </div>
+          </div>
+
+          <div class="btn-div">
+            <button type="submit" class="btn-submit">Submit Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- loader -->
+    <loading-spinner *ngIf="loading"></loading-spinner>
+  </div>
+</ion-content>

@@ -32,14 +32,11 @@
       <ion-item color="medium">
        <ion-label>Caegories</ion-label> 
        <ion-select  (ngModelChange)="selectChange($event)"  [(ngModel)]="model.mlistOptions">
-         <ion-select-option value="economics">Economics</ion-select-option>
-         <ion-select-option value="sport">Sport</ion-select-option>
-         <ion-select-option value="movie">Movie</ion-select-option>
-         <ion-select-option value="science">Science</ion-select-option>
-         <ion-select-option value="history">History</ion-select-option>
-         <ion-select-option value="politics">Politics</ion-select-option>
-         <ion-select-option value="arts">Art</ion-select-option>
-         <ion-select-option value="tourism">Tourism</ion-select-option>
+         <ion-select-option *ngFor="let item of allCategory" [value]="item.name">{{item.name}}</ion-select-option>
+         <!-- <ion-select-option value="h">h</ion-select-option>
+         <ion-select-option value="a">a</ion-select-option>
+         <ion-select-option value="d">d</ion-select-option> -->
+
        </ion-select>
      </ion-item>
 
@@ -50,7 +47,7 @@
      <ion-label position="floating">Question</ion-label>
      <ion-input rows="6" cols="20" name="question" [(ngModel)]="questionModel.question"
       clearOnEdit required="true" spellcheck="true"></ion-input>
-   </ion-item>
+   </ion-item> 
  
    <ion-item color="medium" class="ion-margin">
      <ion-label position="floating">Answer</ion-label>
@@ -91,7 +88,7 @@
  
  
      <!-- loader -->
-     <div *ngIf="loading" class=" ">
+     <div *ngIf="loading" class="">
        <div class="toast-container ">
            <div class="lds-roller"><div></div><div></div><div></div><div></div>
            <div></div><div></div><div></div><div></div></div>

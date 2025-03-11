@@ -2,11 +2,15 @@ import { Router } from '@angular/router';
 import { GameServiceService } from '../../shared/game-service.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { PopoverController, ToastController } from '@ionic/angular';
+import { PopoverController, ToastController, AlertController } from '@ionic/angular';
 import { AdminnavigationComponent } from '../../components/adminnavigation/adminnavigation.component';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { BehavourService } from '../../services/behavour.service';
 import { LogicService } from '../../services/logic.service';
+import { FirebaseService } from 'src/app/services/firebase.service';
+// import { UserService } from '../../shared/user.service';
+
+
 
 @Component({
   selector: 'app-admin-account',
@@ -16,7 +20,7 @@ import { LogicService } from '../../services/logic.service';
 export class AdminAccountPage implements OnInit {
 
 
- segment = 'app_date';
+ segment = 'game_category';
 
 
   loading  = false;
@@ -24,11 +28,16 @@ export class AdminAccountPage implements OnInit {
 
   constructor(public gameService: GameServiceService,
                 private router: Router,
+                private fireService: FirebaseService,
+                public toastController: ToastController,
+                public alertController: AlertController,
+                // private userService: UserService,
                 private logicService: LogicService,
                 private behaviorService: BehavourService,
               private popoverController: PopoverController) { 
 
   }
+
   amountModel = {
     amount: null,
     admin : 'ADMIN'
@@ -38,7 +47,7 @@ export class AdminAccountPage implements OnInit {
    activate: '',
    date:'',
    sms:'',
-   youtubeUrl:''
+   youtubeUrl:'',
  };
 
  promoCode = {
@@ -47,18 +56,41 @@ export class AdminAccountPage implements OnInit {
    endDate :  null,
    promoCode :'',
    promoSlot : null
-
  }
 
+ game_category = {
+  name: '',
+  icon: ''
+ }
+
+ categories: any = [];
+
   ngOnInit() {
+    console.log('on it')
     this.behaviorService.getGameAmount().subscribe(amount => {
       this.currentAmount = amount;
     })
+    this.getCategories();
+  }
+
+  getCategories() {
+    console.log('get categories');
+    this.loading = true;
+    this.gameService.getCategories().subscribe(
+      (res : { categories: any}) => {
+        this.categories = res?.categories;
+        this.loading = false;
+      },
+      err => {
+        this.loading = false;
+      }
+    );
   }
 
 
+
   segmentChanged($event){
-    console.log('event...', $event);
+    // console.log('event...', $event);
     this.segment = $event.detail.value;
   }
 
@@ -66,15 +98,15 @@ export class AdminAccountPage implements OnInit {
   
 
   selectedDate(event){
-    console.log(event);
+    // console.log(event);
   }
 
   submitDate(form : NgForm){
-    console.log(this.model.date);
+    // console.log(this.model.date);
   }
 
   submitSms(form : NgForm){
-    console.log(this.model.sms);
+    // console.log(this.model.sms);
     const sms = {sms : this.model.sms};
     this.gameService.sendSms(sms).subscribe(
       res =>{
@@ -85,6 +117,17 @@ export class AdminAccountPage implements OnInit {
       }
       
     );
+  }
+
+  
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      header: 'Info ',
+      message: `${message}`,
+      position: 'middle',
+      duration: 3000
+    });
+    toast.present();
   }
 
   activateDate(){
@@ -102,8 +145,70 @@ export class AdminAccountPage implements OnInit {
         this.loading = false;
       }
     );
-
   }
+
+  addCategory(form : NgForm){
+    let category = this.game_category;
+    this.loading = true;
+    
+    this.gameService.createCategory(category).subscribe(
+      res => {
+        this.loading = false;
+        this.presentToast('Category added successfully')
+        console.log({res})
+        this.game_category = {
+          name: '',
+          icon: ''
+        }
+        // this.gameService.getAdminDate();
+        // this.router.navigateByUrl('/tabs/gamesection');
+      },
+      err => {
+        this.loading = false;
+        this.presentToast('Error adding category')
+      }
+    );
+  }
+
+  async deleteCategory(event) {
+    console.log('event', event)
+    this.loading = true;
+    this.gameService.deleteCategory(event._id).subscribe(
+      res => {
+        this.loading = false;
+        // this.userService.generalToast(res['msg'], 2000);
+        this.getCategories();
+      },
+      err => {
+        this.loading = false;
+        // this.userService.generalAlert(err.error.msg);
+      }
+    );
+  }
+
+  uploadImageToFireBase(image) {
+    this.loading = true;
+    try {
+        this.fireService.uploadFile(image).then((success) => {
+            const imageRef = success.ref.fullPath;
+            this.fireService.downloadItem(imageRef).subscribe(imageUrl => {
+              this.game_category.icon = imageUrl;
+              this.loading = false;
+            });
+        });
+    } catch (error) {
+        this.loading = false;
+        // console.log(error);
+        this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
+    }
+  }
+
+
+
+  addImagesFirebase(event) {
+    const file = event.target.files[0];
+    this.uploadImageToFireBase(file);
+} 
 
   submityoutubeLink(link){
     this.loading = true;
@@ -160,5 +265,7 @@ export class AdminAccountPage implements OnInit {
       this.logicService.presentAlert('error ','error saving promo code')
     })
   }
+
+
 
 }

@@ -58,6 +58,7 @@ export class LoginPage implements OnInit {
       this.accountService.loadMyBonus();
       this.accountService.loadMyBalance();
       this.userService.loadUsername();
+      this.userService.loadIsFirst();
 
       this.loading = false;
       this.router.navigate(['/']);      
@@ -75,7 +76,6 @@ export class LoginPage implements OnInit {
   register() {
     this.router.navigate(['/register']);
   }
-
 
   async presentAlertConfirm(msg) {
     const alert = await this.alertController.create({

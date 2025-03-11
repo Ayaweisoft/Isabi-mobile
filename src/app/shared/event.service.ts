@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { shareReplay } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -24,14 +26,31 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
   getAllEventAdmin(){
     return this.http.get(environment.apiBaseUrl +'/get-all-event-admin');
   }
+  getAllApprovedEventAdmin(){
+    return this.http.get(environment.apiBaseUrl +'/get-event-by-status/APPROVED');
+  }
+  getAllPendingEventAdmin(){
+    return this.http.get(environment.apiBaseUrl +'/get-event-by-status/PENDING');
+  }
+
+  getEventById(id: any){
+    console.log('service: ', id);
+    return this.http.get(environment.apiBaseUrl +`/v2/get-event-by-id/${id}`);
+  }
+  approveEvent(id: any){
+    return this.http.get(environment.apiBaseUrl +`/approve-event/${id}`);
+  }
+  rejectEvent(id: any){
+    return this.http.get(environment.apiBaseUrl +`/reject-event/${id}`);
+  }
 
   checkTicketIdIfExist(ticketId, eventId){
     return this.http.get(environment.apiBaseUrl+ `/v2/check-ticket-id/${ticketId}/${eventId}`)
 
   }
 
-  savePurchaseTicket(ticket){
-    return this.http.post(environment.apiBaseUrl +'/v2/save-purchased-ticket', ticket);
+  savePurchaseTicket(ticket: any){
+    return this.http.post(environment.apiBaseUrl +'/v2/save-purchased-ticket', ticket).pipe(shareReplay(1))
   }
 
   findMyTicket(eventId, email){

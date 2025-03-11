@@ -6,13 +6,17 @@ import { GameServiceService } from '../../shared/game-service.service';
   styleUrls: ['./countdown-timer.component.scss'],
 })
 export class CountdownTimerComponent implements OnInit {
+    @Input() userCount: String;
     notLive: boolean = true;
   constructor(
     public gameService: GameServiceService,
-  ) { }
+    ) { 
+      console.log("userCount", this.userCount);
+}
 
-  ngOnInit() {}
-
+ngOnInit() {
+    console.log("userCount", this.userCount);
+}
 
   async initializeTimer(){
     let day = document.querySelector(".day-loader");

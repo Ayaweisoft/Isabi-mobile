@@ -4,23 +4,25 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { EventService } from 'src/app/shared/event.service';
 import { GameServiceService } from 'src/app/shared/game-service.service';
 import { UserService } from 'src/app/shared/user.service';
-import { EditEventComponent } from '../edit-event/edit-event.component';
+import { EditEventComponent } from '../../components/edit-event/edit-event.component';
 
 @Component({
   selector: 'app-manage-event',
-  templateUrl: './manage-event.component.html',
-  styleUrls: ['./manage-event.component.scss'],
+  templateUrl: './manage-event.page.html',
+  styleUrls: ['./manage-event.page.scss'],
 })
-export class ManageEventComponent implements OnInit {
+export class ManageEventPage implements OnInit {
   allEvent = [];
   loading = true;
+  isApproved = false;
     constructor(private router: Router, private gameService: GameServiceService, 
                 private eventService: EventService, public  userService: UserService,
                 private modalController: ModalController,
-                public alertController: AlertController) { }
+                public alertController: AlertController,
+                ) { }
   
     ngOnInit() { 
-      this.getAllevent();
+      this.loadApprovedEvents();
     }
 
 
@@ -50,21 +52,65 @@ async editEvent(event) {
   
   
     getAllevent(){
-        this.eventService.getAllEventAdmin().subscribe(
-          res => {
-            console.log(res);
-            this.allEvent = res['event'];
-            this.loading = false;
-          },
-          err => {
-            this.loading = false;
-            this.userService.longToast(err.error.msg)
-            
-  
-            console.log('error getting event', err);
-          }
-        );
+      this.eventService.getAllEventAdmin().subscribe(
+        res => {
+          console.log(res);
+          this.allEvent = res['event'];
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.userService.generalAlert(err.error.msg)
+          console.log('error getting event', err);
+        }
+      );
     }
+
+    loadPendingEvents(){
+      console.log("pending event")
+      this.isApproved = false;
+      this.eventService.getAllPendingEventAdmin().subscribe(
+        res => {
+          this.allEvent = res['event'];
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.userService.generalAlert(err.error.msg)
+          console.log('error getting PENDING events', err);
+        }
+      );
+    }
+
+    loadApprovedEvents(){
+      console.log("approved event");
+      this.isApproved = true;
+      this.eventService.getAllApprovedEventAdmin().subscribe(
+        res => {
+          console.log(res);
+          this.allEvent = res['event'];
+          this.loading = false;
+        },
+        err => {
+          this.loading = false;
+          this.userService.generalAlert(err.error.msg)
+          console.log('error getting APPROVED events', err);
+        }
+      );
+    }
+
+    viewDetails(event){
+      this.router.navigate(['/tabs/manage-event/details', event._id]);
+    }
+
+    parseText(text: any, length: number) {
+      text =
+        text?.length > length
+          ? text.substring(0, length - 3) + "..."
+          : text.substring(0, text?.length - 3) + "...";
+      return text;
+    }
+  
   
     // insideEvent(event){
   
@@ -107,7 +153,7 @@ async editEvent(event) {
               res => {
                 this.loading = false;
                 this.userService.generalToast(res['msg'], 2000);
-                this.getAllevent();
+                this.loadApprovedEvents();
               },
               err => {
                 this.loading = false;
