@@ -69,7 +69,8 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
   }
 
   getAllContestant(id){
-    return this.http.get(environment.apiBaseUrl + `/get-contestant${id}`)
+    return this.http.get(environment.apiBaseUrl + '/get-contestant/'+id)
+
   }
 
 deleteTicket(id){
@@ -89,11 +90,11 @@ deleteTicket(id){
   }
 
   deleteContestant(id){
-return this.http.delete(environment.apiBaseUrl +`/delete-contestant${id}`);
+return this.http.delete(environment.apiBaseUrl +`/delete-contestant/${id}`);
   }
 
   deleteEvent(id){
-return this.http.delete(environment.apiBaseUrl +`/delete-event${id}`);
+return this.http.delete(environment.apiBaseUrl +`/delete-event/${id}`);
   }
 
 

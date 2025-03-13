@@ -7,6 +7,7 @@ import { AccountService } from '../../shared/account.service';
 import { AddTicketComponent } from '../../components/add-ticket/add-ticket.component';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { LogicService } from 'src/app/services/logic.service';
+import { AddContestantComponent } from 'src/app/components/add-contestant/add-contestant.component';
 
 
 @Component({
@@ -17,6 +18,7 @@ import { LogicService } from 'src/app/services/logic.service';
 
 export class OnboardEventPage implements OnInit {
   tickets = [];
+  contestants = [];
   loading: boolean = false;
   photo: String = '';
   onboardingForm: {
@@ -40,7 +42,12 @@ export class OnboardEventPage implements OnInit {
       "image_url": string,
       "ticket_type": string,
       "amount": number,
-  }[],
+    }[],
+    contestants:{
+      image_url: string,
+      fullname: string,
+      nickname: string,
+    }[],
   };
 
   // validationMessages = {
@@ -77,6 +84,7 @@ export class OnboardEventPage implements OnInit {
           accountNumber: '',
           newUser: true,
           tickets: [],
+          contestants: [],
           // eventId: new FormControl('', Validators.required)
           };
       }
@@ -128,11 +136,34 @@ export class OnboardEventPage implements OnInit {
       this.onboardingForm.tickets.push(data?.data?.data);
     }
   }
+
+  async addContestant(event) {
+    event.preventDefault();
+    const modal = await this.modalController.create({
+      component: AddContestantComponent,
+    });
+
+    await modal.present();
+
+    const data = await modal.onDidDismiss();
+    console.log(data)
+    if (data?.data?.data) {
+      this.onboardingForm.contestants.push(data?.data?.data);
+    }
+  }
+
+
   async removeTicket(event, ticket_type) {
     event.preventDefault();
     // console.log(event.target.value, ticket_type)
     // console.log(this.onboardingForm.tickets)
     this.onboardingForm.tickets = this.onboardingForm.tickets.filter((ticket, index) => ticket.ticket_type != ticket_type);
+  }
+  async removeContestant(event, fullname) {
+    event.preventDefault();
+    // console.log(event.target.value, ticket_type)
+    // console.log(this.onboardingForm.tickets)
+    this.onboardingForm.contestants = this.onboardingForm.contestants.filter((contestant) => contestant.fullname != fullname);
   }
 
   setNewUserTrue(){
@@ -169,6 +200,7 @@ export class OnboardEventPage implements OnInit {
         accountNumber: '',
         newUser: true,
         tickets: [],
+        contestants: [],
         };
     }, err => {
       this.loading = false;

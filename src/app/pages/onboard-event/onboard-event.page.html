@@ -46,7 +46,7 @@
             <img class="cover_img" *ngIf="photo" [src]="photo" alt=""  onclick="document.getElementById('image_url').click();">
             <input required type="file" name="image_url" id="image_url" (change)="addImagesFirebase($event)">
           </div>
-          <div>
+          <div *ngIf="onboardingForm.eventType != 'VOTING'">
             <h3 class="section-title">Add Tickets</h3>
             <div class="tickets">
               <div *ngFor="let ticket of onboardingForm.tickets">
@@ -64,6 +64,26 @@
               <button class="cover-photo ticket" (click)="addTicket($event)">
                 <img src="../../../assets/figma/add.svg" alt="">
   
+              </button>
+            </div>
+          </div>
+          <div *ngIf="onboardingForm.eventType == 'VOTING'">
+            <h3 class="section-title">Add Contestants</h3>
+            <div class="tickets">
+              <div *ngFor="let contestant of onboardingForm.contestants">
+                <div class="ticket_img-div">
+                  <img class="ticket_img" [src]="contestant.image_url" alt="">
+                  <div class="ticket_data">
+                    <span>{{contestant.fullname}}</span>
+                    <span>{{contestant.nickname}}</span>
+                  </div>
+                  <span class="remove-ticket" (click)="removeContestant($event, contestant.fullname)" value="contestant.fullname">
+                    <img src="../../../assets/figma/close.svg" alt="">
+                  </span>
+                </div>
+              </div>
+              <button class="cover-photo ticket" (click)="addContestant($event)">
+                <img src="../../../assets/figma/add.svg" alt="">
               </button>
             </div>
           </div>
