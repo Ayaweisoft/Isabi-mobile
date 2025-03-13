@@ -35,6 +35,10 @@
                 </div>
               </div>
               <input required type="text" name="companyName" [(ngModel)]="onboardingForm.companyName" id="companyName" placeholder="Enter company Name">
+              <div class="date-time"  *ngIf="onboardingForm.eventType == 'VOTING'">
+                <input required type="number" name="costPerVote" [(ngModel)]="onboardingForm.costPerVote" id="costPerVote" placeholder="Enter cost per vote(₦)">
+                <input required type="number" name="numberOfSlots" [(ngModel)]="onboardingForm.numberOfSlots" id="numberOfSlots" placeholder="Enter number of slots">
+              </div>
             </div>
             <textarea name="aboutEvent" [(ngModel)]="onboardingForm.aboutEvent" id="aboutEvent" cols="30" rows="3" placeholder="Event Description"></textarea>
           </div>

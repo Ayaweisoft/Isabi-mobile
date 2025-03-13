@@ -25,9 +25,9 @@ image: any;
                private router: Router) {}
 
   eventModel = {
-    eventName: '', type: '', image_url: '', companyName: '', address: '', contactNumber: '', aboutEvent: '',bankname:'',
+    eventName: '', eventType: '', image_url: '', companyName: '', eventLocation: '', contactNumber: '', aboutEvent: '',bankname:'',
     costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '',  sharingRatio_company: '', accountNumber: '', accountName: '',
-    eventOwner:'', venue:null, startDate:null, time:null, businessSharingRatio:null, endDate:null, startTime:null,
+    eventOwner:'', eventOwnerUsername: '', venue:null, startDate:null, time:null, businessSharingRatio:null, endDate:null, startTime:null,
     pay_item_id:'', merchant_code: ''
   }
   ngOnInit() {
@@ -61,10 +61,10 @@ image: any;
 
   resetForm(){
     this.eventModel = {
-      eventName: '', type: '', image_url: '', companyName: '', address: '', 
+      eventName: '', eventType: '', image_url: '', companyName: '', eventLocation: '', 
       contactNumber: '', aboutEvent: '',bankname:'',
       costPerVote: '', numberOfSlot: '', sharingRatio_isabi: '', 
-       sharingRatio_company: '', accountNumber: '', accountName: '',eventOwner:'',
+       sharingRatio_company: '', accountNumber: '', accountName: '',eventOwner:'', eventOwnerUsername: '',
        venue:null, startDate:null, time:null,businessSharingRatio:null, endDate: null, startTime: null,
        pay_item_id:'', merchant_code:''
     }

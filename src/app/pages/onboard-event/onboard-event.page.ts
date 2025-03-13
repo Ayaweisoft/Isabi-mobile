@@ -38,6 +38,8 @@ export class OnboardEventPage implements OnInit {
     accountName: '',
     accountNumber: '',
     newUser: Boolean,
+    costPerVote: '',
+    numberOfSlots: '',
     tickets:{
       "image_url": string,
       "ticket_type": string,
@@ -83,6 +85,8 @@ export class OnboardEventPage implements OnInit {
           accountName: '',
           accountNumber: '',
           newUser: true,
+          costPerVote: '',
+          numberOfSlots: '',
           tickets: [],
           contestants: [],
           // eventId: new FormControl('', Validators.required)
@@ -198,6 +202,8 @@ export class OnboardEventPage implements OnInit {
         bankname: '',
         accountName: '',
         accountNumber: '',
+        numberOfSlots: '',
+        costPerVote: '',
         newUser: true,
         tickets: [],
         contestants: [],

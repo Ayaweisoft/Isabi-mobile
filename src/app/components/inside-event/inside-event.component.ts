@@ -16,14 +16,21 @@ import { LogicService } from 'src/app/services/logic.service';
 })
 export class InsideEventComponent implements OnInit {
   @ViewChild('refresherRef', {static : false}) refresherRef: IonRefresher;
-eventId;
-loading = true;
-contestant = [];
-displayedContestant = [];
-contestantData = [];
-costPerVote = null;
-personalLink = environment.webVotingUrl;
+  eventId;
+  event: any;
+  loading = true;
+  contestant = [];
+  displayedContestant = [];
+  contestantData = [];
+  costPerVote = null;
+  personalLink = environment.webVotingUrl;
   eventRefresher: any;
+  date: any = new Date();
+  months: string[] = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct",
+    "Nov", "Dec"
+    ]
+    
 
   constructor(private route: ActivatedRoute, public modalController: ModalController,
     private logicService: LogicService,
@@ -103,6 +110,10 @@ personalLink = environment.webVotingUrl;
         console.log(this.contestant.length);
         this.contestantData = this.contestant;
         this.costPerVote = res['cost_per_vote'];
+        this.event = res['eventData'];
+        this.date = new Date(res['eventData']?.startDate)
+
+        console.log('ekjeshd', this.event, res)
       },
       err => {
         try {

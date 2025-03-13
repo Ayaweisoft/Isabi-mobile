@@ -54,20 +54,25 @@
 
             <ion-col>
               <!-- select options -->
+              <select name="eventType" id="eventType" placeholder="Select Event Type" required [(ngModel)]="eventModel.eventType">
+                <option value="" disabled selected style="color: gray;">Select Event Type</option>
+                <option value="TICKETING">TICKETING</option>
+                <option value="FORM-SALES">FORM SALES</option>
+                <option value="VOTING">VOTING</option>
+              </select>
+<!--               
               <ion-card>
                 <ion-label class="text-center"><small class="text-danger">*</small> select event type</ion-label>
-
                 <ion-item color="light">
-                  <ion-select select="success" interface="popover" name="type" (ngModelChange)="eventType($event)"
-                    [(ngModel)]="eventModel.type">
+                  <ion-select interface="popover" name="type" (ngModelChange)="eventType($event)" [(ngModel)]="eventModel.eventType">
                     <ion-select-option value="VOTING">VOTING</ion-select-option>
                     <ion-select-option value="TICKETING">TICKETING</ion-select-option>
                     <ion-select-option value="FORM-SALES">FORM-SALES</ion-select-option>
                   </ion-select>
                 </ion-item>
-                <small *ngIf="eventName.value && !eventModel.type" class="text-center text-danger"><small
+                <small *ngIf="eventName.value && !eventModel.eventType" class="text-center text-danger"><small
                     class="text-danger ">*</small> select event type</small>
-              </ion-card>
+              </ion-card> -->
             </ion-col>
 
             <ion-col>
@@ -83,8 +88,8 @@
             <ion-col>
               <ion-item color="light">
                 <div class="text-input ">
-                  <ion-label position="floating"><small class="text-danger ">*</small> address</ion-label>
-                  <ion-input type="text" #address="ngModel" name="address" [(ngModel)]="eventModel.address"
+                  <ion-label position="floating"><small class="text-danger ">*</small>Event Location</ion-label>
+                  <ion-input type="text" #eventLocation="ngModel" name="eventLocation" [(ngModel)]="eventModel.eventLocation"
                     required="true"></ion-input>
                 </div>
               </ion-item>
@@ -110,7 +115,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col *ngIf="eventModel.type === 'TICKETING'">
+            <ion-col *ngIf="eventModel.eventType === 'TICKETING'">
               <ion-item color="light">
                 <div class="text-input ">
                   <ion-label position="floating"><small class="text-danger ">*</small> venue</ion-label>
@@ -141,7 +146,7 @@
 
             <ion-row>
 
-              <ion-col *ngIf="eventModel.type === 'VOTING'">
+              <ion-col *ngIf="eventModel.eventType === 'VOTING'">
                 <ion-item color="light">
                   <div class="text-input ">
                     <ion-label position="floating">cost per vote</ion-label>
@@ -162,7 +167,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col *ngIf="eventModel.type === 'TICKETING'">
+              <ion-col *ngIf="eventModel.eventType === 'TICKETING'">
                 <ion-item color="light">
                   <div class="text-input ">
                     <ion-label position="floating">time</ion-label>
@@ -172,7 +177,7 @@
               </ion-col>
 
 
-              <ion-col *ngIf="eventModel.type === 'VOTING'">
+              <ion-col *ngIf="eventModel.eventType === 'VOTING'">
                 <ion-item color="light">
                   <div class="text-input ">
                     <ion-label position="floating">number of slot</ion-label>
@@ -246,8 +251,8 @@
             </ion-row>
             <ion-list>
               <ion-item color="light">
-                <ion-input type="text" #bankname="ngModel" name="bankname" [(ngModel)]="eventModel.eventOwner"
-                  placeholder="(optional username)  event owner"></ion-input>
+                <ion-input type="text" #bankname="ngModel" name="bankname" [(ngModel)]="eventModel.eventOwnerUsername"
+                  placeholder="event owner username"></ion-input>
               </ion-item>
 
               <ion-item color="light">
@@ -264,7 +269,7 @@
 
               <ion-item color="light">
                 <div class="p-3">
-                  <ion-button (click)="submitEvent()" *ngIf="eventModel.type  && eventForm.valid">submit</ion-button>
+                  <ion-button (click)="submitEvent()" *ngIf="eventModel.eventType  && eventForm.valid">submit</ion-button>
 
                 </div>
               </ion-item>
