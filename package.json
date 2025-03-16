@@ -5,7 +5,7 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "NODE_OPTIONS=--openssl-legacy-provider ng serve",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -40,6 +40,7 @@
     "animate.css": "^3.7.2",
     "animejs": "^3.1.0",
     "bounce.js": "^0.8.2",
+    "cross-env": "^7.0.3",
     "firebase": "^8.7.1",
     "jwt-decode": "^3.1.2",
     "ng-otp-input": "^1.8.5",
