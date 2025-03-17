@@ -11,6 +11,7 @@ import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.componen
 import { LoadingSpinnerComponent } from 'src/app/components/loading-spinner/loading-spinner.component';
 import { ScoreCounterComponent } from 'src/app/components/score-counter/score-counter.component';
 import { ProfilePhotoComponent } from 'src/app/components/profile-photo/profile-photo.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Routes = [
   {
@@ -24,8 +25,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedComponentsModule,
   ],
-  declarations: [PlaysectionPage, ScoreCounterComponent, CountdownTimerComponent, ClueTipsComponent, LoadingSpinnerComponent, ProfilePhotoComponent]
+  declarations: [PlaysectionPage]
 })
 export class PlaysectionPageModule {}

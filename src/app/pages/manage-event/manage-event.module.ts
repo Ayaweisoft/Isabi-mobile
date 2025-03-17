@@ -9,6 +9,7 @@ import { IonicModule } from '@ionic/angular';
 import { ManageEventPage } from './manage-event.page';
 import { EventDetailsPage } from '../event-details/event-details.page';
 import { ProfilePhotoComponent } from 'src/app/components/profile-photo/profile-photo.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Routes = [
   {
@@ -26,8 +27,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedComponentsModule,
   ],
-  declarations: [ManageEventPage, EventDetailsPage, ProfilePhotoComponent]
+  declarations: [ManageEventPage, EventDetailsPage]
 })
 export class ManageEventPageModule {}

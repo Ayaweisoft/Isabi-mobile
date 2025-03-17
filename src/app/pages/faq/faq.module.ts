@@ -9,14 +9,16 @@ import { FaqPageRoutingModule } from './faq-routing.module';
 import { FaqPage } from './faq.page';
 
 import { EmptyComponentComponent } from 'src/app/components/empty-component/empty-component.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FaqPageRoutingModule
+    FaqPageRoutingModule,
+    SharedComponentsModule,
   ],
-  declarations: [FaqPage, EmptyComponentComponent]
+  declarations: [FaqPage]
 })
 export class FaqPageModule {}

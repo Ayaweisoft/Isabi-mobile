@@ -19,9 +19,11 @@ export class EventsPage implements OnInit {
   @ViewChild("mySlider", { static: false }) mySlider: IonSlides;
   allEvent = [];
   displayedEvents = [];
+  shadowEvents = [0, 0, 0];
   loadingCards = [0, 0, 0];
   loading = false;
   isFirst: boolean = false;
+  headerIsActive: true;
   webLink = environment.webVotingUrl;
   slideCounter = 0;
   socket: any;
@@ -108,8 +110,8 @@ export class EventsPage implements OnInit {
   //   this.displayedEvents = newEvents
   //   console.log("ÿoooooo")
   // }
-  getChildData(data) {
-    this.displayedEvents = data;
+  getChildData($event) {
+    this.displayedEvents = this.displayedEvents;
   }
 
   copyInputMessage(inputElement) {

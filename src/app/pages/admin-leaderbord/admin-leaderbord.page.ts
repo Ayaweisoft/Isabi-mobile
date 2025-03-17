@@ -43,7 +43,7 @@ export class AdminLeaderbordPage implements OnInit {
     this.segment = $event.detail.value;
   }
 
-  changeCount($event){
+  changeCount(){
     this.loading = true;
     this.accountService.updateLeaderboardCount({count: this.leaderBoardCount}).subscribe((val: number)=> {
       this.presentSuccessToast();

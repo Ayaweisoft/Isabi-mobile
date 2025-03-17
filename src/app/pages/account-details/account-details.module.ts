@@ -8,14 +8,16 @@ import { AccountDetailsPageRoutingModule } from './account-details-routing.modul
 
 import { AccountDetailsPage } from './account-details.page';
 import { LoadingSpinnerComponent } from '../../components/loading-spinner/loading-spinner.component'
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AccountDetailsPageRoutingModule
+    AccountDetailsPageRoutingModule,
+    SharedComponentsModule,
   ],
-  declarations: [AccountDetailsPage, LoadingSpinnerComponent]
+  declarations: [AccountDetailsPage]
 })
 export class AccountDetailsPageModule {}

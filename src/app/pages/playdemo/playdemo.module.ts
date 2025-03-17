@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { LoadingSpinnerComponent } from 'src/app/components/loading-spinner/loading-spinner.component';
 import { PlaydemoPage } from './playdemo.page';
 import { CountdownTimerComponent } from 'src/app/components/countdown-timer/countdown-timer.component';
 import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
 import { ScoreCounterComponent } from 'src/app/components/score-counter/score-counter.component';
 import { ProfilePhotoComponent } from 'src/app/components/profile-photo/profile-photo.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Routes = [
   {
@@ -24,8 +24,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedComponentsModule,
   ],
-  declarations: [PlaydemoPage, CountdownTimerComponent, ClueTipsComponent, ScoreCounterComponent, LoadingSpinnerComponent, ProfilePhotoComponent]
+  declarations: [PlaydemoPage]
 })
 export class PlaydemoPageModule {}

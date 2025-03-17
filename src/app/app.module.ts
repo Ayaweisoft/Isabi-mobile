@@ -68,6 +68,7 @@ import { TransactionService } from './services/transaction.service';
 import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
 // import { NgOtpInputModule } from 'ng-otp-input';
 import { MinutesToSecondsPipe } from './pipes/minutes-to-seconds.pipe';
+import { SharedComponentsModule } from './pages/shared-components/shared-components.module';
 
 const config: SocketIoConfig = { url: environment.socketsUrl, options: {
   path: "/live/",
@@ -103,7 +104,6 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     TicketItemComponent,
     WebTicketComponent,
     SafeResourceUrlPipe, 
-    PrivacyPolicyPage,
     SplashComponent,
     MinutesToSecondsPipe,
   ],
@@ -113,13 +113,13 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     BrowserModule,
     CommonModule,
     FormsModule,
+    SharedComponentsModule,
     ReactiveFormsModule,
     NgInterswitchModule,
     HttpClientModule,
     IonicModule.forRoot(),
     SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    AppRoutingModule,
     // NgOtpInputModule
     
   ],

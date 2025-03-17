@@ -9,6 +9,7 @@ import { LoadingSpinnerComponent } from 'src/app/components/loading-spinner/load
 import { IonicModule } from '@ionic/angular';
 
 import { OnboardEventPage } from './onboard-event.page';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Routes = [
   {
@@ -22,8 +23,9 @@ const routes: Routes = [
     CommonModule,
     IonicModule,
     FormsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedComponentsModule,
   ],
-  declarations: [OnboardEventPage, LoadingSpinnerComponent, ProfilePhotoComponent]
+  declarations: [OnboardEventPage]
 })
 export class OnboardEventPageModule {}

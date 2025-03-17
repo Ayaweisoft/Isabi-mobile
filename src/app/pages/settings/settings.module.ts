@@ -6,6 +6,7 @@ import { LoadingSpinnerComponent } from 'src/app/components/loading-spinner/load
 import { IonicModule } from '@ionic/angular';
 
 import { SettingsPage } from './settings.page';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 const routes: Routes = [
   {
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    SharedComponentsModule,
   ],
-  declarations: [SettingsPage, LoadingSpinnerComponent]
+  declarations: [SettingsPage]
 })
 export class SettingsPageModule {}

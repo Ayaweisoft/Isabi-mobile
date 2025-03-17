@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-transaction',
   templateUrl: './transaction.page.html',
   styleUrls: ['./transaction.page.scss'],
+  
 })
 export class TransactionPage implements OnInit {
 loading: boolean = true;

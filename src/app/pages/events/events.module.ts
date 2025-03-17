@@ -6,13 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 // import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { EventsPage } from './events.page';
-
-import { CountdownTimerComponent } from '../../components/countdown-timer/countdown-timer.component';
-import { ClueTipsComponent } from '../../components/clue-tips/clue-tips.component';
-import { SearchbarComponent } from '../../components/searchbar/searchbar.component';
-// import { HeaderComponent } from 'src/app/components/header/header.component';
-import {ProfilePhotoComponent} from '../../components/profile-photo/profile-photo.component'
-import { AboutPopupComponent } from 'src/app/components/about-popup/about-popup.component';
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 // import { apiBaseUrl } from '../../environments/'
 const routes: Routes = [
   {
@@ -24,13 +18,14 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    SharedComponentsModule,
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
     // SocketIoModule.forRoot(config)
   ],
   // declarations: [EventsPage, HeaderComponent, CountdownTimerComponent, ClueTipsComponent]
-  declarations: [EventsPage, CountdownTimerComponent, ClueTipsComponent, SearchbarComponent, ProfilePhotoComponent, AboutPopupComponent]
+  declarations: [EventsPage]
 })
 export class EventsPageModule {}
    

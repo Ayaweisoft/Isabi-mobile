@@ -7,6 +7,7 @@ import { IonicModule } from "@ionic/angular";
 
 import { TransactionPage } from "./transaction.page";
 import { ProfilePhotoComponent } from "../../components/profile-photo/profile-photo.component";
+import { SharedComponentsModule } from "../shared-components/shared-components.module";
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
+    SharedComponentsModule,
   ],
-  declarations: [TransactionPage, ProfilePhotoComponent],
+  declarations: [TransactionPage],
 })
 export class TransactionPageModule {}

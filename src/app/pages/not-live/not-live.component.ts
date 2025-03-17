@@ -135,15 +135,15 @@ export class NotLiveComponent implements OnInit {
     });
   }
 
-  // clickSlidetoNext() {
-  //   console.log('slide to next')
-  //   this.mySlider.slideNext();
-  // }
+  clickSlidetoNext() {
+    console.log('slide to next')
+    this.mySlider.slideNext();
+  }
 
-  // clickSlidePrevious() {
-  //   console.log('slide to previous');
-  //   this.mySlider.slidePrev();
-  // }
+  clickSlidePrevious() {
+    console.log('slide to previous');
+    this.mySlider.slidePrev();
+  }
 
 
   async getYoutubeLink() {

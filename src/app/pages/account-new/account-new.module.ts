@@ -10,6 +10,7 @@ import { NgInterswitchModule } from '@interswitchapi/ng-interswitch';
 
 import { AccountNewPage } from './account-new.page';
 import {ProfilePhotoComponent} from '../../components/profile-photo/profile-photo.component'
+import { SharedComponentsModule } from '../shared-components/shared-components.module';
 
 @NgModule({
   imports: [
@@ -18,8 +19,9 @@ import {ProfilePhotoComponent} from '../../components/profile-photo/profile-phot
     IonicModule,
     AccountNewPageRoutingModule,
     NgInterswitchModule,
+    SharedComponentsModule,
     // NgOtpInputModule
   ],
-  declarations: [AccountNewPage, ProfilePhotoComponent]
+  declarations: [AccountNewPage]
 })
 export class AccountNewPageModule {}

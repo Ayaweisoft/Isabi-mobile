@@ -10,7 +10,7 @@ import { UserService } from "./user.service";
 })
 export class AccountService {
   public appUser: any;
-  // public accountBalance = null;
+  public accountBalance = null;
   accountSubject = new BehaviorSubject<number>(0);
   accountBonus = new BehaviorSubject<number>(0);
   leaderboard$: Observable<any>;
@@ -36,6 +36,7 @@ export class AccountService {
       .get(environment.apiBaseUrl + "/get-account-balance")
       .subscribe((value) => {
         this.setAccountBalance(value["balance"]);
+        this.accountBalance(value["balance"]);
         console.log("NEW Balance ", this.accountSubject.getValue());
         //get week and year
         let date = new Date();

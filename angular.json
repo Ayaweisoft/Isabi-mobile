@@ -39,9 +39,10 @@
               {
                 "input": "src/global.scss"
               },
-              "node_modules/@fortawesome/fontawesome-free/css/all.css",
               "node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
-              "node_modules/angular-bootstrap-md/assets/scscss/mdb.scss"
+              "node_modules/@fortawesome/fontawesome-free/css/all.css",
+              "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
+              "node_modules/@fortawesome/fontawesome-free/css/fontawesome.css"
             ],
             "scripts": []
           },

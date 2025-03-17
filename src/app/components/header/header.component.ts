@@ -8,9 +8,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 @Input() label : string;
+  gameService: GameServiceService
   constructor(
     gameService: GameServiceService
-  ) { }
+  ) {
+    this.gameService = gameService
+   }
 
   ngOnInit() {}
 

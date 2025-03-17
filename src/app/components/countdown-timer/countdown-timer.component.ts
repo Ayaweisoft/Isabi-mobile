@@ -6,7 +6,7 @@ import { GameServiceService } from '../../shared/game-service.service';
   styleUrls: ['./countdown-timer.component.scss'],
 })
 export class CountdownTimerComponent implements OnInit {
-    @Input() userCount: String;
+    @Input() userCount: Number;
     notLive: boolean = true;
   constructor(
     public gameService: GameServiceService,
