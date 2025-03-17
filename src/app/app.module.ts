@@ -118,6 +118,7 @@ const config: SocketIoConfig = { url: environment.socketsUrl, options: {
     NgInterswitchModule,
     HttpClientModule,
     IonicModule.forRoot(),
+    AppRoutingModule,
     SocketIoModule.forRoot(config),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     // NgOtpInputModule
