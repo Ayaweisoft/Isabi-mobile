@@ -23,6 +23,8 @@
             padding-top: 0;
             padding-bottom: 20px;
         }
+
+        
         
         .voting-head-section{
             height: 100px;
@@ -41,7 +43,43 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 10px;
+            padding: 1rem 2rem;
+
+            
+            .head-title{
+                width: 100%;
+                text-align: center;
+                margin-bottom: 0.5rem;
+            }
+
+            .event-desc{
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                gap: 1rem;
+                // padding: 0 2rem;
+                
+                .event-name{
+                    font-size: 1.7rem;
+                }
+                
+                .event-img{
+                    width: 15rem;
+                }
+
+                .event-about{
+                    width: 90%;
+                    margin: 0;
+                }
+
+                .event-location{
+                    .icon{
+                        width: 1rem;
+                    }
+                    display: flex;
+                    gap: 3rem;
+                }
+            }
 
 			.voting-title{
 				font-weight: 600;

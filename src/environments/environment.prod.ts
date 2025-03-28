@@ -20,12 +20,10 @@
 
 export const environment = {
   production: true,
-  // apiBaseUrl:  'http://localhost:8000/api',
+  apiBaseUrl: 'https://i-sabi-server.onrender.com/api',
   socketsUrl: 'https://i-sabi-server.onrender.com/',
-  // webVotingUrl:  'http://localhost:8100/',
   webVotingUrl: 'https://i-sabi.com.ng/',
   versionCode: 5.2,
-  apiBaseUrl: 'https://i-sabi-server.onrender.com/api',
   firebaseConfig: {
     apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
     authDomain: "i-sabi-bd851.firebaseapp.com",

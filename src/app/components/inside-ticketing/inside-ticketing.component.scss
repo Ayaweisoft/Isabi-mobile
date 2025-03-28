@@ -41,7 +41,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding-top: 10px;
+            padding: 1rem 2rem;
 
             .head-title{
                 width: 100%;
@@ -54,18 +54,19 @@
                 flex-direction: column;
                 position: relative;
                 gap: 1rem;
-                padding: 0 2rem;
-
+                // padding: 0 2rem;
+                
+                .event-name{
+                    font-size: 1.7rem;
+                }
+                
                 .event-img{
                     width: 15rem;
                 }
 
-                .event-name{
-                    font-size: 1.7rem;
-                }
-
                 .event-about{
                     width: 90%;
+                    margin: 0;
                 }
 
                 .event-location{
