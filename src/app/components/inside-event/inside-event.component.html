@@ -97,6 +97,11 @@
                   Vote Now
                 </button>
               </div>
+              <div *ngIf="userService.getRole() == 'ADMIN'" class="ion-text-center">
+                <input readonly type="text" [value]="personalLink + item._id" #userinput size="35">
+                <ion-button color="dark" size="small" (click)="copyInputMessage(userinput)" value="click to copy">Copy
+                </ion-button>
+              </div>
             </div>
           </div>
         </div>
@@ -167,7 +172,6 @@
             <input readonly type="text" [value]="personalLink +'/'+'web-voting/'+ item._id " #userinput size="35">
             <ion-button color="dark" size="small" (click)="copyInputMessage(userinput)" value="click to copy">Copy
             </ion-button>
-
           </div>
         </ion-card>
       </ion-col>

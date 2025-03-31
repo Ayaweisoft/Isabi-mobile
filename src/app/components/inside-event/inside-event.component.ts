@@ -61,14 +61,14 @@ export class InsideEventComponent implements OnInit {
 
   initializeItems(){
     this.contestant = this.contestantData;
-     }
+  }
 
-     copyInputMessage(inputElement){
-      inputElement.select();
-      document.execCommand('copy');
-      inputElement.setSelectionRange(0, 0);
-      this.logicService.presentToast('text  coppied' );
-    }
+  copyInputMessage(inputElement){
+    inputElement.select();
+    document.execCommand('copy');
+    inputElement.setSelectionRange(0, 0);
+    this.logicService.presentToast('text coppied' );
+  }
 
 
 

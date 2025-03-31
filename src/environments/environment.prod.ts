@@ -22,7 +22,7 @@ export const environment = {
   production: true,
   apiBaseUrl: 'https://i-sabi-server.onrender.com/api',
   socketsUrl: 'https://i-sabi-server.onrender.com/',
-  webVotingUrl: 'https://i-sabi.com.ng/',
+  webVotingUrl: 'https://voting.i-sabi.com.ng/contestant/',
   versionCode: 5.2,
   firebaseConfig: {
     apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
