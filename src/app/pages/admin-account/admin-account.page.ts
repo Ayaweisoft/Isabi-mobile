@@ -66,7 +66,7 @@ export class AdminAccountPage implements OnInit {
  categories: any = [];
 
   ngOnInit() {
-    console.log('on it')
+    // console.log('on it')
     this.behaviorService.getGameAmount().subscribe(amount => {
       this.currentAmount = amount;
     })
@@ -74,7 +74,7 @@ export class AdminAccountPage implements OnInit {
   }
 
   getCategories() {
-    console.log('get categories');
+    // console.log('get categories');
     this.loading = true;
     this.gameService.getCategories().subscribe(
       (res : { categories: any}) => {
@@ -111,7 +111,7 @@ export class AdminAccountPage implements OnInit {
     this.gameService.sendSms(sms).subscribe(
       res =>{
 
-       console.log(res);
+      //  console.log(res);
        let message = res['message'];
        this.gameService.presentToast(message);
       }
@@ -155,7 +155,7 @@ export class AdminAccountPage implements OnInit {
       res => {
         this.loading = false;
         this.presentToast('Category added successfully')
-        console.log({res})
+        // console.log({res})
         this.game_category = {
           name: '',
           icon: ''
@@ -171,7 +171,7 @@ export class AdminAccountPage implements OnInit {
   }
 
   async deleteCategory(event) {
-    console.log('event', event)
+    // console.log('event', event)
     this.loading = true;
     this.gameService.deleteCategory(event._id).subscribe(
       res => {
@@ -213,15 +213,15 @@ export class AdminAccountPage implements OnInit {
   submityoutubeLink(link){
     this.loading = true;
     let body = {"link" : this.model.youtubeUrl};
-    console.log(body);
+    // console.log(body);
     this.gameService.setYoutubeDate(body).subscribe(
         res => {
           this.loading = false;
-          console.log(res);
+          // console.log(res);
         },
         err => {
           this.loading = false;
-          console.log(err);
+          // console.log(err);
         }
       );
   }
@@ -236,20 +236,20 @@ export class AdminAccountPage implements OnInit {
  
 
   createContestant(form: NgForm){
-    console.log(form);
+    // console.log(form);
   }
 
   submitGameAmount(){
     this.loading = true;
     this.gameService.setGameAmount(this.amountModel).subscribe( res => {
-      console.log('res ', res);
+      // console.log('res ', res);
       this.loading = false;
       this.behaviorService.setGameAmount(res.data.amount);
 
       this.amountModel.amount = undefined;
 
     }, err => {
-      console.log(err);
+      // console.log(err);
       this.loading = false;
     });
   }

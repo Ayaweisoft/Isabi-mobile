@@ -22,18 +22,18 @@ getWinners() {
   this.loading = true;
   this.accountServive.getWinners().subscribe(val => {
     this.leaderBoard = val["document"];
-    console.log(this.leaderBoard);
+    // console.log(this.leaderBoard);
     this.loading = false;
   });
 }
 
 payWinner(id, fileID){
   this.loading = true;
-console.log(id, fileID);
+// console.log(id, fileID);
 const userDoc = {id, fileID}
 this.accountServive.payWinner(userDoc).subscribe(
   res => {
-    console.log(res);
+    // console.log(res);
     this.loading = false;
     let msg = res['message'];
     this.gameService.presentToast(msg);
@@ -43,7 +43,7 @@ this.accountServive.payWinner(userDoc).subscribe(
   },
   err => {
     this.loading = false;
-    console.log(err);
+    // console.log(err);
     this.gameService.presentToast(err.error.message);
   }
 )

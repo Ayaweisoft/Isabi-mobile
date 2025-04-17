@@ -52,7 +52,7 @@ export class AccountComponent implements OnInit, OnDestroy {
               public modalController: ModalController
              ) {  
                 this.accountService.loadMyBalance();
-                console.log('REF2', this.reference);
+                // console.log('REF2', this.reference);
 
 }
 
@@ -67,8 +67,8 @@ model = {
 
 ngOnInit() {
 
-  console.log('REF', this.reference);
-  console.log('trans ref', )
+  // console.log('REF', this.reference);
+  // console.log('trans ref', )
   this.appUsername = localStorage.getItem('appUser');
   this.model.username = this.appUsername;
 
@@ -93,7 +93,7 @@ ngOnDestroy() {
 }
 
 paymentCallback(response: any): void {
-  console.log("RESULT", response);
+  // console.log("RESULT", response);
   if(response.resp == "00"){
     this.generateReference();
     response.date = Date.now();
@@ -103,10 +103,10 @@ paymentCallback(response: any): void {
     response.user_id  = this.userService.getAuthId();
     response.transaction  = response.txnref;
     response.amount  =  this.model.actual;
-    console.log('final response ', response);
+    // console.log('final response ', response);
     this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
       res => {
-        console.log('new balance',res);
+        // console.log('new balance',res);
         this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
        this.accountService.loadMyBalance();
         
@@ -121,7 +121,7 @@ paymentCallback(response: any): void {
 
  
   }else{
-    console.log('data')
+    // console.log('data')
     this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
   }
 
@@ -130,7 +130,7 @@ paymentCallback(response: any): void {
 
 closedPaymentModal(): void {
   this.generateReference();
-  console.log('payment is closed');
+  // console.log('payment is closed');
   this.model.amount = null;
 
  
@@ -144,17 +144,17 @@ generateReference() {
 
 submitProCode(promo){
   this.loading = true;
-  console.log(promo)
+  // console.log(promo)
  let data = {promoCode : promo}
   this.accountService.activatePromo(data).subscribe(data => {
-    console.log(data);
+    // console.log(data);
     this.loading = false;
     this.logicService.presentAlert('success', 'your account has been credited');
     this.accountService.loadMyBalance();
   }, err => {
     this.loading = false;
     this.logicService.presentAlert('not fount', err.error.message);
-    console.log(err);
+    // console.log(err);
   })
 
 }
@@ -190,7 +190,7 @@ paymentCancel(){
 //      this.accountService.loadMyBalance();
 //     }
 //   );
-//   console.log( process);
+  // console.log( process);
 //  }
 
 
@@ -199,12 +199,12 @@ paymentCancel(){
 }
 
  payNow(){
-  console.log('pay now is clicked..', this.reference);
+  // console.log('pay now is clicked..', this.reference);
   
 }
 
 // mobileTransfer(){
-//   console.log(this.model.amount.valueOf());
+  // console.log(this.model.amount.valueOf());
 //   this.showAlert();
 // }
 
@@ -235,14 +235,14 @@ paymentCancel(){
 //           trxref: this.reference, account_id: this.accountService.user_id, transaction : ' manual transfer'};
 
 //          process.username = this.appUsername;
-//          console.log('Confirm Okay', process);
+        //  console.log('Confirm Okay', process);
 //          this.userService.postManualTrans(process).subscribe(
 //             res => {
-//               console.log(res);
+              // console.log(res);
 //               this.presentSucess();
 //             },
 //             err => {
-//               console.log(err); 
+              // console.log(err); 
 //             }
 //           );
 //         }
@@ -280,15 +280,15 @@ async enterAmountInput() {
         role: 'cancel',
         cssClass: 'danger',
         handler: (blah) => {
-          console.log('cancel amount input');
+          // console.log('cancel amount input');
           this.generateReference()
         }
       }, {
         text: 'Confirm',
         cssClass : 'success',
         handler: (val) => {
-          console.log(val.amount)
-          console.log(typeof(val.amount))
+          // console.log(val.amount)
+          // console.log(typeof(val.amount))
           this.showPaymentButtons = true;
           this.model.amount = val.amount+'00'
           this.model.actual = val.amount
@@ -314,12 +314,12 @@ async enterAmountInput() {
 //         role: 'cancel',
 //         cssClass: 'secondary',
 //         handler: (blah) => {
-//           console.log('Confirm Cancel: blah');
+          // console.log('Confirm Cancel: blah');
 //         }
 //       }, {
 //         text: 'Okay',
 //         handler: (value) => {
-//           console.log('Confirm Okay', value);
+          // console.log('Confirm Okay', value);
 //           this.model.amount = value.amount;
 //           this.payNow();
 //         }
@@ -347,7 +347,7 @@ async enterCashoutAmount() {
         role: 'cancel',
         cssClass: 'danger',
         handler: (blah) => {
-          console.log('cashout is canceled');
+          // console.log('cashout is canceled');
         
         }
       }, {
@@ -366,12 +366,12 @@ async enterCashoutAmount() {
           this.accountService.cashout(this.model).subscribe(
           res => {
 
-            console.log(res);
+            // console.log(res);
             this.accountService.loadMyBalance();
             this.cashoutSuccess();
           },
           err => {
-            console.log(err);
+            // console.log(err);
             this.gameSevice.presentToast(err.error.message);
           }
         );
@@ -397,7 +397,7 @@ async cashoutSuccess() {
         text: 'Ok',
         cssClass : 'success',
         handler: () => {
-          console.log('ok');
+          // console.log('ok');
         }
       }
     ]

@@ -13,7 +13,7 @@ export class GameGuard implements CanActivate {
 
     canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
       this.gameLive = localStorage.getItem('GAMELIVE');
-      console.log('INSIDE live',this.gameLive );
+      // console.log('INSIDE live',this.gameLive );
       const admin = 'ADMIN';
       if( this.gameLive !== 'true'){
         this.router.navigateByUrl('/tabs/not-live');

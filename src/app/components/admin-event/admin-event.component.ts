@@ -37,10 +37,10 @@ image: any;
 
 
   submitEvent(){
-    console.log(this.eventModel);
+    // console.log(this.eventModel);
     this.eventService.submitEvent(this.eventModel).subscribe(
       res => {
-         console.log('event submitted successful!');
+        //  console.log('event submitted successful!');
          this.userService.shortToast(res['msg']);
          this.resetForm();
          setTimeout(()=>{
@@ -48,14 +48,14 @@ image: any;
          },2000)
       },
       err => {
-        console.log('error submitting event.');
+        // console.log('error submitting event.');
         this.userService.shortToast(err.error.msg);
       }
     );
   }
 
   eventType(event){
-    console.log(event);
+    // console.log(event);
    
   }
 
@@ -79,7 +79,7 @@ image: any;
     for (let i = 0; i < j; i++) {
         const reader = new FileReader();
         file = files[i];
-        console.log(file);
+        // console.log(file);
         this.uploadImageToFireBase(file);
     }
 }
@@ -97,7 +97,7 @@ uploadImageToFireBase(image) {
       });
   } catch (error) {
       this.loading = false;
-      console.log(error);
+      // console.log(error);
       this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
   }
 }

@@ -20,7 +20,7 @@ export class ImageCustomSpinnerComponent implements OnInit {
 
   onLoad() {
       this.imageLoading = false;
-      console.log('FFINISHSSH');
+      // console.log('FFINISHSSH');
   }
 
 }

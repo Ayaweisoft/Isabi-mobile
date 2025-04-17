@@ -47,18 +47,18 @@ export class ConfirmEmailPage implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
-      console.log('params: ', params.get('id'))
+      // console.log('params: ', params.get('id'))
       this.model.emailOtp = params.get('id');
-      console.log('otp: ', this.model.emailOtp);
+      // console.log('otp: ', this.model.emailOtp);
       if(this.model.emailOtp){
         this.userService.validateOtp(this.model).subscribe(
           res => {
             this.isOtp = true;
-            console.log('token: ', res)
+            // console.log('token: ', res)
           },
           err => {
             this.logicService.presentAlert('Email Verification', `Email Verification Failed: ${err.error.message}`);
-            console.log('error: ', err.error.message);
+            // console.log('error: ', err.error.message);
           }
         )
       }     
@@ -70,11 +70,11 @@ export class ConfirmEmailPage implements OnInit {
     this.loading = true;
     this.userService.validateOtp(this.model).subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.logicService.presentAlert('success','Your Email has been verified'); 
       },
       err => {
-        console.log(err.error);
+        // console.log(err.error);
       }
     );
   }

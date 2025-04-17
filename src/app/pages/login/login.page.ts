@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
   }
 
   async login(form: any) {
-    console.log('login fire')
+    // console.log('login fire')
     this.loading = true;
     this.userService.login(this.model).subscribe(response => {
       this.userService.setToken(response['token']);
@@ -68,7 +68,7 @@ export class LoginPage implements OnInit {
     }, err => {
       this.loading = false;
         this.gameService.presentToast(err.error.message);
-        console.log('LOGIN ERROR', err.error.message);
+        // console.log('LOGIN ERROR', err.error.message);
    
      
       // this.loginToast(message);
@@ -87,7 +87,7 @@ export class LoginPage implements OnInit {
       buttons: [ {
           text: 'Try again',
           handler: () => {
-            console.log('Confirm Okay');
+            // console.log('Confirm Okay');
           }
         }
       ]

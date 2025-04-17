@@ -12,7 +12,7 @@ export class InsideEventAddUserComponent implements OnInit {
 
   constructor(public modalController: ModalController, public navParams: NavParams,
         private eventService: EventService, public userService: UserService ) { 
-                  console.log('id', navParams.get('event_id'));
+                  // console.log('id', navParams.get('event_id'));
                   this.contesttModel.event_id =  navParams.get('event_id');
   }
 
@@ -31,7 +31,7 @@ export class InsideEventAddUserComponent implements OnInit {
 
 
   submitUser(){
-    console.log(this.contesttModel);
+    // console.log(this.contesttModel);
     this.eventService.createContestTant(this.contesttModel).subscribe(
       res => {
         this.closeModal();

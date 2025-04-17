@@ -20,7 +20,7 @@ result: any;
  
 
   ngOnInit() {
-    console.log(this.minutes, this.seconds, this.correctQuestion);
+    // console.log(this.minutes, this.seconds, this.correctQuestion);
   }
 
   dismissModal(){

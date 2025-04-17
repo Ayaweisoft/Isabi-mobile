@@ -66,10 +66,10 @@ export class ConfirmEmailPage implements OnInit {
           res => {
             this.isResetToken = true;
             this.passModel.resetToken = this.tokenModel.resetToken;
-            console.log('token: ', res)
+            // console.log('token: ', res)
           },
           err => {
-            console.log(err);
+            // console.log(err);
           }
         )
       }    
@@ -81,11 +81,11 @@ export class ConfirmEmailPage implements OnInit {
     this.loading = true;
     this.userService.resetPassword(this.model).subscribe(
       res => {
-        console.log("recovery email sent: ", res);
+        // console.log("recovery email sent: ", res);
         this.logicService.presentSucess('success','check your email for futher instruction', 'continue'); 
       },
       err => {
-        console.log(err.error);
+        // console.log(err.error);
       }  
     );
   }
@@ -95,11 +95,11 @@ export class ConfirmEmailPage implements OnInit {
       this.loading = true;
       this.userService.newPassword(this.passModel).subscribe(
         res => {
-          console.log(res)
+          // console.log(res)
           this.router.navigate(['/login']);
         },
         err => {
-          console.log(err.error);
+          // console.log(err.error);
         }
       )
     } else{

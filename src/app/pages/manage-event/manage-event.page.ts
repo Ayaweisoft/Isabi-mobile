@@ -35,7 +35,7 @@ async editEvent(event) {
   await modal.present();
 
   const data = await modal.onDidDismiss();
-  console.log(data)
+  // console.log(data)
   if(data.role === 'exist'){
     event = data.data;
     this.allEvent =  this.allEvent.map((eve)=> {
@@ -54,20 +54,20 @@ async editEvent(event) {
     getAllevent(){
       this.eventService.getAllEventAdmin().subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.allEvent = res['event'];
           this.loading = false;
         },
         err => {
           this.loading = false;
           this.userService.generalAlert(err.error.msg)
-          console.log('error getting event', err);
+          // console.log('error getting event', err);
         }
       );
     }
 
     loadPendingEvents(){
-      console.log("pending event")
+      // console.log("pending event")
       this.isApproved = false;
       this.eventService.getAllPendingEventAdmin().subscribe(
         res => {
@@ -77,24 +77,24 @@ async editEvent(event) {
         err => {
           this.loading = false;
           this.userService.generalAlert(err.error.msg)
-          console.log('error getting PENDING events', err);
+          // console.log('error getting PENDING events', err);
         }
       );
     }
 
     loadApprovedEvents(){
-      console.log("approved event");
+      // console.log("approved event");
       this.isApproved = true;
       this.eventService.getAllApprovedEventAdmin().subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           this.allEvent = res['event'];
           this.loading = false;
         },
         err => {
           this.loading = false;
           this.userService.generalAlert(err.error.msg)
-          console.log('error getting APPROVED events', err);
+          // console.log('error getting APPROVED events', err);
         }
       );
     }
@@ -143,7 +143,7 @@ async editEvent(event) {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel: blah');
+            // console.log('Confirm Cancel: blah');
           }
         }, {
           text: 'Okay',
@@ -171,10 +171,10 @@ async editEvent(event) {
   changeStatus(event, id){
    var selectedEvent =   this.allEvent.filter((item) => item._id === id);
    selectedEvent[0]['active'] = event.detail.checked;
-   console.log('sel ', ...selectedEvent);
+  //  console.log('sel ', ...selectedEvent);
    const data = {id:selectedEvent[0]['_id'], status:selectedEvent[0]['active']}
    this.eventService.updateEventStatus(data).subscribe(res => {
-    console.log(res)
+    // console.log(res)
    });
 
   }

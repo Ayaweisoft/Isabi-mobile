@@ -77,7 +77,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     //   this.info.nativeElement.classList.remove('infinite');
     // }, 12000);
     this.gameLiveStatusString = gameService.getGameLiveStatus();
-    console.log('Game Status' + this.gameLiveStatusString)
+    // console.log('Game Status' + this.gameLiveStatusString)
     if(this.gameLiveStatusString === 'true'){
       this.gameLiveStatus = true;
     } else {
@@ -140,7 +140,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     })
     this.getCategories();
     this.gameLiveStatusString = this.gameService.getGameLiveStatus();
-    console.log('Game Status' + this.gameLiveStatusString)
+    // console.log('Game Status' + this.gameLiveStatusString)
     if(this.gameLiveStatusString === 'true'){ 
       this.gameLiveStatus = true;
     } else {
@@ -150,7 +150,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   getCategories() {
-    console.log('get categories');
+    // console.log('get categories');
     this.loading = true;
     this.gameService.getCategories().subscribe(
       (res : { categories: any}) => {
@@ -164,7 +164,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   getRemoteAmount(){
-    console.log('getting remote amount');
+    // console.log('getting remote amount');
     this.loadingGame =  true;
     this.gameService.getAdminDate();
     this.gameService.getGameAmount().subscribe(res => {
@@ -180,7 +180,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   ionViewWillEnter() {
     this.gameService.getAdminDate();
     this.getQuestionForGame();
-    console.log('will enter');
+    // console.log('will enter');
   }
 
   ionViewWillLeave(){
@@ -215,7 +215,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.startGame = false;
     this.lastQuestion =  0;
     clearInterval(this.timerTicker);
-    console.log('destroyed');
+    // console.log('destroyed');
   }
 
   getColor1(){
@@ -247,7 +247,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
         this.loadingGame = false;
       },
       err => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -258,11 +258,11 @@ export class PlaysectionPage implements OnInit, OnDestroy {
 
   setCategory(category: any){
     if(this.gameLiveStatus){
-      console.log('game status: ', this.gameLiveStatus)
+      // console.log('game status: ', this.gameLiveStatus)
       this.gameCategory = category;
       this.showModal = true;
     } else {
-      console.log('game status: ', this.gameLiveStatus)
+      // console.log('game status: ', this.gameLiveStatus)
       this.logicService.presentAlert('Game Alert!!!','Game is not live yet');
     } 
   }
@@ -273,7 +273,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
       res => {
         // this.loadingGame = false;
         // this.startGame = true;
-        console.log({res})
+        // console.log({res})
         this.gameQuestions = res['questions'];
         // console.log(this.gameQuestions);
         this.lastQuestion =  this.gameQuestions.length - 1;
@@ -299,7 +299,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
           this.loadingGame = true;
         this.deductSub =  this.accountService.deductGameAmountFromAccountDemo().subscribe(
             (res) => {
-              console.log('PAY RES',res)
+              // console.log('PAY RES',res)
               this.accountService.loadMyBalance();
               this.startGame = true;
               this.currentQuestion  = this.gameQuestions[this.runningQuestion];
@@ -307,7 +307,9 @@ export class PlaysectionPage implements OnInit, OnDestroy {
               this.loadingGame = false;
 
             },
-            error => {console.log('ERROR', error); }
+            error => {
+              console.log('ERROR', error);
+             }
           );
         }
       },  
@@ -334,7 +336,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
           this.loadingGame = true;
         this.deductSub =  this.accountService.deductGameAmountFromBonus().subscribe(
             (res) => {
-              console.log('PAY RES',res)
+              // console.log('PAY RES',res)
               this.accountService.loadMyBonus();
               this.startGame = true;
               this.currentQuestion  = this.gameQuestions[this.runningQuestion];
@@ -530,7 +532,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
     this.gameOver = undefined;
     this.correctAns = 0;
     this.wrongAns = 0;
-    console.log("corect: ", this.correctAns, "wrong: ", this.wrongAns)
+    // console.log("corect: ", this.correctAns, "wrong: ", this.wrongAns)
     this.router.navigate(['/myrecord']);
   }
 
@@ -547,7 +549,7 @@ export class PlaysectionPage implements OnInit, OnDestroy {
   }
 
   async presentFailedModal(minutes, seconds, correctQuestion) {
-    console.log('QSTTT',correctQuestion);
+    // console.log('QSTTT',correctQuestion);
     const modal = await this.modalController.create({
     component: FailGameComponent,
     componentProps: {minutes, seconds, correctQuestion }

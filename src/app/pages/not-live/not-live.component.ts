@@ -49,18 +49,18 @@ export class NotLiveComponent implements OnInit {
 
      ionViewWillEnter() {
     this.gameService.getAdminDate();
-    console.log('will enter')
+    // console.log('will enter')
      }
 
 
 
      ionViewDidEnter(){
-      console.log('did enter');
+      // console.log('did enter');
      }
 
 
      ionViewCanEnter(){
-      console.log('can enter');
+      // console.log('can enter');
      }
 
 
@@ -76,7 +76,7 @@ export class NotLiveComponent implements OnInit {
 
 
   ngOnDestroy() {
-    console.log('on desotry');
+    // console.log('on desotry');
     clearInterval(this.gameTime);
     
   }
@@ -110,7 +110,7 @@ export class NotLiveComponent implements OnInit {
           text: 'continue',
           cssClass : 'success',
           handler: (val) => {
-           console.log('close notice');
+          //  console.log('close notice');
           }
         }
       ]
@@ -136,12 +136,12 @@ export class NotLiveComponent implements OnInit {
   }
 
   clickSlidetoNext() {
-    console.log('slide to next')
+    // console.log('slide to next')
     this.mySlider.slideNext();
   }
 
   clickSlidePrevious() {
-    console.log('slide to previous');
+    // console.log('slide to previous');
     this.mySlider.slidePrev();
   }
 
@@ -150,7 +150,7 @@ export class NotLiveComponent implements OnInit {
    this.gameService.getYoutubeLink().subscribe(
       res => {
         let youtubeVideo = res['doc']['link'];
-        console.log('link', youtubeVideo);
+        // console.log('link', youtubeVideo);
         this.safeVideo = this.sanitizer.bypassSecurityTrustResourceUrl(youtubeVideo);
       },
       err => {

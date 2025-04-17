@@ -27,20 +27,20 @@ profile : any;
 
   queryUser(){
     this.loading = true;
-    console.log(this.model.query); 
+    // console.log(this.model.query); 
     const obj = {user : this.model.query}
     this.accountService.queryUser(obj).subscribe(
       val => {
         this.loading = false;
         this.userDetails = val['userDetails'];
         this.profile = val['profile'];
-        console.log(this.userDetails);
-        console.log(this.profile);
+        // console.log(this.userDetails);
+        // console.log(this.profile);
       },
       err => {
         this.loading = false;
         this.presentToast();
-        console.log(err);
+        // console.log(err);
       }
       
     );

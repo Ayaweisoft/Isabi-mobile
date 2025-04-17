@@ -107,13 +107,13 @@ export class InsideEventComponent implements OnInit {
         }
         this.loading = false;
         this.contestant = res['contestant'];
-        console.log(this.contestant.length);
+        // console.log(this.contestant.length);
         this.contestantData = this.contestant;
         this.costPerVote = res['cost_per_vote'];
         this.event = res['eventData'];
         this.date = new Date(res['eventData']?.startDate)
 
-        console.log('ekjeshd', this.event, res)
+        // console.log('ekjeshd', this.event, res)
       },
       err => {
         try {

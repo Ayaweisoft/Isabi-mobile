@@ -29,15 +29,15 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router) {}
 
   loadMyBalance() {
-    console.log("GETTING BALANCE");
+    // console.log("GETTING BALANCE");
     this.getLeaderGameSection();
     this.appUser = localStorage.getItem("appUser");
     this.http
       .get(environment.apiBaseUrl + "/get-account-balance")
       .subscribe((value) => {
         this.setAccountBalance(value["balance"]);
-        this.accountBalance(value["balance"]);
-        console.log("NEW Balance ", this.accountSubject.getValue());
+        // this.accountBalance(value["balance"]);
+        // console.log("NEW Balance ", this.accountSubject.getValue());
         //get week and year
         let date = new Date();
         let week = this.getWeekNumber(date);
@@ -60,7 +60,7 @@ export class AccountService {
       .get(environment.apiBaseUrl + "/get-account-bonus")
       .subscribe((value) => {
         this.setAccountBonus(value["bonus"]);
-        console.log("NEW Bonus ", this.accountBonus.getValue());
+        // console.log("NEW Bonus ", this.accountBonus.getValue());
       });
   }
 
@@ -95,6 +95,7 @@ export class AccountService {
 
   setAccountBalance(balance: number) {
     this.accountSubject.next(balance);
+    this.accountBalance = balance; // just for safety
   }
 
   setAccountBonus(bonus: number) {

@@ -99,11 +99,11 @@ export class NetworkPage implements OnInit {
     this.userService.loadTotalReferrredCount();
 
     this.userService.getUsername().subscribe(name => this.username = name);
-    console.log('username: ' + this.username);
+    // console.log('username: ' + this.username);
     this.userService.getRank().subscribe(rank => this.user_rank = rank);
-    console.log('user rank: ' + this.user_rank);
+    // console.log('user rank: ' + this.user_rank);
     this.userService.getTotalReferredCount().subscribe(tot => this.totalReferredCount = tot);
-    console.log('total count: ' + this.totalReferredCount);
+    // console.log('total count: ' + this.totalReferredCount);
 
     this.userService.getUserProfile().subscribe(
       res => {
@@ -117,7 +117,7 @@ export class NetworkPage implements OnInit {
         this.model.compesationalBalance = res.compesationalBalance;
         this.model.rankingBalance = res.rankingBalance;
        
-        console.log(this.myProfile);
+        // console.log(this.myProfile);
         // this.userRecordNotAvalible = false;
       },
       err => {
@@ -129,28 +129,28 @@ export class NetworkPage implements OnInit {
 
   claimReferralBonus(bonus: number){
     this.refBonus_claim = true;
-    console.log('bonus: ', bonus);
+    // console.log('bonus: ', bonus);
     this.accountSerice.claimReferralBonus(bonus).subscribe(data => {
       this.accountSerice.loadMyBonus();
-      console.log("data: " + data)
+      // console.log("data: " + data)
     });
   }
 
   claimRankingBalance(balance: number){
     this.rankBal_claim = true;
-    console.log('bal: ', balance);
+    // console.log('bal: ', balance);
     this.accountSerice.claimRankingBalance(balance).subscribe(data => {
       this.accountSerice.loadMyBalance();
-      console.log("data: " + data)
+      // console.log("data: " + data)
     });
   }
 
   claimCompesationalBalance(balance: number){
     this.compBal_claim = true;
-    console.log('bal: ', balance);
+    // console.log('bal: ', balance);
     this.accountSerice.claimCompensationalBalance(balance).subscribe(data => {
       this.accountSerice.loadMyBalance();
-      console.log("data: " + data)
+      // console.log("data: " + data)
     });
   }
 
@@ -169,7 +169,7 @@ export class NetworkPage implements OnInit {
   }
 
   segmentChanged(ev){
-    // console.log(ev)
+    console.log(ev)
     this.segment = ev.detail.value;
   }
 

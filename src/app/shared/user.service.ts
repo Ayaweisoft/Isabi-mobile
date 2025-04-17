@@ -184,7 +184,8 @@ constructor(private http: HttpClient,
       return this.http.post(environment.apiBaseUrl + `/get-contestant-by-id`,dataId, this.noAuthHeader);
     }
 
-    postTransaction(tranx){
+    postTransaction(tranx: any){
+      console.log({ tranx })
       return this.http.post(environment.apiBaseUrl + `/submit-transaction`, tranx);
     }
 
@@ -310,8 +311,8 @@ constructor(private http: HttpClient,
       try {
         let payLoad = jwtDecode(this.getToken());
         let username = payLoad['username'] || this.getDoc()?.username;
-      console.log('getting username: ', payLoad['username'])
-      console.log('payload: ', payLoad);
+      // console.log('getting username: ', payLoad['username'])
+      // console.log('payload: ', payLoad);
       return username;
       } catch (error) {
         
@@ -322,8 +323,11 @@ constructor(private http: HttpClient,
      getAuthId(){
       try {
         let payLoad = jwtDecode(this.getToken());
-      let user_id = payLoad['_id'];
-      return user_id;
+        const user_id = payLoad['_id'];
+        if (!user_id) {
+          return this.getDoc()?._id;
+        }
+        return user_id;
       } catch (error) {
         
       }
@@ -352,7 +356,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-profile-pic')
       .subscribe(value => {
         this.setProfilePicture(value['image_url'])
-        console.log('Update Image ',this.profilePic.getValue())
+        // console.log('Update Image ',this.profilePic.getValue())
       })
     }
 
@@ -381,7 +385,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-user-name')
       .subscribe(value => {
         this.setUsername(value['username'])
-        console.log('Update username ',this.user_name.getValue())
+        // console.log('Update username ',this.user_name.getValue())
       })
     }
 
@@ -389,7 +393,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/check-is-first')
       .subscribe(value => {
         this.setIsFirst(value['isFirst'])
-        console.log('isFirst ', this.is_first.getValue())
+        // console.log('isFirst ', this.is_first.getValue())
       })
     }
 
@@ -417,7 +421,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-full-name')
       .subscribe(value => {
         this.setFullname(value['fullname'])
-        console.log('Update username ',this.full_name.getValue());
+        // console.log('Update username ',this.full_name.getValue());
       })
     }
 
@@ -433,7 +437,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-user-totalReferredCount')
       .subscribe(value => {
         this.setTotalReferredCount(value['totalReferredCount'])
-        console.log('Update TotalReferralCount ', this.totalReferredCount.getValue())
+        // console.log('Update TotalReferralCount ', this.totalReferredCount.getValue())
       })
     }
 
@@ -449,7 +453,7 @@ constructor(private http: HttpClient,
       this.http.get(environment.apiBaseUrl + '/get-user-rank')
       .subscribe(value => {
         this.setRank(value['rank'])
-        console.log('Update rank ', this.rank.getValue())
+        // console.log('Update rank ', this.rank.getValue())
       })
     }
   

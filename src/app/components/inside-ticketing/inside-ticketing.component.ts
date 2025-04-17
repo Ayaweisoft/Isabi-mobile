@@ -45,13 +45,13 @@ export class InsideTicketingComponent implements OnInit {
   randomString(len) {
     var p = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     var shortpass = [...Array(len)].reduce(a => a + p[~~(Math.random() * p.length)], '');
-    console.log('POP ', shortpass)
+    // console.log('POP ', shortpass)
     this.generatedTicketId = shortpass
     this.eventService.checkTicketIdIfExist(shortpass, this.eventId).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.randomString(6)
     }, err => {
-      console.log(err);
+      // console.log(err);
     });
     return
   }
@@ -67,7 +67,7 @@ export class InsideTicketingComponent implements OnInit {
 
 
   segmentChanged(ev) {
-    console.log(ev)
+    // console.log(ev)
     this.segment = ev.detail.value;
   }
 
@@ -83,7 +83,7 @@ export class InsideTicketingComponent implements OnInit {
 
     await modal.onDidDismiss().then(data => {
       this.getAllTicket();
-      console.log(data.data.data)
+      // console.log(data.data.data)
       if (data.data.data) {
         this.myTicketList.push(data.data.data)
         this.findMyTicket();
@@ -97,7 +97,7 @@ export class InsideTicketingComponent implements OnInit {
     if (result) {
       this.ticketList = this.ticketList.filter((item) => item._id != id);
       this.eventService.deleteTicket(id).subscribe(res => {
-        console.log(res)
+        // console.log(res)
       })
     }
   }
@@ -117,12 +117,12 @@ export class InsideTicketingComponent implements OnInit {
         } catch (error) {
 
         }
-        console.log(res);
+        // console.log(res);
         this.ticketList = res['ticketList'];
         this.event = res['event'];
         this.date = new Date(res['event'].startDate)
   
-        console.log('event: ', this.event);
+        // console.log('event: ', this.event);
         this.loading = false;
       },
       err => {
@@ -139,7 +139,7 @@ export class InsideTicketingComponent implements OnInit {
 
   findMyTicket() {
     this.eventService.findMyTicket(this.eventId, this.userService.getEmail()).subscribe(myList => {
-      console.log('OBSSS ', myList);
+      // console.log('OBSSS ', myList);
       this.myTicketList = myList['ticketList'];
     })
   }
@@ -178,12 +178,12 @@ export class InsideTicketingComponent implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            console.log('Confirm Cancel');
+            // console.log('Confirm Cancel');
           }
         }, {
           text: 'Confirm',
           handler: (data) => {
-            console.log('Confirm Ok', data);
+            // console.log('Confirm Ok', data);
             if (!data?.email || !data.phone || !data?.name || !data?.slot) {
               return this.logicService.presentToast('one or more field is required!')
             }
@@ -192,7 +192,7 @@ export class InsideTicketingComponent implements OnInit {
               return this.logicService.presentToast('slot must be greater tha zero')
             }
             var remainingTicket = ticket?.numberOfTicket - parseInt(data.slot);
-            console.log('remain ', remainingTicket)
+            // console.log('remain ', remainingTicket)
             if (remainingTicket < 1) {
               return this.logicService.presentToast('You have requested more than your slot')
             }
@@ -205,7 +205,7 @@ export class InsideTicketingComponent implements OnInit {
             }
 
             this.eventService.shareTicket(newTicket).subscribe(response => {
-              console.log(response);
+              // console.log(response);
               this.findMyTicket();
               this.randomString(6);
               this.logicService.presentSucess('Shared successful', `you have successfully shared ${newTicket?.numberOfTicket} ` +
@@ -213,7 +213,7 @@ export class InsideTicketingComponent implements OnInit {
               this.loading = false;
             }, err => {
               this.loading = false;
-              console.log(err);
+              // console.log(err);
             })
 
           }
@@ -233,7 +233,7 @@ export class InsideTicketingComponent implements OnInit {
     await modal.present();
 
     const data = await modal.onDidDismiss();
-    console.log(data)
+    // console.log(data)
     if (data?.data?.data) {
       this.ticketList.push(data?.data?.data);
     }
@@ -241,7 +241,7 @@ export class InsideTicketingComponent implements OnInit {
   }
 
   confirmMessage(ticket) {
-    console.log('confirm  ticket ', ticket)
+    // console.log('confirm  ticket ', ticket)
     ticket.status = 'VALID';
     this.eventService.confirmTicketId(ticket._id).subscribe(data => {
 

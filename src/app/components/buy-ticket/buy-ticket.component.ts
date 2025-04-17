@@ -88,10 +88,10 @@ export class BuyTicketComponent implements OnInit {
     // this.ticketForm.get('ticketId').setValue(shortpass);
     // this.ticketForm.get('parentTicket').setValue(shortpass);
     this.eventService.checkTicketIdIfExist(shortpass, this.ticket.eventId).subscribe(res => {
-      console.log(res);
+      // console.log(res);
       this.randomString(6)
     }, err => {
-      console.log(err);
+      // console.log(err);
     });
     return
   }
@@ -117,8 +117,8 @@ export class BuyTicketComponent implements OnInit {
     if (this.data.quantity < 1) {
       return this.logicService.presentToast('One or more field is required')
     }
-    console.log('model: ', this.model)
-    console.log('val: ', this.ticketForm.value)
+    // console.log('model: ', this.model)
+    // console.log('val: ', this.ticketForm.value)
     let costPerTicket = this.model.amount * this.data.quantity;
     // let costPerTicket = this.ticketForm.get('amount').value * this.data.quantity;
     let remainBalance = this.balance - costPerTicket;
@@ -130,19 +130,19 @@ export class BuyTicketComponent implements OnInit {
 
     if (remainBalance > 1) {
       this.eventService.savePurchaseTicket(this.model).subscribe(newTicket => {
-        console.log('count: ', newTicket);
+        // console.log('count: ', newTicket);
         this.modalController.dismiss({ data: newTicket });
         this.randomString(6);
         this.logicService.presentSucess('success', 'ticket purchase successful ', '')
         this.accountService.loadMyBalance();
 
       }, err => {
-        console.log(err);
+        // console.log(err);
       }) 
 
     } else {
       this.userService.longToast('balance is to low!');
-      console.log('balance to low for this purchase');
+      // console.log('balance to low for this purchase');
 
     }
   }

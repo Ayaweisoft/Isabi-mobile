@@ -65,7 +65,7 @@ export class ProfilePage implements OnInit {
     this.userService.getProfilePicture().subscribe(pic => this.image = pic);
     // this.model.name = this.userService.getUsername()
     this.userService.getUsername().subscribe(name => this.username = name);
-    console.log('username; ' + this.model.username);
+    // console.log('username; ' + this.model.username);
   }
 
   async presentFailNetwork() {
@@ -78,7 +78,7 @@ export class ProfilePage implements OnInit {
 
   createProfile(form : NgForm){
     this.loading = true;
-      console.log('before saving' + this.model);
+      // console.log('before saving' + this.model);
      
       this.userService.updateUserProfile(this.model).subscribe(res => {       
         this.userService.loadProfilePicture();
@@ -93,7 +93,7 @@ export class ProfilePage implements OnInit {
         this.loading =false;
         let message = err?.error;
         this.gameService.presentToast(message);
-        console.log(err);
+        // console.log(err);
       });
   }
 
@@ -106,13 +106,13 @@ export class ProfilePage implements OnInit {
       getMyProfile() {
         this.userService.getUsername().subscribe(name => this.model.username = name);
         // this.model.name = this.userService.getUsername()
-        console.log('username; ' + this.model.username)
+        // console.log('username; ' + this.model.username)
         this.userService.getUserProfile().subscribe(
           res => {
             this.loading = false;
             this.myProfile = res;
             
-            console.log(this.myProfile);
+            // console.log(this.myProfile);
             this.userRecordNotAvalible = false;
           },
           err => {
@@ -127,7 +127,7 @@ export class ProfilePage implements OnInit {
           res => {
             this.loading = false;
             this.image = res.image_url;
-            console.log(this.image);
+            // console.log(this.image);
           },
           err => {
             this.loading = false;
@@ -138,12 +138,12 @@ export class ProfilePage implements OnInit {
       uploadImage(image){
         this.userService.updateProfilePic(image).subscribe(res => {
           this.userService.loadProfilePicture();
-          console.log(res);
+          // console.log(res);
           this.loading = false;
         },
         err => {       
           this.loading =false;
-          console.log(err);
+          // console.log(err);
         });
       }
 
@@ -154,7 +154,7 @@ export class ProfilePage implements OnInit {
         for (let i = 0; i < j; i++) {
             const reader = new FileReader();
             file = files[i];
-            console.log(file);
+            // console.log(file);
             this.uploadImageToFireBase(file);
         }
     } 
@@ -171,13 +171,13 @@ export class ProfilePage implements OnInit {
                 this.userService.getUsername().subscribe(data => this.picModel.name = data);
                 // this.picModel.name = this.userService.getUsername()
                 this.uploadImage(this.picModel);
-                console.log('picUsername: ' + this.picModel.name)
+                // console.log('picUsername: ' + this.picModel.name)
                 this.loading = false;
               });
           });
       } catch (error) {
           this.loading = false;
-          console.log(error);
+          // console.log(error);
           this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
       }
     }

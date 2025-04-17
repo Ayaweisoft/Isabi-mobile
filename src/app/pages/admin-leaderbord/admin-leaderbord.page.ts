@@ -119,7 +119,7 @@ export class AdminLeaderbordPage implements OnInit {
     this.popLoading = true;
     this.userService.getUserDetails(id).subscribe((val: any)=> {
       this.loading = false;
-      console.log("val: ", val['user']);
+      // console.log("val: ", val['user']);
       this.userDetails = val['user'];
       this.popLoading = false;
     }, err => {

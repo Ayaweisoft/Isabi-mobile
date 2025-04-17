@@ -26,14 +26,14 @@ export class WebTicketComponent implements OnInit {
       this.eventId = this.activateRoute.snapshot.params['id'];
       if(this.eventId){
         this.eventService.getTicketByEventId(this.eventId).subscribe( (response: any) => {
-          console.log(response);
+          // console.log(response);
           this.loading = false;
          this.event = response['event']
          this.ticketList = response['ticketList']
         }, err => {
           this.loading = false;
           this.logicService.presentAlert('Error getting event', ' it could be cause by connection error, check your connection and try again')
-          console.log(err);
+          // console.log(err);
         })
       }
    });
@@ -51,7 +51,7 @@ export class WebTicketComponent implements OnInit {
     await modal.present();
   
     const data = await modal.onDidDismiss();
-    console.log(data.data.data)
+    // console.log(data.data.data)
    if(data?.data?.data){
     this.ticketList.push(data.data.data)
   // this.findMyTicket();

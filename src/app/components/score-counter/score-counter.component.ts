@@ -13,7 +13,7 @@ export class ScoreCounterComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log("level", this.level);
+    // console.log("level", this.level);
   }
 
   get wrongValue(): number {
@@ -32,8 +32,8 @@ export class ScoreCounterComponent implements OnInit {
   }
 
   updateProgress() {
-    console.log(this._rightValue);
-    console.log(this._wrongValue);
+    // console.log(this._rightValue);
+    // console.log(this._wrongValue);
     if (this._rightValue == 0 && this._wrongValue == 0) {
       this.level = 50;
       return;

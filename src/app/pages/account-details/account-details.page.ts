@@ -34,7 +34,7 @@ export class AccountDetailsPage implements OnInit {
                 public toastController: ToastController,
                 public accountService: AccountService) {
                   this.getProfilePic();
-                  console.log('username; ' + userService.getUsername())
+                  // console.log('username; ' + userService.getUsername())
                   userService.getUsername().subscribe(name => this.model.name = name);
                  }
 
@@ -68,13 +68,13 @@ export class AccountDetailsPage implements OnInit {
     this.getProfilePic();
     this.userService.sendAccountOtp().subscribe(
       res => {
-        console.log("message: ", res);
+        // console.log("message: ", res);
       },
       err => {
-        console.error("error: ", err.error.message)
+        // console.error("error: ", err.error.message)
       }
     )
-    console.log('username; ' + this.userService.getUsername());
+    // console.log('username; ' + this.userService.getUsername());
     this.userService.getUsername().subscribe(name => this.model.name = name);
   }
 
@@ -96,7 +96,7 @@ export class AccountDetailsPage implements OnInit {
       ...this.model,
       ...this.model
     }
-    console.log('before saving' + data);
+    // console.log('before saving' + data);
     
     this.userService.updateUserProfile(this.model).subscribe(res => {
       this.getMyProfile();
@@ -104,26 +104,26 @@ export class AccountDetailsPage implements OnInit {
     err => {
       
       this.loading =false;
-      console.log(err);
+      // console.log(err);
     });
   }
 
   selectChange(value: any) {
-    console.log("bank: ", value);
+    // console.log("bank: ", value);
     this.model.bank = value;
 
 
     this.model.bankCode = this.banks.filter(bank => bank.bank_name === value)[0].nip_bank_code;
-    console.log("bank: ", this.model.bankCode);
+    // console.log("bank: ", this.model.bankCode);
     this.disableInput = false;
   }
 
   inputChange(value: any) {
-    console.log("val: ", value);
+    // console.log("val: ", value);
     if(value.length === 10){
-      console.log("account: ", this.model)
+      // console.log("account: ", this.model)
       this.model.accountNumber = value;
-      console.log("resolving account....");
+      // console.log("resolving account....");
       this.resolveAccount();
     }
   }
@@ -135,7 +135,7 @@ export class AccountDetailsPage implements OnInit {
       res => {
         this.myProfile = res;
         
-        console.log('profile: ', this.myProfile);
+        // console.log('profile: ', this.myProfile);
         this.loading = false;
         this.userRecordNotAvalible = false;
       },
@@ -151,12 +151,12 @@ export class AccountDetailsPage implements OnInit {
       res => {
         const result: any = res;
         this.banks = result?.data?.banks
-        console.log('res: ', res);
-        console.log('banks: ', this.banks);
+        // console.log('res: ', res);
+        // console.log('banks: ', this.banks);
         this.loading = false;
       },
       err => {
-        console.log('err: ', err)
+        // console.log('err: ', err)
         this.loading = false;
       }
     );
@@ -166,14 +166,14 @@ export class AccountDetailsPage implements OnInit {
     this.nameLoading = true;
     this.accountService.resolveAccount(this.model).subscribe(
       res => {
-        console.log('res: ', res);
+        // console.log('res: ', res);
         let result: any = res;
         this.model.accountName = result?.data?.account_name;
         this.showName = true;
         this.nameLoading = false;
       },
       err => {
-        console.log('err: ', err)
+        // console.log('err: ', err)
         this.nameLoading = false;
       }
     );
@@ -184,7 +184,7 @@ export class AccountDetailsPage implements OnInit {
           res => {
             this.loading = false;
             this.image = res.image_url;
-            console.log(this.image);
+            // console.log(this.image);
           },
           err => {
             this.loading = false;
@@ -194,12 +194,12 @@ export class AccountDetailsPage implements OnInit {
 
       uploadImage(image){
         this.userService.updateProfilePic(image).subscribe(res => {
-          console.log(res);
+          // console.log(res);
           this.loading = false;
         },
         err => {       
           this.loading =false;
-          console.log(err);
+          // console.log(err);
         });
       }
 
@@ -210,7 +210,7 @@ export class AccountDetailsPage implements OnInit {
         for (let i = 0; i < j; i++) {
             const reader = new FileReader();
             file = files[i];
-            console.log(file);
+            // console.log(file);
             this.uploadImageToFireBase(file);
         }
     } 
@@ -230,20 +230,20 @@ export class AccountDetailsPage implements OnInit {
           });
       } catch (error) {
           this.loading = false;
-          console.log(error);
+          // console.log(error);
           this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
       }
     }
 
     validateOtp(){
       this.loading = true;
-      console.log(this.otpModel)
+      // console.log(this.otpModel)
       this.userService.validateAccountOtp(this.otpModel).subscribe(
         res => {
           this.loading = false;
           this.showAccount = true;
           this.logicService.presentAlert('Otp Validation', 'User Validation Successful');
-          console.log(res);
+          // console.log(res);
           this.getMyProfile();
 
         },

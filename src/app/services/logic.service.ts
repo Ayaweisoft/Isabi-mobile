@@ -66,7 +66,7 @@ export class LogicService {
       {
           text: 'Okay',
           handler: () => {
-            console.log('Confirm Okay');
+            // console.log('Confirm Okay');
           }
         }
       ]

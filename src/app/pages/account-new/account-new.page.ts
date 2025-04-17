@@ -59,7 +59,7 @@ export class AccountNewPage implements OnInit {
     public modalController: ModalController
   ) {
     this.accountService.loadMyBalance();
-    console.log('REF2', this.reference);
+    // console.log('REF2', this.reference);
     this.getTransaction();
 
   }
@@ -73,8 +73,8 @@ export class AccountNewPage implements OnInit {
 
   ngOnInit() {
 
-    console.log('REF', this.reference);
-    console.log('trans ref',)
+    // console.log('REF', this.reference);
+    // console.log('trans ref',)
     this.appUsername = localStorage.getItem('appUser');
     this.model.username = this.appUsername;
 
@@ -103,33 +103,35 @@ export class AccountNewPage implements OnInit {
     };
   }
 
+  
+
   onPinChange(){
-    console.log("pin: ", this.pinModel.pin)
+    // console.log("pin: ", this.pinModel.pin)
   }
 
   paymentCallback(response: any): void {
     this.showPaymentButtons = false;
-    console.log("RESULT", response);
+    // console.log("RESULT", response);
     if (response.resp == "00") {
       this.generateReference();
       response.date = Date.now();
       response.account_id = this.userService.getAuthId();
       response.ref = response.retRef;
-      response.username = this.userService.getUsername();
+      response.username = this.userService.getUserName();
       response.user_id = this.userService.getAuthId();
       response.transaction = response.txnref;
       response.amount = this.model.actual;
-      console.log('final response ', response);
+      // console.log('final response ', response);
       this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
-        res => {
+        (res) => {
           console.log('new balance', res);
           this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
           this.accountService.loadMyBalance();
 
-
           this.generateReference();
         },
-        err => {
+        (err) => {
+          console.log('err', err);
           this.generateReference()
           this.accountService.loadMyBalance();
         }
@@ -137,15 +139,16 @@ export class AccountNewPage implements OnInit {
 
 
     } else {
-      console.log('data')
+      // console.log('data')
       this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
     }
 
   }
 
+
   closedPaymentModal(): void {
     this.generateReference();
-    console.log('payment is closed');
+    // console.log('payment is closed');
     this.model.amount = null;
   }
 
@@ -156,17 +159,17 @@ export class AccountNewPage implements OnInit {
 
   submitProCode(promo) {
     this.loading = true;
-    console.log(promo)
+    // console.log(promo)
     let data = { promoCode: promo }
     this.accountService.activatePromo(data).subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.loading = false;
       this.logicService.presentAlert('success', 'your account has been credited');
       this.accountService.loadMyBalance();
     }, err => {
       this.loading = false;
       this.logicService.presentAlert('not fount', err.error.message);
-      console.log(err);
+      // console.log(err);
     })
 
   }
@@ -199,7 +202,7 @@ export class AccountNewPage implements OnInit {
   }
 
   payNow() {
-    console.log('pay now is clicked..', this.reference);
+    // console.log('pay now is clicked..', this.reference);
   }
 
   async enterAmountInput() {
@@ -218,7 +221,7 @@ export class AccountNewPage implements OnInit {
           role: 'cancel',
           cssClass: 'danger',
           handler: (blah) => {
-            console.log('cancel amount input');
+            // console.log('cancel amount input');
             this.generateReference()
           }
         },
@@ -226,8 +229,8 @@ export class AccountNewPage implements OnInit {
           text: 'Confirm',
           cssClass: 'success',
           handler: (val) => {
-            console.log(val.amount)
-            console.log(typeof (val.amount))
+            // console.log(val.amount)
+            // console.log(typeof (val.amount))
             this.showPaymentButtons = true;
             this.model.amount = val.amount + '00'
             this.model.actual = val.amount
@@ -257,7 +260,7 @@ export class AccountNewPage implements OnInit {
           role: 'cancel',
           cssClass: 'danger',
           handler: (blah) => {
-            console.log('cashout is canceled');
+            // console.log('cashout is canceled');
 
           }
         }, {
@@ -275,12 +278,12 @@ export class AccountNewPage implements OnInit {
               this.accountService.cashout(this.model).subscribe(
                 res => {
 
-                  console.log(res);
+                  // console.log(res);
                   this.accountService.loadMyBalance();
                   this.cashoutSuccess();
                 },
                 err => {
-                  console.log(err);
+                  // console.log(err);
                   this.gameSevice.presentToast(err.error.message);
                 }
               );
@@ -304,7 +307,7 @@ export class AccountNewPage implements OnInit {
           text: 'Ok',
           cssClass: 'success',
           handler: () => {
-            console.log('ok');
+            // console.log('ok');
           }
         }
       ]
@@ -319,13 +322,13 @@ export class AccountNewPage implements OnInit {
       res => {
         this.loading = false;
         this.transaction = res['transaction'];
-        console.log('transaction result: ', res);
+        // console.log('transaction result: ', res);
 
-        console.log('transaction: ', this.transaction);
+        // console.log('transaction: ', this.transaction);
       },
       err => {
         this.loading = false;
-        console.log(err);
+        // console.log(err);
       }
     );
   }

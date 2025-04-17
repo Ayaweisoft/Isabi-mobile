@@ -27,21 +27,21 @@ loading: boolean = true;
       res => {
         this.loading = false;
         this.manualTransfer = res['trans'];
-        console.log(this.manualTransfer);
+        // console.log(this.manualTransfer);
       }
     );
   }
 
   confirmUser(id){ 
     this.loading = true;
-    console.log(id);
+    // console.log(id);
     this.accountService.confirmTransaction(id).subscribe(
       res => {
         this.loading = false;
         this.getManualList();
       },err => {
         this.loading = false;
-        console.log(err);
+        // console.log(err);
         this.getManualList();
       }
     )
@@ -68,16 +68,17 @@ async declineAlert(id, amount, username){
         role: 'cancel',
         cssClass: 'secondary',
         handler: (blah) => {
-          console.log('Cancel');
+          // console.log('Cancel');
         }
       }, {
         text: 'DECLINE',
         handler: () => {
-          console.log('Confirm Okay');
+          // console.log('Confirm Okay');
           this.accountService.declineTransaction(id).subscribe(
             res => {
               let message = 'Transaction declined'
-              console.log(res);  this.getManualList(); this.presentToast(message) },
+              // console.log(res);
+              this.getManualList(); this.presentToast(message) },
             err => { this.loading = false; this.getManualList(); }
           );
         }

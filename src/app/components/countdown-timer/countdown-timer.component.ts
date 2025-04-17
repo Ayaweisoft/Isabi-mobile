@@ -11,11 +11,11 @@ export class CountdownTimerComponent implements OnInit {
   constructor(
     public gameService: GameServiceService,
     ) { 
-      console.log("userCount", this.userCount);
+    //   console.log("userCount", this.userCount);
 }
 
 ngOnInit() {
-    console.log("userCount", this.userCount);
+    // console.log("userCount", this.userCount);
 }
 
   async initializeTimer(){

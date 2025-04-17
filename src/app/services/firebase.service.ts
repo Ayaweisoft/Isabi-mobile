@@ -16,12 +16,12 @@ export class FirebaseService {
   
   
   uploadFile( image: any): AngularFireUploadTask {
-    console.log('file', image);
+    // console.log('file', image);
     return this.storage.upload(`${'image'}`+Date.now(), image);
   }
   
   uploadImage(email: string, imageFile: File): AngularFireUploadTask {
-    console.log('file', imageFile);
+    // console.log('file', imageFile);
     return this.storage.upload(`${email}/${imageFile.name}`+ Date.now(), imageFile);
   }
   

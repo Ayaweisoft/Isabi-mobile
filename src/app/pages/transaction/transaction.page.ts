@@ -26,13 +26,13 @@ transaction: any;
       res => {
         this.loading = false;
         this.transaction = res['transaction'];
-        console.log(res);
+        // console.log(res);
 
-        console.log(this.transaction); 
+        // console.log(this.transaction); 
       },
       err => {
         this.loading = false;
-        console.log(err);
+        // console.log(err);
       }
     );
   }

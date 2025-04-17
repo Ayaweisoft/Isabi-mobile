@@ -61,7 +61,7 @@ export class AddContestantComponent implements OnInit {
         for (let i = 0; i < j; i++) {
             const reader = new FileReader();
             file = files[i];
-            console.log(file);
+            // console.log(file);
             this.uploadImageToFireBase(file);
         }
     }
@@ -79,13 +79,13 @@ export class AddContestantComponent implements OnInit {
             });
         } catch (error) {
             this.loading = false;
-            console.log(error);
+            // console.log(error);
             this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
         }
     }
   
     submitForm(){
-        console.log(this.contestantForm.value)
+        // console.log(this.contestantForm.value)
         this.modalController.dismiss({data: this.contestantForm.value});
     }
 

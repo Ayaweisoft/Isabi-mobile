@@ -25,18 +25,18 @@ cashoutList: any;
   }
 
   async doRefresh(refresher) {
-    console.log('Begin async operation');
+    // console.log('Begin async operation');
     await this.cashoutRequest();
     this.refresherRef.complete();
    
   }
 
   cashoutRequest(){
-    console.log('fire cashout');
+    // console.log('fire cashout');
     this.loading = true;
     this.accountService.cashoutOutRequest().subscribe(
       res => {
-        console.log(res);
+        // console.log(res);
         this.loading = false;
         this.cashoutList = res['document'];
       }

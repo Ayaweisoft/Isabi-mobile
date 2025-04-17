@@ -32,7 +32,7 @@ eventModel = {
     private logicService: LogicService, private eventService: EventService) { }
 
   ngOnInit() {
-    console.log(this.event)
+    // console.log(this.event)
     this.image = this.event?.image_url;
     this.eventModel = {
       eventName:this.event?.eventName, type: this.event?.type, image_url:this.event?.image_url, 
@@ -55,7 +55,7 @@ eventModel = {
 
 
   updateEvent(){
-    console.log(this.eventModel)
+    // console.log(this.eventModel)
     this.loading = true;
     this.eventService.updateEvent(this.eventModel).subscribe(response=> {
       this.modalController.dismiss(response, "exist");
@@ -74,7 +74,7 @@ eventModel = {
     for (let i = 0; i < j; i++) {
         const reader = new FileReader();
         file = files[i];
-        console.log(file);
+        // console.log(file);
         this.uploadImageToFireBase(file);
     }
 }
@@ -92,7 +92,7 @@ uploadImageToFireBase(image) {
       });
   } catch (error) {
       this.loading = false;
-      console.log(error);
+      // console.log(error);
       this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
   }
 }

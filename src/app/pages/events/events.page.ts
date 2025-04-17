@@ -55,7 +55,7 @@ export class EventsPage implements OnInit {
     this.SocketService.connect();
     // this.appUser = localStorage.getItem('appUser');
     //this.initializeTimer();
-    console.log("day", this.GameService.timeDays);
+    // console.log("day", this.GameService.timeDays);
     // this.SocketService.userConnected();
     this.SocketService.fetchOnlineUsers().subscribe((data) => {
       this.userCount = data;
@@ -65,18 +65,18 @@ export class EventsPage implements OnInit {
     // this.socket.on('new-msg', (msg: any) => {
     //   console.log('sock msg: ' + msg);
     // })
-    console.log("number of users online: " + this.onlineUsers);
+    // console.log("number of users online: " + this.onlineUsers);
     const userID = this.UserService.getAuthId();
-    console.log("E enter events");
+    // console.log("E enter events");
     this.SocketService.userConnected(userID);
     this.SocketService.test(userID);
     this.SocketService.getConnectedUsers().subscribe((users) => {
       this.userCount = users;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
     this.SocketService.getUserDisconnected().subscribe((user) => {
       this.userCount = user.length;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
   }
 
@@ -93,7 +93,7 @@ export class EventsPage implements OnInit {
     this.loading = true;
     this.EventService.getAllEvent().subscribe(
       (res) => {
-        console.log(res);
+        // console.log(res);
         this.allEvent = res["event"];
         this.displayedEvents = this.allEvent;
         this.loading = false;
@@ -101,7 +101,7 @@ export class EventsPage implements OnInit {
       (err) => {
         this.loading = false;
         this.UserService.longToast(err.error.msg);
-        console.log("error getting event", err);
+        // console.log("error getting event", err);
       }
     );
   }
@@ -148,7 +148,7 @@ export class EventsPage implements OnInit {
           role: "cancel",
           cssClass: "secondary",
           handler: () => {
-            console.log("Confirm Cancel: blah");
+            // console.log("Confirm Cancel: blah");
           },
         },
         {

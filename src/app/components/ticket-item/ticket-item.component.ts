@@ -14,12 +14,12 @@ ticket : Ticket;
   constructor(private eventService: EventService) { }
 
   ngOnInit() {
-    console.log('shared tick id ', this.id )
+    // console.log('shared tick id ', this.id )
     this.eventService.getTicketById(this.id).subscribe(data => {
-      console.log('data ', data);
+      // console.log('data ', data);
       this.ticket = data['ticket'];
     }, err => {
-      console.log(err);
+      // console.log(err);
     })
   }
 

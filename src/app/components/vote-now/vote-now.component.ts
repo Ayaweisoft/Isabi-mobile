@@ -17,7 +17,7 @@ loading = false;
               public accountService: AccountService, private eventService: EventService,
               private userService: UserService) {
                 accountService.loadMyBalance();
-                console.log( navParams.get('event_id'));
+                // console.log( navParams.get('event_id'));
                 this.properties.event_id = navParams.get('event_id');
                 this.properties.contestant_id = navParams.get('contestant_id');
                 this.properties.image_url = navParams.get('image_url');
@@ -56,7 +56,7 @@ loading = false;
     let totalCost = this.balance - costPerVate ;
    
     if( totalCost > 1){
-      console.log('we can bid for this');
+      // console.log('we can bid for this');
       this.loading = true;
       this.eventService.submitVote(this.properties).subscribe(
           res => {
@@ -72,7 +72,7 @@ loading = false;
 
     }else{
       this.userService.longToast('balance is to low!');
-      console.log('balance to low for this purchase');
+      // console.log('balance to low for this purchase');
 
     }
 

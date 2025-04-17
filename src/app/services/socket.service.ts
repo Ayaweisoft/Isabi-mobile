@@ -21,7 +21,7 @@ constructor(private socket: Socket) {
             .fromEvent(eventName)
             .pipe(map((data: any) => {
               // data.msg
-              console.log(data)
+              // console.log(data)
               return data;
             } ));
     // return this.socket.fromEvent(eventName).pipe(map((result: any) => result.data));
@@ -31,7 +31,7 @@ constructor(private socket: Socket) {
     this.socket.emit(eventName, data);
   }
   test(id: string){
-    console.log("test", id);
+    // console.log("test", id);
     this.emit('test', id);
   }
   fetchOnlineUsers(): Observable<number> {

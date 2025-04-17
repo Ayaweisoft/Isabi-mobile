@@ -102,7 +102,7 @@ export class OnboardEventPage implements OnInit {
     for (let i = 0; i < j; i++) {
         const reader = new FileReader();
         file = files[i];
-        console.log(file);
+        // console.log(file);
         this.uploadImageToFireBase(file);
     }
   }
@@ -120,7 +120,7 @@ export class OnboardEventPage implements OnInit {
           });
       } catch (error) {
           this.loading = false;
-          console.log(error);
+          // console.log(error);
           this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
       }
   }
@@ -135,7 +135,7 @@ export class OnboardEventPage implements OnInit {
     await modal.present();
 
     const data = await modal.onDidDismiss();
-    console.log(data)
+    // console.log(data)
     if (data?.data?.data) {
       this.onboardingForm.tickets.push(data?.data?.data);
     }
@@ -150,7 +150,7 @@ export class OnboardEventPage implements OnInit {
     await modal.present();
 
     const data = await modal.onDidDismiss();
-    console.log(data)
+    // console.log(data)
     if (data?.data?.data) {
       this.onboardingForm.contestants.push(data?.data?.data);
     }

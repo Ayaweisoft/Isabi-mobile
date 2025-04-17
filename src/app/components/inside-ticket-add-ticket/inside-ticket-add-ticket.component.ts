@@ -44,7 +44,7 @@ export class InsideTicketAddTicketComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.eventId);
+    // console.log(this.eventId);
     this.ticketForm.get('eventId').setValue(this.eventId);
   }
 
@@ -63,7 +63,7 @@ export class InsideTicketAddTicketComponent implements OnInit {
     for (let i = 0; i < j; i++) {
         const reader = new FileReader();
         file = files[i];
-        console.log(file);
+        // console.log(file);
         this.uploadImageToFireBase(file);
     }
 }
@@ -81,17 +81,17 @@ uploadImageToFireBase(image) {
       });
   } catch (error) {
       this.loading = false;
-      console.log(error);
+      // console.log(error);
       this.logicService.presentAlert('Error uploading document', ' check your connection and try again.');
   }
 }
   
 submitForm(){
   this.loading = true;
-  console.log(this.ticketForm.value);
+  // console.log(this.ticketForm.value);
   this.eventService.submitTicket(this.ticketForm.value).subscribe(response => {
     this.ticketForm.reset();
-    console.log(response)
+    // console.log(response)
     this.loading = false;
     this.modalController.dismiss({data: response['docs']});
   }, err => {

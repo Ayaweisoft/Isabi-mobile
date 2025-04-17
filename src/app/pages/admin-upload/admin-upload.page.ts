@@ -48,7 +48,7 @@ export class AdminUploadPage implements OnInit {
   }
 
   getCategories() {
-    console.log('get categories');
+    // console.log('get categories');
     this.loading = true;
     this.gameService.getCategories().subscribe(
       (res : { categories: any}) => {
@@ -73,7 +73,7 @@ export class AdminUploadPage implements OnInit {
  
   submit(form: NgForm){
     this.loading = true;
-    console.log(form.value);
+    // console.log(form.value);
     this.questionModel.question = form.value.question;
     this.questionModel.answer = form.value.answer;
     this.questionModel.option1 = form.value.option1;
@@ -81,19 +81,19 @@ export class AdminUploadPage implements OnInit {
     this.questionModel.option3 = form.value.option3;
     this.questionModel.option4 = form.value.option4;
     this.questionModel.tip = form.value.tip;
-    console.log('model: ', this.questionModel);
-    console.log('modelCateg: ', this.questionModel.category);
+    // console.log('model: ', this.questionModel);
+    // console.log('modelCateg: ', this.questionModel.category);
 
     this.userService.postQuestion(this.questionModel).subscribe(
         response => {
           this.loading = false;
-          console.log(response);
+          // console.log(response);
           this.resetForm();
           this.presentToast();
         },
         err => {
           this.loading = false;
-          console.log(err);
+          // console.log(err);
           this.presentFail(err.error.message);
         }
       );
@@ -118,7 +118,7 @@ export class AdminUploadPage implements OnInit {
       buttons: [ {
           text: 'Retry',
           handler: () => {
-            console.log('Confirm Okay');
+            // console.log('Confirm Okay');
           } 
         }
       ]
@@ -136,8 +136,8 @@ export class AdminUploadPage implements OnInit {
   }
 
   selectChange( $event) {
-    console.log('event', $event);
+    // console.log('event', $event);
     this.questionModel.category = $event;
-    console.log('categ', this.questionModel.category);
+    // console.log('categ', this.questionModel.category);
   }
 }

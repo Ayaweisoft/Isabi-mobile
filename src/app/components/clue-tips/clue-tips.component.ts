@@ -28,7 +28,7 @@ opts = {
        this.gameService.slideCounter = this.gameService.gameTipArray.length;
        this.gameService.slideCounter --;
        this.mySlider.slideNext(3000, true);
-       console.log('slide to prev', this.gameService.slideCounter);
+      //  console.log('slide to prev', this.gameService.slideCounter);
     
     
     },9000)
@@ -36,12 +36,12 @@ opts = {
  }
 
  clickSlidetoNext() {
-  console.log('slide to next')
+  // console.log('slide to next')
   this.mySlider.slideNext();
 }
 
 clickSlidePrevious() {
-  console.log('slide to previous');
+  // console.log('slide to previous');
   this.mySlider.slidePrev();
 }
 

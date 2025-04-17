@@ -20,7 +20,7 @@ export class CongratsComponent implements OnInit {
    
   
     ngOnInit() {
-      console.log(this.minutes, this.seconds, this.correctQuestion);
+      // console.log(this.minutes, this.seconds, this.correctQuestion);
     }
   
     dismissModal(){

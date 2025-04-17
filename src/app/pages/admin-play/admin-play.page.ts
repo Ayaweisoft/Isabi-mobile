@@ -65,7 +65,7 @@ export class AdminPlayPage implements OnInit {
         this.loadingGame = false;
       },
       err => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }
@@ -160,10 +160,10 @@ export class AdminPlayPage implements OnInit {
          this.timeSeconds = secs;
   
          if (this.gameOver){
-           console.log('time is stoped');
+          //  console.log('time is stoped');
           clearInterval(ticker);
          }else{
-           console.warn('not yet time...');
+          //  console.warn('not yet time...');
          }
    
        }, 1000);
@@ -180,7 +180,7 @@ export class AdminPlayPage implements OnInit {
           text: 'OK',
           cssClass : 'success',
           handler: (val) => {
-           console.log('ok');
+          //  console.log('ok');
           }
         }
       ]
@@ -198,7 +198,7 @@ export class AdminPlayPage implements OnInit {
           role: 'cancel',
           cssClass: 'danger',
           handler: (blah) => {
-            console.log('cancel amount input');
+            // console.log('cancel amount input');
           }
         }, {
           text: 'Confirm',

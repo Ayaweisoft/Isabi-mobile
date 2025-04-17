@@ -26,7 +26,7 @@ export class WebVotingComponent implements OnInit {
       if(this.contestanId){
        let data = {id : this.contestanId}
         this.userService.getContestantById(data).subscribe( (contestant: any) => {
-          console.log(contestant);
+          // console.log(contestant);
           this.loading = false;
           this.properties.contestant_id = contestant['contestant']._id;
           this.properties.event_id = contestant['contestant'].event_id;
@@ -38,7 +38,7 @@ export class WebVotingComponent implements OnInit {
         }, err => {
           this.loading = false;
           this.logicService.presentAlert('Error getting contestant', ' it could be cause by connection error, check your connection and try again')
-          console.log(err);
+          // console.log(err);
         })
       }
    });

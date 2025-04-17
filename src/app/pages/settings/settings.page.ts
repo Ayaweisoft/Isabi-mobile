@@ -83,7 +83,7 @@ export class SettingsPage implements OnInit {
     this.userService.getUsername().subscribe(name => this.username = name);
     this.userService.getFullname().subscribe(name => this.fullname = name);
     // this.model.name = this.userService.getUsername()
-    console.log('username; ' + this.username);
+    // console.log('username; ' + this.username);
     this.userService.getProfilePicture().subscribe(pic => this.image = pic);
     this.loading = false;
   }

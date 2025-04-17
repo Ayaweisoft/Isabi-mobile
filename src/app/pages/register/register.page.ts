@@ -51,7 +51,7 @@ export class RegisterPage implements OnInit {
           this.ref.referralCode = this.id;
           this.isReferralCode = true;
           this.model.referrer = this.id;
-          console.log(this.ref.referralCode);
+          // console.log(this.ref.referralCode);
         }
         
     });
@@ -75,7 +75,7 @@ export class RegisterPage implements OnInit {
         // console.log(error);
         let message = error.error;
         this.gameService.presentToast(message);
-        console.log('error: ', error)
+        // console.log('error: ', error)
         
       }
     );

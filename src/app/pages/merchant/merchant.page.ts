@@ -31,15 +31,15 @@ export class MerchantPage implements OnInit {
 
   transferMoney(){
     if(this.model.username != this.model.conf_username){
-      console.log('user not matched');
+      // console.log('user not matched');
       let msg = 'incorrect input, cross-check input!';
       this.gameService.presentToast(msg);
     }else{
-      console.log(this.model);
+      // console.log(this.model);
       this.loading  = true;
       this.accountService.merchantTransfer(this.model).subscribe(
         res => {
-          console.log(res);
+          // console.log(res);
           let msg = res['msg'];
           this.gameService.presentToast(msg);
           this.accountService.loadMyBalance();
@@ -49,11 +49,11 @@ export class MerchantPage implements OnInit {
           this.loading = false;
           let msg = err.error.msg;
           this.gameService.presentToast(msg);
-          console.log(err);
+          // console.log(err);
         }
       );
     }
-    console.log(this.model);
+    // console.log(this.model);
   }
 
  

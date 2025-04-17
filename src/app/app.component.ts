@@ -140,32 +140,32 @@ export class AppComponent {
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
        const userID = this.UserService.getAuthId()
-    console.log("E nginit")
+    // console.log("E nginit")
     this.SocketService.userConnected(userID);
     this.SocketService.test(userID);
     this.SocketService.getConnectedUsers().subscribe(users => {
       this.userCount = users;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
     this.SocketService.getUserDisconnected().subscribe(user => {
       this.userCount = user.length;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
   }
   ionViewWillEnter(){
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
        const userID = this.UserService.getAuthId()
-    console.log("E ion enter")
+    // console.log("E ion enter")
     this.SocketService.userConnected(userID);
     this.SocketService.test(userID);
     this.SocketService.getConnectedUsers().subscribe(users => {
       this.userCount = users;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
     this.SocketService.getUserDisconnected().subscribe(user => {
       this.userCount = user.length;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
   }
 
@@ -179,22 +179,22 @@ export class AppComponent {
       this.AccountService.getAccountBalance().subscribe(bal =>  this.balance =  bal);
       this.reloadBonus();
       this.AccountService.getAccountBonus().subscribe(bon =>  this.bonus =  bon);
-      console.log(this.bonus);
+      // console.log(this.bonus);
       
       const userID = this.UserService.getAuthId()
-    console.log("E init")
+    // console.log("E init")
     this.SocketService.userConnected(userID);
     this.SocketService.test(userID);
     this.SocketService.getConnectedUsers().subscribe(users => {
       this.userCount = users;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
     this.SocketService.getUserDisconnected().subscribe(user => {
       this.userCount = user.length;
-      console.log(this.userCount, "userCount");
+      // console.log(this.userCount, "userCount");
     });
         // this.localNotifications.on('trigger').subscribe( res => {
-        //   console.log('alert Trigger 2', res );
+          // console.log('alert Trigger 2', res );
         //   let msg = res.data ? res.data.mydata : '';
         //   this.showAlert(res.title, res.text);
         // });
@@ -234,7 +234,7 @@ export class AppComponent {
   //     res => {
   //       this.loading = false;
   //       this.image = res.image_url;
-  //       console.log(this.image);
+        // console.log(this.image);
   //     },
   //     err => {
   //       this.loading = false;

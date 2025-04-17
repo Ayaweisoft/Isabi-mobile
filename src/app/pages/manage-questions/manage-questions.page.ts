@@ -60,7 +60,7 @@ export class ManageQuestionsPage implements OnInit {
   }
 
   getCategories() {
-    console.log('get categories');
+    // console.log('get categories');
     this.loading = true;
     this.gameService.getCategories().subscribe(
       (res : { categories: any}) => {
@@ -80,7 +80,7 @@ export class ManageQuestionsPage implements OnInit {
         getLiveQuestions(){
           this.userService.getLiveQuestionAmount().subscribe(
             res => {
-              console.log(res);
+              // console.log(res);
               this.liveQuestions = res['count'];
             }
           )
@@ -91,12 +91,12 @@ export class ManageQuestionsPage implements OnInit {
           this.userService.getAllQuestions().subscribe(
             res => {
               this.loading = false;
-              console.log(res);
+              // console.log(res);
               this.questionsOutPut = res['quesions'];
             },
             err => {
               this.loading = false;
-              console.log(err);
+              // console.log(err);
             }
           );
         }
@@ -115,7 +115,7 @@ export class ManageQuestionsPage implements OnInit {
                   role: 'cancel',
                   cssClass: 'secondary',
                   handler: (blah) => {
-                    console.log('cancle delete');
+                    // console.log('cancle delete');
                   }
                 }, {
                   text: 'Yes',
@@ -125,7 +125,7 @@ export class ManageQuestionsPage implements OnInit {
                     this.userService.deleteQuestion(id).subscribe(
                       res => {
                         this.loading = false;
-                        console.log('response .. success delete');
+                        // console.log('response .. success delete');
                         this.findByCategory(category);
                       },
                       err => {
@@ -143,18 +143,18 @@ export class ManageQuestionsPage implements OnInit {
 
           findByCategory(category){
             this.loading = true;
-            console.log(category);
+            // console.log(category);
             // console.log(this.catType);
             this.userService.findByCategory(category).subscribe(
               res => {
                 this.loading = false;
                 this.questionsOutPut = res['questions'];
-                console.log(this.questionsOutPut);
+                // console.log(this.questionsOutPut);
         
               },
               err => {
                 this.loading = false;
-                console.log(err);
+                // console.log(err);
               }
             );
         
@@ -164,14 +164,14 @@ export class ManageQuestionsPage implements OnInit {
           }
 
           changeStatusTrue(id, category){
-            console.log('I CLICK TRUE', category);
+            // console.log('I CLICK TRUE', category);
             this.userService.changeQuestionStatusToTrue(id).subscribe(
               res => { this.findByCategory(category); 
               } );
           }
         
           changeStatusFalse(id, category){
-            console.log('I CLICK false');
+            // console.log('I CLICK false');
             this.userService.changeQuestionStatusToFalse(id).subscribe(
               res => {
                 this.findByCategory(category) });
@@ -198,7 +198,7 @@ export class ManageQuestionsPage implements OnInit {
               },
               err => {
                 this.loading = false;
-                console.log(err);
+                // console.log(err);
               }
             );
           }
@@ -206,16 +206,16 @@ export class ManageQuestionsPage implements OnInit {
           
   updateQuestion(form: NgForm, id){
   
-    console.log(this.questionModel.id);
+    // console.log(this.questionModel.id);
     this.userService.upDateQuestion(this.questionModel).subscribe(
       response => {
         this.showForm = false;
         this.showContent = true; 
-        console.log(response);
+        // console.log(response);
         this.findByCategory(this.questionModel.category);
       },
       error => {
-        console.log(error); 
+        // console.log(error); 
       }
     );
   }
@@ -223,18 +223,18 @@ export class ManageQuestionsPage implements OnInit {
 
 
   searchQst(){
-    console.log(this.model.search);
+    // console.log(this.model.search);
     let searchText = { text : this.model.search}
     this.loading = true;
     this.userService.searchQuestion(searchText).subscribe(
       res => {
         this.loading =false;
-        console.log(res);
+        // console.log(res);
         this.questionsOutPut = res['questions'];
-        console.log(this.questionsOutPut);
+        // console.log(this.questionsOutPut);
       },
       err => {
-        console.log(err);
+        // console.log(err);
       }
     );
   }

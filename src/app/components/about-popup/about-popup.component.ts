@@ -18,20 +18,20 @@ export class AboutPopupComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("popup called");
+    // console.log("popup called");
   }
   redirect(){
     this.loading = true;
     this.UserService.toggleIsFirst()
       .subscribe(
         res => {
-          console.log('isFirst: ', this.isFirst)
+          // console.log('isFirst: ', this.isFirst)
           this.UserService.loadIsFirst();
           this.loading = false;
           this.router.navigate(['/tabs/profile']);
         },
         err => {
-          console.log('error: ', err);
+          // console.log('error: ', err);
         }    
       );
   }

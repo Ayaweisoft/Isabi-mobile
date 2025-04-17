@@ -92,7 +92,7 @@ export class PlaydemoPage implements OnInit {
   }
 
   getCategories() {
-    console.log('get categories');
+    // console.log('get categories');
     this.loading = true;
     this.gameService.getCategories().subscribe(
       (res : { categories: any}) => {
@@ -108,7 +108,7 @@ export class PlaydemoPage implements OnInit {
   ionViewWillEnter() {
     this.gameService.getAdminDate();
     this.getQuestionForGame();
-    console.log("will enter");
+    // console.log("will enter");
   }
 
   ionViewWillLeave() {
@@ -165,7 +165,7 @@ export class PlaydemoPage implements OnInit {
   }
 
   getRemoteAmount(){
-    console.log('getting remote amount');
+    // console.log('getting remote amount');
     this.loadingGame =  true;
     this.gameService.getGameAmount().subscribe(res => {
       if(res.data?.amount){
@@ -225,7 +225,7 @@ export class PlaydemoPage implements OnInit {
           this.loadingGame = true;
         this.deductSub =  this.accountService.deductGameAmountFromAccountDemo().subscribe(
             (res) => {
-              console.log('PAY RES',res)
+              // console.log('PAY RES',res)
               this.accountService.loadMyBalance();
               this.startGame = true;
               this.currentQuestion  = this.gameQuestions[this.runningQuestion];
@@ -260,7 +260,7 @@ export class PlaydemoPage implements OnInit {
           this.loadingGame = true;
         this.deductSub =  this.accountService.deductGameAmountFromBonusDemo().subscribe(
             (res) => {
-              console.log('PAY RES',res)
+              // console.log('PAY RES',res)
               this.accountService.loadMyBonus();
               this.startGame = true;
               this.currentQuestion  = this.gameQuestions[this.runningQuestion];
@@ -354,7 +354,7 @@ export class PlaydemoPage implements OnInit {
       let correctOption = options.findIndex(el=> {
         return el.includes(correctAnswer)
       }) + 1
-      console.log(correctOption)
+      // console.log(correctOption)
       this['option' + correctOption] = 'correct'
 
     }
@@ -457,7 +457,7 @@ export class PlaydemoPage implements OnInit {
   }
 
   async presentFailedModal(minutes, seconds, correctQuestion) {
-    console.log("QSTTT", correctQuestion);
+    // console.log("QSTTT", correctQuestion);
     const modal = await this.modalController.create({
       component: FailGameComponent,
       componentProps: { minutes, seconds, correctQuestion },

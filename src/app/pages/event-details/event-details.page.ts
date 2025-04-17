@@ -38,7 +38,7 @@ export class EventDetailsPage implements OnInit {
     ngOnInit() { 
       this.activatedRoute.paramMap.subscribe(params => { 
         this.id = params.get('id');
-        console.log('my id: ', this.id);       
+        // console.log('my id: ', this.id);       
       });
       this.getEventById(this.id);
     }
@@ -53,7 +53,7 @@ async editEvent(event) {
   await modal.present();
 
   const data = await modal.onDidDismiss();
-  console.log(data)
+  // console.log(data)
   if(data.role === 'exist'){
     event = data.data;
     this.allEvent =  this.allEvent.map((eve)=> {
@@ -71,10 +71,10 @@ async editEvent(event) {
   
   async  getEventById(id: any){
     this.loading = true;
-    console.log('id: ', id);
+    // console.log('id: ', id);
     this.eventService.getEventById(id).subscribe(
       res => {
-        console.log("log: ", res['eventData']);
+        // console.log("log: ", res['eventData']);
         this.event = res['eventData'];
         this.loading = false;
       },
@@ -83,18 +83,18 @@ async editEvent(event) {
         this.userService.longToast(err.error.msg)
         
 
-        console.log('error getting event', err);
+        // console.log('error getting event', err);
       }
     );
   }
 
     loadPendingEvent(){
-      console.log("pending event")
+      // console.log("pending event")
       this.isApproved = false;
     }
 
     loadApprovedEvent(){
-      console.log("approved event");
+      // console.log("approved event");
       this.isApproved = true;
     }
 
@@ -110,17 +110,17 @@ async editEvent(event) {
   changeStatus(event, id){
    var selectedEvent =   this.allEvent.filter((item) => item._id === id);
    selectedEvent[0]['active'] = event.detail.checked;
-   console.log('sel ', ...selectedEvent);
+  //  console.log('sel ', ...selectedEvent);
    const data = {id:selectedEvent[0]['_id'], status:selectedEvent[0]['active']}
    this.eventService.updateEventStatus(data).subscribe(res => {
-    console.log(res)
+    // console.log(res)
    });
   }
 
   approveEvent(event: Event) {
     event.preventDefault();
     this.loading = true;
-    console.log(this.details)
+    // console.log(this.details)
     this.eventService.approveEvent(this.id, this.details).subscribe(response => {
       this.loading = false;
       // console.log('event approved', response);   
