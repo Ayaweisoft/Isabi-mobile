@@ -24,6 +24,7 @@ export class AppComponent {
   balance : any;
   image: any;
   username: String;
+  role: String;
   bonus: any;
   userCount: number;
   authenticate = false;
@@ -139,6 +140,7 @@ export class AppComponent {
   ngOnInit(){
     // this.getProfilePic();
     this.UserService.getUsername().subscribe(name => this.username = name);
+    this.role = this.UserService.getRole()
        const userID = this.UserService.getAuthId()
     console.log("E nginit")
     this.SocketService.userConnected(userID);

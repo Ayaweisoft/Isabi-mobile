@@ -52,7 +52,9 @@ export class LoginPage implements OnInit {
     this.loading = true;
     this.userService.login(this.model).subscribe(response => {
       this.userService.setToken(response['token']);
-      // this.userService.setUsername(response.doc['username']);
+      this.userService.setUsername(response['doc']['username']);
+      this.userService.setRole(response['doc']['role']);
+      
       // this.userService.loadBalance();
       this.userService.loadProfilePicture();
       this.accountService.loadMyBonus();

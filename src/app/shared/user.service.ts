@@ -19,6 +19,7 @@ export class UserService {
   userID: string | null;
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
+  role = '';
   full_name = new BehaviorSubject<any>('');
   is_first = new BehaviorSubject<any>('');
   rank = new BehaviorSubject<any>('');
@@ -264,25 +265,21 @@ constructor(private http: HttpClient,
       }
      
      }
-
     
-   
+    //  getRole(){
+    //  try {
+    //   let payLoad = jwtDecode(this.getToken());
+    //   let role = payLoad['role'];
+    //   return role;
+    //  } catch (error) {
+    //     console.log('I failed')
+    //  }
 
-     getRole(){
-     try {
-      let payLoad = jwtDecode(this.getToken());
-      let role = payLoad['role'];
-      return role;
-     } catch (error) {
-        console.log('I failed')
-     }
-
-     }
+    //  }
 
      checkForAdmin(){
      try {
-      let payLoad = jwtDecode(this.getToken());
-      let role = payLoad['role'];
+      const role = this.role;
       if(role == 'ADMIN'){
         return true
       }else{
@@ -293,6 +290,20 @@ constructor(private http: HttpClient,
      }
      
      }
+    //  checkForAdmin(){
+    //  try {
+    //   let payLoad = jwtDecode(this.getToken());
+    //   let role = payLoad['role'];
+    //   if(role == 'ADMIN'){
+    //     return true
+    //   }else{
+    //     return false;
+    //   }
+    //  } catch (error) {
+       
+    //  }
+     
+    //  }
      
      getUserName(){
       try {
@@ -347,9 +358,15 @@ constructor(private http: HttpClient,
     setUsername(name: string){
       this.user_name.next(name)
     }
+    setRole(role: string){
+      this.role = role;
+    }
 
     getUsername(): BehaviorSubject<any> {
       return this.user_name;
+    }
+    getRole(): string{
+      return this.role;
     }
 
     loadUsername(){

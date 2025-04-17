@@ -20,174 +20,15 @@ import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { OnboardEventPage } from './pages/onboard-event/onboard-event.page';
 import { LeaderboardPage } from './pages/leaderboard/leaderboard.page';
 
-// const routes2: Routes = [
-//   {
-//     path: '',
-//     redirectTo: 'tabs/events',
-//     pathMatch: 'full'
-//   },
-
-//   {
-//     path: 'tabs', component: TabsComponent,
-//     children: [
-//       {
-//         path: 'gamesection',
-//         component: GamesectionComponent, canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'game-not-live',
-//         component: NotLiveComponent, canActivate: [AuthguardGuard]
-//       },
-
-//       {
-//         path: 'not-live', component: NotLiveComponent, canActivate: [AuthguardGuard]
-//       },
-
-//       {
-//         path: 'events', loadChildren: './pages/events/events.module#EventsPageModule',
-//         canActivate: [AuthguardGuard]
-//       },
-
-//       {
-//         path: 'admin-event', component: AdminEventComponent,
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-
-//       {
-//         path: 'leaderboard',
-//         loadChildren: './pages//leaderboard/leaderboard.module#LeaderboardPageModule',
-//         canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'account', component: AccountComponent, canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'playdemo',
-//         loadChildren: './pages/playdemo/playdemo.module#PlaydemoPageModule', canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'profile',
-//         loadChildren: './pages/profile/profile.module#ProfilePageModule', canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'myrecord',
-//         loadChildren: './pages/myrecord/myrecord.module#MyrecordPageModule', canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'playsection',
-//         loadChildren: './pages/playsection/playsection.module#PlaysectionPageModule',
-//         canActivate: [AuthguardGuard, GameGuard]
-//       },
-
-//       {
-//         path: 'transaction',
-//         loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
-//         canActivate: [AuthguardGuard]
-//       },
-
-//       //  admin routes
-//       {
-//         path: 'admin-upload',
-//         loadChildren: './pages/admin-upload/admin-upload.module#AdminUploadPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'manage-users',
-//         loadChildren: './pages/manage-users/manage-users.module#ManageUsersPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'manage-questions',
-//         loadChildren: './pages/manage-questions/manage-questions.module#ManageQuestionsPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'payouts',
-//         loadChildren: './pages/payouts/payouts.module#PayoutsPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'admin-account',
-//         loadChildren: './pages/admin-account/admin-account.module#AdminAccountPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'adminquery', loadChildren: './pages/adminquery/adminquery.module#AdminqueryPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'admintransfer', loadChildren: './pages/admintransfer/admintransfer.module#AdmintransferPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'admin-play',
-//         loadChildren: './pages/admin-play/admin-play.module#AdminPlayPageModule', canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'merchant',
-//         loadChildren: './pages/merchant/merchant.module#MerchantPageModule', canActivate: [AuthguardGuard, MerchantGuard]
-//       },
-
-//       {
-//         path: 'cashout-request',
-//         loadChildren: './pages/cashout-request/cashout-request.module#CashoutRequestPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//       {
-//         path: 'inside-event/:id', component: InsideEventComponent, canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'inside-ticketing/:id', component: InsideTicketingComponent, canActivate: [AuthguardGuard]
-//       },
-//       {
-//         path: 'admin-leaderbord', loadChildren: './pages/admin-leaderbord/admin-leaderbord.module#AdminLeaderbordPageModule',
-//         canActivate: [AuthguardGuard, AdminGuard]
-//       },
-//     ]
-//   },
-// // Outer Routes
-//   { path: 'howtoplay', loadChildren: './pages/howtoplay/howtoplay.module#HowtoplayPageModule' },
-//   { path: 'admin-navigation', component: AdminnavigationComponent },
-
-
-//   {
-//     path: 'testimonials',
-//     loadChildren: './pages/testimonials/testimonials.module#TestimonialsPageModule'
-//   },
-//   {
-//     path: 'contactus',
-//     loadChildren: './pages/contactus/contactus.module#ContactusPageModule'
-//   },
-//   {
-//     path: 'register',
-//     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
-//   },
-//   {
-//     path: 'login',
-//     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginPageModule)
-//   },
-//   {
-    
-//     path: 'web-voting/:id', component: WebVotingComponent
-//   },
-//   {
-    
-//     path: 'web-event-ticket/:id', component: WebTicketComponent
-//   },
-
-
-// ];
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'tabs/events',
     pathMatch: 'full'
   },
-
   {
     path: 'tabs', component: TabsComponent,
     children: [
-     
     {
       path: 'events', loadChildren: './pages/events/events.module#EventsPageModule',
       canActivate: [AuthguardGuard]
@@ -205,16 +46,12 @@ const routes: Routes = [
       path: 'playdemo',
       loadChildren: './pages/playdemo/playdemo.module#PlaydemoPageModule', canActivate: [AuthguardGuard]
     },
-
-
     {
       path: 'not-live', component: NotLiveComponent, canActivate: [AuthguardGuard]
     },
-    
     {
       path: 'leaderboard',
       loadChildren: './pages/leaderboard/leaderboard.module#LeaderboardPageModule',
-      
     },
     {
       path: 'onboard-event',
@@ -277,18 +114,15 @@ const routes: Routes = [
       loadChildren: './pages/playsection/playsection.module#PlaysectionPageModule',
       canActivate: [AuthguardGuard]
     },
-
     {
       path: 'network',
       loadChildren: () => import('./pages/network/network.module').then( m => m.NetworkPageModule)
     },
-
     {
       path: 'transaction',
       loadChildren: './pages/transaction/transaction.module#TransactionPageModule',
       canActivate: [AuthguardGuard]
     },
-
     //  admin routes
     {
       path: 'admin-upload',
