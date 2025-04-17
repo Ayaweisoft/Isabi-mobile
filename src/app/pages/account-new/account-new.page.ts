@@ -44,7 +44,7 @@ export class AccountNewPage implements OnInit {
   }
 
   customerDetails = {
-    name: this.userService.getUsername(), email: this.userService.getEmail(), phone_number: '',
+    name: this.userService.getUsername() || this.userService.getDoc()?.username, email: this.userService.getEmail() || this.userService.getDoc()?.email, phone_number: '',
     merchantCode: this.transService.merchant_code, payItemID: this.transService.pay_item_id
   }
 

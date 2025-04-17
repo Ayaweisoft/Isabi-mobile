@@ -13,6 +13,7 @@ import jwtDecode, * as jwt_decode from "jwt-decode";
 })
 export class UserService {
   messsageFromServer : any;
+  doc: any;
   token: any;
   accountBalance: any;
   username: any;
@@ -258,7 +259,7 @@ constructor(private http: HttpClient,
      getEmail(){
       try {
         let payLoad = jwtDecode(this.getToken());
-        let email = payLoad['email'];
+        let email = payLoad['email'] || this.getDoc()?.email; 
         return email;
       } catch (error) {
         
@@ -308,7 +309,7 @@ constructor(private http: HttpClient,
      getUserName(){
       try {
         let payLoad = jwtDecode(this.getToken());
-      let username = payLoad['username'];
+        let username = payLoad['username'] || this.getDoc()?.username;
       console.log('getting username: ', payLoad['username'])
       console.log('payload: ', payLoad);
       return username;
@@ -367,7 +368,13 @@ constructor(private http: HttpClient,
     }
 
     getRole(): String {
-      return this.role.getValue();
+      const role = this.role.getValue();
+      if (!!role) {
+        return role; 
+      }
+      const roleFromDoc = this.getDoc()?.role;
+      this.role.next(roleFromDoc);
+      return roleFromDoc;
     }
 
     loadUsername(){
@@ -450,6 +457,9 @@ constructor(private http: HttpClient,
      setToken(token: string) {
       localStorage.setItem('token', token);
      }
+     setDoc(doc: object) {
+      localStorage.setItem('doc', JSON.stringify(doc));
+     }
     //  setUsername(username: string) {
     //   localStorage.setItem('username', username);
     //  }
@@ -462,7 +472,14 @@ constructor(private http: HttpClient,
      this.token = localStorage.getItem('token');
      return this.token;
      }
-  
+
+     public getDoc(): { username: string, email: string, role: string, _id: string }{
+        if (this.doc) {
+          return this.doc;
+        }
+        this.doc = JSON.parse(localStorage.getItem('doc'));
+        return this.doc;
+      }
    
      getUserPayload() {
        const token = this.getToken();
