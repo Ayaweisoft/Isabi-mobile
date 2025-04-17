@@ -19,11 +19,21 @@ export class EventDetailsPage implements OnInit {
   loading = true;
   id: any;
   isApproved = false;
+  details: {
+    sharingRatio_company: string
+    sharingRatio_isabi: string
+  };
+  
     constructor(private router: Router, private gameService: GameServiceService, 
                 private eventService: EventService, public  userService: UserService,
                 private modalController: ModalController,
                 private activatedRoute: ActivatedRoute,
-                public alertController: AlertController) { }
+                public alertController: AlertController) { 
+                  this.details = {
+                    sharingRatio_company: '70',
+                    sharingRatio_isabi: '30',
+                  };
+                }
   
     ngOnInit() { 
       this.activatedRoute.paramMap.subscribe(params => { 
@@ -110,7 +120,8 @@ async editEvent(event) {
   approveEvent(event: Event) {
     event.preventDefault();
     this.loading = true;
-    this.eventService.approveEvent(this.id).subscribe(response => {
+    console.log(this.details)
+    this.eventService.approveEvent(this.id, this.details).subscribe(response => {
       this.loading = false;
       // console.log('event approved', response);   
       this.userService.generalAlert(response['msg'])

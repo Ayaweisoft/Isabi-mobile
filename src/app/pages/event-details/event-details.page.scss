@@ -6,6 +6,18 @@
 	display: flex;
 	flex-direction: column;
 
+    input, textarea, select {
+        width: 60%;
+        outline: none;
+        border: none;
+        background-color: inherit;
+        color: black;
+        // width: 97%;
+        margin: 0.5rem 0;
+        padding: 0.7rem 0;
+        border-bottom: 2px solid gray;
+      }
+
     .event-container{	
 		height: fit-content;
 		width: 100%;

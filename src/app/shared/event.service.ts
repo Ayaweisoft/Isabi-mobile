@@ -37,8 +37,8 @@ AuthHeader = {headers: new HttpHeaders().set('Authorization',
     console.log('service: ', id);
     return this.http.get(environment.apiBaseUrl +`/v2/get-event-by-id/${id}`);
   }
-  approveEvent(id: any){
-    return this.http.get(environment.apiBaseUrl +`/approve-event/${id}`);
+  approveEvent(id: any, details: any){
+    return this.http.post(environment.apiBaseUrl +`/approve-event/${id}`, details);
   }
   rejectEvent(id: any){
     return this.http.get(environment.apiBaseUrl +`/reject-event/${id}`);

@@ -80,16 +80,20 @@
               <span class="event-detail-name">{{ event?.voting_properties?.accountNumber }}</span>
             </div>
           </div>
+          <!-- <div class="date-time"  *ngIf="onboardingForm.eventType == 'VOTING'">
+            <input required type="number" name="costPerVote" [(ngModel)]="onboardingForm.costPerVote" id="costPerVote" placeholder="Enter cost per vote(₦)">
+            <input required type="number" name="numberOfSlots" [(ngModel)]="onboardingForm.numberOfSlots" id="numberOfSlots" placeholder="Enter ratio (1-100)">
+          </div> -->
           <div class="event-sect ratios">
             <div class="event-detail">
-              <h3 class="event-detail-title event-title">Company Ratio:</h3>
-              <span class="event-detail-name">70%</span>
+              <h3 class="event-detail-title event-title">Company/Business Ratio:</h3>
+              <input required type="number" min="1" max="100" name="sharingRatio_company" [(ngModel)]="details.sharingRatio_company" id="sharingRatio_company" placeholder="Enter ratio (1-100)">
             </div>
           </div>
           <div class="event-sect ratios">
             <div class="event-detail">
-              <h3 class="event-detail-title event-title">Business Ratio:</h3>
-              <span class="event-detail-name">30%</span>
+              <h3 class="event-detail-title event-title">Isabi Ratio:</h3>
+              <input required type="number" min="1" max="100" name="sharingRatio_isabi" [(ngModel)]="details.sharingRatio_isabi" id="sharingRatio_isabi" placeholder="Enter ratio (1-100)">
             </div>
           </div>
           <div class="btn-div btn-div-accept">
