@@ -19,7 +19,7 @@ export class UserService {
   userID: string | null;
   profilePic = new BehaviorSubject<any>('');
   user_name = new BehaviorSubject<any>('');
-  role = '';
+  role = new BehaviorSubject<any>('');
   full_name = new BehaviorSubject<any>('');
   is_first = new BehaviorSubject<any>('');
   rank = new BehaviorSubject<any>('');
@@ -279,7 +279,7 @@ constructor(private http: HttpClient,
 
      checkForAdmin(){
      try {
-      const role = this.role;
+      const role = this.role.getValue();
       if(role == 'ADMIN'){
         return true
       }else{
@@ -359,14 +359,15 @@ constructor(private http: HttpClient,
       this.user_name.next(name)
     }
     setRole(role: string){
-      this.role = role;
+      this.role.next(role)
     }
 
     getUsername(): BehaviorSubject<any> {
       return this.user_name;
     }
-    getRole(): string{
-      return this.role;
+
+    getRole(): String {
+      return this.role.getValue();
     }
 
     loadUsername(){
