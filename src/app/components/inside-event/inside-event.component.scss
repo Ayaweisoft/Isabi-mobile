@@ -90,15 +90,26 @@
 
             .voting-segment{
                 position: relative;
-                display: grid;
-				grid-template-columns: repeat(4, 1fr);
-                place-items: center;
+                display: flex;
+                flex-direction: column;
                 gap: 20px;
+                width: 80%;
+
+                // display: grid;
+				// grid-template-columns: repeat(4, 1fr);
+                // place-items: center;
+                // gap: 20px;
 				padding: 0 1rem;
                 width: 100%;
-                @media screen and (max-width: 768px){
-                        grid-template-columns: repeat(2, 1fr);
+
+                @media screen and (min-width: 600px) {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+                    // justify-content: center;
                 }
+                // @media screen and (max-width: 768px){
+                //         grid-template-columns: repeat(2, 1fr);
+                // }
 
                 .voting-card{
                     display: flex;
