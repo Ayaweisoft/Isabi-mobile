@@ -27,11 +27,20 @@
           [(ngModel)]="contesttModel.nickname" required="true"></ion-input>
     </ion-item>
 
-      <ion-item color="light">
+      <div>
+        <h3 class="section-title">Add Cover Image</h3>
+        <label *ngIf="!photo" for="image_url" class="cover-photo">
+          <img src="../../../assets/figma/add.svg" alt="">
+        </label>
+        <img class="cover_img" *ngIf="photo" [src]="photo" alt=""  onclick="document.getElementById('image_url').click();">
+        <input required type="file" name="image_url" id="image_url" (change)="addImagesFirebase($event)">
+      </div>
+
+      <!-- <ion-item color="light">
           <ion-label position="floating">user image url</ion-label>
           <ion-input  type="text" #image_url="ngModel" name="image_url" 
           [(ngModel)]="contesttModel.image_url" required="true"></ion-input>
-    </ion-item>
+    </ion-item> -->
   
    <div class="ion-text-center">
     <ion-button (click)="submitUser()" >create</ion-button>
