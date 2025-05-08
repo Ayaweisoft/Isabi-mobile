@@ -37,6 +37,7 @@ export class AccountNewPage implements OnInit {
   balance: any;
   transaction: any;
   pinType: string = "password";
+  successCodes: string[] = ["10", "11", "00"];
   withdrawalPin: boolean = false;
   
   pinModel = {
@@ -111,40 +112,60 @@ export class AccountNewPage implements OnInit {
 
   paymentCallback(response: any): void {
     this.showPaymentButtons = false;
-    // console.log("RESULT", response);
+    console.log("RESULT", {response});
     if (response.resp == "00") {
-      this.generateReference();
-      response.date = Date.now();
-      response.account_id = this.userService.getAuthId();
-      response.ref = response.retRef;
-      response.username = this.userService.getUserName();
-      response.user_id = this.userService.getAuthId();
-      response.transaction = response.txnref;
-      response.amount = this.model.actual;
-      // console.log('final response ', response);
-      this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
+      this.updateBalance(response);
+    } else {
+      const data = {
+        merchantcode: "MX46047",
+        reference: response?.txnref,
+        amount: !!response?.amount ? response?.amount : this.model?.amount,
+      }
+      // console.log('verify', {data});
+      this.userService.verifyPayment(data).subscribe(
         (res) => {
-          console.log('new balance', res);
-          this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
-          this.accountService.loadMyBalance();
-
-          this.generateReference();
+          // console.log('verify', {res});
+          if (this.successCodes.includes(res["ResponseCode"])) {
+            this.updateBalance(response);
+          } else {
+              this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
+          }
         },
         (err) => {
-          console.log('err', err);
-          this.generateReference()
-          this.accountService.loadMyBalance();
+         this.generateReference()
+         this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
         }
-      );
-
-
-    } else {
-      // console.log('data')
-      this.logicService.presentAlert('failed', 'your transactions has failed, please try again')
+      )
     }
 
   }
 
+  
+updateBalance(response: any) {
+    this.generateReference();
+    response.date = Date.now();
+    response.account_id = this.userService.getAuthId();
+    response.ref = response.retRef;
+    response.username = this.userService.getUserName();
+    response.user_id = this.userService.getAuthId();
+    response.transaction = response.txnref;
+    response.amount = this.model.actual;
+    // console.log('final response ', response);
+    this.paymentDoneSub = this.userService.postTransaction(response).subscribe(
+      (res) => {
+        // console.log('new balance', res);
+        this.logicService.presentAlert('Thank you', 'your account has been credited successfully. reload if not reflect.')
+        this.accountService.loadMyBalance();
+
+        this.generateReference();
+      },
+      (err) => {
+        console.log('err', err);
+        this.generateReference()
+        this.accountService.loadMyBalance();
+      }
+    );
+  }
 
   closedPaymentModal(): void {
     this.generateReference();

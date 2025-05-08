@@ -188,6 +188,10 @@ constructor(private http: HttpClient,
       console.log({ tranx })
       return this.http.post(environment.apiBaseUrl + `/submit-transaction`, tranx);
     }
+ 
+    verifyPayment(tranx: any){
+      return this.http.post(environment.apiBaseUrl + `/v2/verify-payment`, tranx);
+    }
 
     postManualTransaction(tranx){
     }

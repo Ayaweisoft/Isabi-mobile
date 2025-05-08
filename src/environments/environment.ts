@@ -4,13 +4,13 @@
 
 export const environment = {
   production: false,
-  // apiBaseUrl: 'http://localhost:8000/api',
-  // socketsUrl: 'http://localhost:8000',
-  // webVotingUrl: 'http://localhost:8100/',
+  apiBaseUrl: 'http://localhost:8000/api',
+  socketsUrl: 'http://localhost:8000',
+  webVotingUrl: 'http://localhost:8100/',
   
-  apiBaseUrl:  'https://i-sabi-server.onrender.com/api',
-  socketsUrl: 'https://i-sabi-server.onrender.com',
-  webVotingUrl: 'https://voting.i-sabi.com.ng/contestant/',
+  // apiBaseUrl:  'https://i-sabi-server.onrender.com/api',
+  // socketsUrl: 'https://i-sabi-server.onrender.com',
+  // webVotingUrl: 'https://voting.i-sabi.com.ng/contestant/',
   versionCode: 5.2,
   firebaseConfig: {
     apiKey: "AIzaSyBxZ8gv4d0y4CXQ8cty-cNAAMPQ9AvvB7g",
