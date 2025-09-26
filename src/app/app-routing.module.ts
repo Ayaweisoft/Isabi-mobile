@@ -20,17 +20,29 @@ import { WebTicketComponent } from './pages/web-ticket/web-ticket.component';
 import { OnboardEventPage } from './pages/onboard-event/onboard-event.page';
 import { LeaderboardPage } from './pages/leaderboard/leaderboard.page';
 
+
 const routes: Routes = [
+  // --- 1. DEFAULT ROUTE: Redirects to Onboarding for First-time setup ---
   {
     path: '',
-    redirectTo: 'tabs/events',
+    redirectTo: 'onboarding', 
     pathMatch: 'full'
   },
+  {
+    path: 'onboarding', 
+    loadChildren: () => import('./pages/onboarding/onboarding.module').then( m => m.OnboardingPageModule)
+  },
+  // --- END DEFAULT ROUTE ---
+
   {
     path: 'tabs', component: TabsComponent,
     children: [
     {
       path: 'events', loadChildren: './pages/events/events.module#EventsPageModule',
+      canActivate: [AuthguardGuard]
+    },
+    {
+      path: 'utility', loadChildren: './pages/utility/utility.module#UtilityPageModule',
       canActivate: [AuthguardGuard]
     },
     
@@ -221,18 +233,7 @@ const routes: Routes = [
     path: '**',
     loadChildren: () => import('./pages/error-page/error-page.module').then( m => m.ErrorPagePageModule)
   },
-    
-    
-
 ];
-
-// const routes3: Routes = [
-//   {
-//     path: '',
-//     redirectTo: 'tabs/events',
-//     pathMatch: 'full'
-//   },
-// ]
 
 @NgModule({
   imports: [

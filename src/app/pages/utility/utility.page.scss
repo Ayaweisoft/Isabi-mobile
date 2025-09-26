@@ -1,0 +1,214 @@
+/* --- New CSS for the Custom Header --- */
+.header {
+  position: absolute; /* Allows it to float over the background/content */
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between; /* Pushes buttons and photo to opposite ends */
+  align-items: center;
+  padding: 10px 10px 0 10px; /* Top padding to ensure it's not hidden by status bar */
+  z-index: 100; /* Ensure it is on top of everything */
+}
+
+/* Style for the menu button container */
+.header ion-buttons {
+  order: 1; /* Place it on the left */
+}
+
+/* Style for the profile photo component */
+profile-photo {
+  order: 2; /* Place it on the right */
+  /* The custom class 'profile-header' from your HTML can be used for sizing */
+}
+
+/* If profile-photo is a simple wrapper for an image/avatar */
+.profile-header {
+  height: 40px; /* Example size */
+  width: 40px; /* Example size */
+  border-radius: 50%;
+  overflow: hidden;
+  background: white; /* Give it a background so you can see the size */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the header text is below the buttons/photo */
+.utility-header {
+  color: white;
+  padding: 70px 0 30px 0; /* INCREASED TOP PADDING to clear the custom header bar (40px + status bar height) */
+  text-align: center;
+  position: relative;
+}
+/* Define Primary Color Variable for consistency */
+$primary-green: #348a40;
+$light-background: #f2f2f2;
+$card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+
+ion-header {
+  display: none; /* Hides the default ion-header/toolbar */
+}
+
+/* 1. Make ion-content's host transparent */
+ion-content {
+  --background: transparent;
+}
+
+/* 2. Apply the complex background and positioning to the inner div */
+.utility-background {
+  /* This ensures the div covers the entire viewable area */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  
+  /* Apply the visual styling: image with a color overlay */
+  background: linear-gradient(
+      to bottom,
+      rgba(52, 138, 64, 0.85) 0%, /* Dark Green Start */
+      rgba(52, 138, 64, 0.65) 40%,
+      rgba(242, 242, 242, 1) 100% /* Fade to $light-background */
+    ),
+    url("../../../assets/figma/unsplash_XIIsv6AshJY.svg") no-repeat center center;
+    
+  background-size: cover;
+  z-index: 1; /* Keep it behind the content */
+}
+
+.utility-container {
+  padding: 0 20px;
+  position: relative; /* Context for children */
+  z-index: 2; /* Ensure content is above the background layer */
+}
+
+
+.utility-header {
+  color: white;
+  padding: 40px 0 30px 0;
+  text-align: center;
+  position: relative;
+}
+
+.utility-header h1 {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.utility-header p {
+  font-size: 1em;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Custom Back Arrow Styling */
+.back-arrow {
+  position: absolute;
+  top: 15px;
+  left: 0px;
+  font-size: 1.8em;
+  color: white;
+  z-index: 10;
+  padding: 15px;
+}
+
+.service-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: left;
+  height: 140px;
+  box-shadow: $card-shadow;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.service-card ion-icon {
+  font-size: 2.5em;
+  color: $primary-green;
+  margin-bottom: 10px;
+}
+
+.service-card h2 {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.service-card p {
+  font-size: 0.8em;
+  color: #666;
+  margin: 2px 0 0 0;
+}
+
+/* FORM STYLES */
+.form-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: $card-shadow;
+  animation: fadeIn 0.3s ease-out;
+  margin-top: 0;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.sub-segment {
+  margin-bottom: 20px;
+  ion-segment-button {
+    --color-checked: $primary-green;
+    --indicator-color: $primary-green;
+  }
+}
+
+.input-item {
+  --background: #f9f9f9;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #e0e0e0;
+  transition: border-color 0.3s;
+  &:focus-within {
+    border-color: $primary-green;
+  }
+}
+
+.utility-btn {
+  --background: #348a40;
+  --border-radius: 10px;
+  height: 50px;
+  font-weight: bold;
+  margin-top: 20px;
+  transition: background-color 0.2s;
+}
+
+.utility-btn, .utility-btn ion-button {
+  background: #348a40 !important;
+  color: #fff !important;
+  border-radius: 10px !important;
+}
+
+.account-name-display {
+  padding: 10px 16px;
+  font-size: 0.9em;
+  color: $primary-green;
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+  .utility-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 40px;
+  }
+}

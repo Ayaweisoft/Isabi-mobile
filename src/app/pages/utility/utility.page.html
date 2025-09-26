@@ -1,0 +1,198 @@
+<div class="utility-background"></div> 
+
+<div class="header" [class.headerIsActive]="headerIsActive">
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+  <profile-photo [className]="'profile-header'"></profile-photo>
+</div>
+
+<ion-content class="ion-padding">
+  <div class="utility-container">
+
+    <div class="utility-header">
+      <ion-icon name="arrow-back-outline" class="back-arrow" *ngIf="currentView !== 'grid'" (click)="backToGrid()">
+      </ion-icon>
+
+      <h1>{{ currentView === 'grid' ? 'Utility Services' : currentView | titlecase }}</h1>
+      <p *ngIf="currentView === 'grid'">Pay bills, buy airtime, and more</p>
+    </div>
+
+    <ng-container *ngIf="currentView === 'grid'">
+      <ion-grid class="utility-grid">
+        <ion-row>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('mobile', 'airtime')">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+              <h2>Airtime</h2>
+              <p>Buy Airtime</p>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('mobile', 'data')">
+              <ion-icon name="globe-outline"></ion-icon>
+              <h2>Data</h2>
+              <p>Buy Data</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('mobile', 'mtn_awuf')">
+              <ion-icon name="gift-outline"></ion-icon>
+              <h2>MTN AWUF</h2>
+              <p>Get Bonus Airtime</p>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('mobile', 'pin')">
+              <ion-icon name="key-outline"></ion-icon>
+              <h2>Recharge PIN</h2>
+              <p>Buy Recharge PIN</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('electricity')">
+              <ion-icon name="bulb-outline"></ion-icon>
+              <h2>Electricity</h2>
+              <p>Buy Token</p>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('bank')">
+              <ion-icon name="business-outline"></ion-icon>
+              <h2>Banks</h2>
+              <p>Transfer & Verify</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <div class="service-card" (click)="goToForm('examinations')">
+              <ion-icon name="school-outline"></ion-icon>
+              <h2>Examinations</h2>
+              <p>Purchase PIN</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+
+    <div class="form-card" *ngIf="currentView !== 'grid'">
+
+      <form *ngIf="currentView === 'mobile'" (ngSubmit)="submitMobileForm()">
+        <ion-list lines="none">
+          <ion-segment [(ngModel)]="mobileType" name="mobileTypeSegment" class="sub-segment">
+            <ion-segment-button value="airtime">Airtime</ion-segment-button>
+            <ion-segment-button value="data">Data</ion-segment-button>
+            <ion-segment-button value="mtn_awuf">MTN AWUF</ion-segment-button>
+            <ion-segment-button value="pin">PIN</ion-segment-button>
+          </ion-segment>
+
+          <ion-item class="input-item">
+            <ion-label position="floating">Phone Number</ion-label>
+            <ion-input type="tel" [(ngModel)]="mobileForm.phone" name="phone"></ion-input>
+          </ion-item>
+
+          <ion-item class="input-item" *ngIf="mobileType !== 'data'">
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number" [(ngModel)]="mobileForm.amount" name="amount"></ion-input>
+          </ion-item>
+
+          <ion-item class="input-item" *ngIf="mobileType === 'data'">
+            <ion-label position="floating">Data Plan</ion-label>
+            <ion-select placeholder="Select Data Plan" [(ngModel)]="mobileForm.dataPlan" name="dataPlan">
+              <ion-select-option *ngFor="let bundle of dataBundles" [value]="bundle.id">{{ bundle.name
+                }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-button expand="block" class="utility-btn" [disabled]="isLoading" type="submit">
+            <ion-spinner *ngIf="isLoading"></ion-spinner>
+            <span *ngIf="!isLoading">Purchase {{ mobileType | uppercase }}</span>
+          </ion-button>
+        </ion-list>
+      </form>
+
+      <form *ngIf="currentView === 'electricity'" (ngSubmit)="submitElectricityForm()">
+        <ion-list lines="none">
+          <ion-item class="input-item">
+            <ion-label position="floating">Meter Number</ion-label>
+            <ion-input type="number" [(ngModel)]="electricityForm.meter" name="meter"
+              (ionChange)="verifyMeter()"></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Meter Type</ion-label>
+            <ion-select placeholder="Select Type" [(ngModel)]="electricityForm.type" name="type">
+              <ion-select-option value="prepaid">Prepaid</ion-select-option>
+              <ion-select-option value="postpaid">Postpaid</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number" [(ngModel)]="electricityForm.amount" name="amount"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" class="utility-btn" [disabled]="isLoading" type="submit">
+          <ion-spinner *ngIf="isLoading"></ion-spinner>
+          <span *ngIf="!isLoading">Purchase Token</span>
+        </ion-button>
+      </form>
+
+      <form *ngIf="currentView === 'examinations'" (ngSubmit)="submitExamForm()">
+        <ion-list lines="none">
+          <ion-item class="input-item">
+            <ion-label position="floating">Exam Type</ion-label>
+            <ion-select placeholder="Select Exam" [(ngModel)]="examForm.type" name="type">
+              <ion-select-option value="JAMB">JAMB</ion-select-option>
+              <ion-select-option value="WAEC">WAEC</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number" [(ngModel)]="examForm.amount" name="amount"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" class="utility-btn" [disabled]="isLoading" type="submit">
+          <ion-spinner *ngIf="isLoading"></ion-spinner>
+          <span *ngIf="!isLoading">Purchase PIN</span>
+        </ion-button>
+      </form>
+
+      <form *ngIf="currentView === 'bank'" (ngSubmit)="submitBankForm()">
+        <ion-list lines="none">
+          <ion-item class="input-item">
+            <ion-label position="floating">Bank</ion-label>
+            <ion-select placeholder="Select Bank" [(ngModel)]="bankForm.bank" name="bank">
+              <ion-select-option *ngFor="let bank of banksList" [value]="bank.bankCode">{{ bank.bankName }}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Account Number</ion-label>
+            <ion-input type="number" [(ngModel)]="bankForm.account" name="account" (ionChange)="verifyBankDetails()"></ion-input>
+          </ion-item>
+          <div *ngIf="bankForm.accountName" class="account-name-display">
+            Account Name: <strong>{{ bankForm.accountName }}</strong>
+          </div>
+          <ion-item class="input-item">
+            <ion-label position="floating">Amount</ion-label>
+            <ion-input type="number" [(ngModel)]="bankForm.amount" name="amount"></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Remark (Optional)</ion-label>
+            <ion-input type="text" [(ngModel)]="bankForm.remark" name="remark"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button expand="block" class="utility-btn" [disabled]="isLoading" type="submit">
+          <ion-spinner *ngIf="isLoading"></ion-spinner>
+          <span *ngIf="!isLoading">Send Money</span>
+        </ion-button>
+      </form>
+    </div>
+  </div>
+</ion-content>

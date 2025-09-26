@@ -1,0 +1,135 @@
+/* Define primary colors for consistency */
+$primary-green: #07360E;
+$light-green: #216905; // A slightly lighter green for the gradient
+
+/* --- KEYFRAMES FOR PULSE ANIMATION --- */
+@keyframes pulseZoom {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05); /* Zooms slightly larger */
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+ion-content {
+  --background: #f8f8f8; /* A light background for the content area */
+}
+
+ion-slides {
+  height: 100%;
+}
+
+/* --- Specific Styles for the Splash Screen Image --- */
+.slide-1 {
+  --background: white; // Base slide is white
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  
+  /* --- The Large Green Circle (Pseudo-element) --- */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -120vh; /* Pushes the circle largely off the top of the screen */
+    left: 5vw; /* Pushes the circle slightly off the left for the asymmetric look */
+    
+    /* Create a giant circle */
+    width: 150vw; 
+    height: 160vh;
+    border-radius: 50%;
+    
+    /* Apply the dark-to-light green gradient */
+    background: linear-gradient(
+      145deg,
+      $primary-green 0%,
+      $light-green 100%
+    );
+    z-index: 1; /* Keep it behind the content */
+  }
+}
+
+.onboarding-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2; /* Ensure content is on top of the green circle */
+  height: 100%; /* Take full height of the slide */
+  justify-content: center; /* Center content vertically */
+  padding: 20px;
+  text-align: center;
+  margin-top: -15vh; /* Custom adjustment to position logo higher on the screen */
+}
+
+.logo-container {
+  margin-bottom: 20px;
+}
+
+.app-logo {
+  width: 150px;
+  height: 150px;
+  /* --- APPLY THE ANIMATION HERE --- */
+  animation: pulseZoom 2s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(7, 54, 14, 0.5)); /* Subtle shadow based on $primary-green */
+}
+
+.welcome-title {
+  font-size: 2.2em; /* Adjusted slightly to match the look */
+  font-weight: bold;
+  color: $primary-green; /* Apply app's primary color */
+  margin: 0; /* Remove default h1 margin */
+}
+/* ---------------------------------------------------- */
+
+
+/* --- General Slide Content and Footer Styles --- */
+.slide-image {
+  max-height: 40vh;
+  margin-bottom: 30px;
+}
+
+.text-content h1 {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #333;
+}
+
+.text-content p {
+  font-size: 1em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.footer-buttons {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  z-index: 10;
+}
+
+.next-button {
+  --background: $primary-green;
+  --border-radius: 10px;
+  font-weight: bold;
+  height: 50px;
+}
+
+.skip-button {
+  --color: #666;
+  font-weight: bold;
+  height: 50px;
+  margin-top: 10px;
+}
